@@ -1,8 +1,3 @@
----
-title: Apache Mesos - Release and Support Policy
-layout: documentation
----
-
 # Mesos Release and Support policy
 
 The Mesos versioning and release policy gives operators and developers clear guidelines on:

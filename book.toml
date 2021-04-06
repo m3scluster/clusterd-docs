@@ -1,0 +1,6 @@
+[book]
+authors = ["Andreas Peters"]
+language = "en"
+multilingual = false
+src = "src"
+title = "Apache Mesos"

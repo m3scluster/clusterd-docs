@@ -3,7 +3,6 @@
 # Fundamentals
 - [Mesos Architecture providing an overview of Mesos concepts](architecture.md)
 - [Video and Slides of Mesos Presentations](presentations.md)
-- [Academic Papers and Project History](https://www.usenix.org/conference/nsdi11/mesos-platform-fine-grained-resource-sharing-data-center)
 - [Mesos Release and Support Policy](versioning.md)
 
 # Build / Installation

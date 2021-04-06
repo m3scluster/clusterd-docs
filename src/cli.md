@@ -1,8 +1,3 @@
----
-title: Apache Mesos - CLI
-layout: documentation
----
-
 # The new CLI
 
 The new Mesos Command Line Interface provides one executable Python 3

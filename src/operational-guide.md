@@ -1,8 +1,3 @@
----
-title: Apache Mesos - Operational Guide
-layout: documentation
----
-
 # Operational Guide
 
 ## Using a process supervisor

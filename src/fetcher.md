@@ -1,8 +1,3 @@
----
-title: Apache Mesos - Fetcher
-layout: documentation
----
-
 # Mesos Fetcher
 
 Mesos 0.23.0 introduced experimental support for the Mesos _fetcher cache_.

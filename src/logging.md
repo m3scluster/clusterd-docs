@@ -1,8 +1,3 @@
----
-title: Apache Mesos - Logging
-layout: documentation
----
-
 # Logging
 
 Mesos handles the logs of each Mesos component differently depending on the

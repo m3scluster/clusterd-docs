@@ -1,8 +1,3 @@
----
-title: Apache Mesos - Memory Profiling
-layout: documentation
----
-
 # Memory Profiling with Mesos and Jemalloc
 
 On Linux systems, Mesos is able to leverage the memory-profiling capabilities of

@@ -1,9 +1,3 @@
----
-title: Apache Mesos - Observability Metrics
-layout: documentation
----
-
-
 # Mesos Observability Metrics
 
 This document describes the observability metrics provided by Mesos master and

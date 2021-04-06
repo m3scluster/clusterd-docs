@@ -1,8 +1,3 @@
----
-title: Apache Mesos - Downgrade Compatibility
-layout: documentation
----
-
 # Downgrade Mesos
 
 This document serves as a guide for users who wish to downgrade from an

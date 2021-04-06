@@ -1,8 +1,3 @@
----
-title: Apache Mesos - Performance Profiling
-layout: documentation
----
-
 # Performance Profiling
 
 This document over time will be home to various guides on how to use various profiling tools to do performance analysis of Mesos.

@@ -1,0 +1,583 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Task State Reasons describes how task state reasons are used in Mesos. - Apache Mesos</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="favicon.png">
+        
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        
+        <link rel="stylesheet" href="css/print.css" media="print">
+        
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">Fundamentals</li><li class="chapter-item expanded "><a href="architecture.html"><strong aria-hidden="true">1.</strong> Mesos Architecture providing an overview of Mesos concepts</a></li><li class="chapter-item expanded "><a href="presentations.html"><strong aria-hidden="true">2.</strong> Video and Slides of Mesos Presentations</a></li><li class="chapter-item expanded "><a href="versioning.html"><strong aria-hidden="true">3.</strong> Mesos Release and Support Policy</a></li><li class="chapter-item expanded affix "><li class="part-title">Build / Installation</li><li class="chapter-item expanded "><a href="building.html"><strong aria-hidden="true">4.</strong> Building for basic instructions on compiling and installing Mesos.</a></li><li class="chapter-item expanded "><a href="binary-packages.html"><strong aria-hidden="true">5.</strong> Binary Packages for how to use Mesos binary packages.</a></li><li class="chapter-item expanded "><a href="configuration.html"><strong aria-hidden="true">6.</strong> Configuration for build configuration options.</a></li><li class="chapter-item expanded "><a href="cmake.html"><strong aria-hidden="true">7.</strong> CMake for details about using the new CMake build system.</a></li><li class="chapter-item expanded "><a href="windows.html"><strong aria-hidden="true">8.</strong> Windows Support for the state of Windows support in Mesos.</a></li><li class="chapter-item expanded affix "><li class="part-title">Administration</li><li class="chapter-item expanded "><a href="configuration.html"><strong aria-hidden="true">9.</strong> Configuration for command-line arguments.</a></li><li class="chapter-item expanded "><a href="high-availability.html"><strong aria-hidden="true">10.</strong> High Availability Master Setup</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="replicated-log-internals.html"><strong aria-hidden="true">10.1.</strong> Replicated Log for information on the Mesos replicated log.</a></li></ol></li><li class="chapter-item expanded "><a href="agent-recovery.html"><strong aria-hidden="true">11.</strong> Fault Tolerant Agent Setup</a></li><li class="chapter-item expanded "><a href="framework-rate-limiting.html"><strong aria-hidden="true">12.</strong> Framework Rate Limiting</a></li><li class="chapter-item expanded "><a href="maintenance.html"><strong aria-hidden="true">13.</strong> Maintenance for performing maintenance on a Mesos cluster.</a></li><li class="chapter-item expanded "><a href="upgrades.html"><strong aria-hidden="true">14.</strong> Upgrades for upgrading a Mesos cluster.</a></li><li class="chapter-item expanded "><a href="downgrades.html"><strong aria-hidden="true">15.</strong> Downgrades for downgrading a Mesos cluster.</a></li><li class="chapter-item expanded "><a href="logging.html"><strong aria-hidden="true">16.</strong> Logging</a></li><li class="chapter-item expanded "><a href="monitoring.html"><strong aria-hidden="true">17.</strong> Monitoring / Metrics</a></li><li class="chapter-item expanded "><a href="cli.html"><strong aria-hidden="true">18.</strong> Debugging using the new CLI</a></li><li class="chapter-item expanded "><a href="operational-guide.html"><strong aria-hidden="true">19.</strong> Operational Guide</a></li><li class="chapter-item expanded "><a href="fetcher.html"><strong aria-hidden="true">20.</strong> Fetcher Cache Configuration</a></li><li class="chapter-item expanded "><a href="fault-domains.html"><strong aria-hidden="true">21.</strong> Fault Domains</a></li><li class="chapter-item expanded "><a href="performance-profiling.html"><strong aria-hidden="true">22.</strong> Performance Profiling for debugging performance issues in Mesos.</a></li><li class="chapter-item expanded "><a href="memory-profiling.html"><strong aria-hidden="true">23.</strong> Memory Profiling for debugging potential memory leaks in Mesos.</a></li><li class="chapter-item expanded affix "><li class="part-title">Resource Management</li><li class="chapter-item expanded "><a href="attributes-resources.html"><strong aria-hidden="true">24.</strong> Attributes and Resources for how to describe the agents that comprise a cluster.</a></li><li class="chapter-item expanded "><a href="roles.html"><strong aria-hidden="true">25.</strong> Using Resource Roles</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="weights.html"><strong aria-hidden="true">25.1.</strong> Resource Role Weights for fair sharing.</a></li><li class="chapter-item expanded "><a href="quota.html"><strong aria-hidden="true">25.2.</strong> Resource Role Quota for how to configure Mesos to provide guaranteed resource allocations for use by a role.</a></li><li class="chapter-item expanded "><a href="reservation.html"><strong aria-hidden="true">25.3.</strong> Reservations for how operators and frameworks can reserve resources on individual agents for use by a role.</a></li><li class="chapter-item expanded "><a href="shared-resources.html"><strong aria-hidden="true">25.4.</strong> Shared Resources for how to share persistent volumes between tasks managed by different executors on the same agent.</a></li></ol></li><li class="chapter-item expanded "><a href="oversubscription.html"><strong aria-hidden="true">26.</strong> Oversubscription for how to configure Mesos to take advantage of unused resources to launch “best-effort” tasks.</a></li><li class="chapter-item expanded affix "><li class="part-title">Security</li><li class="chapter-item expanded "><a href="authentication.html"><strong aria-hidden="true">27.</strong> Authentication</a></li><li class="chapter-item expanded "><a href="authorization.html"><strong aria-hidden="true">28.</strong> Authorization</a></li><li class="chapter-item expanded "><a href="ssl.html"><strong aria-hidden="true">29.</strong> SSL</a></li><li class="chapter-item expanded "><a href="secrets.html"><strong aria-hidden="true">30.</strong> Secrets for managing secrets within Mesos.</a></li><li class="chapter-item expanded affix "><li class="part-title">Containerization</li><li class="chapter-item expanded "><a href="containerizers.html"><strong aria-hidden="true">31.</strong> Containerizer Overview</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="containerizer-internals.html"><strong aria-hidden="true">31.1.</strong> Containerizer Internals for implementation details of containerizers.</a></li><li class="chapter-item expanded "><a href="docker-containerizer.html"><strong aria-hidden="true">31.2.</strong> Docker Containerizer for launching a Docker image as a Task, or as an Executor.</a></li><li class="chapter-item expanded "><a href="mesos-containerizer.html"><strong aria-hidden="true">31.3.</strong> Mesos Containerizer default containerizer, supports both Linux and POSIX systems.</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="container-image.html"><strong aria-hidden="true">31.3.1.</strong> Container Images for supporting container images in Mesos containerizer.</a></li><li class="chapter-item expanded "><a href="isolators/docker-volume.html"><strong aria-hidden="true">31.3.2.</strong> Docker Volume Support</a></li><li class="chapter-item expanded "><a href="gpu-support.html"><strong aria-hidden="true">31.3.3.</strong> Nvidia GPU Support for how to run Mesos with Nvidia GPU support.</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="sandbox.html"><strong aria-hidden="true">32.</strong> Container Sandboxes</a></li><li class="chapter-item expanded "><a href="container-volume.html"><strong aria-hidden="true">33.</strong> Container Volumes</a></li><li class="chapter-item expanded "><a href="nested-container-and-task-group.html"><strong aria-hidden="true">34.</strong> Nested Container and Task Group (Pod)</a></li><li class="chapter-item expanded "><a href="standalone-containers.html"><strong aria-hidden="true">35.</strong> Standalone Containers</a></li><li class="chapter-item expanded affix "><li class="part-title">Networking</li><li class="chapter-item expanded "><a href="networking.html"><strong aria-hidden="true">36.</strong> Networking Overview</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="networking-for-mesos-managed-containers.html"><strong aria-hidden="true">36.1.</strong> Networking in Detail</a></li><li class="chapter-item expanded "><a href="cni.html"><strong aria-hidden="true">36.2.</strong> Container Network Interface (CNI)</a></li><li class="chapter-item expanded "><a href="isolators/network-port-mapping.html"><strong aria-hidden="true">36.3.</strong> Port Mapping Isolator</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">Storage</li><li class="chapter-item expanded "><a href="multiple-disk.html"><strong aria-hidden="true">37.</strong> Multiple Disks for how to allow tasks to use multiple isolated disk resources.</a></li><li class="chapter-item expanded "><a href="persistent-volume.html"><strong aria-hidden="true">38.</strong> Persistent Volume for how to allow tasks to access persistent storage resources.</a></li><li class="chapter-item expanded "><a href="csi.html"><strong aria-hidden="true">39.</strong> Container Storage Interface (CSI) Support</a></li><li class="chapter-item expanded affix "><li class="part-title">Scheduler and Executor Development</li><li class="chapter-item expanded "><a href="running-workloads.html"><strong aria-hidden="true">40.</strong> Running Workloads in Mesos explains how a scheduler can specify and run tasks.</a></li><li class="chapter-item expanded "><a href="app-framework-development-guide.html"><strong aria-hidden="true">41.</strong> Framework Development Guide describes how to build applications on top of Mesos.</a></li><li class="chapter-item expanded "><a href="high-availability-framework-guide.html"><strong aria-hidden="true">42.</strong> Guide for Designing Highly Available Mesos Frameworks</a></li><li class="chapter-item expanded "><a href="reconciliation.html"><strong aria-hidden="true">43.</strong> Reconciliation for ensuring a framework’s state remains eventually consistent in the face of failures.</a></li><li class="chapter-item expanded "><a href="task-state-reasons.html" class="active"><strong aria-hidden="true">44.</strong> Task State Reasons describes how task state reasons are used in Mesos.</a></li><li class="chapter-item expanded "><a href="health-checks.html"><strong aria-hidden="true">45.</strong> Task Health Checking</a></li><li class="chapter-item expanded "><a href="scheduler-http-api.html"><strong aria-hidden="true">46.</strong> v1 Scheduler HTTP API for communication between schedulers and the Mesos master.</a></li><li class="chapter-item expanded "><a href="executor-http-api.html"><strong aria-hidden="true">47.</strong> v1 Executor HTTP API describes the new HTTP API for communication between executors and the Mesos agent.</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">Apache Mesos</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                        <a href="https://github.com/AVENTER-UG/mesos-docs/" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <hr />
+<h2>title: Apache Mesos - Task State Reasons
+layout: documentation</h2>
+<h1 id="task-state-reasons"><a class="header" href="#task-state-reasons">Task State Reasons</a></h1>
+<p>Some TaskStatus messages will arrive with the <code>reason</code> field set to a value
+that can allow frameworks to display better error messages and to implement
+special behaviour for some of the reasons.</p>
+<p>For most reasons, the <code>message</code> field of the TaskStatus message will give a
+more detailed, human-readable error description.</p>
+<p>Not all status updates will contain a reason.</p>
+<h1 id="guidelines-for-framework-authors"><a class="header" href="#guidelines-for-framework-authors">Guidelines for Framework Authors</a></h1>
+<p>Frameworks that implement their own executors are free to set the reason field
+on any status messages they produce.</p>
+<p>Note that executors can not generally rely on the fact that the scheduler will
+see the status update with the reason set by the executor, since only the
+latest update for each different task state is stored and re-transmitted. See
+in particular the description of <code>REASON_RECONCILIATION</code> below.</p>
+<p>Most reasons describe conditions that can only be detected in the master or
+agent code, and will accompany automatically generated status updates from
+either of these.</p>
+<p>For consistency with the existing usages of the different task reasons, we
+recommend that executors restrict themselves to the following subset if they
+use a non-default reason in their status updates.</p>
+<table class="table table-striped">
+<tr><td><code>     REASON_TASK_CHECK_STATUS_UPDATED
+</code></td><td>   For executors that support running task checks, it is
+                   recommended to generate a status update with this reason
+                   every time the task check status changes, together with a
+                   human-readable description of the change in
+                   the <code> message </code> field.
+</td></tr>
+<tr><td><code>     REASON_TASK_HEALTH_CHECK_STATUS_UPDATED
+</code></td><td>   For executors that support running task health checks, it
+                   is recommended to generate a status update with this reason
+                   every time the health check status changes, together with a
+                   human-readable description of the change in
+                   the <code> message </code> field.
+<strong>           Note:
+</strong>          The built-in executors additionally send an update with
+                   this reason every time a health check is unhealthy.
+</td></tr>
+<tr><td><code>     REASON_TASK_INVALID
+</code></td><td>   For executors that implement their own task validation
+                   logic, this reason can be used when the validation check
+                   fails, together with a human-readable description of the
+                   failed check in the <code> message </code> field.
+</td></tr>
+<tr><td><code>     REASON_TASK_UNAUTHORIZED
+</code></td><td>   For executors that implement their own authorization logic,
+                   this reason can be used when authorization fails, together
+                   with a human-readable description in
+                   the <code> message </code> field.
+</td></tr></table>
+<h1 id="reference-of-reasons-currently-used-in-mesos"><a class="header" href="#reference-of-reasons-currently-used-in-mesos">Reference of Reasons Currently Used in Mesos</a></h1>
+<h2 id="deprecated-reasons"><a class="header" href="#deprecated-reasons">Deprecated Reasons</a></h2>
+<p>The reason <code>REASON_COMMAND_EXECUTOR_FAILED</code> is deprecated and will be removed
+in the future. It should not be referenced by newly written code.</p>
+<h2 id="unused-reasons"><a class="header" href="#unused-reasons">Unused Reasons</a></h2>
+<p>The reasons <code>REASON_CONTAINER_LIMITATION</code>, <code>REASON_INVALID_FRAMEWORKID</code>,
+<code>REASON_SLAVE_UNKNOWN</code>, <code>REASON_TASK_UNKNOWN</code> and
+<code>REASON_EXECUTOR_UNREGISTERED</code> are not used as of Mesos 1.4.</p>
+<h2 id="reasons-for-terminal-status-updates"><a class="header" href="#reasons-for-terminal-status-updates">Reasons for Terminal Status Updates</a></h2>
+<p>For these status updates, the reason indicates <em>why</em> the task state changed.
+Typically, a given reason will always appear together
+with the same state.</p>
+<p>Typically they are generated by mesos when an error occurs that prevents
+the executor from sending its own status update messages.</p>
+<p>Below, a partition-aware framework means a framework which has the
+<code>Capability::PARTITION_AWARE</code> capability bit set in its <code>FrameworkInfo</code>.
+Messages generated on the master will have the <code>source</code> field set to
+<code>SOURCE_MASTER</code> and messages generated on the agent will have it set
+to <code>SOURCE_AGENT</code> in the v1 API or <code>SOURCE_SLAVE</code> in the v0 API.</p>
+<p>As of Mesos 1.4, the following reasons are being used.</p>
+<h3 id="for-state-task_failed"><a class="header" href="#for-state-task_failed">For state <code>TASK_FAILED</code></a></h3>
+<h4 id="in-status-updates-generated-on-the-agent"><a class="header" href="#in-status-updates-generated-on-the-agent">In status updates generated on the agent:</a></h4>
+<table class="table table-striped">
+<tr><td><code>     REASON_CONTAINER_LAUNCH_FAILED
+</code></td><td>   The task could not be launched because its container failed
+                   to launch.
+</td></tr>
+<tr><td><code>     REASON_CONTAINER_LIMITATION_MEMORY
+</code></td><td>   The container in which the task was running exceeded its
+                   memory allocation.
+</td></tr>
+<tr><td><code>     REASON_CONTAINER_LIMITATION_DISK
+</code></td><td>   The container in which the task was running exceeded its
+                   disk quota.
+</td></tr>
+<tr> <td><code>    REASON_IO_SWITCHBOARD_EXITED
+</code></td><td>   The I/O switchboard server terminated unexpectedly.
+</td></tr>
+<tr><td><code>     REASON_EXECUTOR_REGISTRATION_TIMEOUT
+</code></td><td>   The executor for this task didn't register with the agent
+                   within the allowed time limit.
+</td></tr>
+<tr><td><code>     REASON_EXECUTOR_REREGISTRATION_TIMEOUT
+</code></td><td>   The executor for this task lost connection and didn't
+                   reregister within the allowed time limit.
+</td></tr>
+<tr><td><code>     REASON_EXECUTOR_TERMINATED
+</code></td><td>   The tasks' executor terminated abnormally, and no more
+                   specific reason could be determined.
+</td></tr></table>
+<h3 id="for-state-task_killed"><a class="header" href="#for-state-task_killed">For state <code>TASK_KILLED</code></a></h3>
+<h4 id="in-status-updates-generated-on-the-master"><a class="header" href="#in-status-updates-generated-on-the-master">In status updates generated on the master:</a></h4>
+<table class="table table-striped">
+<tr><td><code>     REASON_FRAMEWORK_REMOVED
+</code></td><td>   The framework to which this task belonged was removed.
+<br/><strong>      Note:
+</strong>          The status update will be sent out before the task is
+                   actually killed.
+</td></tr>
+<tr><td><code>     REASON_TASK_KILLED_DURING_LAUNCH
+</code></td><td>   This task, or a task within this task group, was killed
+                   before delivery to the agent.
+</td></tr></table>
+<h4 id="in-status-updates-generated-on-the-agent-1"><a class="header" href="#in-status-updates-generated-on-the-agent-1">In status updates generated on the agent:</a></h4>
+<table class="table table-striped">
+<tr><td><code>     REASON_TASK_KILLED_DURING_LAUNCH
+</code></td><td>   This task, or a task within this task group, was killed
+                   before delivery to the executor.
+<br/><strong>      Note:
+</strong>          Prior to version 1.5, the agent would in this situation
+                   sometimes send status updates with reason set
+                   to <code> REASON_EXECUTOR_UNREGISTERED </code> and
+                   sometimes without any reason set, depending on details of
+                   the timing of the executor launch and the kill command.
+</td></tr></table>
+<h3 id="for-state-task_error"><a class="header" href="#for-state-task_error">For state <code>TASK_ERROR</code></a></h3>
+<h4 id="in-status-updates-generated-on-the-master-1"><a class="header" href="#in-status-updates-generated-on-the-master-1">In status updates generated on the master:</a></h4>
+<table class="table table-striped">
+<tr><td><code>     REASON_TASK_INVALID
+</code></td><td>   Task or resource validation checks failed.
+</td></tr>
+<tr><td><code>     REASON_TASK_GROUP_INVALID
+</code></td><td>   Task group or resource validation checks failed.
+</td></tr>
+<tr><td><code>     REASON_TASK_UNAUTHORIZED
+</code></td><td>   Task authorization failed on the master.
+</td></tr>
+<tr><td><code>     REASON_TASK_GROUP_UNAUTHORIZED
+</code></td><td>   Task group authorization failed on the master.
+</td></tr></table>
+<h4 id="in-status-updates-generated-on-the-agent-2"><a class="header" href="#in-status-updates-generated-on-the-agent-2">In status updates generated on the agent:</a></h4>
+<table class="table table-striped">
+<tr><td><code>     REASON_TASK_UNAUTHORIZED
+</code></td><td>   Task authorization failed on the agent.
+</td></tr>
+<tr><td><code>     REASON_TASK_GROUP_UNAUTHORIZED
+</code></td><td>   Task group authorization failed on the agent.
+</td></tr></table>
+<h3 id="for-state-task_lost"><a class="header" href="#for-state-task_lost">For state <code>TASK_LOST</code></a></h3>
+<h4 id="in-status-updates-generated-on-the-master-2"><a class="header" href="#in-status-updates-generated-on-the-master-2">In status updates generated on the master:</a></h4>
+<table class="table table-striped">
+<tr><td rowspan="2">
+<code>             REASON_SLAVE_DISCONNECTED
+</code></td><td>   The agent on which the task was running disconnected, and
+                   didn't reconnect in time.
+<br/><strong>      Note:
+</strong>          For partition-aware frameworks, the state will
+                   be <code> TASK_DROPPED </code> instead
+</td></tr>
+<tr><td>           The task was part of an accepted offer, but the agent
+                   sending the offer disconnected in the meantime.
+<br/><strong>      Note:
+</strong>          For partition-aware frameworks, the state will
+                   be <code> TASK_DROPPED </code> instead.
+</td></tr>
+<tr><td><code>     REASON_MASTER_DISCONNECTED
+</code></td><td>   The task was part of an accepted offer which couldn't be
+                   sent to the master, because it was disconnected.
+<br/><strong>      Note:
+</strong>          For partition-aware frameworks, the state will
+                   be <code> TASK_DROPPED </code> instead.
+<br/><strong>      Note:
+</strong>          Despite the source being set to <code> SOURCE_MASTER </code>,
+                   the message is not sent from the master but locally from
+                   the scheduler driver.
+<strong>           Note:
+</strong>          This reason is only used in the v0 API.
+</td></tr>
+<tr><td rowspan="3">
+<code>             REASON_SLAVE_REMOVED
+</code></td><td>   The agent on which the task was running was removed.
+</td></tr>
+<tr><td>           The task was part of an accepted offer, but the agent
+                   sending the offer was disconnected in the meantime.
+<br/><strong>      Note:
+</strong>          For partition-aware frameworks, the state will be
+                   to <code> TASK_DROPPED </code> instead.
+</td></tr>
+<tr><td>           The agent on which the task was running was marked
+                   unreachable.
+<br/><strong>      Note:
+</strong>          For partition-aware frameworks, the state will
+                   be <code> TASK_UNREACHABLE </code> instead.
+</td></tr>
+<tr><td><code>     REASON_RESOURCES_UNKNOWN
+</code></td><td>   The task was part of an accepted offer which used
+                   checkpointed resources that are not known to the master.
+<br/><strong>      Note:
+</strong>          For partition-aware frameworks, the state will
+                   be <code> TASK_DROPPED </code> instead.
+</td></tr></table>
+<h4 id="in-status-updates-generated-on-the-agent-3"><a class="header" href="#in-status-updates-generated-on-the-agent-3">In status updates generated on the agent:</a></h4>
+<table class="table table-striped">
+<tr><td><code>     REASON_SLAVE_RESTARTED
+</code></td><td>   The task was launched during an agent restart, and never
+                   got forwarded to the executor.
+<br/><strong>      Note:
+</strong>          For partition-aware frameworks, the state will
+                   be <code> TASK_DROPPED </code> instead.
+</td></tr>
+<tr><td><code>     REASON_CONTAINER_PREEMPTED
+</code></td><td>   The container in which the task was running was pre-empted
+                   by a QoS correction.
+<br/><strong>      Note:
+</strong>          For partition-aware frameworks, the state will be changed
+                   to <code> TASK_GONE </code> instead.
+</td></tr>
+<tr><td><code>     REASON_CONTAINER_UPDATE_FAILED
+</code></td><td>   The container in which the task was running was discarded
+                   because a resource update failed.
+<br/><strong>      Note:
+</strong>          For partition-aware frameworks, the state will
+                   be <code> TASK_GONE </code> instead.
+</td></tr>
+<tr><td><code>     REASON_EXECUTOR_TERMINATED
+</code></td><td>   The executor which was supposed to execute this task was
+                   already terminated, or the agent receives an instruction to
+                   kill the task before the executor was started.
+<br/><strong>      Note:
+</strong>          For partition-aware frameworks, the state will
+                   be <code> TASK_DROPPED </code> instead.
+</td></tr>
+<tr><td><code>     REASON_GC_ERROR
+</code></td><td>   A directory to be used by this task was scheduled for GC
+                   and it could not be unscheduled.
+<br/><strong>      Note:
+</strong>          For partition-aware frameworks, the state will
+                   be <code> TASK_DROPPED </code> instead.
+</td></tr>
+<tr><td><code>     REASON_INVALID_OFFERS
+</code></td><td>   This task belonged to an accepted offer that didn't pass
+                   validation checks.
+<br/><strong>      Note:
+</strong>          For partition-aware frameworks, the state will
+                   be <code> TASK_DROPPED </code> instead.
+</td></tr></table>
+<h3 id="for-state-task_dropped"><a class="header" href="#for-state-task_dropped">For state <code>TASK_DROPPED</code>:</a></h3>
+<h4 id="in-status-updates-generated-on-the-master-3"><a class="header" href="#in-status-updates-generated-on-the-master-3">In status updates generated on the master:</a></h4>
+<table class="table table-striped">
+<tr><td><code>     REASON_SLAVE_DISCONNECTED
+</code></td><td>   See <code> TASK_LOST </code>
+</td></tr>
+<tr><td><code>     REASON_SLAVE_REMOVED
+</code></td><td>   See <code> TASK_LOST </code>
+</td></tr>
+<tr><td><code>     REASON_RESOURCES_UNKNOWN
+</code></td><td>   See <code> TASK_LOST </code>
+</td></tr></table>
+<h4 id="in-status-updates-generated-on-the-agent-4"><a class="header" href="#in-status-updates-generated-on-the-agent-4">In status updates generated on the agent:</a></h4>
+<table class="table table-striped">
+<tr><td><code>     REASON_SLAVE_RESTARTED
+</code></td><td>   See <code> TASK_LOST </code>
+</td></tr>
+<tr><td><code>     REASON_GC_ERROR
+</code></td><td>   See <code> TASK_LOST </code>
+</td></tr>
+<tr><td><code>     REASON_INVALID_OFFERS
+</code></td><td>   See <code> TASK_LOST </code>
+</td></tr></table>
+<h3 id="for-state-task_unreachable"><a class="header" href="#for-state-task_unreachable">For state <code>TASK_UNREACHABLE</code>:</a></h3>
+<h4 id="in-status-updates-generated-on-the-master-4"><a class="header" href="#in-status-updates-generated-on-the-master-4">In status updates generated on the master:</a></h4>
+<table class="table table-striped">
+<tr><td><code>     REASON_SLAVE_REMOVED
+</code></td><td>   See <code> TASK_LOST <code>
+</td></tr></table>
+<h3 id="for-state-task_gone"><a class="header" href="#for-state-task_gone">For state <code>TASK_GONE</code></a></h3>
+<h4 id="in-status-updates-generated-on-the-agent-5"><a class="header" href="#in-status-updates-generated-on-the-agent-5">In status updates generated on the agent:</a></h4>
+<table class="table table-striped">
+<tr><td><code>     REASON_CONTAINER_UPDATE_FAILED
+</code></td><td>   See <code> TASK_LOST </code>
+</td></tr>
+<tr><td><code>     REASON_CONTAINER_PREEMPTED
+</code></td><td>   See <code> TASK_LOST </code>
+</td></tr>
+<tr><td><code>     REASON_EXECUTOR_PREEMPTED
+</code></td><td>   Renamed to <code> REASON_CONTAINER_PREEMPTED </code> in
+                   Mesos 0.26.
+</td></tr></table>
+<h2 id="reasons-for-non-terminal-status-updates"><a class="header" href="#reasons-for-non-terminal-status-updates">Reasons for Non-Terminal Status Updates</a></h2>
+<p>These reasons do not cause a state change, and will be sent along with the
+last known state of the task. The reason field indicates <em>why</em> the status
+update was sent.</p>
+<table class="table table-striped">
+<tr><td><code>     REASON_RECONCILIATION
+</code></td><td>   A framework requested implicit or explicit reconciliation
+                   for this task.
+<br/><strong>      Note:
+</strong>          Status updates with this reason are not the original ones,
+                   but rather a modified copy that is re-sent from the master.
+                   In particular, the original <code> data </code>
+                   and <code> message </code> fields are erased and the
+                   original <code> reason </code> field is overwritten
+                   by <code> REASON_RECONCILIATION </code>.
+</td></tr>
+<tr><td><code>     REASON_TASK_CHECK_STATUS_UPDATED
+</code></td><td>   A task check notified the agent that its state changed.
+<br/><strong>      Note:
+</strong>          This reason is set by the executor, so for tasks that are
+                   running with a custom executor, whether or not status
+                   updates with this reasons are sent depends on that
+                   executors implementation.
+<strong>           Note:
+</strong>          Currently, when using one of the built-in executors, this
+                   reason is only used within status updates with task
+                   state <code> TASK_RUNNING </code>.
+</td></tr>
+<tr><td><code>     REASON_TASK_HEALTH_CHECK_STATUS_UPDATED
+</code></td><td>   A task health check notified the agent that its
+                   state changed.
+<br/><strong>      Note:
+</strong>          This reason is set by the executor, so for tasks that are
+                   running with a custom executor, whether or not status
+                   updates with this reasons are sent depends on that
+                   executors implementation.
+<strong>           Note:
+</strong>          Currently, when using one of the built-in executors, this
+                   reason is only used within status updates with task
+                   state <code> TASK_RUNNING </code>.
+</td></tr>
+<tr><td><code>     REASON_SLAVE_REREGISTERED
+</code></td><td>   The agent on which the task was running has reregistered
+                   after being marked unreachable by the master.
+<br/><strong>      Note:
+</strong>          Due to garbage collection of the unreachable and gone agents
+                   in the registry and master state Mesos also sends such status
+                   updates for agents unknown to the master.
+<strong>           Note:
+</strong>          Status updates with this reason are modified copies re-sent
+                   by the master which reflect the states of the tasks reported
+                   by the agent upon its re-registration. See comments for
+                   <code> REASON_RECONCILIATION </code>.
+</td></tr></table>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="reconciliation.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="health-checks.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="reconciliation.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="health-checks.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

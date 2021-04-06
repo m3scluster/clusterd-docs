@@ -1,0 +1,371 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Reconciliation for ensuring a framework’s state remains eventually consistent in the face of failures. - Apache Mesos</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="favicon.png">
+        
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        
+        <link rel="stylesheet" href="css/print.css" media="print">
+        
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">Fundamentals</li><li class="chapter-item expanded "><a href="architecture.html"><strong aria-hidden="true">1.</strong> Mesos Architecture providing an overview of Mesos concepts</a></li><li class="chapter-item expanded "><a href="presentations.html"><strong aria-hidden="true">2.</strong> Video and Slides of Mesos Presentations</a></li><li class="chapter-item expanded "><a href="versioning.html"><strong aria-hidden="true">3.</strong> Mesos Release and Support Policy</a></li><li class="chapter-item expanded affix "><li class="part-title">Build / Installation</li><li class="chapter-item expanded "><a href="building.html"><strong aria-hidden="true">4.</strong> Building for basic instructions on compiling and installing Mesos.</a></li><li class="chapter-item expanded "><a href="binary-packages.html"><strong aria-hidden="true">5.</strong> Binary Packages for how to use Mesos binary packages.</a></li><li class="chapter-item expanded "><a href="configuration.html"><strong aria-hidden="true">6.</strong> Configuration for build configuration options.</a></li><li class="chapter-item expanded "><a href="cmake.html"><strong aria-hidden="true">7.</strong> CMake for details about using the new CMake build system.</a></li><li class="chapter-item expanded "><a href="windows.html"><strong aria-hidden="true">8.</strong> Windows Support for the state of Windows support in Mesos.</a></li><li class="chapter-item expanded affix "><li class="part-title">Administration</li><li class="chapter-item expanded "><a href="configuration.html"><strong aria-hidden="true">9.</strong> Configuration for command-line arguments.</a></li><li class="chapter-item expanded "><a href="high-availability.html"><strong aria-hidden="true">10.</strong> High Availability Master Setup</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="replicated-log-internals.html"><strong aria-hidden="true">10.1.</strong> Replicated Log for information on the Mesos replicated log.</a></li></ol></li><li class="chapter-item expanded "><a href="agent-recovery.html"><strong aria-hidden="true">11.</strong> Fault Tolerant Agent Setup</a></li><li class="chapter-item expanded "><a href="framework-rate-limiting.html"><strong aria-hidden="true">12.</strong> Framework Rate Limiting</a></li><li class="chapter-item expanded "><a href="maintenance.html"><strong aria-hidden="true">13.</strong> Maintenance for performing maintenance on a Mesos cluster.</a></li><li class="chapter-item expanded "><a href="upgrades.html"><strong aria-hidden="true">14.</strong> Upgrades for upgrading a Mesos cluster.</a></li><li class="chapter-item expanded "><a href="downgrades.html"><strong aria-hidden="true">15.</strong> Downgrades for downgrading a Mesos cluster.</a></li><li class="chapter-item expanded "><a href="logging.html"><strong aria-hidden="true">16.</strong> Logging</a></li><li class="chapter-item expanded "><a href="monitoring.html"><strong aria-hidden="true">17.</strong> Monitoring / Metrics</a></li><li class="chapter-item expanded "><a href="cli.html"><strong aria-hidden="true">18.</strong> Debugging using the new CLI</a></li><li class="chapter-item expanded "><a href="operational-guide.html"><strong aria-hidden="true">19.</strong> Operational Guide</a></li><li class="chapter-item expanded "><a href="fetcher.html"><strong aria-hidden="true">20.</strong> Fetcher Cache Configuration</a></li><li class="chapter-item expanded "><a href="fault-domains.html"><strong aria-hidden="true">21.</strong> Fault Domains</a></li><li class="chapter-item expanded "><a href="performance-profiling.html"><strong aria-hidden="true">22.</strong> Performance Profiling for debugging performance issues in Mesos.</a></li><li class="chapter-item expanded "><a href="memory-profiling.html"><strong aria-hidden="true">23.</strong> Memory Profiling for debugging potential memory leaks in Mesos.</a></li><li class="chapter-item expanded affix "><li class="part-title">Resource Management</li><li class="chapter-item expanded "><a href="attributes-resources.html"><strong aria-hidden="true">24.</strong> Attributes and Resources for how to describe the agents that comprise a cluster.</a></li><li class="chapter-item expanded "><a href="roles.html"><strong aria-hidden="true">25.</strong> Using Resource Roles</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="weights.html"><strong aria-hidden="true">25.1.</strong> Resource Role Weights for fair sharing.</a></li><li class="chapter-item expanded "><a href="quota.html"><strong aria-hidden="true">25.2.</strong> Resource Role Quota for how to configure Mesos to provide guaranteed resource allocations for use by a role.</a></li><li class="chapter-item expanded "><a href="reservation.html"><strong aria-hidden="true">25.3.</strong> Reservations for how operators and frameworks can reserve resources on individual agents for use by a role.</a></li><li class="chapter-item expanded "><a href="shared-resources.html"><strong aria-hidden="true">25.4.</strong> Shared Resources for how to share persistent volumes between tasks managed by different executors on the same agent.</a></li></ol></li><li class="chapter-item expanded "><a href="oversubscription.html"><strong aria-hidden="true">26.</strong> Oversubscription for how to configure Mesos to take advantage of unused resources to launch “best-effort” tasks.</a></li><li class="chapter-item expanded affix "><li class="part-title">Security</li><li class="chapter-item expanded "><a href="authentication.html"><strong aria-hidden="true">27.</strong> Authentication</a></li><li class="chapter-item expanded "><a href="authorization.html"><strong aria-hidden="true">28.</strong> Authorization</a></li><li class="chapter-item expanded "><a href="ssl.html"><strong aria-hidden="true">29.</strong> SSL</a></li><li class="chapter-item expanded "><a href="secrets.html"><strong aria-hidden="true">30.</strong> Secrets for managing secrets within Mesos.</a></li><li class="chapter-item expanded affix "><li class="part-title">Containerization</li><li class="chapter-item expanded "><a href="containerizers.html"><strong aria-hidden="true">31.</strong> Containerizer Overview</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="containerizer-internals.html"><strong aria-hidden="true">31.1.</strong> Containerizer Internals for implementation details of containerizers.</a></li><li class="chapter-item expanded "><a href="docker-containerizer.html"><strong aria-hidden="true">31.2.</strong> Docker Containerizer for launching a Docker image as a Task, or as an Executor.</a></li><li class="chapter-item expanded "><a href="mesos-containerizer.html"><strong aria-hidden="true">31.3.</strong> Mesos Containerizer default containerizer, supports both Linux and POSIX systems.</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="container-image.html"><strong aria-hidden="true">31.3.1.</strong> Container Images for supporting container images in Mesos containerizer.</a></li><li class="chapter-item expanded "><a href="isolators/docker-volume.html"><strong aria-hidden="true">31.3.2.</strong> Docker Volume Support</a></li><li class="chapter-item expanded "><a href="gpu-support.html"><strong aria-hidden="true">31.3.3.</strong> Nvidia GPU Support for how to run Mesos with Nvidia GPU support.</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="sandbox.html"><strong aria-hidden="true">32.</strong> Container Sandboxes</a></li><li class="chapter-item expanded "><a href="container-volume.html"><strong aria-hidden="true">33.</strong> Container Volumes</a></li><li class="chapter-item expanded "><a href="nested-container-and-task-group.html"><strong aria-hidden="true">34.</strong> Nested Container and Task Group (Pod)</a></li><li class="chapter-item expanded "><a href="standalone-containers.html"><strong aria-hidden="true">35.</strong> Standalone Containers</a></li><li class="chapter-item expanded affix "><li class="part-title">Networking</li><li class="chapter-item expanded "><a href="networking.html"><strong aria-hidden="true">36.</strong> Networking Overview</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="networking-for-mesos-managed-containers.html"><strong aria-hidden="true">36.1.</strong> Networking in Detail</a></li><li class="chapter-item expanded "><a href="cni.html"><strong aria-hidden="true">36.2.</strong> Container Network Interface (CNI)</a></li><li class="chapter-item expanded "><a href="isolators/network-port-mapping.html"><strong aria-hidden="true">36.3.</strong> Port Mapping Isolator</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">Storage</li><li class="chapter-item expanded "><a href="multiple-disk.html"><strong aria-hidden="true">37.</strong> Multiple Disks for how to allow tasks to use multiple isolated disk resources.</a></li><li class="chapter-item expanded "><a href="persistent-volume.html"><strong aria-hidden="true">38.</strong> Persistent Volume for how to allow tasks to access persistent storage resources.</a></li><li class="chapter-item expanded "><a href="csi.html"><strong aria-hidden="true">39.</strong> Container Storage Interface (CSI) Support</a></li><li class="chapter-item expanded affix "><li class="part-title">Scheduler and Executor Development</li><li class="chapter-item expanded "><a href="running-workloads.html"><strong aria-hidden="true">40.</strong> Running Workloads in Mesos explains how a scheduler can specify and run tasks.</a></li><li class="chapter-item expanded "><a href="app-framework-development-guide.html"><strong aria-hidden="true">41.</strong> Framework Development Guide describes how to build applications on top of Mesos.</a></li><li class="chapter-item expanded "><a href="high-availability-framework-guide.html"><strong aria-hidden="true">42.</strong> Guide for Designing Highly Available Mesos Frameworks</a></li><li class="chapter-item expanded "><a href="reconciliation.html" class="active"><strong aria-hidden="true">43.</strong> Reconciliation for ensuring a framework’s state remains eventually consistent in the face of failures.</a></li><li class="chapter-item expanded "><a href="task-state-reasons.html"><strong aria-hidden="true">44.</strong> Task State Reasons describes how task state reasons are used in Mesos.</a></li><li class="chapter-item expanded "><a href="health-checks.html"><strong aria-hidden="true">45.</strong> Task Health Checking</a></li><li class="chapter-item expanded "><a href="scheduler-http-api.html"><strong aria-hidden="true">46.</strong> v1 Scheduler HTTP API for communication between schedulers and the Mesos master.</a></li><li class="chapter-item expanded "><a href="executor-http-api.html"><strong aria-hidden="true">47.</strong> v1 Executor HTTP API describes the new HTTP API for communication between executors and the Mesos agent.</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">Apache Mesos</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                        <a href="https://github.com/AVENTER-UG/mesos-docs/" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <hr />
+<h2>title: Apache Mesos - Reconciliation
+layout: documentation</h2>
+<h1 id="task-reconciliation"><a class="header" href="#task-reconciliation">Task Reconciliation</a></h1>
+<p>Messages between framework schedulers and the Mesos master may be dropped due to
+failures and network partitions. This may cause a framework scheduler and the
+master to have different views of the current state of the cluster. For example,
+consider a launch task request sent by a framework.  There are many ways that
+failures can prevent the task launch operation from succeeding, such as:</p>
+<ul>
+<li>Framework fails after persisting its intent to launch the task, but
+before the launch task message was sent.</li>
+<li>Master fails before receiving the message.</li>
+<li>Master fails after receiving the message but before sending it to the
+agent.</li>
+</ul>
+<p>In these cases, the framework believes the task to be staging but the task is
+unknown to the master. To cope with such situations, Mesos frameworks should use
+<em>reconciliation</em> to ask the master for the current state of their tasks.</p>
+<h2 id="how-to-reconcile"><a class="header" href="#how-to-reconcile">How To Reconcile</a></h2>
+<p>Frameworks can use the scheduler driver's <code>reconcileTasks</code> method to send a
+reconciliation request to the master:</p>
+<pre><code class="language-{.cpp}">// Allows the framework to query the status for non-terminal tasks.
+// This causes the master to send back the latest task status for
+// each task in 'statuses', if possible. Tasks that are no longer
+// known will result in a TASK_LOST update. If statuses is empty,
+// then the master will send the latest status for each task
+// currently known.
+virtual Status reconcileTasks(const std::vector&lt;TaskStatus&gt;&amp; statuses);
+</code></pre>
+<p>Currently, the master will only examine two fields in <code>TaskStatus</code>:</p>
+<ul>
+<li><code>TaskID</code>: This is required.</li>
+<li><code>SlaveID</code>: Optional but recommended. This leads to faster reconciliation in
+the presence of agents that are transitioning between states.</li>
+</ul>
+<p>Mesos provides two forms of reconciliation:</p>
+<ul>
+<li>&quot;Explicit&quot; reconciliation: the scheduler sends a list of non-terminal task IDs
+and the master responds with the latest state for each task, if possible.</li>
+<li>&quot;Implicit&quot; reconciliation: the scheduler sends an empty list of tasks
+and the master responds with the latest state for all currently known
+non-terminal tasks.</li>
+</ul>
+<p>Reconciliation results are returned as task status updates (e.g., via the
+scheduler driver's <code>statusUpdate</code> callback). Status updates that result from
+reconciliation requests will their <code>reason</code> field set to
+<code>REASON_RECONCILIATION</code>. Note that most of the other fields in the returned
+<code>TaskStatus</code> message will not be set: for example, reconciliation cannot be used
+to retrieve the <code>labels</code> or <code>data</code> fields associated with a running task.</p>
+<h2 id="when-to-reconcile"><a class="header" href="#when-to-reconcile">When To Reconcile</a></h2>
+<p>Framework schedulers should periodically reconcile <em>all</em> of their tasks (for
+example, every fifteen minutes). This serves two purposes:</p>
+<ol>
+<li>It is necessary to account for dropped messages between the framework and
+the master; for example, see the task launch scenario described above.</li>
+<li>It is a defensive programming technique to catch bugs in both the framework
+and the Mesos master.</li>
+</ol>
+<p>As an optimization, framework schedulers should reconcile <em>more frequently</em> when
+they have reason to suspect that their local state differs from that of the
+master. For example, after a framework launches a task, it should expect to
+receive a <code>TASK_RUNNING</code> status update for the new task fairly promptly. If no
+such update is received, the framework should perform explicit reconciliation
+more quickly than usual.</p>
+<p>Similarly, frameworks should initiate reconciliation after both framework
+failovers and master failovers. Note that the scheduler driver notifies
+frameworks when master failover has occurred (via the <code>reregistered()</code>
+callback). For more information, see the
+<a href="high-availability-framework-guide.html">guide to designing highly available frameworks</a>.</p>
+<h2 id="algorithm"><a class="header" href="#algorithm">Algorithm</a></h2>
+<p>This technique for explicit reconciliation reconciles all non-terminal tasks
+until an update is received for each task, using exponential backoff to retry
+tasks that remain unreconciled. Retries are needed because the master temporarily
+may not be able to reply for a particular task. For example, during master
+failover the master must reregister all of the agents to rebuild its
+set of known tasks (this process can take minutes for large clusters, and
+is bounded by the <code>--agent_reregister_timeout</code> flag on the master).</p>
+<p>Steps:</p>
+<ol>
+<li>let <code>start = now()</code></li>
+<li>let <code>remaining = { T in tasks | T is non-terminal }</code></li>
+<li>Perform reconciliation: <code>reconcile(remaining)</code></li>
+<li>Wait for status updates to arrive (use truncated exponential backoff). For each update, note the time of arrival.</li>
+<li>let <code>remaining = { T in remaining | T.last_update_arrival() &lt; start }</code></li>
+<li>If <code>remaining</code> is non-empty, go to 3.</li>
+</ol>
+<p>This reconciliation algorithm <strong>must</strong> be run after each (re-)registration.</p>
+<p>Implicit reconciliation (passing an empty list) should also be used
+periodically, as a defense against data loss in the framework. Unless a
+strict registry is in use on the master, its possible for tasks to resurrect
+from a LOST state (without a strict registry the master does not enforce
+agent removal across failovers). When an unknown task is encountered, the
+scheduler should kill or recover the task.</p>
+<p>Notes:</p>
+<ul>
+<li>When waiting for updates to arrive, <strong>use a truncated exponential backoff</strong>.
+This will avoid a snowball effect in the case of the driver or master being
+backed up.</li>
+<li>It is beneficial to ensure that only 1 reconciliation is in progress at a
+time, to avoid a snowball effect in the face of many re-registrations.
+If another reconciliation should be started while one is in-progress,
+then the previous reconciliation algorithm should stop running.</li>
+</ul>
+<h1 id="offer-reconciliation"><a class="header" href="#offer-reconciliation">Offer Reconciliation</a></h1>
+<p>Offers are reconciled automatically after a failure:</p>
+<ul>
+<li>Offers do not persist beyond the lifetime of a Master.</li>
+<li>If a disconnection occurs, offers are no longer valid.</li>
+<li>Offers are rescinded and regenerated each time the framework (re-)registers.</li>
+</ul>
+<h1 id="operation-reconciliation"><a class="header" href="#operation-reconciliation">Operation Reconciliation</a></h1>
+<p>When a scheduler specifies an <code>id</code> on an offer operation, the master will
+provide updates on the status of that operation. If the scheduler needs to
+reconcile its view of the current states of operations with the master's view,
+it can do so via the <code>RECONCILE_OPERATIONS</code> call in the v1 scheduler API.</p>
+<p>Operation reconciliation is similar to task reconciliation in that the scheduler
+can perform either explicit or implicit reconciliation by specifying particular
+operation IDs or by leaving the <code>operations</code> field unset, respectively.</p>
+<p>In order to explicitly reconcile particular operations, the scheduler should
+include in the <code>RECONCILE_OPERATIONS</code> call a list of operations, specifying an
+operation ID, agent ID, and resource provider ID (if applicable) for each one.
+While the agent and resource provider IDs are optional, the master will be able
+to provide the highest quality reconciliation information when they are set. For
+example, if the relevant agent is not currently registered, inclusion of the
+agent ID will allow the master to respond with states like
+<code>OPERATION_RECOVERING</code>, <code>OPERATION_UNREACHABLE</code>, or <code>OPERATION_GONE_BY_OPERATOR</code>
+when the agent is recovering, unreachable, or gone, respectively. Inclusion of
+the resource provider ID provides the same benefit for cases where the
+resource provider is recovering or gone.</p>
+<p>Similar to task reconciliation, we recommend that schedulers implement a
+periodic reconciliation loop for operations in order to defend against network
+failures and bugs in the scheduler and/or Mesos master.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="high-availability-framework-guide.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="task-state-reasons.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="high-availability-framework-guide.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="task-state-reasons.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

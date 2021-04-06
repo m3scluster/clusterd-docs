@@ -1,0 +1,975 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Persistent Volume for how to allow tasks to access persistent storage resources. - Apache Mesos</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="favicon.png">
+        
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        
+        <link rel="stylesheet" href="css/print.css" media="print">
+        
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">Fundamentals</li><li class="chapter-item expanded "><a href="architecture.html"><strong aria-hidden="true">1.</strong> Mesos Architecture providing an overview of Mesos concepts</a></li><li class="chapter-item expanded "><a href="presentations.html"><strong aria-hidden="true">2.</strong> Video and Slides of Mesos Presentations</a></li><li class="chapter-item expanded "><a href="versioning.html"><strong aria-hidden="true">3.</strong> Mesos Release and Support Policy</a></li><li class="chapter-item expanded affix "><li class="part-title">Build / Installation</li><li class="chapter-item expanded "><a href="building.html"><strong aria-hidden="true">4.</strong> Building for basic instructions on compiling and installing Mesos.</a></li><li class="chapter-item expanded "><a href="binary-packages.html"><strong aria-hidden="true">5.</strong> Binary Packages for how to use Mesos binary packages.</a></li><li class="chapter-item expanded "><a href="configuration.html"><strong aria-hidden="true">6.</strong> Configuration for build configuration options.</a></li><li class="chapter-item expanded "><a href="cmake.html"><strong aria-hidden="true">7.</strong> CMake for details about using the new CMake build system.</a></li><li class="chapter-item expanded "><a href="windows.html"><strong aria-hidden="true">8.</strong> Windows Support for the state of Windows support in Mesos.</a></li><li class="chapter-item expanded affix "><li class="part-title">Administration</li><li class="chapter-item expanded "><a href="configuration.html"><strong aria-hidden="true">9.</strong> Configuration for command-line arguments.</a></li><li class="chapter-item expanded "><a href="high-availability.html"><strong aria-hidden="true">10.</strong> High Availability Master Setup</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="replicated-log-internals.html"><strong aria-hidden="true">10.1.</strong> Replicated Log for information on the Mesos replicated log.</a></li></ol></li><li class="chapter-item expanded "><a href="agent-recovery.html"><strong aria-hidden="true">11.</strong> Fault Tolerant Agent Setup</a></li><li class="chapter-item expanded "><a href="framework-rate-limiting.html"><strong aria-hidden="true">12.</strong> Framework Rate Limiting</a></li><li class="chapter-item expanded "><a href="maintenance.html"><strong aria-hidden="true">13.</strong> Maintenance for performing maintenance on a Mesos cluster.</a></li><li class="chapter-item expanded "><a href="upgrades.html"><strong aria-hidden="true">14.</strong> Upgrades for upgrading a Mesos cluster.</a></li><li class="chapter-item expanded "><a href="downgrades.html"><strong aria-hidden="true">15.</strong> Downgrades for downgrading a Mesos cluster.</a></li><li class="chapter-item expanded "><a href="logging.html"><strong aria-hidden="true">16.</strong> Logging</a></li><li class="chapter-item expanded "><a href="monitoring.html"><strong aria-hidden="true">17.</strong> Monitoring / Metrics</a></li><li class="chapter-item expanded "><a href="cli.html"><strong aria-hidden="true">18.</strong> Debugging using the new CLI</a></li><li class="chapter-item expanded "><a href="operational-guide.html"><strong aria-hidden="true">19.</strong> Operational Guide</a></li><li class="chapter-item expanded "><a href="fetcher.html"><strong aria-hidden="true">20.</strong> Fetcher Cache Configuration</a></li><li class="chapter-item expanded "><a href="fault-domains.html"><strong aria-hidden="true">21.</strong> Fault Domains</a></li><li class="chapter-item expanded "><a href="performance-profiling.html"><strong aria-hidden="true">22.</strong> Performance Profiling for debugging performance issues in Mesos.</a></li><li class="chapter-item expanded "><a href="memory-profiling.html"><strong aria-hidden="true">23.</strong> Memory Profiling for debugging potential memory leaks in Mesos.</a></li><li class="chapter-item expanded affix "><li class="part-title">Resource Management</li><li class="chapter-item expanded "><a href="attributes-resources.html"><strong aria-hidden="true">24.</strong> Attributes and Resources for how to describe the agents that comprise a cluster.</a></li><li class="chapter-item expanded "><a href="roles.html"><strong aria-hidden="true">25.</strong> Using Resource Roles</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="weights.html"><strong aria-hidden="true">25.1.</strong> Resource Role Weights for fair sharing.</a></li><li class="chapter-item expanded "><a href="quota.html"><strong aria-hidden="true">25.2.</strong> Resource Role Quota for how to configure Mesos to provide guaranteed resource allocations for use by a role.</a></li><li class="chapter-item expanded "><a href="reservation.html"><strong aria-hidden="true">25.3.</strong> Reservations for how operators and frameworks can reserve resources on individual agents for use by a role.</a></li><li class="chapter-item expanded "><a href="shared-resources.html"><strong aria-hidden="true">25.4.</strong> Shared Resources for how to share persistent volumes between tasks managed by different executors on the same agent.</a></li></ol></li><li class="chapter-item expanded "><a href="oversubscription.html"><strong aria-hidden="true">26.</strong> Oversubscription for how to configure Mesos to take advantage of unused resources to launch “best-effort” tasks.</a></li><li class="chapter-item expanded affix "><li class="part-title">Security</li><li class="chapter-item expanded "><a href="authentication.html"><strong aria-hidden="true">27.</strong> Authentication</a></li><li class="chapter-item expanded "><a href="authorization.html"><strong aria-hidden="true">28.</strong> Authorization</a></li><li class="chapter-item expanded "><a href="ssl.html"><strong aria-hidden="true">29.</strong> SSL</a></li><li class="chapter-item expanded "><a href="secrets.html"><strong aria-hidden="true">30.</strong> Secrets for managing secrets within Mesos.</a></li><li class="chapter-item expanded affix "><li class="part-title">Containerization</li><li class="chapter-item expanded "><a href="containerizers.html"><strong aria-hidden="true">31.</strong> Containerizer Overview</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="containerizer-internals.html"><strong aria-hidden="true">31.1.</strong> Containerizer Internals for implementation details of containerizers.</a></li><li class="chapter-item expanded "><a href="docker-containerizer.html"><strong aria-hidden="true">31.2.</strong> Docker Containerizer for launching a Docker image as a Task, or as an Executor.</a></li><li class="chapter-item expanded "><a href="mesos-containerizer.html"><strong aria-hidden="true">31.3.</strong> Mesos Containerizer default containerizer, supports both Linux and POSIX systems.</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="container-image.html"><strong aria-hidden="true">31.3.1.</strong> Container Images for supporting container images in Mesos containerizer.</a></li><li class="chapter-item expanded "><a href="isolators/docker-volume.html"><strong aria-hidden="true">31.3.2.</strong> Docker Volume Support</a></li><li class="chapter-item expanded "><a href="gpu-support.html"><strong aria-hidden="true">31.3.3.</strong> Nvidia GPU Support for how to run Mesos with Nvidia GPU support.</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="sandbox.html"><strong aria-hidden="true">32.</strong> Container Sandboxes</a></li><li class="chapter-item expanded "><a href="container-volume.html"><strong aria-hidden="true">33.</strong> Container Volumes</a></li><li class="chapter-item expanded "><a href="nested-container-and-task-group.html"><strong aria-hidden="true">34.</strong> Nested Container and Task Group (Pod)</a></li><li class="chapter-item expanded "><a href="standalone-containers.html"><strong aria-hidden="true">35.</strong> Standalone Containers</a></li><li class="chapter-item expanded affix "><li class="part-title">Networking</li><li class="chapter-item expanded "><a href="networking.html"><strong aria-hidden="true">36.</strong> Networking Overview</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="networking-for-mesos-managed-containers.html"><strong aria-hidden="true">36.1.</strong> Networking in Detail</a></li><li class="chapter-item expanded "><a href="cni.html"><strong aria-hidden="true">36.2.</strong> Container Network Interface (CNI)</a></li><li class="chapter-item expanded "><a href="isolators/network-port-mapping.html"><strong aria-hidden="true">36.3.</strong> Port Mapping Isolator</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">Storage</li><li class="chapter-item expanded "><a href="multiple-disk.html"><strong aria-hidden="true">37.</strong> Multiple Disks for how to allow tasks to use multiple isolated disk resources.</a></li><li class="chapter-item expanded "><a href="persistent-volume.html" class="active"><strong aria-hidden="true">38.</strong> Persistent Volume for how to allow tasks to access persistent storage resources.</a></li><li class="chapter-item expanded "><a href="csi.html"><strong aria-hidden="true">39.</strong> Container Storage Interface (CSI) Support</a></li><li class="chapter-item expanded affix "><li class="part-title">Scheduler and Executor Development</li><li class="chapter-item expanded "><a href="running-workloads.html"><strong aria-hidden="true">40.</strong> Running Workloads in Mesos explains how a scheduler can specify and run tasks.</a></li><li class="chapter-item expanded "><a href="app-framework-development-guide.html"><strong aria-hidden="true">41.</strong> Framework Development Guide describes how to build applications on top of Mesos.</a></li><li class="chapter-item expanded "><a href="high-availability-framework-guide.html"><strong aria-hidden="true">42.</strong> Guide for Designing Highly Available Mesos Frameworks</a></li><li class="chapter-item expanded "><a href="reconciliation.html"><strong aria-hidden="true">43.</strong> Reconciliation for ensuring a framework’s state remains eventually consistent in the face of failures.</a></li><li class="chapter-item expanded "><a href="task-state-reasons.html"><strong aria-hidden="true">44.</strong> Task State Reasons describes how task state reasons are used in Mesos.</a></li><li class="chapter-item expanded "><a href="health-checks.html"><strong aria-hidden="true">45.</strong> Task Health Checking</a></li><li class="chapter-item expanded "><a href="scheduler-http-api.html"><strong aria-hidden="true">46.</strong> v1 Scheduler HTTP API for communication between schedulers and the Mesos master.</a></li><li class="chapter-item expanded "><a href="executor-http-api.html"><strong aria-hidden="true">47.</strong> v1 Executor HTTP API describes the new HTTP API for communication between executors and the Mesos agent.</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">Apache Mesos</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                        <a href="https://github.com/AVENTER-UG/mesos-docs/" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <hr />
+<h2>title: Apache Mesos - Persistent Volumes
+layout: documentation</h2>
+<h1 id="persistent-volumes"><a class="header" href="#persistent-volumes">Persistent Volumes</a></h1>
+<p>Mesos supports creating persistent volumes from disk resources. When
+launching a task, you can create a volume that exists outside the
+task's sandbox and will persist on the node even after the task dies or
+completes. When the task exits, its resources -- including the persistent volume
+-- can be offered back to the framework, so that the framework can launch the
+same task again, launch a recovery task, or launch a new task that consumes the
+previous task's output as its input.</p>
+<p>Persistent volumes enable stateful services such as HDFS and Cassandra
+to store their data within Mesos rather than having to resort to
+workarounds (e.g., writing task state to a distributed filesystem that
+is mounted at a well-known location outside the task's sandbox).</p>
+<h2 id="usage"><a class="header" href="#usage">Usage</a></h2>
+<p>Persistent volumes can only be created from <strong>reserved</strong> disk resources, whether
+it be statically reserved or dynamically reserved. A dynamically reserved
+persistent volume also cannot be unreserved without first explicitly destroying
+the volume. These rules exist to limit accidental mistakes, such as a persistent
+volume containing sensitive data being offered to other frameworks in the
+cluster. Similarly, a persistent volume cannot be destroyed if there is an
+active task that is still using the volume.</p>
+<p>Please refer to the <a href="reservation.html">Reservation</a> documentation for details
+regarding reservation mechanisms available in Mesos.</p>
+<p>Persistent volumes can also be created on isolated and auxiliary disks by
+reserving <a href="multiple-disk.html">multiple disk resources</a>.</p>
+<p>By default, a persistent volume cannot be shared between tasks running
+under different executors: that is, once a task is launched using a
+persistent volume, that volume will not appear in any resource offers
+until the task has finished running. <em>Shared</em> volumes are a type of
+persistent volumes that can be accessed by multiple tasks at the same
+agent simultaneously; see the documentation on <a href="shared-resources.html">shared
+volumes</a> for more information.</p>
+<p>Persistent volumes can be created by <strong>operators</strong> and <strong>frameworks</strong>.
+By default, frameworks and operators can create volumes for <em>any</em>
+role and destroy <em>any</em> persistent volume. <a href="authorization.html">Authorization</a>
+allows this behavior to be limited so that volumes can only be created for
+particular roles and only particular volumes can be destroyed. For these
+operations to be authorized, the framework or operator should provide a
+<code>principal</code> to identify itself. To use authorization with reserve, unreserve,
+create, and destroy operations, the Mesos master must be configured with the
+appropriate ACLs. For more information, see the
+<a href="authorization.html">authorization documentation</a>.</p>
+<ul>
+<li>The following messages are available for <strong>frameworks</strong> to send back via the
+<code>acceptOffers</code> API as a response to a resource offer:
+<ul>
+<li><code>Offer::Operation::Create</code></li>
+<li><code>Offer::Operation::Destroy</code></li>
+<li><code>Offer::Operation::GrowVolume</code></li>
+<li><code>Offer::Operation::ShrinkVolume</code></li>
+</ul>
+</li>
+<li>For each message in above list, a corresponding call in
+<a href="operator-http-api.html">HTTP Operator API</a> is available for operators or
+administrative tools;</li>
+<li><code>/create-volumes</code> and <code>/destroy-volumes</code> HTTP endpoints allow
+<strong>operators</strong> to manage persistent volumes through the master.</li>
+</ul>
+<p>When a persistent volume is destroyed, all the data on that volume is removed
+from the agent's filesystem. Note that for persistent volumes created on <code>Mount</code>
+disks, the root directory is not removed, because it is typically the mount
+point used for a separate storage device.</p>
+<p>In the following sections, we will walk through examples of each of the
+interfaces described above.</p>
+<h2 id="framework-api"><a class="header" href="#framework-api">Framework API</a></h2>
+<p><a name="offer-operation-create"></a></p>
+<h3 id="offeroperationcreate"><a class="header" href="#offeroperationcreate"><code>Offer::Operation::Create</code></a></h3>
+<p>A framework can create volumes through the resource offer cycle.  Suppose we
+receive a resource offer with 2048 MB of dynamically reserved disk:</p>
+<pre><code>{
+  &quot;id&quot; : &lt;offer_id&gt;,
+  &quot;framework_id&quot; : &lt;framework_id&gt;,
+  &quot;slave_id&quot; : &lt;slave_id&gt;,
+  &quot;hostname&quot; : &lt;hostname&gt;,
+  &quot;resources&quot; : [
+    {
+      &quot;name&quot; : &quot;disk&quot;,
+      &quot;type&quot; : &quot;SCALAR&quot;,
+      &quot;scalar&quot; : { &quot;value&quot; : 2048 },
+      &quot;role&quot; : &lt;offer's allocation role&gt;,
+      &quot;reservation&quot; : {
+        &quot;principal&quot; : &lt;framework_principal&gt;
+      }
+    }
+  ]
+}
+</code></pre>
+<p>We can create a persistent volume from the 2048 MB of disk resources by sending
+an <code>Offer::Operation</code> message via the <code>acceptOffers</code> API.
+<code>Offer::Operation::Create</code> has a <code>volumes</code> field which specifies the persistent
+volume information. We need to specify the following:</p>
+<ol>
+<li>
+<p>The ID for the persistent volume; this must be unique per role on each agent.</p>
+</li>
+<li>
+<p>The non-nested relative path within the container to mount the volume.</p>
+</li>
+<li>
+<p>The permissions for the volume. Currently, <code>&quot;RW&quot;</code> is the only possible value.</p>
+</li>
+<li>
+<p>If the framework provided a principal when registering with the master, then
+the <code>disk.persistence.principal</code> field must be set to that principal. If the
+framework did not provide a principal when registering, then the
+<code>disk.persistence.principal</code> field can take any value, or can be left unset.
+Note that the <code>principal</code> field determines the &quot;creator principal&quot; when
+<a href="authorization.html">authorization</a> is enabled, even if authentication is
+disabled.</p>
+<pre><code> {
+   &quot;type&quot; : Offer::Operation::CREATE,
+   &quot;create&quot;: {
+     &quot;volumes&quot; : [
+       {
+         &quot;name&quot; : &quot;disk&quot;,
+         &quot;type&quot; : &quot;SCALAR&quot;,
+         &quot;scalar&quot; : { &quot;value&quot; : 2048 },
+         &quot;role&quot; : &lt;offer's allocation role&gt;,
+         &quot;reservation&quot; : {
+           &quot;principal&quot; : &lt;framework_principal&gt;
+         },
+         &quot;disk&quot;: {
+           &quot;persistence&quot;: {
+             &quot;id&quot; : &lt;persistent_volume_id&gt;,
+             &quot;principal&quot; : &lt;framework_principal&gt;
+           },
+           &quot;volume&quot; : {
+             &quot;container_path&quot; : &lt;container_path&gt;,
+             &quot;mode&quot; : &lt;mode&gt;
+           }
+         }
+       }
+     ]
+   }
+ }
+</code></pre>
+</li>
+</ol>
+<p>If this succeeds, a subsequent resource offer will contain the following
+persistent volume:</p>
+<pre><code>{
+  &quot;id&quot; : &lt;offer_id&gt;,
+  &quot;framework_id&quot; : &lt;framework_id&gt;,
+  &quot;slave_id&quot; : &lt;slave_id&gt;,
+  &quot;hostname&quot; : &lt;hostname&gt;,
+  &quot;resources&quot; : [
+    {
+      &quot;name&quot; : &quot;disk&quot;,
+      &quot;type&quot; : &quot;SCALAR&quot;,
+      &quot;scalar&quot; : { &quot;value&quot; : 2048 },
+      &quot;role&quot; : &lt;offer's allocation role&gt;,
+      &quot;reservation&quot; : {
+        &quot;principal&quot; : &lt;framework_principal&gt;
+      },
+      &quot;disk&quot;: {
+        &quot;persistence&quot;: {
+          &quot;id&quot; : &lt;persistent_volume_id&gt;
+        },
+        &quot;volume&quot; : {
+          &quot;container_path&quot; : &lt;container_path&gt;,
+          &quot;mode&quot; : &lt;mode&gt;
+        }
+      }
+    }
+  ]
+}
+</code></pre>
+<h3 id="offeroperationdestroy"><a class="header" href="#offeroperationdestroy"><code>Offer::Operation::Destroy</code></a></h3>
+<p>A framework can destroy persistent volumes through the resource offer cycle. In
+<a href="#offer-operation-create">Offer::Operation::Create</a>, we created a persistent
+volume from 2048 MB of disk resources. The volume will continue to exist until
+it is explicitly destroyed. Suppose we would like to destroy the volume we
+created. First, we receive a resource offer (copy/pasted from above):</p>
+<pre><code>{
+  &quot;id&quot; : &lt;offer_id&gt;,
+  &quot;framework_id&quot; : &lt;framework_id&gt;,
+  &quot;slave_id&quot; : &lt;slave_id&gt;,
+  &quot;hostname&quot; : &lt;hostname&gt;,
+  &quot;resources&quot; : [
+    {
+      &quot;name&quot; : &quot;disk&quot;,
+      &quot;type&quot; : &quot;SCALAR&quot;,
+      &quot;scalar&quot; : { &quot;value&quot; : 2048 },
+      &quot;role&quot; : &lt;offer's allocation role&gt;,
+      &quot;reservation&quot; : {
+        &quot;principal&quot; : &lt;framework_principal&gt;
+      },
+      &quot;disk&quot;: {
+        &quot;persistence&quot;: {
+          &quot;id&quot; : &lt;persistent_volume_id&gt;
+        },
+        &quot;volume&quot; : {
+          &quot;container_path&quot; : &lt;container_path&gt;,
+          &quot;mode&quot; : &lt;mode&gt;
+        }
+      }
+    }
+  ]
+}
+</code></pre>
+<p>We can destroy the persistent volume by sending an <code>Offer::Operation</code> message
+via the <code>acceptOffers</code> API. <code>Offer::Operation::Destroy</code> has a <code>volumes</code> field
+which specifies the persistent volumes to be destroyed.</p>
+<pre><code>{
+  &quot;type&quot; : Offer::Operation::DESTROY,
+  &quot;destroy&quot; : {
+    &quot;volumes&quot; : [
+      {
+        &quot;name&quot; : &quot;disk&quot;,
+        &quot;type&quot; : &quot;SCALAR&quot;,
+        &quot;scalar&quot; : { &quot;value&quot; : 2048 },
+        &quot;role&quot; : &lt;offer's allocation role&gt;,
+        &quot;reservation&quot; : {
+          &quot;principal&quot; : &lt;framework_principal&gt;
+        },
+        &quot;disk&quot;: {
+          &quot;persistence&quot;: {
+            &quot;id&quot; : &lt;persistent_volume_id&gt;
+          },
+          &quot;volume&quot; : {
+            &quot;container_path&quot; : &lt;container_path&gt;,
+            &quot;mode&quot; : &lt;mode&gt;
+          }
+        }
+      }
+    ]
+  }
+}
+</code></pre>
+<p>If this request succeeds, the persistent volume will be destroyed, and all
+files and directories associated with the volume will be deleted. However, the
+disk resources will still be reserved. As such, a subsequent resource offer will
+contain the following reserved disk resources:</p>
+<pre><code>{
+  &quot;id&quot; : &lt;offer_id&gt;,
+  &quot;framework_id&quot; : &lt;framework_id&gt;,
+  &quot;slave_id&quot; : &lt;slave_id&gt;,
+  &quot;hostname&quot; : &lt;hostname&gt;,
+  &quot;resources&quot; : [
+    {
+      &quot;name&quot; : &quot;disk&quot;,
+      &quot;type&quot; : &quot;SCALAR&quot;,
+      &quot;scalar&quot; : { &quot;value&quot; : 2048 },
+      &quot;role&quot; : &lt;offer's allocation role&gt;,
+      &quot;reservation&quot; : {
+        &quot;principal&quot; : &lt;framework_principal&gt;
+      }
+    }
+  ]
+}
+</code></pre>
+<p>Those reserved resources can then be used as normal: e.g., they can be used to
+create another persistent volume or can be unreserved.</p>
+<p><a name="offer-operation-grow-volume"></a></p>
+<h3 id="offeroperationgrowvolume"><a class="header" href="#offeroperationgrowvolume"><code>Offer::Operation::GrowVolume</code></a></h3>
+<p>Sometimes, a framework or an operator may find that the size of an existing
+persistent volume may be too small (possibly due to increased usage). In
+<a href="#offer-operation-create">Offer::Operation::Create</a>, we created a persistent
+volume from 2048 MB of disk resources. Suppose we want to grow the size of
+the volume to 4096 MB, we first need resource offer(s) with at least 2048 MB of
+disk resources with the same reservation and disk information:</p>
+<pre><code>{
+  &quot;id&quot; : &lt;offer_id&gt;,
+  &quot;framework_id&quot; : &lt;framework_id&gt;,
+  &quot;slave_id&quot; : &lt;slave_id&gt;,
+  &quot;hostname&quot; : &lt;hostname&gt;,
+  &quot;resources&quot; : [
+    {
+      &quot;name&quot; : &quot;disk&quot;,
+      &quot;type&quot; : &quot;SCALAR&quot;,
+      &quot;scalar&quot; : { &quot;value&quot; : 2048 },
+      &quot;role&quot; : &lt;offer's allocation role&gt;,
+      &quot;reservation&quot; : {
+        &quot;principal&quot; : &lt;framework_principal&gt;
+      }
+    },
+    {
+      &quot;name&quot; : &quot;disk&quot;,
+      &quot;type&quot; : &quot;SCALAR&quot;,
+      &quot;scalar&quot; : { &quot;value&quot; : 2048 },
+      &quot;role&quot; : &lt;offer's allocation role&gt;,
+      &quot;reservation&quot; : {
+        &quot;principal&quot; : &lt;framework_principal&gt;
+      },
+      &quot;disk&quot;: {
+        &quot;persistence&quot;: {
+          &quot;id&quot; : &lt;persistent_volume_id&gt;
+        },
+        &quot;volume&quot; : {
+          &quot;container_path&quot; : &lt;container_path&gt;,
+          &quot;mode&quot; : &lt;mode&gt;
+        }
+      }
+    }
+  ]
+}
+</code></pre>
+<p>We can grow the persistent volume by sending an <code>Offer::Operation</code> message.
+<code>Offer::Operation::GrowVolume</code> has a <code>volume</code> field which specifies the
+persistent volume to grow, and an <code>addition</code> field which specifies the
+additional disk space resource.</p>
+<pre><code>{
+  &quot;type&quot; : Offer::Operation::GROW_VOLUME,
+  &quot;grow_volume&quot; : {
+    &quot;volume&quot; : {
+      &quot;name&quot; : &quot;disk&quot;,
+      &quot;type&quot; : &quot;SCALAR&quot;,
+      &quot;scalar&quot; : { &quot;value&quot; : 2048 },
+      &quot;role&quot; : &lt;offer's allocation role&gt;,
+      &quot;reservation&quot; : {
+        &quot;principal&quot; : &lt;framework_principal&gt;
+      },
+      &quot;disk&quot;: {
+        &quot;persistence&quot;: {
+          &quot;id&quot; : &lt;persistent_volume_id&gt;
+        },
+        &quot;volume&quot; : {
+          &quot;container_path&quot; : &lt;container_path&gt;,
+          &quot;mode&quot; : &lt;mode&gt;
+        }
+      }
+    },
+   &quot;addition&quot; : {
+      &quot;name&quot; : &quot;disk&quot;,
+      &quot;type&quot; : &quot;SCALAR&quot;,
+      &quot;scalar&quot; : { &quot;value&quot; : 2048 },
+      &quot;role&quot; : &lt;offer's allocation role&gt;,
+      &quot;reservation&quot; : {
+        &quot;principal&quot; : &lt;framework_principal&gt;
+      }
+    }
+  }
+}
+</code></pre>
+<p>If this request succeeds, the persistent volume will be grown to the new size,
+and all files and directories associated with the volume will not be touched.
+A subsequent resource offer will contain the grown volume:</p>
+<pre><code>{
+  &quot;id&quot; : &lt;offer_id&gt;,
+  &quot;framework_id&quot; : &lt;framework_id&gt;,
+  &quot;slave_id&quot; : &lt;slave_id&gt;,
+  &quot;hostname&quot; : &lt;hostname&gt;,
+  &quot;resources&quot; : [
+    {
+      &quot;name&quot; : &quot;disk&quot;,
+      &quot;type&quot; : &quot;SCALAR&quot;,
+      &quot;scalar&quot; : { &quot;value&quot; : 4096 },
+      &quot;role&quot; : &lt;offer's allocation role&gt;,
+      &quot;reservation&quot; : {
+        &quot;principal&quot; : &lt;framework_principal&gt;
+      },
+      &quot;disk&quot;: {
+        &quot;persistence&quot;: {
+          &quot;id&quot; : &lt;persistent_volume_id&gt;
+        },
+        &quot;volume&quot; : {
+          &quot;container_path&quot; : &lt;container_path&gt;,
+          &quot;mode&quot; : &lt;mode&gt;
+        }
+      }
+    }
+  ]
+}
+</code></pre>
+<p><a name="offer-operation-shrink-volume"></a></p>
+<h3 id="offeroperationshrinkvolume"><a class="header" href="#offeroperationshrinkvolume"><code>Offer::Operation::ShrinkVolume</code></a></h3>
+<p>Similarly, a framework or an operator may find that the size of an existing
+persistent volume may be too large (possibly due to over provisioning), and want
+to free up unneeded disk space resources.
+In <a href="#offer-operation-create">Offer::Operation::Create</a>, we created a persistent
+volume from 2048 MB of disk resources. Suppose we want to shrink the size of
+the volume to 1024 MB, we first need a resource offer with the volume to shrink:</p>
+<pre><code>{
+  &quot;id&quot; : &lt;offer_id&gt;,
+  &quot;framework_id&quot; : &lt;framework_id&gt;,
+  &quot;slave_id&quot; : &lt;slave_id&gt;,
+  &quot;hostname&quot; : &lt;hostname&gt;,
+  &quot;resources&quot; : [
+    {
+      &quot;name&quot; : &quot;disk&quot;,
+      &quot;type&quot; : &quot;SCALAR&quot;,
+      &quot;scalar&quot; : { &quot;value&quot; : 2048 },
+      &quot;role&quot; : &lt;offer's allocation role&gt;,
+      &quot;reservation&quot; : {
+        &quot;principal&quot; : &lt;framework_principal&gt;
+      },
+      &quot;disk&quot;: {
+        &quot;persistence&quot;: {
+          &quot;id&quot; : &lt;persistent_volume_id&gt;
+        },
+        &quot;volume&quot; : {
+          &quot;container_path&quot; : &lt;container_path&gt;,
+          &quot;mode&quot; : &lt;mode&gt;
+        }
+      }
+    }
+  ]
+}
+</code></pre>
+<p>We can shrink the persistent volume by sending an <code>Offer::Operation</code> message via
+the <code>acceptOffers</code> API. <code>Offer::Operation::ShrinkVolume</code> has a <code>volume</code> field
+which specifies the persistent volume to grow, and a <code>subtract</code> field which
+specifies the scalar value of disk space to subtract from the volume:</p>
+<pre><code>{
+  &quot;type&quot; : Offer::Operation::SHRINK_VOLUME,
+  &quot;shrink_volume&quot; : {
+    &quot;volume&quot; : {
+      &quot;name&quot; : &quot;disk&quot;,
+      &quot;type&quot; : &quot;SCALAR&quot;,
+      &quot;scalar&quot; : { &quot;value&quot; : 2048 },
+      &quot;role&quot; : &lt;offer's allocation role&gt;,
+      &quot;reservation&quot; : {
+        &quot;principal&quot; : &lt;framework_principal&gt;
+      },
+      &quot;disk&quot;: {
+        &quot;persistence&quot;: {
+          &quot;id&quot; : &lt;persistent_volume_id&gt;
+        },
+        &quot;volume&quot; : {
+          &quot;container_path&quot; : &lt;container_path&gt;,
+          &quot;mode&quot; : &lt;mode&gt;
+        }
+      }
+    },
+   &quot;subtract&quot; : {
+      &quot;value&quot; : 1024
+    }
+  }
+}
+</code></pre>
+<p>If this request succeeds, the persistent volume will be shrunk to the new size,
+and all files and directories associated with the volume will not be touched.
+A subsequent resource offer will contain the shrunk volume as well as freed up
+disk resources with the same reservation information:</p>
+<pre><code>{
+  &quot;id&quot; : &lt;offer_id&gt;,
+  &quot;framework_id&quot; : &lt;framework_id&gt;,
+  &quot;slave_id&quot; : &lt;slave_id&gt;,
+  &quot;hostname&quot; : &lt;hostname&gt;,
+  &quot;resources&quot; : [
+    {
+      &quot;name&quot; : &quot;disk&quot;,
+      &quot;type&quot; : &quot;SCALAR&quot;,
+      &quot;scalar&quot; : { &quot;value&quot; : 1024 },
+      &quot;role&quot; : &lt;offer's allocation role&gt;,
+      &quot;reservation&quot; : {
+        &quot;principal&quot; : &lt;framework_principal&gt;
+      }
+    },
+    {
+      &quot;name&quot; : &quot;disk&quot;,
+      &quot;type&quot; : &quot;SCALAR&quot;,
+      &quot;scalar&quot; : { &quot;value&quot; : 1024 },
+      &quot;role&quot; : &lt;offer's allocation role&gt;,
+      &quot;reservation&quot; : {
+        &quot;principal&quot; : &lt;framework_principal&gt;
+      },
+      &quot;disk&quot;: {
+        &quot;persistence&quot;: {
+          &quot;id&quot; : &lt;persistent_volume_id&gt;
+        },
+        &quot;volume&quot; : {
+          &quot;container_path&quot; : &lt;container_path&gt;,
+          &quot;mode&quot; : &lt;mode&gt;
+        }
+      }
+    }
+  ]
+}
+</code></pre>
+<p>Some restrictions about resizing a volume (applicable to both
+<a href="#offer-operation-grow-volume">Offer::Operation::GrowVolume</a> and
+<a href="#offer-operation-shrink-volume">Offer::Operation::ShrinkVolume</a>):</p>
+<ul>
+<li>Only persistent volumes created on an agent's local disk space with <code>ROOT</code> or
+<code>PATH</code> type can be resized;</li>
+<li>A persistent volume cannot be actively used by a task when being resized;</li>
+<li>A persistent volume cannot be shared when being resized;</li>
+<li>Volume resize operations cannot be included in an ACCEPT call with other
+operations which make use of the resized volume.</li>
+</ul>
+<h2 id="versioned-http-operator-api"><a class="header" href="#versioned-http-operator-api">Versioned HTTP Operator API</a></h2>
+<p>As described above, persistent volumes can be created by a framework scheduler
+as part of the resource offer cycle. Persistent volumes can also be managed
+using the <a href="operator-http-api.html">HTTP Operator API</a>.</p>
+<p>This capability is intended for use by operators and administrative tools.</p>
+<p>For each offer operation which interacts with persistent volume, there is an
+equivalent call in master's <a href="operator-http-api.html">HTTP Operator API</a>.</p>
+<h2 id="unversioned-operator-http-endpoints"><a class="header" href="#unversioned-operator-http-endpoints">Unversioned Operator HTTP Endpoints</a></h2>
+<p>Several HTTP endpoints like
+<a href="endpoints/master/create-volumes.html">/create-volumes</a> and
+<a href="endpoints/master/destroy-volumes.html">/destroy-volumes</a> can still be used to
+manage persisent volumes, but we generally encourage operators to use
+versioned <a href="operator-http-api.html">HTTP Operator API</a> instead, as new features
+like resize support may not be backported.</p>
+<h3 id="create-volumes"><a class="header" href="#create-volumes"><code>/create-volumes</code></a></h3>
+<p>To use this endpoint, the operator should first ensure that a reservation for
+the necessary resources has been made on the appropriate agent (e.g., by using
+the <a href="endpoints/master/reserve.html">/reserve</a> HTTP endpoint or by configuring a
+static reservation). The information that must be included in a request to this
+endpoint is similar to that of the <code>CREATE</code> offer operation. One difference is
+the required value of the <code>disk.persistence.principal</code> field: when HTTP
+authentication is enabled on the master, the field must be set to the same
+principal that is provided in the request's HTTP headers. When HTTP
+authentication is disabled, the <code>disk.persistence.principal</code> field can take any
+value, or can be left unset. Note that the <code>principal</code> field determines the
+&quot;creator principal&quot; when <a href="authorization.html">authorization</a> is enabled, even if
+HTTP authentication is disabled.</p>
+<p>To create a 512MB persistent volume for the <code>ads</code> role on a dynamically reserved
+disk resource, we can send an HTTP POST request to the master's
+<a href="endpoints/master/create-volumes.html">/create-volumes</a> endpoint like so:</p>
+<pre><code>curl -i \
+     -u &lt;operator_principal&gt;:&lt;password&gt; \
+     -d slaveId=&lt;slave_id&gt; \
+     -d volumes='[
+       {
+         &quot;name&quot;: &quot;disk&quot;,
+         &quot;type&quot;: &quot;SCALAR&quot;,
+         &quot;scalar&quot;: { &quot;value&quot;: 512 },
+         &quot;role&quot;: &quot;ads&quot;,
+         &quot;reservation&quot;: {
+           &quot;principal&quot;: &lt;operator_principal&gt;
+         },
+         &quot;disk&quot;: {
+           &quot;persistence&quot;: {
+             &quot;id&quot; : &lt;persistence_id&gt;,
+             &quot;principal&quot; : &lt;operator_principal&gt;
+           },
+           &quot;volume&quot;: {
+             &quot;mode&quot;: &quot;RW&quot;,
+             &quot;container_path&quot;: &lt;path&gt;
+           }
+         }
+       }
+     ]' \
+     -X POST http://&lt;ip&gt;:&lt;port&gt;/master/create-volumes
+</code></pre>
+<p>The user receives one of the following HTTP responses:</p>
+<ul>
+<li><code>202 Accepted</code>: Request accepted (see below).</li>
+<li><code>400 BadRequest</code>: Invalid arguments (e.g., missing parameters).</li>
+<li><code>401 Unauthorized</code>: Unauthenticated request.</li>
+<li><code>403 Forbidden</code>: Unauthorized request.</li>
+<li><code>409 Conflict</code>: Insufficient resources to create the volumes.</li>
+</ul>
+<p>A single <code>/create-volumes</code> request can create multiple persistent volumes, but
+all of the volumes must be on the same agent.</p>
+<p>This endpoint returns the 202 ACCEPTED HTTP status code, which indicates that
+the create operation has been validated successfully by the master. The request
+is then forwarded asynchronously to the Mesos agent where the reserved
+resources are located. That asynchronous message may not be delivered or
+creating the volumes at the agent might fail, in which case no volumes will be
+created. To determine if a create operation has succeeded, the user can examine
+the state of the appropriate Mesos agent (e.g., via the agent's
+<a href="endpoints/slave/state.html">/state</a> HTTP endpoint).</p>
+<h3 id="destroy-volumes"><a class="header" href="#destroy-volumes"><code>/destroy-volumes</code></a></h3>
+<p>To destroy the volume created above, we can send an HTTP POST to the master's
+<a href="endpoints/master/destroy-volumes.html">/destroy-volumes</a> endpoint like so:</p>
+<pre><code>curl -i \
+     -u &lt;operator_principal&gt;:&lt;password&gt; \
+     -d slaveId=&lt;slave_id&gt; \
+     -d volumes='[
+       {
+         &quot;name&quot;: &quot;disk&quot;,
+         &quot;type&quot;: &quot;SCALAR&quot;,
+         &quot;scalar&quot;: { &quot;value&quot;: 512 },
+         &quot;role&quot;: &quot;ads&quot;,
+         &quot;reservation&quot;: {
+           &quot;principal&quot;: &lt;operator_principal&gt;
+         },
+         &quot;disk&quot;: {
+           &quot;persistence&quot;: {
+             &quot;id&quot; : &lt;persistence_id&gt;
+           },
+           &quot;volume&quot;: {
+             &quot;mode&quot;: &quot;RW&quot;,
+             &quot;container_path&quot;: &lt;path&gt;
+           }
+         }
+       }
+     ]' \
+     -X POST http://&lt;ip&gt;:&lt;port&gt;/master/destroy-volumes
+</code></pre>
+<p>Note that the <code>volume</code> JSON in the <code>/destroy-volumes</code> request must
+<em>exactly</em> match the definition of the volume. The JSON definition of a
+volume can be found via the <code>reserved_resources_full</code> key in the
+master's <a href="endpoints/master/slaves.html">/slaves</a> endpoint (see below).</p>
+<p>The user receives one of the following HTTP responses:</p>
+<ul>
+<li><code>202 Accepted</code>: Request accepted (see below).</li>
+<li><code>400 BadRequest</code>: Invalid arguments (e.g., missing parameters).</li>
+<li><code>401 Unauthorized</code>: Unauthenticated request.</li>
+<li><code>403 Forbidden</code>: Unauthorized request.</li>
+<li><code>409 Conflict</code>: Insufficient resources to destroy the volumes.</li>
+</ul>
+<p>A single <code>/destroy-volumes</code> request can destroy multiple persistent volumes, but
+all of the volumes must be on the same agent.</p>
+<p>This endpoint returns the 202 ACCEPTED HTTP status code, which indicates that
+the destroy operation has been validated successfully by the master. The
+request is then forwarded asynchronously to the Mesos agent where the
+volumes are located. That asynchronous message may not be delivered or
+destroying the volumes at the agent might fail, in which case no volumes will
+be destroyed. To determine if a destroy operation has succeeded, the user can
+examine the state of the appropriate Mesos agent (e.g., via the agent's
+<a href="endpoints/slave/state.html">/state</a> HTTP endpoint).</p>
+<h2 id="listing-persistent-volumes"><a class="header" href="#listing-persistent-volumes">Listing Persistent Volumes</a></h2>
+<p>Information about the persistent volumes at each agent in the cluster can be
+found by querying the <a href="endpoints/master/slaves.html">/slaves</a> master endpoint,
+under the <code>reserved_resources_full</code> key.</p>
+<p>The same information can also be found in the <a href="endpoints/slave/state.html">/state</a>
+agent endpoint (under the <code>reserved_resources_full</code> key). The agent
+endpoint is useful to confirm if changes to persistent volumes have been
+propagated to the agent (which can fail in the event of network partition or
+master/agent restarts).</p>
+<h2 id="programming-with-persistent-volumes"><a class="header" href="#programming-with-persistent-volumes">Programming with Persistent Volumes</a></h2>
+<p>Some suggestions to keep in mind when building applications that use persistent
+volumes:</p>
+<ul>
+<li>
+<p>A single <code>acceptOffers</code> call make a dynamic reservation (via
+<code>Offer::Operation::Reserve</code>) and create a new persistent volume on the
+newly reserved resources (via <code>Offer::Operation::Create</code>). However,
+these operations are not executed atomically (i.e., either operation
+or both operations could fail).</p>
+</li>
+<li>
+<p>Volume IDs must be unique per role on each agent. However, it is strongly
+recommended that frameworks use globally unique volume IDs, to avoid potential
+confusion between volumes on different agents with the same volume
+ID. Note also that the agent ID where a volume resides might change over
+time. For example, suppose a volume is created on an agent and then the
+agent's host machine is rebooted. When the agent registers with Mesos after
+the reboot, it will be assigned a new AgentID---but it will retain the same
+volume it had previously. Hence, frameworks should not assume that using the
+pair &lt;AgentID, VolumeID&gt; is a stable way to identify a volume in a cluster.</p>
+</li>
+<li>
+<p>Attempts to dynamically reserve resources or create persistent volumes might
+fail---for example, because the network message containing the operation did
+not reach the master or because the master rejected the operation.
+Applications should be prepared to detect failures and correct for them (e.g.,
+by retrying the operation).</p>
+</li>
+<li>
+<p>When using HTTP endpoints to reserve resources or create persistent volumes,
+<em>some</em> failures can be detected by examining the HTTP response code returned
+to the client. However, it is still possible for a <code>202</code> response code to be
+returned to the client but for the associated operation to fail---see
+discussion above.</p>
+</li>
+<li>
+<p>When using the scheduler API, detecting that a dynamic reservation has failed
+is a little tricky: reservations do not have unique identifiers, and the Mesos
+master does not provide explicit feedback on whether a reservation request has
+succeeded or failed. Hence, framework schedulers typically use a combination
+of two techniques:</p>
+<ol>
+<li>
+<p>They use timeouts to detect that a reservation request may have failed
+(because they don't receive a resource offer containing the expected
+resources after a given period of time).</p>
+</li>
+<li>
+<p>To check whether a resource offer includes the effect of a dynamic
+reservation, applications <em>cannot</em> check for the presence of a &quot;reservation
+ID&quot; or similar value (because reservations do not have IDs). Instead,
+applications should examine the resource offer and check that it contains
+sufficient reserved resources for the application's role. If it does not,
+the application should make additional reservation requests as necessary.</p>
+</li>
+</ol>
+</li>
+<li>
+<p>When a scheduler issues a dynamic reservation request, the reserved resources
+might <em>not</em> be present in the next resource offer the scheduler receives.
+There are two reasons for this: first, the reservation request might fail or
+be dropped by the network, as discussed above. Second, the reservation request
+might simply be delayed, so that the next resource offer from the master will
+be issued before the reservation request is received by the master. This is
+why the text above suggests that applications wait for a timeout before
+assuming that a reservation request should be retried.</p>
+</li>
+<li>
+<p>A consequence of using timeouts to detect failures is that an application
+might submit more reservation requests than intended (e.g., a timeout fires
+and an application makes another reservation request; meanwhile, the original
+reservation request is also processed). Recall that two reservations for the
+same role at the same agent are &quot;merged&quot;: for example, role <code>foo</code> makes two
+requests to reserve 2 CPUs at a single agent and both reservation requests
+succeed, the result will be a single reservation of 4 CPUs. To handle this
+situation, applications should be prepared for resource offers that contain
+more resources than expected. Some applications may also want to detect this
+situation and unreserve any additional reserved resources that will not be
+required.</p>
+</li>
+<li>
+<p>It often makes sense to structure application logic as a &quot;state machine&quot;,
+where the application moves from its initial state (no reserved resources and
+no persistent volumes) and eventually transitions toward a single terminal
+state (necessary resources reserved and persistent volume created). As new
+events (such as timeouts and resource offers) are received, the application
+compares the event with its current state and decides what action to take
+next.</p>
+</li>
+<li>
+<p>Because persistent volumes are associated with roles, a volume might be
+offered to <em>any</em> of the frameworks that are subscribed to that role. For
+example, a persistent volume might be created by one framework and then
+offered to a different framework subscribed to the same role. This can be
+used to pass large volumes of data between frameworks in a convenient way.
+However, this behavior might also allow sensitive data created by one
+framework to be read or modified by another framework subscribed to the
+same role. It can also make it more difficult for frameworks to determine
+whether a dynamic reservation has succeeded: as discussed above, frameworks
+need to wait for an offer that contains the &quot;expected&quot; reserved resources
+to determine when a reservation request has succeeded. Determining what a
+framework should &quot;expect&quot; to find in an offer is more difficult when
+multiple frameworks can make reservations for the same role concurrently.
+In general, whenever multiple frameworks are allowed to subscribe to the
+same role, the operator should ensure that those frameworks are configured
+to collaborate with one another when using role-specific resources. For
+more information, see the discussion of
+<a href="roles.html#roles-multiple-frameworks">multiple frameworks in the same role</a>.</p>
+</li>
+</ul>
+<h2 id="version-history"><a class="header" href="#version-history">Version History</a></h2>
+<p>Persistent volumes were introduced in Mesos 0.23. Mesos 0.27 introduced HTTP
+endpoints for creating and destroying volumes. Mesos 0.28 introduced support for
+<a href="multiple-disk.html">multiple disk resources</a>, and also enhanced the <code>/slaves</code>
+master endpoint to include detailed information about persistent volumes and
+dynamic reservations. Mesos 1.0 changed the semantics of destroying a volume:
+in previous releases, destroying a volume would remove the Mesos-level metadata
+but would not remove the volume's data from the agent's filesystem. Mesos 1.1
+introduced support for <a href="shared-resources.html">shared persistent volumes</a>. Mesos
+1.6 introduced experimental support for resizing persistent volumes.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="multiple-disk.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="csi.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="multiple-disk.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="csi.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

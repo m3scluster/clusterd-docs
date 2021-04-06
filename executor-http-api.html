@@ -1,0 +1,627 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>v1 Executor HTTP API describes the new HTTP API for communication between executors and the Mesos agent. - Apache Mesos</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="favicon.png">
+        
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        
+        <link rel="stylesheet" href="css/print.css" media="print">
+        
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">Fundamentals</li><li class="chapter-item expanded "><a href="architecture.html"><strong aria-hidden="true">1.</strong> Mesos Architecture providing an overview of Mesos concepts</a></li><li class="chapter-item expanded "><a href="presentations.html"><strong aria-hidden="true">2.</strong> Video and Slides of Mesos Presentations</a></li><li class="chapter-item expanded "><a href="versioning.html"><strong aria-hidden="true">3.</strong> Mesos Release and Support Policy</a></li><li class="chapter-item expanded affix "><li class="part-title">Build / Installation</li><li class="chapter-item expanded "><a href="building.html"><strong aria-hidden="true">4.</strong> Building for basic instructions on compiling and installing Mesos.</a></li><li class="chapter-item expanded "><a href="binary-packages.html"><strong aria-hidden="true">5.</strong> Binary Packages for how to use Mesos binary packages.</a></li><li class="chapter-item expanded "><a href="configuration.html"><strong aria-hidden="true">6.</strong> Configuration for build configuration options.</a></li><li class="chapter-item expanded "><a href="cmake.html"><strong aria-hidden="true">7.</strong> CMake for details about using the new CMake build system.</a></li><li class="chapter-item expanded "><a href="windows.html"><strong aria-hidden="true">8.</strong> Windows Support for the state of Windows support in Mesos.</a></li><li class="chapter-item expanded affix "><li class="part-title">Administration</li><li class="chapter-item expanded "><a href="configuration.html"><strong aria-hidden="true">9.</strong> Configuration for command-line arguments.</a></li><li class="chapter-item expanded "><a href="high-availability.html"><strong aria-hidden="true">10.</strong> High Availability Master Setup</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="replicated-log-internals.html"><strong aria-hidden="true">10.1.</strong> Replicated Log for information on the Mesos replicated log.</a></li></ol></li><li class="chapter-item expanded "><a href="agent-recovery.html"><strong aria-hidden="true">11.</strong> Fault Tolerant Agent Setup</a></li><li class="chapter-item expanded "><a href="framework-rate-limiting.html"><strong aria-hidden="true">12.</strong> Framework Rate Limiting</a></li><li class="chapter-item expanded "><a href="maintenance.html"><strong aria-hidden="true">13.</strong> Maintenance for performing maintenance on a Mesos cluster.</a></li><li class="chapter-item expanded "><a href="upgrades.html"><strong aria-hidden="true">14.</strong> Upgrades for upgrading a Mesos cluster.</a></li><li class="chapter-item expanded "><a href="downgrades.html"><strong aria-hidden="true">15.</strong> Downgrades for downgrading a Mesos cluster.</a></li><li class="chapter-item expanded "><a href="logging.html"><strong aria-hidden="true">16.</strong> Logging</a></li><li class="chapter-item expanded "><a href="monitoring.html"><strong aria-hidden="true">17.</strong> Monitoring / Metrics</a></li><li class="chapter-item expanded "><a href="cli.html"><strong aria-hidden="true">18.</strong> Debugging using the new CLI</a></li><li class="chapter-item expanded "><a href="operational-guide.html"><strong aria-hidden="true">19.</strong> Operational Guide</a></li><li class="chapter-item expanded "><a href="fetcher.html"><strong aria-hidden="true">20.</strong> Fetcher Cache Configuration</a></li><li class="chapter-item expanded "><a href="fault-domains.html"><strong aria-hidden="true">21.</strong> Fault Domains</a></li><li class="chapter-item expanded "><a href="performance-profiling.html"><strong aria-hidden="true">22.</strong> Performance Profiling for debugging performance issues in Mesos.</a></li><li class="chapter-item expanded "><a href="memory-profiling.html"><strong aria-hidden="true">23.</strong> Memory Profiling for debugging potential memory leaks in Mesos.</a></li><li class="chapter-item expanded affix "><li class="part-title">Resource Management</li><li class="chapter-item expanded "><a href="attributes-resources.html"><strong aria-hidden="true">24.</strong> Attributes and Resources for how to describe the agents that comprise a cluster.</a></li><li class="chapter-item expanded "><a href="roles.html"><strong aria-hidden="true">25.</strong> Using Resource Roles</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="weights.html"><strong aria-hidden="true">25.1.</strong> Resource Role Weights for fair sharing.</a></li><li class="chapter-item expanded "><a href="quota.html"><strong aria-hidden="true">25.2.</strong> Resource Role Quota for how to configure Mesos to provide guaranteed resource allocations for use by a role.</a></li><li class="chapter-item expanded "><a href="reservation.html"><strong aria-hidden="true">25.3.</strong> Reservations for how operators and frameworks can reserve resources on individual agents for use by a role.</a></li><li class="chapter-item expanded "><a href="shared-resources.html"><strong aria-hidden="true">25.4.</strong> Shared Resources for how to share persistent volumes between tasks managed by different executors on the same agent.</a></li></ol></li><li class="chapter-item expanded "><a href="oversubscription.html"><strong aria-hidden="true">26.</strong> Oversubscription for how to configure Mesos to take advantage of unused resources to launch “best-effort” tasks.</a></li><li class="chapter-item expanded affix "><li class="part-title">Security</li><li class="chapter-item expanded "><a href="authentication.html"><strong aria-hidden="true">27.</strong> Authentication</a></li><li class="chapter-item expanded "><a href="authorization.html"><strong aria-hidden="true">28.</strong> Authorization</a></li><li class="chapter-item expanded "><a href="ssl.html"><strong aria-hidden="true">29.</strong> SSL</a></li><li class="chapter-item expanded "><a href="secrets.html"><strong aria-hidden="true">30.</strong> Secrets for managing secrets within Mesos.</a></li><li class="chapter-item expanded affix "><li class="part-title">Containerization</li><li class="chapter-item expanded "><a href="containerizers.html"><strong aria-hidden="true">31.</strong> Containerizer Overview</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="containerizer-internals.html"><strong aria-hidden="true">31.1.</strong> Containerizer Internals for implementation details of containerizers.</a></li><li class="chapter-item expanded "><a href="docker-containerizer.html"><strong aria-hidden="true">31.2.</strong> Docker Containerizer for launching a Docker image as a Task, or as an Executor.</a></li><li class="chapter-item expanded "><a href="mesos-containerizer.html"><strong aria-hidden="true">31.3.</strong> Mesos Containerizer default containerizer, supports both Linux and POSIX systems.</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="container-image.html"><strong aria-hidden="true">31.3.1.</strong> Container Images for supporting container images in Mesos containerizer.</a></li><li class="chapter-item expanded "><a href="isolators/docker-volume.html"><strong aria-hidden="true">31.3.2.</strong> Docker Volume Support</a></li><li class="chapter-item expanded "><a href="gpu-support.html"><strong aria-hidden="true">31.3.3.</strong> Nvidia GPU Support for how to run Mesos with Nvidia GPU support.</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="sandbox.html"><strong aria-hidden="true">32.</strong> Container Sandboxes</a></li><li class="chapter-item expanded "><a href="container-volume.html"><strong aria-hidden="true">33.</strong> Container Volumes</a></li><li class="chapter-item expanded "><a href="nested-container-and-task-group.html"><strong aria-hidden="true">34.</strong> Nested Container and Task Group (Pod)</a></li><li class="chapter-item expanded "><a href="standalone-containers.html"><strong aria-hidden="true">35.</strong> Standalone Containers</a></li><li class="chapter-item expanded affix "><li class="part-title">Networking</li><li class="chapter-item expanded "><a href="networking.html"><strong aria-hidden="true">36.</strong> Networking Overview</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="networking-for-mesos-managed-containers.html"><strong aria-hidden="true">36.1.</strong> Networking in Detail</a></li><li class="chapter-item expanded "><a href="cni.html"><strong aria-hidden="true">36.2.</strong> Container Network Interface (CNI)</a></li><li class="chapter-item expanded "><a href="isolators/network-port-mapping.html"><strong aria-hidden="true">36.3.</strong> Port Mapping Isolator</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">Storage</li><li class="chapter-item expanded "><a href="multiple-disk.html"><strong aria-hidden="true">37.</strong> Multiple Disks for how to allow tasks to use multiple isolated disk resources.</a></li><li class="chapter-item expanded "><a href="persistent-volume.html"><strong aria-hidden="true">38.</strong> Persistent Volume for how to allow tasks to access persistent storage resources.</a></li><li class="chapter-item expanded "><a href="csi.html"><strong aria-hidden="true">39.</strong> Container Storage Interface (CSI) Support</a></li><li class="chapter-item expanded affix "><li class="part-title">Scheduler and Executor Development</li><li class="chapter-item expanded "><a href="running-workloads.html"><strong aria-hidden="true">40.</strong> Running Workloads in Mesos explains how a scheduler can specify and run tasks.</a></li><li class="chapter-item expanded "><a href="app-framework-development-guide.html"><strong aria-hidden="true">41.</strong> Framework Development Guide describes how to build applications on top of Mesos.</a></li><li class="chapter-item expanded "><a href="high-availability-framework-guide.html"><strong aria-hidden="true">42.</strong> Guide for Designing Highly Available Mesos Frameworks</a></li><li class="chapter-item expanded "><a href="reconciliation.html"><strong aria-hidden="true">43.</strong> Reconciliation for ensuring a framework’s state remains eventually consistent in the face of failures.</a></li><li class="chapter-item expanded "><a href="task-state-reasons.html"><strong aria-hidden="true">44.</strong> Task State Reasons describes how task state reasons are used in Mesos.</a></li><li class="chapter-item expanded "><a href="health-checks.html"><strong aria-hidden="true">45.</strong> Task Health Checking</a></li><li class="chapter-item expanded "><a href="scheduler-http-api.html"><strong aria-hidden="true">46.</strong> v1 Scheduler HTTP API for communication between schedulers and the Mesos master.</a></li><li class="chapter-item expanded "><a href="executor-http-api.html" class="active"><strong aria-hidden="true">47.</strong> v1 Executor HTTP API describes the new HTTP API for communication between executors and the Mesos agent.</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">Apache Mesos</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                        <a href="https://github.com/AVENTER-UG/mesos-docs/" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <hr />
+<h2>title: Apache Mesos - Executor HTTP API
+layout: documentation</h2>
+<h1 id="executor-http-api"><a class="header" href="#executor-http-api">Executor HTTP API</a></h1>
+<p>A Mesos executor can be built in two different ways:</p>
+<ol>
+<li>
+<p>By using the HTTP API. This allows Mesos executors to be developed without
+using C++ or a native client library; instead, a custom executor interacts with
+the Mesos agent via HTTP requests, as described below. Although it is
+theoretically possible to use the HTTP executor API &quot;directly&quot; (e.g., by using a
+generic HTTP library), most executor developers should use a library for their
+language of choice that manages the details of the HTTP API; see the document on
+<a href="api-client-libraries.html">HTTP API client libraries</a> for a list. This is the
+recommended way to develop new Mesos executors.</p>
+</li>
+<li>
+<p>By using the deprecated <code>ExecutorDriver</code> C++ interface. While this interface
+is still supported, note that new features are usually not added to it. The
+<code>ExecutorDriver</code> handles the details of communicating with the Mesos agent.
+Executor developers implement custom executor logic by registering callbacks
+with the <code>ExecutorDriver</code> for significant events, such as when a new task launch
+request is received. Because the <code>ExecutorDriver</code> interface is written in C++,
+this typically requires that executor developers either use C++ or use a C++
+binding to their language of choice (e.g., JNI when using JVM-based languages).</p>
+</li>
+</ol>
+<h2 id="overview"><a class="header" href="#overview">Overview</a></h2>
+<p>The executor interacts with Mesos via the [/api/v1/executor]
+(endpoints/slave/api/v1/executor.md) agent endpoint. We refer to this endpoint
+with its suffix &quot;/executor&quot; in the rest of this document. The endpoint accepts
+HTTP POST requests with data encoded as JSON (Content-Type: application/json) or
+binary Protobuf (Content-Type: application/x-protobuf). The first request that
+the executor sends to the &quot;/executor&quot; endpoint is called <code>SUBSCRIBE</code> and results
+in a streaming response (&quot;200 OK&quot; status code with Transfer-Encoding: chunked).</p>
+<p><strong>Executors are expected to keep the subscription connection open as long as
+possible (barring network errors, agent process restarts, software bugs, etc.)
+and incrementally process the response.</strong> HTTP client libraries that can only
+parse the response after the connection is closed cannot be used. For the
+encoding used, please refer to <strong>Events</strong> section below.</p>
+<p>All subsequent (non-<code>SUBSCRIBE</code>) requests to the &quot;/executor&quot; endpoint (see
+details below in <strong>Calls</strong> section) must be sent using a different connection
+than the one used for subscription. The agent responds to these HTTP POST
+requests with &quot;202 Accepted&quot; status codes (or, for unsuccessful requests, with
+4xx or 5xx status codes; details in later sections). The &quot;202 Accepted&quot; response
+means that a request has been accepted for processing, not that the processing
+of the request has been completed. The request might or might not be acted upon
+by Mesos (e.g., agent fails during the processing of the request). Any
+asynchronous responses from these requests will be streamed on the long-lived
+subscription connection. Executors can submit requests using more than one
+different HTTP connection.</p>
+<p>The &quot;/executor&quot; endpoint is served at the Mesos agent's IP:port and in addition,
+when the agent has the <code>http_executor_domain_sockets</code> flag set to <code>true</code>, the
+executor endpoint is also served on a Unix domain socket, the location of which
+can be found by the executor in the <code>MESOS_DOMAIN_SOCKET</code> environment variable.
+Connecting to the domain socket is similar to connecting using a TCP socket, and
+once the connection is established, data is sent and received in the same way.</p>
+<h2 id="calls"><a class="header" href="#calls">Calls</a></h2>
+<p>The following calls are currently accepted by the agent. The canonical source of
+this information is <a href="https://github.com/apache/mesos/blob/master/include/mesos/v1/executor/executor.proto">executor.proto</a>.
+When sending JSON-encoded Calls, executors should encode raw bytes in Base64 and
+strings in UTF-8.</p>
+<h3 id="subscribe"><a class="header" href="#subscribe">SUBSCRIBE</a></h3>
+<p>This is the first step in the communication process between the executor and
+agent. This is also to be considered as subscription to the &quot;/executor&quot; events
+stream.</p>
+<p>To subscribe with the agent, the executor sends an HTTP POST with a <code>SUBSCRIBE</code>
+message. The HTTP response is a stream in [RecordIO]
+(scheduler-http-api.md#recordio-response-format) format; the event stream will
+begin with a <code>SUBSCRIBED</code> event (see details in <strong>Events</strong> section).</p>
+<p>Additionally, if the executor is connecting to the agent after a
+<a href="#disconnections">disconnection</a>, it can also send a list of:</p>
+<ul>
+<li><strong>Unacknowledged Status Updates</strong>: The executor is expected to maintain a list
+of status updates not acknowledged by the agent via the <code>ACKNOWLEDGE</code> events.</li>
+<li><strong>Unacknowledged Tasks</strong>: The executor is expected to maintain a list of tasks
+that have not been acknowledged by the agent. A task is considered
+acknowledged if at least one of the status updates for this task is
+acknowledged by the agent.</li>
+</ul>
+<pre><code>SUBSCRIBE Request (JSON):
+
+POST /api/v1/executor  HTTP/1.1
+
+Host: agenthost:5051
+Content-Type: application/json
+Accept: application/json
+
+{
+  &quot;type&quot;: &quot;SUBSCRIBE&quot;,
+  &quot;executor_id&quot;: {
+    &quot;value&quot;: &quot;387aa966-8fc5-4428-a794-5a868a60d3eb&quot;
+  },
+  &quot;framework_id&quot;: {
+    &quot;value&quot;: &quot;49154f1b-8cf6-4421-bf13-8bd11dccd1f1&quot;
+  },
+  &quot;subscribe&quot;: {
+    &quot;unacknowledged_tasks&quot;: [
+      {
+        &quot;name&quot;: &quot;dummy-task&quot;,
+        &quot;task_id&quot;: {
+          &quot;value&quot;: &quot;d40f3f3e-bbe3-44af-a230-4cb1eae72f67&quot;
+        },
+        &quot;agent_id&quot;: {
+          &quot;value&quot;: &quot;f1c9cdc5-195e-41a7-a0d7-adaa9af07f81&quot;
+        },
+        &quot;command&quot;: {
+          &quot;value&quot;: &quot;ls&quot;,
+          &quot;arguments&quot;: [
+            &quot;-l&quot;,
+            &quot;\/tmp&quot;
+          ]
+        }
+      }
+    ],
+    &quot;unacknowledged_updates&quot;: [
+      {
+        &quot;framework_id&quot;: {
+          &quot;value&quot;: &quot;49154f1b-8cf6-4421-bf13-8bd11dccd1f1&quot;
+        },
+        &quot;status&quot;: {
+          &quot;source&quot;: &quot;SOURCE_EXECUTOR&quot;,
+          &quot;task_id&quot;: {
+            &quot;value&quot;: &quot;d40f3f3e-bbe3-44af-a230-4cb1eae72f67&quot;
+          },
+        &quot;state&quot;: &quot;TASK_RUNNING&quot;,
+        &quot;uuid&quot;: &quot;ZDQwZjNmM2UtYmJlMy00NGFmLWEyMzAtNGNiMWVhZTcyZjY3Cg==&quot;
+        }
+      }
+    ]
+  }
+}
+
+SUBSCRIBE Response Event (JSON):
+HTTP/1.1 200 OK
+
+Content-Type: application/json
+Transfer-Encoding: chunked
+
+&lt;event-length&gt;
+{
+  &quot;type&quot;: &quot;SUBSCRIBED&quot;,
+  &quot;subscribed&quot;: {
+    &quot;executor_info&quot;: {
+      &quot;executor_id&quot;: {
+        &quot;value&quot;: &quot;387aa966-8fc5-4428-a794-5a868a60d3eb&quot;
+      },
+      &quot;command&quot;: {
+        &quot;value&quot;: &quot;\/path\/to\/executor&quot;
+      },
+      &quot;framework_id&quot;: {
+        &quot;value&quot;: &quot;49154f1b-8cf6-4421-bf13-8bd11dccd1f1&quot;
+      }
+    },
+    &quot;framework_info&quot;: {
+      &quot;user&quot;: &quot;foo&quot;,
+      &quot;name&quot;: &quot;my_framework&quot;
+    },
+    &quot;agent_id&quot;: {
+      &quot;value&quot;: &quot;f1c9cdc5-195e-41a7-a0d7-adaa9af07f81&quot;
+    },
+    &quot;agent_info&quot;: {
+      &quot;host&quot;: &quot;agenthost&quot;,
+      &quot;port&quot;: 5051
+    }
+  }
+}
+&lt;more events&gt;
+</code></pre>
+<p>NOTE: Once an executor is launched, the agent waits for a duration of <code>--executor_registration_timeout</code> (configurable at agent startup) for the executor to subscribe. If the executor fails to subscribe within this duration, the agent forcefully destroys the container executor is running in.</p>
+<h3 id="update"><a class="header" href="#update">UPDATE</a></h3>
+<p>Sent by the executor to reliably communicate the state of managed tasks. It is crucial that a terminal update (e.g., <code>TASK_FINISHED</code>, <code>TASK_KILLED</code> or <code>TASK_FAILED</code>) is sent to the agent as soon as the task terminates, in order to allow Mesos to release the resources allocated to the task.</p>
+<p>The scheduler must explicitly respond to this call through an <code>ACKNOWLEDGE</code> message (see <code>ACKNOWLEDGED</code> in the Events section below for the semantics). The executor must maintain a list of unacknowledged updates. If for some reason, the executor is disconnected from the agent, these updates must be sent as part of <code>SUBSCRIBE</code> request in the <code>unacknowledged_updates</code> field.</p>
+<pre><code>UPDATE Request (JSON):
+
+POST /api/v1/executor  HTTP/1.1
+
+Host: agenthost:5051
+Content-Type: application/json
+Accept: application/json
+
+{
+  &quot;executor_id&quot;: {
+    &quot;value&quot;: &quot;387aa966-8fc5-4428-a794-5a868a60d3eb&quot;
+  },
+  &quot;framework_id&quot;: {
+    &quot;value&quot;: &quot;9aaa9d0d-e00d-444f-bfbd-23dd197939a0-0000&quot;
+  },
+  &quot;type&quot;: &quot;UPDATE&quot;,
+  &quot;update&quot;: {
+    &quot;status&quot;: {
+      &quot;executor_id&quot;: {
+        &quot;value&quot;: &quot;387aa966-8fc5-4428-a794-5a868a60d3eb&quot;
+      },
+      &quot;source&quot;: &quot;SOURCE_EXECUTOR&quot;,
+      &quot;state&quot;: &quot;TASK_RUNNING&quot;,
+      &quot;task_id&quot;: {
+        &quot;value&quot;: &quot;66724cec-2609-4fa0-8d93-c5fb2099d0f8&quot;
+      },
+      &quot;uuid&quot;: &quot;ZDQwZjNmM2UtYmJlMy00NGFmLWEyMzAtNGNiMWVhZTcyZjY3Cg==&quot;
+    }
+  }
+}
+
+UPDATE Response:
+HTTP/1.1 202 Accepted
+</code></pre>
+<h3 id="message"><a class="header" href="#message">MESSAGE</a></h3>
+<p>Sent by the executor to send arbitrary binary data to the scheduler. Note that Mesos neither interprets this data nor makes any guarantees about the delivery of this message to the scheduler. The <code>data</code> field is raw bytes encoded in Base64.</p>
+<pre><code>MESSAGE Request (JSON):
+
+POST /api/v1/executor  HTTP/1.1
+
+Host: agenthost:5051
+Content-Type: application/json
+Accept: application/json
+
+{
+  &quot;executor_id&quot;: {
+    &quot;value&quot;: &quot;387aa966-8fc5-4428-a794-5a868a60d3eb&quot;
+  },
+  &quot;framework_id&quot;: {
+    &quot;value&quot;: &quot;9aaa9d0d-e00d-444f-bfbd-23dd197939a0-0000&quot;
+  },
+  &quot;type&quot;: &quot;MESSAGE&quot;,
+  &quot;message&quot;: {
+    &quot;data&quot;: &quot;t+Wonz5fRFKMzCnEptlv5A==&quot;
+  }
+}
+
+MESSAGE Response:
+HTTP/1.1 202 Accepted
+</code></pre>
+<h2 id="events"><a class="header" href="#events">Events</a></h2>
+<p>Executors are expected to keep a <strong>persistent</strong> connection to the &quot;/executor&quot; endpoint (even after getting a <code>SUBSCRIBED</code> HTTP Response event). This is indicated by the &quot;Connection: keep-alive&quot; and &quot;Transfer-Encoding: chunked&quot; headers with <em>no</em> &quot;Content-Length&quot; header set. All subsequent events that are relevant to this executor generated by Mesos are streamed on this connection. The agent encodes each Event in <a href="scheduler-http-api.html#recordio-response-format">RecordIO</a> format, i.e., string representation of length of the event in bytes followed by JSON or binary Protobuf  (possibly compressed) encoded event. The length of an event is a 64-bit unsigned integer (encoded as a textual value) and will never be &quot;0&quot;. Also, note that the <code>RecordIO</code> encoding should be decoded by the executor whereas the underlying HTTP chunked encoding is typically invisible at the application (executor) layer. The type of content encoding used for the events will be determined by the accept header of the POST request (e.g., &quot;Accept: application/json&quot;).</p>
+<p>The following events are currently sent by the agent. The canonical source of this information is at <a href="https://github.com/apache/mesos/blob/master/include/mesos/v1/executor/executor.proto">executor.proto</a>. Note that when sending JSON-encoded events, agent encodes raw bytes in Base64 and strings in UTF-8.</p>
+<h3 id="subscribed"><a class="header" href="#subscribed">SUBSCRIBED</a></h3>
+<p>The first event sent by the agent when the executor sends a <code>SUBSCRIBE</code> request on the persistent connection. See <code>SUBSCRIBE</code> in Calls section for the format.</p>
+<h3 id="launch"><a class="header" href="#launch">LAUNCH</a></h3>
+<p>Sent by the agent whenever it needs to assign a new task to the executor. The executor is required to send an <code>UPDATE</code> message back to the agent indicating the success or failure of the task initialization.</p>
+<p>The executor must maintain a list of unacknowledged tasks (see <code>SUBSCRIBE</code> in <code>Calls</code> section). If for some reason, the executor is disconnected from the agent, these tasks must be sent as part of <code>SUBSCRIBE</code> request in the <code>tasks</code> field.</p>
+<pre><code>LAUNCH Event (JSON)
+
+&lt;event-length&gt;
+{
+  &quot;type&quot;: &quot;LAUNCH&quot;,
+  &quot;launch&quot;: {
+    &quot;framework_info&quot;: {
+      &quot;id&quot;: {
+        &quot;value&quot;: &quot;49154f1b-8cf6-4421-bf13-8bd11dccd1f1&quot;
+      },
+      &quot;user&quot;: &quot;foo&quot;,
+      &quot;name&quot;: &quot;my_framework&quot;
+    },
+    &quot;task&quot;: {
+      &quot;name&quot;: &quot;dummy-task&quot;,
+      &quot;task_id&quot;: {
+        &quot;value&quot;: &quot;d40f3f3e-bbe3-44af-a230-4cb1eae72f67&quot;
+      },
+      &quot;agent_id&quot;: {
+        &quot;value&quot;: &quot;f1c9cdc5-195e-41a7-a0d7-adaa9af07f81&quot;
+      },
+      &quot;command&quot;: {
+        &quot;value&quot;: &quot;sleep&quot;,
+        &quot;arguments&quot;: [
+          &quot;100&quot;
+        ]
+      }
+    }
+  }
+}
+</code></pre>
+<h3 id="launch_group"><a class="header" href="#launch_group">LAUNCH_GROUP</a></h3>
+<p>This <strong>experimental</strong> event was added in 1.1.0.</p>
+<p>Sent by the agent whenever it needs to assign a new task group to the executor. The executor is required to send <code>UPDATE</code> messages back to the agent indicating the success or failure of each of the tasks in the group.</p>
+<p>The executor must maintain a list of unacknowledged tasks (see <code>LAUNCH</code> section above).</p>
+<pre><code>LAUNCH_GROUP Event (JSON)
+
+&lt;event-length&gt;
+{
+  &quot;type&quot;: &quot;LAUNCH_GROUP&quot;,
+  &quot;launch_group&quot;: {
+    &quot;task_group&quot; : {
+      &quot;tasks&quot; : [
+        {
+          &quot;name&quot;: &quot;dummy-task&quot;,
+          &quot;task_id&quot;: {
+            &quot;value&quot;: &quot;d40f3f3e-bbe3-44af-a230-4cb1eae72f67&quot;
+          },
+          &quot;agent_id&quot;: {
+            &quot;value&quot;: &quot;f1c9cdc5-195e-41a7-a0d7-adaa9af07f81&quot;
+          },
+          &quot;command&quot;: {
+            &quot;value&quot;: &quot;sleep&quot;,
+            &quot;arguments&quot;: [
+              &quot;100&quot;
+            ]
+          }
+        }
+      ]
+    }
+  }
+}
+</code></pre>
+<h3 id="kill"><a class="header" href="#kill">KILL</a></h3>
+<p>The <code>KILL</code> event is sent whenever the scheduler needs to stop execution of a specific task. The executor is required to send a terminal update (e.g., <code>TASK_FINISHED</code>, <code>TASK_KILLED</code> or <code>TASK_FAILED</code>) back to the agent once it has stopped/killed the task. Mesos will mark the task resources as freed once the terminal update is received.</p>
+<pre><code>LAUNCH Event (JSON)
+
+&lt;event-length&gt;
+{
+  &quot;type&quot; : &quot;KILL&quot;,
+  &quot;kill&quot; : {
+    &quot;task_id&quot; : {&quot;value&quot; : &quot;d40f3f3e-bbe3-44af-a230-4cb1eae72f67&quot;}
+  }
+}
+</code></pre>
+<h3 id="acknowledged"><a class="header" href="#acknowledged">ACKNOWLEDGED</a></h3>
+<p>Sent by the agent in order to signal the executor that a status update was received as part of the reliable message passing mechanism. Acknowledged updates must not be retried.</p>
+<pre><code>ACKNOWLEDGED Event (JSON)
+
+&lt;event-length&gt;
+{
+  &quot;type&quot; : &quot;ACKNOWLEDGED&quot;,
+  &quot;acknowledged&quot; : {
+    &quot;task_id&quot; : {&quot;value&quot; : &quot;d40f3f3e-bbe3-44af-a230-4cb1eae72f67&quot;},
+    &quot;uuid&quot; : &quot;ZDQwZjNmM2UtYmJlMy00NGFmLWEyMzAtNGNiMWVhZTcyZjY3Cg==&quot;
+  }
+}
+</code></pre>
+<h3 id="message-1"><a class="header" href="#message-1">MESSAGE</a></h3>
+<p>Custom message generated by the scheduler and forwarded all the way to the executor. These messages are delivered &quot;as-is&quot; by Mesos and have no delivery guarantees. It is up to the scheduler to retry if a message is dropped for any reason. The <code>data</code> field contains raw bytes encoded as Base64.</p>
+<pre><code>MESSAGE Event (JSON)
+
+&lt;event-length&gt;
+{
+  &quot;type&quot; : &quot;MESSAGE&quot;,
+  &quot;message&quot; : {
+    &quot;data&quot; : &quot;c2FtcGxlIGRhdGE=&quot;
+  }
+}
+</code></pre>
+<h3 id="shutdown"><a class="header" href="#shutdown">SHUTDOWN</a></h3>
+<p>Sent by the agent in order to shutdown the executor. Once an executor gets a <code>SHUTDOWN</code> event it is required to kill all its tasks, send <code>TASK_KILLED</code> updates and gracefully exit. If an executor doesn't terminate within a certain period <code>MESOS_EXECUTOR_SHUTDOWN_GRACE_PERIOD</code> (an environment variable set by the agent upon executor startup), the agent will forcefully destroy the container where the executor is running. The agent would then send <code>TASK_LOST</code> updates for any remaining active tasks of this executor.</p>
+<pre><code>SHUTDOWN Event (JSON)
+
+&lt;event-length&gt;
+{
+  &quot;type&quot; : &quot;SHUTDOWN&quot;
+}
+</code></pre>
+<h3 id="error"><a class="header" href="#error">ERROR</a></h3>
+<p>Sent by the agent when an asynchronous error event is generated. It is recommended that the executor abort when it receives an error event and retry subscription.</p>
+<pre><code>ERROR Event (JSON)
+
+&lt;event-length&gt;
+{
+  &quot;type&quot; : &quot;ERROR&quot;,
+  &quot;error&quot; : {
+    &quot;message&quot; : &quot;Unrecoverable error&quot;
+  }
+}
+</code></pre>
+<h2 id="executor-environment-variables"><a class="header" href="#executor-environment-variables">Executor Environment Variables</a></h2>
+<p>The following environment variables are set by the agent that can be used by the executor upon startup:</p>
+<ul>
+<li><code>MESOS_FRAMEWORK_ID</code>: <code>FrameworkID</code> of the scheduler needed as part of the <code>SUBSCRIBE</code> call.</li>
+<li><code>MESOS_EXECUTOR_ID</code>: <code>ExecutorID</code> of the executor needed as part of the <code>SUBSCRIBE</code> call.</li>
+<li><code>MESOS_DIRECTORY</code>: Path to the working directory for the executor on the host filesystem (deprecated).</li>
+<li><code>MESOS_SANDBOX</code>: Path to the mapped sandbox inside of the container (determined by the agent flag <code>sandbox_directory</code>) for either mesos container with image or docker container. For the case of command task without image specified, it is the path to the sandbox on the host filesystem, which is identical to <code>MESOS_DIRECTORY</code>. <code>MESOS_DIRECTORY</code> is always the sandbox on the host filesystem.</li>
+<li><code>MESOS_AGENT_ENDPOINT</code>: Agent endpoint (i.e., ip:port to be used by the executor to connect to the agent).</li>
+<li><code>MESOS_CHECKPOINT</code>: If set to true, denotes that framework has checkpointing enabled.</li>
+<li><code>MESOS_EXECUTOR_SHUTDOWN_GRACE_PERIOD</code>: Amount of time the agent would wait for an executor to shut down (e.g., 60secs, 3mins etc.) after sending a <code>SHUTDOWN</code> event.</li>
+<li><code>MESOS_EXECUTOR_AUTHENTICATION_TOKEN</code>: The token the executor should use to authenticate with the agent. When executor authentication is enabled, the agent generates a JSON web token (JWT) that the executor can use to authenticate with the agent's default JWT authenticator.</li>
+</ul>
+<p>If <code>MESOS_CHECKPOINT</code> is set (i.e., if framework checkpointing is enabled), the following additional variables are also set that can be used by the executor for retrying upon a disconnection with the agent:</p>
+<ul>
+<li><code>MESOS_RECOVERY_TIMEOUT</code>: The total duration that the executor should spend retrying before shutting itself down when it is disconnected from the agent (e.g., <code>15mins</code>, <code>5secs</code> etc.). This is configurable at agent startup via the flag <code>--recovery_timeout</code>.</li>
+<li><code>MESOS_SUBSCRIPTION_BACKOFF_MAX</code>: The maximum backoff duration to be used by the executor between two retries when disconnected (e.g., <code>250ms</code>, <code>1mins</code> etc.). This is configurable at agent startup via the flag <code>--executor_reregistration_timeout</code>.</li>
+</ul>
+<p>NOTE: Additionally, the executor also inherits all the agent's environment variables.</p>
+<p><a name="disconnections"></a></p>
+<h2 id="disconnections"><a class="header" href="#disconnections">Disconnections</a></h2>
+<p>An executor considers itself disconnected if the persistent subscription connection (opened via SUBSCRIBE request) to &quot;/executor&quot; breaks. The disconnection can happen due to an agent process failure etc.</p>
+<p>Upon detecting a disconnection from the agent, the retry behavior depends on whether framework checkpointing is enabled:</p>
+<ul>
+<li>If framework checkpointing is disabled, the executor is not supposed to retry subscription and gracefully exit.</li>
+<li>If framework checkpointing is enabled, the executor is supposed to retry subscription using a suitable <a href="#backoff-strategies">backoff strategy</a> for a duration of <code>MESOS_RECOVERY_TIMEOUT</code>. If it is not able to establish a subscription with the agent within this duration, it should gracefully exit.</li>
+</ul>
+<h2 id="agent-recovery"><a class="header" href="#agent-recovery">Agent Recovery</a></h2>
+<p>Upon agent startup, an agent performs <a href="agent-recovery.html">recovery</a>. This allows the agent to recover status updates and reconnect with old executors. Currently, the agent supports the following recovery mechanisms specified via the <code>--recover</code> flag:</p>
+<ul>
+<li><strong>reconnect</strong> (default): This mode allows the agent to reconnect with any of it's old live executors provided the framework has enabled checkpointing. The recovery of the agent is only marked complete once all the disconnected executors have connected and hung executors have been destroyed. Hence, it is mandatory that every executor retries at least once within the interval (<code>MESOS_SUBSCRIPTION_BACKOFF_MAX</code>) to ensure it is not shutdown by the agent due to being hung/unresponsive.</li>
+<li><strong>cleanup</strong>: This mode kills any old live executors and then exits the agent. This is usually done by operators when making a non-compatible agent/executor upgrade. Upon receiving a <code>SUBSCRIBE</code> request from the executor of a framework with checkpointing enabled, the agent would send it a <code>SHUTDOWN</code> event as soon as it reconnects. For hung executors, the agent would wait for a duration of <code>--executor_shutdown_grace_period</code> (configurable at agent startup) and then forcefully kill the container where the executor is running in.</li>
+</ul>
+<p><a name="backoff-strategies"></a></p>
+<h2 id="backoff-strategies"><a class="header" href="#backoff-strategies">Backoff Strategies</a></h2>
+<p>Executors are encouraged to retry subscription using a suitable backoff strategy like linear backoff, when they notice a disconnection with the agent. A disconnection typically happens when the agent process terminates (e.g., restarted for an upgrade). Each retry interval should be bounded by the value of <code>MESOS_SUBSCRIPTION_BACKOFF_MAX</code> which is set as an environment variable.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="scheduler-http-api.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="scheduler-http-api.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

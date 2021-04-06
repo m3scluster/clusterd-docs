@@ -1,0 +1,681 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Guide for Designing Highly Available Mesos Frameworks - Apache Mesos</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="favicon.png">
+        
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        
+        <link rel="stylesheet" href="css/print.css" media="print">
+        
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">Fundamentals</li><li class="chapter-item expanded "><a href="architecture.html"><strong aria-hidden="true">1.</strong> Mesos Architecture providing an overview of Mesos concepts</a></li><li class="chapter-item expanded "><a href="presentations.html"><strong aria-hidden="true">2.</strong> Video and Slides of Mesos Presentations</a></li><li class="chapter-item expanded "><a href="versioning.html"><strong aria-hidden="true">3.</strong> Mesos Release and Support Policy</a></li><li class="chapter-item expanded affix "><li class="part-title">Build / Installation</li><li class="chapter-item expanded "><a href="building.html"><strong aria-hidden="true">4.</strong> Building for basic instructions on compiling and installing Mesos.</a></li><li class="chapter-item expanded "><a href="binary-packages.html"><strong aria-hidden="true">5.</strong> Binary Packages for how to use Mesos binary packages.</a></li><li class="chapter-item expanded "><a href="configuration.html"><strong aria-hidden="true">6.</strong> Configuration for build configuration options.</a></li><li class="chapter-item expanded "><a href="cmake.html"><strong aria-hidden="true">7.</strong> CMake for details about using the new CMake build system.</a></li><li class="chapter-item expanded "><a href="windows.html"><strong aria-hidden="true">8.</strong> Windows Support for the state of Windows support in Mesos.</a></li><li class="chapter-item expanded affix "><li class="part-title">Administration</li><li class="chapter-item expanded "><a href="configuration.html"><strong aria-hidden="true">9.</strong> Configuration for command-line arguments.</a></li><li class="chapter-item expanded "><a href="high-availability.html"><strong aria-hidden="true">10.</strong> High Availability Master Setup</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="replicated-log-internals.html"><strong aria-hidden="true">10.1.</strong> Replicated Log for information on the Mesos replicated log.</a></li></ol></li><li class="chapter-item expanded "><a href="agent-recovery.html"><strong aria-hidden="true">11.</strong> Fault Tolerant Agent Setup</a></li><li class="chapter-item expanded "><a href="framework-rate-limiting.html"><strong aria-hidden="true">12.</strong> Framework Rate Limiting</a></li><li class="chapter-item expanded "><a href="maintenance.html"><strong aria-hidden="true">13.</strong> Maintenance for performing maintenance on a Mesos cluster.</a></li><li class="chapter-item expanded "><a href="upgrades.html"><strong aria-hidden="true">14.</strong> Upgrades for upgrading a Mesos cluster.</a></li><li class="chapter-item expanded "><a href="downgrades.html"><strong aria-hidden="true">15.</strong> Downgrades for downgrading a Mesos cluster.</a></li><li class="chapter-item expanded "><a href="logging.html"><strong aria-hidden="true">16.</strong> Logging</a></li><li class="chapter-item expanded "><a href="monitoring.html"><strong aria-hidden="true">17.</strong> Monitoring / Metrics</a></li><li class="chapter-item expanded "><a href="cli.html"><strong aria-hidden="true">18.</strong> Debugging using the new CLI</a></li><li class="chapter-item expanded "><a href="operational-guide.html"><strong aria-hidden="true">19.</strong> Operational Guide</a></li><li class="chapter-item expanded "><a href="fetcher.html"><strong aria-hidden="true">20.</strong> Fetcher Cache Configuration</a></li><li class="chapter-item expanded "><a href="fault-domains.html"><strong aria-hidden="true">21.</strong> Fault Domains</a></li><li class="chapter-item expanded "><a href="performance-profiling.html"><strong aria-hidden="true">22.</strong> Performance Profiling for debugging performance issues in Mesos.</a></li><li class="chapter-item expanded "><a href="memory-profiling.html"><strong aria-hidden="true">23.</strong> Memory Profiling for debugging potential memory leaks in Mesos.</a></li><li class="chapter-item expanded affix "><li class="part-title">Resource Management</li><li class="chapter-item expanded "><a href="attributes-resources.html"><strong aria-hidden="true">24.</strong> Attributes and Resources for how to describe the agents that comprise a cluster.</a></li><li class="chapter-item expanded "><a href="roles.html"><strong aria-hidden="true">25.</strong> Using Resource Roles</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="weights.html"><strong aria-hidden="true">25.1.</strong> Resource Role Weights for fair sharing.</a></li><li class="chapter-item expanded "><a href="quota.html"><strong aria-hidden="true">25.2.</strong> Resource Role Quota for how to configure Mesos to provide guaranteed resource allocations for use by a role.</a></li><li class="chapter-item expanded "><a href="reservation.html"><strong aria-hidden="true">25.3.</strong> Reservations for how operators and frameworks can reserve resources on individual agents for use by a role.</a></li><li class="chapter-item expanded "><a href="shared-resources.html"><strong aria-hidden="true">25.4.</strong> Shared Resources for how to share persistent volumes between tasks managed by different executors on the same agent.</a></li></ol></li><li class="chapter-item expanded "><a href="oversubscription.html"><strong aria-hidden="true">26.</strong> Oversubscription for how to configure Mesos to take advantage of unused resources to launch “best-effort” tasks.</a></li><li class="chapter-item expanded affix "><li class="part-title">Security</li><li class="chapter-item expanded "><a href="authentication.html"><strong aria-hidden="true">27.</strong> Authentication</a></li><li class="chapter-item expanded "><a href="authorization.html"><strong aria-hidden="true">28.</strong> Authorization</a></li><li class="chapter-item expanded "><a href="ssl.html"><strong aria-hidden="true">29.</strong> SSL</a></li><li class="chapter-item expanded "><a href="secrets.html"><strong aria-hidden="true">30.</strong> Secrets for managing secrets within Mesos.</a></li><li class="chapter-item expanded affix "><li class="part-title">Containerization</li><li class="chapter-item expanded "><a href="containerizers.html"><strong aria-hidden="true">31.</strong> Containerizer Overview</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="containerizer-internals.html"><strong aria-hidden="true">31.1.</strong> Containerizer Internals for implementation details of containerizers.</a></li><li class="chapter-item expanded "><a href="docker-containerizer.html"><strong aria-hidden="true">31.2.</strong> Docker Containerizer for launching a Docker image as a Task, or as an Executor.</a></li><li class="chapter-item expanded "><a href="mesos-containerizer.html"><strong aria-hidden="true">31.3.</strong> Mesos Containerizer default containerizer, supports both Linux and POSIX systems.</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="container-image.html"><strong aria-hidden="true">31.3.1.</strong> Container Images for supporting container images in Mesos containerizer.</a></li><li class="chapter-item expanded "><a href="isolators/docker-volume.html"><strong aria-hidden="true">31.3.2.</strong> Docker Volume Support</a></li><li class="chapter-item expanded "><a href="gpu-support.html"><strong aria-hidden="true">31.3.3.</strong> Nvidia GPU Support for how to run Mesos with Nvidia GPU support.</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="sandbox.html"><strong aria-hidden="true">32.</strong> Container Sandboxes</a></li><li class="chapter-item expanded "><a href="container-volume.html"><strong aria-hidden="true">33.</strong> Container Volumes</a></li><li class="chapter-item expanded "><a href="nested-container-and-task-group.html"><strong aria-hidden="true">34.</strong> Nested Container and Task Group (Pod)</a></li><li class="chapter-item expanded "><a href="standalone-containers.html"><strong aria-hidden="true">35.</strong> Standalone Containers</a></li><li class="chapter-item expanded affix "><li class="part-title">Networking</li><li class="chapter-item expanded "><a href="networking.html"><strong aria-hidden="true">36.</strong> Networking Overview</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="networking-for-mesos-managed-containers.html"><strong aria-hidden="true">36.1.</strong> Networking in Detail</a></li><li class="chapter-item expanded "><a href="cni.html"><strong aria-hidden="true">36.2.</strong> Container Network Interface (CNI)</a></li><li class="chapter-item expanded "><a href="isolators/network-port-mapping.html"><strong aria-hidden="true">36.3.</strong> Port Mapping Isolator</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">Storage</li><li class="chapter-item expanded "><a href="multiple-disk.html"><strong aria-hidden="true">37.</strong> Multiple Disks for how to allow tasks to use multiple isolated disk resources.</a></li><li class="chapter-item expanded "><a href="persistent-volume.html"><strong aria-hidden="true">38.</strong> Persistent Volume for how to allow tasks to access persistent storage resources.</a></li><li class="chapter-item expanded "><a href="csi.html"><strong aria-hidden="true">39.</strong> Container Storage Interface (CSI) Support</a></li><li class="chapter-item expanded affix "><li class="part-title">Scheduler and Executor Development</li><li class="chapter-item expanded "><a href="running-workloads.html"><strong aria-hidden="true">40.</strong> Running Workloads in Mesos explains how a scheduler can specify and run tasks.</a></li><li class="chapter-item expanded "><a href="app-framework-development-guide.html"><strong aria-hidden="true">41.</strong> Framework Development Guide describes how to build applications on top of Mesos.</a></li><li class="chapter-item expanded "><a href="high-availability-framework-guide.html" class="active"><strong aria-hidden="true">42.</strong> Guide for Designing Highly Available Mesos Frameworks</a></li><li class="chapter-item expanded "><a href="reconciliation.html"><strong aria-hidden="true">43.</strong> Reconciliation for ensuring a framework’s state remains eventually consistent in the face of failures.</a></li><li class="chapter-item expanded "><a href="task-state-reasons.html"><strong aria-hidden="true">44.</strong> Task State Reasons describes how task state reasons are used in Mesos.</a></li><li class="chapter-item expanded "><a href="health-checks.html"><strong aria-hidden="true">45.</strong> Task Health Checking</a></li><li class="chapter-item expanded "><a href="scheduler-http-api.html"><strong aria-hidden="true">46.</strong> v1 Scheduler HTTP API for communication between schedulers and the Mesos master.</a></li><li class="chapter-item expanded "><a href="executor-http-api.html"><strong aria-hidden="true">47.</strong> v1 Executor HTTP API describes the new HTTP API for communication between executors and the Mesos agent.</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">Apache Mesos</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                        <a href="https://github.com/AVENTER-UG/mesos-docs/" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <hr />
+<h2>title: Apache Mesos - Designing Highly Available Mesos Frameworks
+layout: documentation</h2>
+<h1 id="designing-highly-available-mesos-frameworks"><a class="header" href="#designing-highly-available-mesos-frameworks">Designing Highly Available Mesos Frameworks</a></h1>
+<p>A Mesos framework manages tasks. For a Mesos framework to be highly available,
+it must continue to manage tasks correctly in the presence of a variety of
+failure scenarios. The most common failure conditions that framework authors
+should consider include:</p>
+<ul>
+<li>
+<p>The Mesos master that a framework scheduler is connected to might fail, for
+example by crashing or by losing network connectivity. If the master has been
+configured to use <a href="high-availability.html">high-availability mode</a>, this will
+result in promoting another Mesos master replica to become the current
+leader. In this situation, the scheduler should reregister with the new
+master and ensure that task state is consistent.</p>
+</li>
+<li>
+<p>The host where a framework scheduler is running might fail. To ensure that the
+framework remains available and can continue to schedule new tasks, framework
+authors should ensure that multiple copies of the scheduler run on different
+nodes, and that a backup copy is promoted to become the new leader when the
+previous leader fails. Mesos itself does not dictate how framework authors
+should handle this situation, although we provide some suggestions below. It
+can be useful to deploy multiple copies of your framework scheduler using
+a long-running task scheduler such as Apache Aurora or Marathon.</p>
+</li>
+<li>
+<p>The host where a task is running might fail. Alternatively, the node itself
+might not have failed but the Mesos agent on the node might be unable to
+communicate with the Mesos master, e.g., due to a network partition.</p>
+</li>
+</ul>
+<p>Note that more than one of these failures might occur simultaneously.</p>
+<h2 id="mesos-architecture"><a class="header" href="#mesos-architecture">Mesos Architecture</a></h2>
+<p>Before discussing the specific failure scenarios outlined above, it is worth
+highlighting some aspects of how Mesos is designed that influence high
+availability:</p>
+<ul>
+<li>
+<p>Mesos provides unreliable messaging between components by default: messages
+are delivered &quot;at-most-once&quot; (they might be dropped). Framework authors should
+expect that messages they send might not be received and be prepared to take
+appropriate corrective action. To detect that a message might be lost,
+frameworks typically use timeouts. For example, if a framework attempts to
+launch a task, that message might not be received by the Mesos master (e.g.,
+due to a transient network failure). To address this, the framework scheduler
+should set a timeout after attempting to launch a new task. If the scheduler
+hasn't seen a status update for the new task before the timeout fires, it
+should take corrective action---for example, by performing <a href="reconciliation.html">task state reconciliation</a>,
+and then launching a new copy of the task if necessary.</p>
+<ul>
+<li>
+<p>In general, distributed systems cannot distinguish between &quot;lost&quot; messages
+and messages that are merely delayed. In the example above, the scheduler
+might see a status update for the first task launch attempt immediately
+<em>after</em> its timeout has fired and it has already begun taking corrective
+action. Scheduler authors should be aware of this possibility and program
+accordingly.</p>
+</li>
+<li>
+<p>Mesos actually provides ordered (but unreliable) message delivery between
+any pair of processes: for example, if a framework sends messages M1 and M2
+to the master, the master might receive no messages, just M1, just M2, or M1
+followed by M2 -- it will <em>not</em> receive M2 followed by M1.</p>
+</li>
+<li>
+<p>As a convenience for framework authors, Mesos provides reliable delivery of
+task status updates and operation status updates. The agent persists these
+updates to disk and then forwards them to the master. The master sends
+status updates to the appropriate framework scheduler. When a scheduler
+acknowledges a status update, the master forwards the acknowledgment back to
+the agent, which allows the stored status update to be garbage collected. If
+the agent does not receive an acknowledgment for a status update within a
+certain amount of time, it will repeatedly resend the update to the master,
+which will again forward the update to the scheduler. Hence, task and
+operation status updates will be delivered &quot;at least once&quot;, assuming that
+the agent and the scheduler both remain available. To handle the fact that
+task and operation status updates might be delivered more than once, it can
+be helpful to make the framework logic that processes them
+<a href="https://en.wikipedia.org/wiki/Idempotence">idempotent</a>.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>The Mesos master stores information about the active tasks and registered
+frameworks <em>in memory</em>: it does not persist it to disk or attempt to ensure
+that this information is preserved after a master failover. This helps the
+Mesos master scale to large clusters with many tasks and frameworks. A
+downside of this design is that after a failure, more work is required to
+recover the lost in-memory master state.</p>
+</li>
+<li>
+<p>If all the Mesos masters are unavailable (e.g., crashed or unreachable), the
+cluster should continue to operate: existing Mesos agents and user tasks should
+continue running. However, new tasks cannot be scheduled, and frameworks will
+not receive resource offers or status updates about previously launched tasks.</p>
+</li>
+<li>
+<p>Mesos does not dictate how frameworks should be implemented and does not try
+to assume responsibility for how frameworks should deal with failures.
+Instead, Mesos tries to provide framework developers with the tools they need
+to implement this behavior themselves. Different frameworks might choose to
+handle failures differently, depending on their exact requirements.</p>
+</li>
+</ul>
+<h2 id="recommendations-for-highly-available-frameworks"><a class="header" href="#recommendations-for-highly-available-frameworks">Recommendations for Highly Available Frameworks</a></h2>
+<p>Highly available framework designs typically follow a few common patterns:</p>
+<ol>
+<li>
+<p>To tolerate scheduler failures, frameworks run multiple scheduler instances
+(three instances is typical). At any given time, only one of these scheduler
+instances is the <em>leader</em>: this instance is connected to the Mesos master,
+receives resource offers and task status updates, and launches new tasks. The
+other scheduler replicas are <em>followers</em>: they are used only when the leader
+fails, in which case one of the followers is chosen to become the new leader.</p>
+</li>
+<li>
+<p>Schedulers need a mechanism to decide when the current scheduler leader has
+failed and to elect a new leader. This is typically accomplished using a
+coordination service like <a href="https://zookeeper.apache.org/">Apache ZooKeeper</a>
+or <a href="https://github.com/coreos/etcd">etcd</a>. Consult the documentation of the
+coordination system you are using for more information on how to correctly
+implement leader election.</p>
+</li>
+<li>
+<p>After electing a new leading scheduler, the new leader should reconnect to
+the Mesos master. When registering with the master, the framework should set
+the <code>id</code> field in its <code>FrameworkInfo</code> to the ID that was assigned to the
+failed scheduler instance. This ensures that the master will recognize that
+the connection does not start a new session, but rather continues (and
+replaces) the session used by the failed scheduler instance.</p>
+<blockquote>
+<p>NOTE: When the old scheduler leader disconnects from the master, by default
+the master will immediately kill all the tasks and executors associated with
+the failed framework. For a typical production framework, this default
+behavior is very undesirable! To avoid this, highly available frameworks
+should set the <code>failover_timeout</code> field in their <code>FrameworkInfo</code> to a
+generous value. To avoid accidental destruction of tasks in production
+environments, many frameworks use a <code>failover_timeout</code> of 1 week or more.</p>
+</blockquote>
+<ul>
+<li>In the current implementation, a framework's <code>failover_timeout</code> is not
+preserved during master failover. Hence, if a framework fails but the
+leading master fails before the <code>failover_timeout</code> is reached, the newly
+elected leading master won't know that the framework's tasks should be
+killed after a period of time. Hence, if the framework never
+reregisters, those tasks will continue to run indefinitely but will be
+orphaned. This behavior will likely be fixed in a future version of
+Mesos (<a href="https://issues.apache.org/jira/browse/MESOS-4659">MESOS-4659</a>).</li>
+</ul>
+</li>
+<li>
+<p>After connecting to the Mesos master, the new leading scheduler should ensure
+that its local state is consistent with the current state of the cluster. For
+example, suppose that the previous leading scheduler attempted to launch a
+new task and then immediately failed. The task might have launched
+successfully, at which point the newly elected leader will begin to receive
+status updates about it. To handle this situation, frameworks typically use a
+strongly consistent distributed data store to record information about active
+and pending tasks. In fact, the same coordination service that is used for
+leader election (such as ZooKeeper or etcd) can often be used for this
+purpose. Some Mesos frameworks (such as Apache Aurora) use the Mesos
+<a href="replicated-log-internals.html">replicated log</a> for this purpose.</p>
+<ul>
+<li>
+<p>The data store should be used to record the actions that the scheduler
+<em>intends</em> to take, before it takes them. For example, if a scheduler
+decides to launch a new task, it <em>first</em> writes this intent to its data
+store. Then it sends a &quot;launch task&quot; message to the Mesos master. If this
+instance of the scheduler fails and a new scheduler is promoted to become
+the leader, the new leader can consult the data store to find <em>all possible
+tasks</em> that might be running on the cluster. This is an instance of the
+<a href="https://en.wikipedia.org/wiki/Write-ahead_logging">write-ahead logging</a>
+pattern often employed by database systems and filesystems to improve
+reliability. Two aspects of this design are worth emphasizing.</p>
+<ol>
+<li>
+<p>The scheduler must persist its intent <em>before</em> launching the task: if
+the task is launched first and then the scheduler fails before it can
+write to the data store, the new leading scheduler won't know about the
+new task. If this occurs, the new scheduler instance will begin
+receiving task status updates for a task that it has no knowledge of;
+there is often not a good way to recover from this situation.</p>
+</li>
+<li>
+<p>Second, the scheduler should ensure that its intent has been durably
+recorded in the data store before continuing to launch the task (for
+example, it should wait for a quorum of replicas in the data store to
+have acknowledged receipt of the write operation). For more details on
+how to do this, consult the documentation for the data store you are
+using.</p>
+</li>
+</ol>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="the-life-cycle-of-a-task"><a class="header" href="#the-life-cycle-of-a-task">The Life Cycle of a Task</a></h2>
+<p>A Mesos task transitions through a sequence of states. The authoritative &quot;source
+of truth&quot; for the current state of a task is the agent on which the task is
+running. A framework scheduler learns about the current state of a task by
+communicating with the Mesos master---specifically, by listening for task status
+updates and by performing task state reconciliation.</p>
+<p>Frameworks can represent the state of a task using a state machine, with one
+initial state and several possible terminal states:</p>
+<ul>
+<li>
+<p>A task begins in the <code>TASK_STAGING</code> state. A task is in this state when the
+master has received the framework's request to launch the task but the task
+has not yet started to run. In this state, the task's dependencies are
+fetched---for example, using the <a href="fetcher.html">Mesos fetcher cache</a>.</p>
+</li>
+<li>
+<p>The <code>TASK_STARTING</code> state is optional. It can be used to describe the fact
+that an executor has learned about the task (and maybe started fetching its
+dependencies) but has not yet started to run it. Custom executors are
+encouraged to send it, to provide a more detailed description of the current
+task state to outside observers.</p>
+</li>
+<li>
+<p>A task transitions to the <code>TASK_RUNNING</code> state after it has begun running
+successfully (if the task fails to start, it transitions to one of the
+terminal states listed below).</p>
+<ul>
+<li>
+<p>If a framework attempts to launch a task but does not receive a status
+update for it within a timeout, the framework should perform
+<a href="reconciliation.html">reconciliation</a>. That is, it should ask the master for
+the current state of the task. The master will reply with <code>TASK_LOST</code> status
+updates for unknown tasks. The framework can then use this to distinguish
+between tasks that are slow to launch and tasks that the master has never
+heard about (e.g., because the task launch message was dropped).</p>
+<ul>
+<li>Note that the correctness of this technique depends on the fact that
+messaging between the scheduler and the master is ordered.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>The <code>TASK_KILLING</code> state is optional and is intended to indicate that the
+request to kill the task has been received by the executor, but the task has
+not yet been killed. This is useful for tasks that require some time to
+terminate gracefully. Executors must not generate this state unless the
+framework has the <code>TASK_KILLING_STATE</code> framework capability.</p>
+</li>
+<li>
+<p>There are several terminal states:</p>
+<ul>
+<li><code>TASK_FINISHED</code> is used when a task completes successfully.</li>
+<li><code>TASK_FAILED</code> indicates that a task aborted with an error.</li>
+<li><code>TASK_KILLED</code> indicates that a task was killed by the executor.</li>
+<li><code>TASK_LOST</code> indicates that the task was running on an agent that has lost
+contact with the current master (typically due to a network partition or an
+agent host failure). This case is described further below.</li>
+<li><code>TASK_ERROR</code> indicates that a task launch attempt failed because of an error
+in the task specification.</li>
+</ul>
+</li>
+</ul>
+<p>Note that the same task status can be used in several different (but usually
+related) situations. For example, <code>TASK_ERROR</code> is used when the framework's
+principal is not authorized to launch tasks as a certain user, and also when the
+task description is syntactically malformed (e.g., the task ID contains an
+invalid character). The <code>reason</code> field of the <code>TaskStatus</code> message can be used
+to disambiguate between such situations.</p>
+<h2 id="performing-operations-on-offered-resources"><a class="header" href="#performing-operations-on-offered-resources">Performing operations on offered resources</a></h2>
+<p>The scheduler API provides a number of operations which can be applied to
+resources included in offers sent to a framework scheduler. Schedulers which use
+the <a href="scheduler-http-api.html">v1 scheduler API</a> may set the <code>id</code> field in an offer
+operation in order to request feedback for the operation. When this is done, the
+scheduler will receive <code>UPDATE_OPERATION_STATUS</code> events on its HTTP event stream
+when the operation transitions to a new state. Additionally, the scheduler may
+use the <code>RECONCILE_OPERATIONS</code> call to perform explicit or implicit
+<a href="reconciliation.html">reconciliation</a> of its operations' states, similar to task
+state reconciliation.</p>
+<p>Unlike tasks, which occur as the result of <code>LAUNCH</code> or <code>LAUNCH_GROUP</code>
+operations, other operations do not currently have intermediate states that they
+transition through:</p>
+<ul>
+<li>
+<p>An operation begins in the <code>OPERATION_PENDING</code> state. In the absence of any
+system failures, it remains in this state until it transitions to a terminal
+state.</p>
+</li>
+<li>
+<p>There exist several terminal states that an operation may transition to:</p>
+<ul>
+<li><code>OPERATION_FINISHED</code> is used when an operation completes successfully.</li>
+<li><code>OPERATION_FAILED</code> is used when an operation was attempted but failed to
+complete.</li>
+<li><code>OPERATION_ERROR</code> is used when an operation failed because it was not
+specified correctly and was thus never attempted.</li>
+<li><code>OPERATION_DROPPED</code> is used when an operation was not successfully delivered
+to the agent.</li>
+</ul>
+</li>
+<li>
+<p>When performing operation reconciliation, the scheduler may encounter other
+non-terminal states due to various failures in the system:</p>
+<ul>
+<li><code>OPERATION_UNREACHABLE</code> is used when an operation was previously pending on
+an agent which is not currently reachable by the Mesos master.</li>
+<li><code>OPERATION_RECOVERING</code> is used when an operation was previously pending on
+an agent which has been recovered from the master's checkpointed state after
+a master failover, but which has not yet reregistered.</li>
+<li><code>OPERATION_UNKNOWN</code> is used when Mesos does not recognize an operation ID
+included in an explicit reconciliation request. This may be because an
+operation with that ID was never received by the master, or because the
+operation state is gone due to garbage collection or a system/network
+failure.</li>
+<li><code>OPERATION_GONE_BY_OPERATOR</code> is used when an operation was previously
+pending on an agent which was marked as &quot;gone&quot; by an operator.</li>
+</ul>
+</li>
+</ul>
+<h2 id="dealing-with-partitioned-or-failed-agents"><a class="header" href="#dealing-with-partitioned-or-failed-agents">Dealing with Partitioned or Failed Agents</a></h2>
+<p>The Mesos master tracks the availability and health of the registered agents
+using two different mechanisms:</p>
+<ol>
+<li>
+<p>The state of a persistent TCP connection between the master and the agent.</p>
+</li>
+<li>
+<p><em>Health checks</em> using periodic ping messages to the agent. The master sends
+&quot;ping&quot; messages to the agent and expects a &quot;pong&quot; response message within a
+configurable timeout. The agent is considered to have failed if it does not
+respond promptly to a certain number of ping messages in a row. This behavior
+is controlled by the <code>--agent_ping_timeout</code> and <code>--max_agent_ping_timeouts</code>
+master flags.</p>
+</li>
+</ol>
+<p>If the persistent TCP connection to the agent breaks or the agent fails health
+checks, the master decides that the agent has failed and takes steps to remove
+it from the cluster. Specifically:</p>
+<ul>
+<li>
+<p>If the TCP connection breaks, the agent is considered disconnected. The
+semantics when a registered agent gets disconnected are as follows for each
+framework running on that agent:</p>
+<ul>
+<li>
+<p>If the framework is <a href="agent-recovery.html">checkpointing</a>: no immediate action
+is taken. The agent is given a chance to reconnect until health checks time
+out.</p>
+</li>
+<li>
+<p>If the framework is not checkpointing: all the framework's tasks and
+executors are considered lost. The master immediately sends <code>TASK_LOST</code>
+status updates for the tasks. These updates are not delivered reliably to
+the scheduler (see NOTE below). The agent is given a chance to reconnect
+until health checks timeout. If the agent does reconnect, any tasks for
+which <code>TASK_LOST</code> updates were previously sent will be killed.</p>
+<ul>
+<li>The rationale for this behavior is that, using typical TCP settings, an
+error in the persistent TCP connection between the master and the agent is
+more likely to correspond to an agent error (e.g., the <code>mesos-agent</code>
+process terminating unexpectedly) than a network partition, because the
+Mesos health-check timeouts are much smaller than the typical values of
+the corresponding TCP-level timeouts. Since non-checkpointing frameworks
+will not survive a restart of the <code>mesos-agent</code> process, the master sends
+<code>TASK_LOST</code> status updates so that these tasks can be rescheduled
+promptly.  Of course, the heuristic that TCP errors do not correspond to
+network partitions may not be true in some environments.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>If the agent fails health checks, it is scheduled for removal. The removals can
+be rate limited by the master (see <code>--agent_removal_rate_limit</code> master flag)
+to avoid removing a slew of agents at once (e.g., during a network partition).</p>
+</li>
+<li>
+<p>When it is time to remove an agent, the master removes the agent from the list
+of registered agents in the master's <a href="replicated-log-internals.html">durable state</a>
+(this will survive master failover). The master sends a <code>slaveLost</code> callback
+to every registered scheduler driver; it also sends <code>TASK_LOST</code> status updates
+for every task that was running on the removed agent.</p>
+<blockquote>
+<p>NOTE: Neither the callback nor the task status updates are delivered
+reliably by the master. For example, if the master or scheduler fails over
+or there is a network connectivity issue during the delivery of these
+messages, they will not be resent.</p>
+</blockquote>
+</li>
+<li>
+<p>Meanwhile, any tasks at the removed agent will continue to run and the agent
+will repeatedly attempt to reconnect to the master. Once a removed agent is
+able to reconnect to the master (e.g., because the network partition has
+healed), the reregistration attempt will be refused and the agent will be
+asked to shutdown. The agent will then shutdown all running tasks and
+executors.  Persistent volumes and dynamic reservations on the removed agent
+will be preserved.</p>
+<ul>
+<li>A removed agent can rejoin the cluster by restarting the <code>mesos-agent</code>
+process. When a removed agent is shutdown by the master, Mesos ensures that
+the next time <code>mesos-agent</code> is started (using the same work directory at the
+same host), the agent will receive a new agent ID; in effect, the agent will
+be treated as a newly joined agent. The agent will retain any previously
+created persistent volumes and dynamic reservations, although the agent ID
+associated with these resources will have changed.</li>
+</ul>
+</li>
+</ul>
+<p>Typically, frameworks respond to failed or partitioned agents by scheduling new
+copies of the tasks that were running on the lost agent. This should be done
+with caution, however: it is possible that the lost agent is still alive, but is
+partitioned from the master and is unable to communicate with it. Depending on
+the nature of the network partition, tasks on the agent might still be able to
+communicate with external clients or other hosts in the cluster. Frameworks can
+take steps to prevent this (e.g., by having tasks connect to ZooKeeper and cease
+operation if their ZooKeeper session expires), but Mesos leaves such details to
+framework authors.</p>
+<h2 id="dealing-with-partitioned-or-failed-masters"><a class="header" href="#dealing-with-partitioned-or-failed-masters">Dealing with Partitioned or Failed Masters</a></h2>
+<p>The behavior described above does not apply during the period immediately after
+a new Mesos master is elected. As noted above, most Mesos master state is only
+kept in memory; hence, when the leading master fails and a new master is
+elected, the new master will have little knowledge of the current state of the
+cluster.  Instead, it rebuilds this information as the frameworks and agents
+notice that a new master has been elected and then <em>reregister</em> with it.</p>
+<h3 id="framework-reregistration"><a class="header" href="#framework-reregistration">Framework Reregistration</a></h3>
+<p>When master failover occurs, frameworks that were connected to the previous
+leading master should reconnect to the new leading
+master. <code>MesosSchedulerDriver</code> handles most of the details of detecting when the
+previous leading master has failed and connecting to the new leader; when the
+framework has successfully reregistered with the new leading master, the
+<code>reregistered</code> scheduler driver callback will be invoked.</p>
+<h3 id="agent-reregistration"><a class="header" href="#agent-reregistration">Agent Reregistration</a></h3>
+<p>During the period after a new master has been elected but before a given agent
+has reregistered or the <code>agent_reregister_timeout</code> has fired, attempting to
+reconcile the state of a task running on that agent will not return any
+information (because the master cannot accurately determine the state of the
+task).</p>
+<p>If an agent does not reregister with the new master within a timeout (controlled
+by the <code>--agent_reregister_timeout</code> configuration flag), the master marks the
+agent as failed and follows the same steps described above. However, there is
+one difference: by default, agents are <em>allowed to reconnect</em> following master
+failover, even after the <code>agent_reregister_timeout</code> has fired. This means that
+frameworks might see a <code>TASK_LOST</code> update for a task but then later discover
+that the task is running (because the agent where it was running was allowed to
+reconnect).</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="app-framework-development-guide.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="reconciliation.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="app-framework-development-guide.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="reconciliation.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

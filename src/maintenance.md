@@ -1,8 +1,3 @@
----
-title: Apache Mesos - Performing Maintenance
-layout: documentation
----
-
 # Performing Node Maintenance in a Mesos Cluster
 
 Operators regularly need to perform maintenance tasks on machines that comprise

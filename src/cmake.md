@@ -1,8 +1,3 @@
----
-title: Apache Mesos - CMake
-layout: documentation
----
-
 # Install CMake 3.7+
 
 [cmake-download]: https://cmake.org/download/

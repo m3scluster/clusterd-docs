@@ -1,8 +1,3 @@
----
-title: Apache Mesos - Windows
-layout: documentation
----
-
 # Windows
 
 Mesos 1.0.0 introduced experimental support for Windows.

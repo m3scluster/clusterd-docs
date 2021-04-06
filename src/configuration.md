@@ -1,8 +1,3 @@
----
-title: Apache Mesos - Configuration
-layout: documentation
----
-
 # Mesos Runtime Configuration
 
 The Mesos master and agent can take a variety of configuration options

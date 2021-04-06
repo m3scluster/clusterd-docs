@@ -1,8 +1,3 @@
----
-title: Apache Mesos - Agent Recovery
-layout: documentation
----
-
 # Agent Recovery
 
 If the `mesos-agent` process on a host exits (perhaps due to a Mesos bug or

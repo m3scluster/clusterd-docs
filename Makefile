@@ -4,9 +4,9 @@ deploy: book
 	rm -rf /tmp/book
 	git worktree add -f /tmp/book gh-pages
 	rm -rf /tmp/book/*
+	mdbook build 
 	cp -rp book/* /tmp/book/
 	cd /tmp/book && \
-		mdbook build && \
 		git add -A && \
 		git commit -m "deployed on $(shell date) by ${USER}" && \
 		git push origin gh-pages

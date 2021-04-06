@@ -1,8 +1,3 @@
----
-title: Apache Mesos - The Mesos Replicated Log
-layout: documentation
----
-
 # The Mesos Replicated Log
 
 Mesos provides a library that lets you create replicated fault-tolerant append-only logs; this library is known as the _replicated log_. The Mesos master uses this library to store cluster state in a replicated, durable way; the library is also available for use by frameworks to store replicated framework state or to implement the common "[replicated state machine](https://en.wikipedia.org/wiki/State_machine_replication)" pattern.

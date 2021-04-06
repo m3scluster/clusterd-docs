@@ -4,3 +4,10 @@ language = "en"
 multilingual = false
 src = "src"
 title = "Apache Mesos"
+
+[preprocessor.open-on-gh]
+command = "mdbook-open-on-gh"
+renderer = ["html"]
+
+[output.html]
+git-repository-url = "https://github.com/AVENTER-UG/mesos-docs/"

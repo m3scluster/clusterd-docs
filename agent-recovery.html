@@ -1,0 +1,345 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Fault Tolerant Agent Setup - Apache Mesos</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="favicon.png">
+        
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        
+        <link rel="stylesheet" href="css/print.css" media="print">
+        
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">Fundamentals</li><li class="chapter-item expanded "><a href="architecture.html"><strong aria-hidden="true">1.</strong> Mesos Architecture providing an overview of Mesos concepts</a></li><li class="chapter-item expanded "><a href="presentations.html"><strong aria-hidden="true">2.</strong> Video and Slides of Mesos Presentations</a></li><li class="chapter-item expanded "><a href="versioning.html"><strong aria-hidden="true">3.</strong> Mesos Release and Support Policy</a></li><li class="chapter-item expanded affix "><li class="part-title">Build / Installation</li><li class="chapter-item expanded "><a href="building.html"><strong aria-hidden="true">4.</strong> Building for basic instructions on compiling and installing Mesos.</a></li><li class="chapter-item expanded "><a href="binary-packages.html"><strong aria-hidden="true">5.</strong> Binary Packages for how to use Mesos binary packages.</a></li><li class="chapter-item expanded "><a href="configuration.html"><strong aria-hidden="true">6.</strong> Configuration for build configuration options.</a></li><li class="chapter-item expanded "><a href="cmake.html"><strong aria-hidden="true">7.</strong> CMake for details about using the new CMake build system.</a></li><li class="chapter-item expanded "><a href="windows.html"><strong aria-hidden="true">8.</strong> Windows Support for the state of Windows support in Mesos.</a></li><li class="chapter-item expanded affix "><li class="part-title">Administration</li><li class="chapter-item expanded "><a href="configuration.html"><strong aria-hidden="true">9.</strong> Configuration for command-line arguments.</a></li><li class="chapter-item expanded "><a href="high-availability.html"><strong aria-hidden="true">10.</strong> High Availability Master Setup</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="replicated-log-internals.html"><strong aria-hidden="true">10.1.</strong> Replicated Log for information on the Mesos replicated log.</a></li></ol></li><li class="chapter-item expanded "><a href="agent-recovery.html" class="active"><strong aria-hidden="true">11.</strong> Fault Tolerant Agent Setup</a></li><li class="chapter-item expanded "><a href="framework-rate-limiting.html"><strong aria-hidden="true">12.</strong> Framework Rate Limiting</a></li><li class="chapter-item expanded "><a href="maintenance.html"><strong aria-hidden="true">13.</strong> Maintenance for performing maintenance on a Mesos cluster.</a></li><li class="chapter-item expanded "><a href="upgrades.html"><strong aria-hidden="true">14.</strong> Upgrades for upgrading a Mesos cluster.</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">Apache Mesos</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                        <a href="https://github.com/AVENTER-UG/mesos-docs/" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="agent-recovery"><a class="header" href="#agent-recovery">Agent Recovery</a></h1>
+<p>If the <code>mesos-agent</code> process on a host exits (perhaps due to a Mesos bug or
+because the operator kills the process while <a href="upgrades.html">upgrading Mesos</a>),
+any executors/tasks that were being managed by the <code>mesos-agent</code> process will
+continue to run.</p>
+<p>By default, all the executors/tasks that were being managed by the old
+<code>mesos-agent</code> process are expected to gracefully exit on their own, and
+will be shut down after the agent restarted if they did not.</p>
+<p>However, if a framework enabled  <em>checkpointing</em> when it registered with the
+master, any executors belonging to that framework can reconnect to the new
+<code>mesos-agent</code> process and continue running uninterrupted. Hence, enabling
+framework checkpointing allows tasks to tolerate Mesos agent upgrades and
+unexpected <code>mesos-agent</code> crashes without experiencing any downtime.</p>
+<p>Agent recovery works by having the agent checkpoint information about its own
+state and about the tasks and executors it is managing to local disk, for
+example the <code>SlaveInfo</code>, <code>FrameworkInfo</code> and <code>ExecutorInfo</code> messages or the
+unacknowledged status updates of running tasks.</p>
+<p>When the agent restarts, it will verify that its current configuration, set
+from the environment variables and command-line flags, is compatible with the
+checkpointed information and will refuse to restart if not.</p>
+<p>A special case occurs when the agent detects that its host system was rebooted
+since the last run of the agent: The agent will try to recover its previous ID
+as usual, but if that fails it will actually erase the information of the
+previous run and will register with the master as a new agent.</p>
+<p>Note that executors and tasks that exited between agent shutdown and restart
+are not automatically restarted during agent recovery.</p>
+<h2 id="framework-configuration"><a class="header" href="#framework-configuration">Framework Configuration</a></h2>
+<p>A framework can control whether its executors will be recovered by setting
+the <code>checkpoint</code> flag in its <code>FrameworkInfo</code> when registering with the master.
+Enabling this feature results in increased I/O overhead at each agent that runs
+tasks launched by the framework. By default, frameworks do <strong>not</strong> checkpoint
+their state.</p>
+<h2 id="agent-configuration"><a class="header" href="#agent-configuration">Agent Configuration</a></h2>
+<p>Four <a href="configuration/agent.html">configuration flags</a> control the recovery
+behavior of a Mesos agent:</p>
+<ul>
+<li>
+<p><code>strict</code>: Whether to do agent recovery in strict mode [Default: true].</p>
+<ul>
+<li>If strict=true, all recovery errors are considered fatal.</li>
+<li>If strict=false, any errors (e.g., corruption in checkpointed data) during
+recovery are ignored and as much state as possible is recovered.</li>
+</ul>
+</li>
+<li>
+<p><code>reconfiguration_policy</code>: Which kind of configuration changes are accepted
+when trying to recover [Default: equal].</p>
+<ul>
+<li>If reconfiguration_policy=equal, no configuration changes are accepted.</li>
+<li>If reconfiguration_policy=additive, the agent will allow the new
+configuration to contain additional attributes, increased resourced or an
+additional fault domain. For a more detailed description, see
+<a href="https://gitbox.apache.org/repos/asf?p=mesos.git;a=blob;f=src/slave/compatibility.hpp;h=78b421a01abe5d2178c93832577577a7ba282b38;hb=HEAD#l37">this</a>.</li>
+</ul>
+</li>
+<li>
+<p><code>recover</code>: Whether to recover status updates and reconnect with old
+executors [Default: reconnect]</p>
+<ul>
+<li>If recover=reconnect, reconnect with any old live executors, provided
+the executor's framework enabled checkpointing.</li>
+<li>If recover=cleanup, kill any old live executors and exit. Use this
+option when doing an incompatible agent or executor upgrade!
+<strong>NOTE:</strong> If no checkpointing information exists, no recovery is performed
+and the agent registers with the master as a new agent.</li>
+</ul>
+</li>
+<li>
+<p><code>recovery_timeout</code>: Amount of time allotted for the agent to
+recover [Default: 15 mins].</p>
+<ul>
+<li>If the agent takes longer than <code>recovery_timeout</code> to recover, any
+executors that are waiting to reconnect to the agent will self-terminate.
+<strong>NOTE:</strong> If none of the frameworks have enabled checkpointing, the
+executors and tasks running at an agent die when the agent dies and are
+not recovered.</li>
+</ul>
+</li>
+</ul>
+<p>A restarted agent should reregister with master within a timeout (75 seconds
+by default: see the <code>--max_agent_ping_timeouts</code> and <code>--agent_ping_timeout</code>
+<a href="configuration.html">configuration flags</a>). If the agent takes longer than this
+timeout to reregister, the master shuts down the agent, which in turn will
+shutdown any live executors/tasks.</p>
+<p>Therefore, it is highly recommended to automate the process of restarting an
+agent, e.g. using a process supervisor such as <a href="http://mmonit.com/monit/">monit</a>
+or <code>systemd</code>.</p>
+<h2 id="known-issues-with-systemd-and-process-lifetime"><a class="header" href="#known-issues-with-systemd-and-process-lifetime">Known issues with <code>systemd</code> and process lifetime</a></h2>
+<p>There is a known issue when using <code>systemd</code> to launch the <code>mesos-agent</code>. A
+description of the problem can be found in <a href="https://issues.apache.org/jira/browse/MESOS-3425">MESOS-3425</a>
+and all relevant work can be tracked in the epic <a href="https://issues.apache.org/jira/browse/MESOS-3007">MESOS-3007</a>.</p>
+<p>This problem was fixed in Mesos <code>0.25.0</code> for the mesos containerizer when
+cgroups isolation is enabled. Further fixes for the posix isolators and docker
+containerizer are available in <code>0.25.1</code>, <code>0.26.1</code>, <code>0.27.1</code>, and <code>0.28.0</code>.</p>
+<p>It is recommended that you use the default <a href="http://www.freedesktop.org/software/systemd/man/systemd.kill.html">KillMode</a>
+for systemd processes, which is <code>control-group</code>, which kills all child processes
+when the agent stops. This ensures that &quot;side-car&quot; processes such as the
+<code>fetcher</code> and <code>perf</code> are terminated alongside the agent.
+The systemd patches for Mesos explicitly move executors and their children into
+a separate systemd slice, dissociating their lifetime from the agent. This
+ensures the executors survive agent restarts.</p>
+<p>The following excerpt of a <code>systemd</code> unit configuration file shows how to set
+the flag explicitly:</p>
+<pre><code>[Service]
+ExecStart=/usr/bin/mesos-agent
+KillMode=control-cgroup
+</code></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="replicated-log-internals.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="framework-rate-limiting.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="replicated-log-internals.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="framework-rate-limiting.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

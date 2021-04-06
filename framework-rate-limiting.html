@@ -1,0 +1,307 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Framework Rate Limiting - Apache Mesos</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="favicon.png">
+        
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        
+        <link rel="stylesheet" href="css/print.css" media="print">
+        
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">Fundamentals</li><li class="chapter-item expanded "><a href="architecture.html"><strong aria-hidden="true">1.</strong> Mesos Architecture providing an overview of Mesos concepts</a></li><li class="chapter-item expanded "><a href="presentations.html"><strong aria-hidden="true">2.</strong> Video and Slides of Mesos Presentations</a></li><li class="chapter-item expanded "><a href="versioning.html"><strong aria-hidden="true">3.</strong> Mesos Release and Support Policy</a></li><li class="chapter-item expanded affix "><li class="part-title">Build / Installation</li><li class="chapter-item expanded "><a href="building.html"><strong aria-hidden="true">4.</strong> Building for basic instructions on compiling and installing Mesos.</a></li><li class="chapter-item expanded "><a href="binary-packages.html"><strong aria-hidden="true">5.</strong> Binary Packages for how to use Mesos binary packages.</a></li><li class="chapter-item expanded "><a href="configuration.html"><strong aria-hidden="true">6.</strong> Configuration for build configuration options.</a></li><li class="chapter-item expanded "><a href="cmake.html"><strong aria-hidden="true">7.</strong> CMake for details about using the new CMake build system.</a></li><li class="chapter-item expanded "><a href="windows.html"><strong aria-hidden="true">8.</strong> Windows Support for the state of Windows support in Mesos.</a></li><li class="chapter-item expanded affix "><li class="part-title">Administration</li><li class="chapter-item expanded "><a href="configuration.html"><strong aria-hidden="true">9.</strong> Configuration for command-line arguments.</a></li><li class="chapter-item expanded "><a href="high-availability.html"><strong aria-hidden="true">10.</strong> High Availability Master Setup</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="replicated-log-internals.html"><strong aria-hidden="true">10.1.</strong> Replicated Log for information on the Mesos replicated log.</a></li></ol></li><li class="chapter-item expanded "><a href="agent-recovery.html"><strong aria-hidden="true">11.</strong> Fault Tolerant Agent Setup</a></li><li class="chapter-item expanded "><a href="framework-rate-limiting.html" class="active"><strong aria-hidden="true">12.</strong> Framework Rate Limiting</a></li><li class="chapter-item expanded "><a href="maintenance.html"><strong aria-hidden="true">13.</strong> Maintenance for performing maintenance on a Mesos cluster.</a></li><li class="chapter-item expanded "><a href="upgrades.html"><strong aria-hidden="true">14.</strong> Upgrades for upgrading a Mesos cluster.</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">Apache Mesos</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                        <a href="https://github.com/AVENTER-UG/mesos-docs/" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="framework-rate-limiting"><a class="header" href="#framework-rate-limiting">Framework Rate Limiting</a></h1>
+<p>Framework rate limiting is a feature introduced in Mesos 0.20.0.</p>
+<h2 id="what-is-framework-rate-limiting"><a class="header" href="#what-is-framework-rate-limiting">What is Framework Rate Limiting</a></h2>
+<p>In a multi-framework environment, this feature aims to protect the throughput of high-SLA (e.g., production, service) frameworks by having the master throttle messages from other (e.g., development, batch) frameworks.</p>
+<p>To throttle messages from a framework, the Mesos cluster operator sets a <code>qps</code> (queries per seconds) value for each framework identified by its principal (You can also throttle a group of frameworks together but we'll assume individual frameworks in this doc unless otherwise stated; see the <code>RateLimits</code> <a href="https://github.com/apache/mesos/blob/master/include/mesos/mesos.proto">Protobuf definition</a> and the configuration notes below). The master then promises not to process messages from that framework at a rate above <code>qps</code>. The outstanding messages are stored in memory on the master.</p>
+<h2 id="rate-limits-configuration"><a class="header" href="#rate-limits-configuration">Rate Limits Configuration</a></h2>
+<p>The following is a sample config file (in JSON format) which could be specified with the <code>--rate_limits</code> master flag.</p>
+<pre><code>{
+  &quot;limits&quot;: [
+    {
+      &quot;principal&quot;: &quot;foo&quot;,
+      &quot;qps&quot;: 55.5
+      &quot;capacity&quot;: 100000
+    },
+    {
+      &quot;principal&quot;: &quot;bar&quot;,
+      &quot;qps&quot;: 300
+    },
+    {
+      &quot;principal&quot;: &quot;baz&quot;,
+    }
+  ],
+  &quot;aggregate_default_qps&quot;: 333,
+  &quot;aggregate_default_capacity&quot;: 1000000
+}
+</code></pre>
+<p>In this example, framework <code>foo</code> is throttled at the configured <code>qps</code> and <code>capacity</code>, framework <code>bar</code> is given unlimited capacity and framework <code>baz</code> is not throttled at all. If there is a fourth framework <code>qux</code> or a framework without a principal connected to the master, it is throttled by the rules <code>aggregate_default_qps</code> and <code>aggregate_default_capacity</code>.</p>
+<h3 id="configuration-notes"><a class="header" href="#configuration-notes">Configuration Notes</a></h3>
+<p>Below are the fields in the JSON configuration.</p>
+<ul>
+<li><strong>principal</strong>: (Required) uniquely identifies the entity being throttled or given unlimited rate explicitly.
+<ul>
+<li>It should match the framework's <code>FrameworkInfo.principal</code> (See <a href="https://github.com/apache/mesos/blob/master/include/mesos/mesos.proto">definition</a>).</li>
+<li>You can have multiple frameworks use the same principal (e.g., some Mesos frameworks launch a new framework instance for each job), in which case the combined traffic from all frameworks using the same principal are throttled at the specified QPS.</li>
+</ul>
+</li>
+<li><strong>qps</strong>: (Optional) queries per second, i.e., the rate.
+<ul>
+<li>Once set, the master guarantees that it does not process messages from this principal higher than this rate. However the master could be slower than this rate, especially if the specified rate is too high.</li>
+<li>To explicitly give a framework unlimited rate (i.e., not throttling it), add an entry to <code>limits</code> without the qps.</li>
+</ul>
+</li>
+<li><strong>capacity</strong>: (Optional) The number of <em>outstanding</em> messages frameworks of this principal can put on the master. If not specified, this principal is given unlimited capacity. Note that it is possible the queued messages use too much memory and cause the master to OOM if the capacity is set too high or not set.
+<ul>
+<li>NOTE: If <code>qps</code> is not specified, <code>capacity</code> is ignored.</li>
+</ul>
+</li>
+<li>Use <strong>aggregate_default_qps</strong> and <strong>aggregate_default_capacity</strong> to safeguard the master from unspecified frameworks. All the frameworks not specified in <code>limits</code> get this default rate and capacity.
+<ul>
+<li>The rate and capacity are aggregate values for all of them, i.e., their combined traffic is throttled together.</li>
+<li>Same as above, if <code>aggregate_default_qps</code> is not specified, <code>aggregate_default_capacity</code> is ignored.</li>
+<li>If these fields are not present, the unspecified frameworks are not throttled.
+This is an implicit way of giving frameworks unlimited rate compared to the explicit way above (using an entry in <code>limits</code> with only the principal).
+We recommend using the explicit option especially when the master does not require authentication to prevent unexpected frameworks from overwhelming the master.</li>
+</ul>
+</li>
+</ul>
+<h2 id="using-framework-rate-limiting"><a class="header" href="#using-framework-rate-limiting">Using Framework Rate Limiting</a></h2>
+<h3 id="monitoring-framework-traffic"><a class="header" href="#monitoring-framework-traffic">Monitoring Framework Traffic</a></h3>
+<p>While a framework is registered with the master, the master exposes counters for all messages received and processed from that framework at its metrics endpoint: <code>http://&lt;master&gt;/metrics/snapshot</code>. For instance, framework <code>foo</code> has two message counters <code>frameworks/foo/messages_received</code> and <code>frameworks/foo/messages_processed</code>. Without framework rate limiting the two numbers should differ by little or none (because messages are processed ASAP) but when a framework is being throttled the difference indicates the outstanding messages as a result of the throttling.</p>
+<p>By continuously monitoring the counters, you can derive the rate messages arrive and how fast the message queue length for the framework is growing (if it is throttled). This should depict the characteristics of the framework in terms of network traffic.</p>
+<h2 id="configuring-rate-limits"><a class="header" href="#configuring-rate-limits">Configuring Rate Limits</a></h2>
+<p>Since the goal for framework rate limiting is to prevent low-SLA frameworks from using <strong>too much</strong> resources and not to model their traffic and behavior as precisely as possible, you can start by using large <code>qps</code> values to throttle them. The fact that they are throttled (regardless of the configured <code>qps</code>) is already effective in giving messages from high-SLA frameworks higher priority because they are processed ASAP.</p>
+<p>To calculate how much <code>capacity</code> the master can handle, you need to know the memory limit for the master process, the amount of memory it typically uses to serve similar workload without rate limiting (e.g., use <code>ps -o rss $MASTER_PID</code>) and average sizes of the framework messages (queued messages are stored as <a href="https://github.com/apache/mesos/blob/master/3rdparty/libprocess/include/process/message.hpp">serialized Protocol Buffers with a few additional fields</a>) and you should sum up all capacity values in the config.
+However since this kind of calculation is imprecise, you should start with small values that tolerate reasonable temporary framework burstiness but far from the memory limit to leave enough headroom for the master and frameworks that don't have limited capacity.</p>
+<h2 id="handling-capacity-exceeded-error"><a class="header" href="#handling-capacity-exceeded-error">Handling &quot;Capacity Exceeded&quot; Error</a></h2>
+<p>When a framework <strong>exceeds the capacity</strong>, a FrameworkErrorMessage is sent back to the framework which will <a href="https://github.com/apache/mesos/blob/master/src/sched/sched.cpp">abort the scheduler driver and invoke the error() callback</a>. It doesn't kill any tasks or the scheduler itself. The framework developer can choose to restart or failover the scheduler instance to remedy the consequences of dropped messages (unless your framework doesn't assume all messages sent to the master are processed).</p>
+<p>After version 0.20.0 we are going to iterate on this feature by having the master send an early alert when the message queue for this framework <strong>starts to build up</strong> (<a href="https://issues.apache.org/jira/browse/MESOS-1664">MESOS-1664</a>, consider it a &quot;soft limit&quot;). The scheduler can react by throttling itself (to avoid the error message) or ignoring this alert if it's a temporary burst by design.</p>
+<p>Before the early alerting is implemented we <strong>don't recommend using the rate limiting feature to throttle production frameworks</strong> for now unless you are sure about the consequences of the error message. Of course it's OK to use it to protect production frameworks by throttling other frameworks and it doesn't have any effect on the master if it's not explicitly enabled.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="agent-recovery.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="maintenance.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="agent-recovery.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="maintenance.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

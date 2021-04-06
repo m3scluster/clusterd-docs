@@ -1,0 +1,618 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Maintenance for performing maintenance on a Mesos cluster. - Apache Mesos</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="favicon.png">
+        
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        
+        <link rel="stylesheet" href="css/print.css" media="print">
+        
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">Fundamentals</li><li class="chapter-item expanded "><a href="architecture.html"><strong aria-hidden="true">1.</strong> Mesos Architecture providing an overview of Mesos concepts</a></li><li class="chapter-item expanded "><a href="presentations.html"><strong aria-hidden="true">2.</strong> Video and Slides of Mesos Presentations</a></li><li class="chapter-item expanded "><a href="versioning.html"><strong aria-hidden="true">3.</strong> Mesos Release and Support Policy</a></li><li class="chapter-item expanded affix "><li class="part-title">Build / Installation</li><li class="chapter-item expanded "><a href="building.html"><strong aria-hidden="true">4.</strong> Building for basic instructions on compiling and installing Mesos.</a></li><li class="chapter-item expanded "><a href="binary-packages.html"><strong aria-hidden="true">5.</strong> Binary Packages for how to use Mesos binary packages.</a></li><li class="chapter-item expanded "><a href="configuration.html"><strong aria-hidden="true">6.</strong> Configuration for build configuration options.</a></li><li class="chapter-item expanded "><a href="cmake.html"><strong aria-hidden="true">7.</strong> CMake for details about using the new CMake build system.</a></li><li class="chapter-item expanded "><a href="windows.html"><strong aria-hidden="true">8.</strong> Windows Support for the state of Windows support in Mesos.</a></li><li class="chapter-item expanded affix "><li class="part-title">Administration</li><li class="chapter-item expanded "><a href="configuration.html"><strong aria-hidden="true">9.</strong> Configuration for command-line arguments.</a></li><li class="chapter-item expanded "><a href="high-availability.html"><strong aria-hidden="true">10.</strong> High Availability Master Setup</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="replicated-log-internals.html"><strong aria-hidden="true">10.1.</strong> Replicated Log for information on the Mesos replicated log.</a></li></ol></li><li class="chapter-item expanded "><a href="agent-recovery.html"><strong aria-hidden="true">11.</strong> Fault Tolerant Agent Setup</a></li><li class="chapter-item expanded "><a href="framework-rate-limiting.html"><strong aria-hidden="true">12.</strong> Framework Rate Limiting</a></li><li class="chapter-item expanded "><a href="maintenance.html" class="active"><strong aria-hidden="true">13.</strong> Maintenance for performing maintenance on a Mesos cluster.</a></li><li class="chapter-item expanded "><a href="upgrades.html"><strong aria-hidden="true">14.</strong> Upgrades for upgrading a Mesos cluster.</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">Apache Mesos</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                        <a href="https://github.com/AVENTER-UG/mesos-docs/" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="performing-node-maintenance-in-a-mesos-cluster"><a class="header" href="#performing-node-maintenance-in-a-mesos-cluster">Performing Node Maintenance in a Mesos Cluster</a></h1>
+<p>Operators regularly need to perform maintenance tasks on machines that comprise
+a Mesos cluster.  Most Mesos upgrades can be done without affecting running
+tasks, but there are situations where maintenance may affect running tasks.
+For example:</p>
+<ul>
+<li>Hardware repair</li>
+<li>Kernel upgrades</li>
+<li>Agent upgrades (e.g., adjusting agent attributes or resources)</li>
+</ul>
+<p>Before performing maintenance on an agent node in a Mesos cluster, it is
+typically desirable to gracefully migrate tasks away from the node beforehand in
+order to minimize service disruption when the machine is taken down. Mesos
+provides several ways to accomplish this migration:</p>
+<ul>
+<li>Automatic agent draining, which does not explicitly require cooperation from
+schedulers</li>
+<li>Manual node draining, which allows operators to exercise precise control over
+the task draining process</li>
+<li>Maintenance primitives, which permit complex coordination but do require that
+schedulers react to the maintenance-related messages that they receive</li>
+</ul>
+<h1 id="automatic-node-draining"><a class="header" href="#automatic-node-draining">Automatic Node Draining</a></h1>
+<p>Node draining was added to provide a simple method for operators to drain tasks
+from nodes on which they plan to perform maintenance, without requiring that
+schedulers implement support for any maintenance-specific messages.</p>
+<p>Initiating draining will cause all tasks on the target agent node to receive a
+kill event immediately, assuming the agent is currently reachable. If the agent
+is unreachable, initiation of the kill event will be delayed until the agent is
+reachable by the master again. When the tasks receive a kill event, a SIGTERM
+signal will be sent to the task to begin the killing process. Depending on the
+particular task's behavior, this signal may be sufficient to terminate it. Some
+tasks may use this signal to begin the process of graceful termination, which
+may take some time. After some delay, a SIGKILL signal will be sent to the task,
+which forcefully terminates the task if it is still running. The delay between
+the SIGTERM and SIGKILL signals is determined by the length of the task's kill
+grace period. If no grace period is set for the task, a default value of several
+seconds will be used.</p>
+<h2 id="initiating-draining-on-a-node"><a class="header" href="#initiating-draining-on-a-node">Initiating Draining on a Node</a></h2>
+<p>To begin draining an agent, issue the operator API <a href="operator-http-api.html#drain_agent"><code>DRAIN_AGENT</code>
+call</a> to the master:</p>
+<pre><code>$ curl -X POST -d '{&quot;type&quot;: &quot;DRAIN_AGENT&quot;, &quot;drain_agent&quot;: {&quot;agent_id&quot;: {&quot;value&quot;: &quot;&lt;mesos-agent-id&gt;&quot;}}}' masterhost:5050/api/v1
+</code></pre>
+<p>This will immediately begin the process of killing all tasks on the agent. Once
+draining has begun, it cannot be cancelled. To monitor the progress of the
+draining process, you can inspect the state of the agent via the master operator
+API <a href="operator-http-api.html#get_state"><code>GET_STATE</code></a> or
+<a href="operator-http-api.html#get_agents"><code>GET_AGENTS</code></a> calls:</p>
+<pre><code>$ curl -X POST -d '{&quot;type&quot;: &quot;GET_AGENTS&quot;}' masterhost:5050/api/v1
+</code></pre>
+<p>Locate the relevant agent and inspect its <code>drain_info.state</code> field. While
+draining, the state will be <code>DRAINING</code>. When all tasks on the agent have
+terminated, all their terminal status updates have been acknowledged by the
+schedulers, and all offer operations on the agent have finished, draining is
+complete and the agent's drain state will transition to <code>DRAINED</code>. At this
+point, the node may be taken down for maintenance.</p>
+<h2 id="options-for-automatic-node-draining"><a class="header" href="#options-for-automatic-node-draining">Options for Automatic Node Draining</a></h2>
+<p>You may set an upper bound on the kill grace period of draining tasks by
+specifying the <code>max_grace_period</code> option when draining:</p>
+<pre><code>$ curl -X POST -d '{&quot;type&quot;: &quot;DRAIN_AGENT&quot;, &quot;drain_agent&quot;: {&quot;agent_id&quot;: {&quot;value&quot;: &quot;&lt;mesos-agent-id&gt;&quot;}, &quot;max_grace_period&quot;: &quot;10mins&quot;}}' masterhost:5050/api/v1
+</code></pre>
+<p>In cases where you know that the node being drained will not return after
+draining is complete, and you would like it to be automatically permanently
+removed from the cluster, you may specify the <code>mark_gone</code> option:</p>
+<pre><code>$ curl -X POST -d '{&quot;type&quot;: &quot;DRAIN_AGENT&quot;, &quot;drain_agent&quot;: {&quot;agent_id&quot;: {&quot;value&quot;: &quot;&lt;mesos-agent-id&gt;&quot;}, &quot;mark_gone&quot;: true}}' masterhost:5050/api/v1
+</code></pre>
+<p>This can be useful, for example, in the case of autoscaled cloud instances,
+where an instance is being scaled down and will never return. This is equivalent
+to issuing the <a href="operator-http-api.html#mark_agent_gone"><code>MARK_AGENT_GONE</code></a> call on
+the agent immediately after it finishes draining. WARNING: draining with the
+<code>mark_gone</code> option is irreversible, and results in the loss of all local
+persistent data on the agent node. Use this option with caution!</p>
+<h2 id="reactivating-a-node-after-maintenance"><a class="header" href="#reactivating-a-node-after-maintenance">Reactivating a Node After Maintenance</a></h2>
+<p>Once maintenance on an agent is complete, it must be reactivated so that it can
+reregister with the master and rejoin the cluster. You may use the master
+operator API <a href="operator-http-api.html#reactivate_agent"><code>REACTIVATE_AGENT</code></a> call to
+accomplish this:</p>
+<pre><code>$ curl -X POST -d '{&quot;type&quot;: &quot;REACTIVATE_AGENT&quot;, &quot;reactivate_agent&quot;: {&quot;agent_id&quot;: {&quot;value&quot;: &quot;&lt;mesos-agent-id&gt;&quot;}}}' masterhost:5050/api/v1
+</code></pre>
+<h1 id="manual-node-draining"><a class="header" href="#manual-node-draining">Manual Node Draining</a></h1>
+<p>If you require greater control over the draining process, you may be able to
+drain the agent manually using both the Mesos operator API as well as APIs
+exposed by the schedulers running tasks on the agent.</p>
+<h2 id="deactivating-an-agent"><a class="header" href="#deactivating-an-agent">Deactivating an Agent</a></h2>
+<p>The first step in the manual draining process is agent deactivation, which
+prevents new tasks from launching on the target agent:</p>
+<pre><code>$ curl -X POST -d '{&quot;type&quot;: &quot;DEACTIVATE_AGENT&quot;, &quot;deactivate_agent&quot;: {&quot;agent_id&quot;: {&quot;value&quot;: &quot;&lt;mesos-agent-id&gt;&quot;}}}' masterhost:5050/api/v1
+</code></pre>
+<p>If you receive a <code>200 OK</code> response, then the agent has been deactivated. You can
+confirm the deactivation state of any agent by inspecting its <code>deactivated</code>
+field in the response of the master operator API
+<a href="operator-http-api.html#get_state"><code>GET_STATE</code></a> or
+<a href="operator-http-api.html#get_agents"><code>GET_AGENTS</code></a> calls. Once the agent is
+deactivated, you can use the APIs exposed by the schedulers responsible for the
+tasks running on the agent to kill those tasks manually. To verify that all
+tasks on the agent have terminated and their terminal status updates have been
+acknowledged by the schedulers, ensure that the <code>pending_tasks</code>, <code>queued_tasks</code>,
+and <code>launched_tasks</code> fields in the response to the
+<a href="operator-http-api.html#get_tasks-1"><code>GET_TASKS</code></a> agent operator API call are
+empty:</p>
+<pre><code>$ curl -X POST -d '{&quot;type&quot;: &quot;GET_TASKS&quot;}' agenthost:5051/api/v1
+</code></pre>
+<p>If you are making use of volumes backed by network storage on the target agent,
+it's possible that there may be a long-running offer operation on the agent
+which has not yet finished. To check if this is the case, issue the agent
+operator API <a href="operator-http-api.html#get_operations-1"><code>GET_OPERATIONS</code></a> call to
+the agent:</p>
+<pre><code>$ curl -X POST -d '{&quot;type&quot;: &quot;GET_OPERATIONS&quot;}' agenthost:5051/api/v1
+</code></pre>
+<p>If any operations have a <code>latest_status</code> with a state of <code>OPERATION_PENDING</code>,
+you should wait for them to finish before taking down the node. Unfortunately,
+it is not possible to cancel or forcefully terminate such storage operations. If
+such an operation becomes stuck in the pending state, you should inspect the
+relevant storage backend for any issues.</p>
+<p>Once all tasks on the agent have terminated and all offer operations are
+finished, the node may be taken down for maintenance. Once maintenance is
+complete, the procedure for reactivating the node is the same as that detailed
+in the section on automatic node draining.</p>
+<h1 id="maintenance-primitives"><a class="header" href="#maintenance-primitives">Maintenance Primitives</a></h1>
+<p>Frameworks require visibility into any actions that disrupt cluster operation
+in order to meet Service Level Agreements or to ensure uninterrupted services
+for their end users.  Therefore, to reconcile the requirements of frameworks
+and operators, frameworks must be aware of planned maintenance events and
+operators must be aware of frameworks' ability to adapt to maintenance.
+Maintenance primitives add a layer to facilitate communication between the
+frameworks and operator.</p>
+<h2 id="terminology"><a class="header" href="#terminology">Terminology</a></h2>
+<p>For the purpose of this section, an &quot;Operator&quot; is a person, tool, or script
+that manages a Mesos cluster.</p>
+<p>Maintenance primitives add several new concepts to Mesos. Those concepts are:</p>
+<ul>
+<li><strong>Maintenance</strong>: An operation that makes resources on a machine unavailable,
+either temporarily or permanently.</li>
+<li><strong>Maintenance window</strong>: A set of machines and an associated time interval during
+which some maintenance is planned on those machines.</li>
+<li><strong>Maintenance schedule</strong>: A list of maintenance windows.
+A single machine may only appear in a schedule once.</li>
+<li><strong>Unavailability</strong>: An operator-specified interval, defined by a start time
+and duration, during which an associated machine may become unavailable.
+In general, no assumptions should be made about the availability of the
+machine (or resources) after the unavailability.</li>
+<li><strong>Drain</strong>: An interval between the scheduling of maintenance and when the
+machine(s) become unavailable.  Offers sent with resources from draining
+machines will contain unavailability information.  Frameworks running on
+draining machines will receive inverse offers (see next).  Frameworks
+utilizing resources on affected machines are expected either to take
+preemptive steps to prepare for the unavailability; or to communicate the
+framework's inability to conform to the maintenance schedule.</li>
+<li><strong>Inverse offer</strong>: A communication mechanism for the master to ask for
+resources back from a framework.  This notifies frameworks about any
+unavailability and gives frameworks a mechanism to respond about their
+ability to comply.  Inverse offers are similar to offers in that they
+can be accepted, declined, re-offered, and rescinded.</li>
+</ul>
+<p><strong>Note</strong>: Unavailability and inverse offers are not specific to maintenance.
+The same concepts can be used for non-maintenance goals, such as reallocating
+resources or resource preemption.</p>
+<h2 id="how-does-it-work"><a class="header" href="#how-does-it-work">How does it work?</a></h2>
+<p>Maintenance primitives were introduced in Mesos 0.25.0.  Several machine
+maintenance modes were also introduced.  Those modes are illustrated below.</p>
+<p><img src="images/maintenance-primitives-modes.png" alt="Maintenance mode transitions" /></p>
+<p>All mode transitions must be initiated by the operator.  Mesos will not
+change the mode of any machine, regardless of the estimate provided in
+the maintenance schedule.</p>
+<h3 id="scheduling-maintenance"><a class="header" href="#scheduling-maintenance">Scheduling maintenance</a></h3>
+<p>A machine is transitioned from Up mode to Draining mode as soon as it is
+scheduled for maintenance.  To transition a machine into Draining mode, an
+operator constructs a maintenance schedule as a JSON document and posts it to
+the <a href="endpoints/master/maintenance/schedule.html">/maintenance/schedule</a> HTTP
+endpoint on the Mesos master. Each Mesos cluster has a single maintenance
+schedule; posting a new schedule replaces the previous schedule, if any.</p>
+<p>See the definition of a <a href="https://github.com/apache/mesos/blob/016b02d7ed5a65bcad9261a133c8237c2df66e6e/include/mesos/maintenance/maintenance.proto#L48-L67">maintenance::Schedule</a>
+and of <a href="https://github.com/apache/mesos/blob/016b02d7ed5a65bcad9261a133c8237c2df66e6e/include/mesos/v1/mesos.proto#L140-L154">Unavailability</a>.</p>
+<p>In a production environment, the schedule should be constructed to ensure that
+enough agents are operational at any given point in time to ensure
+uninterrupted service by the frameworks.</p>
+<p>For example, in a cluster of three machines, the operator might schedule two
+machines for one hour of maintenance, followed by another hour for the last
+machine.  The timestamps for unavailability are expressed in nanoseconds since
+the Unix epoch (note that making reliable use of maintenance primitives requires
+that the system clocks of all machines in the cluster are roughly synchronized).</p>
+<p>The schedule might look like:</p>
+<pre><code>{
+  &quot;windows&quot; : [
+    {
+      &quot;machine_ids&quot; : [
+        { &quot;hostname&quot; : &quot;machine1&quot;, &quot;ip&quot; : &quot;10.0.0.1&quot; },
+        { &quot;hostname&quot; : &quot;machine2&quot;, &quot;ip&quot; : &quot;10.0.0.2&quot; }
+      ],
+      &quot;unavailability&quot; : {
+        &quot;start&quot; : { &quot;nanoseconds&quot; : 1443830400000000000 },
+        &quot;duration&quot; : { &quot;nanoseconds&quot; : 3600000000000 }
+      }
+    }, {
+      &quot;machine_ids&quot; : [
+        { &quot;hostname&quot; : &quot;machine3&quot;, &quot;ip&quot; : &quot;10.0.0.3&quot; }
+      ],
+      &quot;unavailability&quot; : {
+        &quot;start&quot; : { &quot;nanoseconds&quot; : 1443834000000000000 },
+        &quot;duration&quot; : { &quot;nanoseconds&quot; : 3600000000000 }
+      }
+    }
+  ]
+}
+</code></pre>
+<p>The operator can then post the schedule to the master's
+<a href="endpoints/master/maintenance/schedule.html">/maintenance/schedule</a> endpoint:</p>
+<pre><code>curl http://localhost:5050/maintenance/schedule \
+  -H &quot;Content-type: application/json&quot; \
+  -X POST \
+  -d @schedule.json
+</code></pre>
+<p>The machines in a maintenance schedule do not need to be registered with the
+Mesos master at the time when the schedule is set.  The operator may add a
+machine to the maintenance schedule prior to launching an agent on the machine.
+For example, this can be useful to prevent a faulty machine from launching an
+agent on boot.</p>
+<p><strong>Note</strong>: Each machine in the maintenance schedule should have as
+complete information as possible.  In order for Mesos to recognize an agent
+as coming from a particular machine, both the <code>hostname</code> and <code>ip</code> fields must
+match.  Any omitted data defaults to the empty string <code>&quot;&quot;</code>.  If there are
+multiple hostnames or IPs for a machine, the machine's fields need to match
+what the agent announces to the master.  If there is any ambiguity in a
+machine's configuration, the operator should use the <code>--hostname</code> and <code>--ip</code>
+options when starting agents.</p>
+<p>The master checks that a maintenance schedule has the following properties:</p>
+<ul>
+<li>Each maintenance window in the schedule must have at least one machine
+and a specified unavailability interval.</li>
+<li>Each machine must only appear in the schedule once.</li>
+<li>Each machine must have at least a hostname or IP included.
+The hostname is not case-sensitive.</li>
+<li>All machines that are in Down mode must be present in the schedule.
+This is required because this endpoint does not handle the transition
+from Down mode to Up mode.</li>
+</ul>
+<p>If any of these properties are not met, the maintenance schedule is rejected
+with a corresponding error message and the master's state is not changed.</p>
+<p>To update the maintenance schedule, the operator should first read the current
+schedule, make any necessary changes, and then post the modified schedule. The
+current maintenance schedule can be obtained by sending a GET request to the
+master's <code>/maintenance/schedule</code> endpoint.</p>
+<p>To cancel the maintenance schedule, the operator should post an empty schedule.</p>
+<h3 id="draining-mode"><a class="header" href="#draining-mode">Draining mode</a></h3>
+<p>As soon as a schedule is posted to the Mesos master, the following things occur:</p>
+<ul>
+<li>The schedule is stored in the <a href="replicated-log-internals.html">replicated log</a>.
+This means the schedule is persisted in case of master failover.</li>
+<li>All machines in the schedule are immediately transitioned into Draining
+mode.  The mode of each machine is also persisted in the replicated log.</li>
+<li>All frameworks using resources on affected agents are immediately
+notified.  Existing offers from the affected agents are rescinded
+and re-sent with additional unavailability data.  All frameworks using
+resources from the affected agents are given inverse offers.</li>
+<li>New offers from the affected agents will also include
+the additional unavailability data.</li>
+</ul>
+<p>Frameworks should use this additional information to schedule tasks in a
+maintenance-aware fashion. Exactly how to do this depends on the design
+requirements of each scheduler, but tasks should typically be scheduled in a way
+that maximizes utilization but that also attempts to vacate machines before that
+machine's advertised unavailability period occurs. A scheduler might choose to
+place long-running tasks on machines with no unavailability, or failing that, on
+machines whose unavailability is the furthest away.</p>
+<p>How a framework responds to an inverse offer indicates its ability to conform to
+the maintenance schedule. Accepting an inverse offer communicates that the
+framework is okay with the current maintenance schedule, given the current state
+of the framework's resources.  The master and operator should interpret
+acceptance as a best-effort promise by the framework to free all the resources
+contained in the inverse offer before the start of the unavailability
+interval. Declining an inverse offer is an advisory notice to the operator that
+the framework is unable or unlikely to meet to the maintenance schedule.</p>
+<p>For example:</p>
+<ul>
+<li>A data store may choose to start a new replica if one of its agents is
+scheduled for maintenance. The data store should accept an inverse offer if it
+can reasonably copy the data on the machine to a new host before the
+unavailability interval described in the inverse offer begins. Otherwise, the
+data store should decline the offer.</li>
+<li>A stateful task on an agent with an impending unavailability may be migrated
+to another available agent.  If the framework has sufficient resources to do
+so, it would accept any inverse offers.  Otherwise, it would decline them.</li>
+</ul>
+<p>A framework can use a filter to control when it wants to be contacted again
+with an inverse offer.  This is useful since future circumstances may change
+the viability of the maintenance schedule.  The filter for inverse offers is
+identical to the existing mechanism for re-offering offers to frameworks.</p>
+<p><strong>Note</strong>: Accepting or declining an inverse offer does not result in
+immediate changes in the maintenance schedule or in the way Mesos acts.
+Inverse offers only represent extra information that frameworks may
+find useful. In the same manner, rejecting or accepting an inverse offer is a
+hint for an operator. The operator may or may not choose to take that hint
+into account.</p>
+<h3 id="starting-maintenance"><a class="header" href="#starting-maintenance">Starting maintenance</a></h3>
+<p>The operator starts maintenance by posting a list of machines to the
+<a href="endpoints/master/machine/down.html">/machine/down</a> HTTP endpoint. The list of
+machines is specified in JSON format; each element of the list is a
+<a href="https://github.com/apache/mesos/blob/016b02d7ed5a65bcad9261a133c8237c2df66e6e/include/mesos/v1/mesos.proto#L157-L167">MachineID</a>.</p>
+<p>For example, to start maintenance on two machines:</p>
+<pre><code>[
+  { &quot;hostname&quot; : &quot;machine1&quot;, &quot;ip&quot; : &quot;10.0.0.1&quot; },
+  { &quot;hostname&quot; : &quot;machine2&quot;, &quot;ip&quot; : &quot;10.0.0.2&quot; }
+]
+</code></pre>
+<pre><code>curl http://localhost:5050/machine/down \
+  -H &quot;Content-type: application/json&quot; \
+  -X POST \
+  -d @machines.json
+</code></pre>
+<p>The master checks that a list of machines has the following properties:</p>
+<ul>
+<li>The list of machines must not be empty.</li>
+<li>Each machine must only appear once.</li>
+<li>Each machine must have at least a hostname or IP included.
+The hostname is not case-sensitive.</li>
+<li>If a machine's IP is included, it must be correctly formed.</li>
+<li>All listed machines must be present in the schedule.</li>
+</ul>
+<p>If any of these properties are not met, the operation is rejected with a
+corresponding error message and the master's state is not changed.</p>
+<p>The operator can start maintenance on any machine that is scheduled for
+maintenance. Machines that are not scheduled for maintenance cannot be directly
+transitioned from Up mode into Down mode.  However, the operator may schedule a
+machine for maintenance with a timestamp equal to the current time or in the
+past, and then immediately start maintenance on that machine.</p>
+<p>This endpoint can be used to start maintenance on machines that are not
+currently registered with the Mesos master. This can be useful if a machine has
+failed and the operator intends to remove it from the cluster; starting
+maintenance on the machine prevents the machine from being accidentally rebooted
+and rejoining the Mesos cluster.</p>
+<p>The operator must explicitly transition a machine from Draining to Down
+mode. That is, Mesos will keep a machine in Draining mode even if the
+unavailability window arrives or passes.  This means that the operation of the
+machine is not disrupted in any way and offers (with unavailability information)
+are still sent for this machine.</p>
+<p>When maintenance is triggered by the operator, all agents on the machine are
+told to shutdown.  These agents are removed from the master, which means that a
+<code>TASK_LOST</code> status update will be sent for every task running on each of those
+agents. The scheduler driver's <code>slaveLost</code> callback will also be invoked for
+each of the removed agents. Any agents on machines in maintenance are also
+prevented from reregistering with the master in the future (until maintenance
+is completed and the machine is brought back up).</p>
+<h3 id="completing-maintenance"><a class="header" href="#completing-maintenance">Completing maintenance</a></h3>
+<p>When maintenance is complete or if maintenance needs to be cancelled,
+the operator can stop maintenance.  The process is very similar
+to starting maintenance (same validation criteria as the previous section).
+The operator posts a list of machines to the master's <a href="endpoints/master/machine/up.html">/machine/up</a> endpoint:</p>
+<pre><code>[
+  { &quot;hostname&quot; : &quot;machine1&quot;, &quot;ip&quot; : &quot;10.0.0.1&quot; },
+  { &quot;hostname&quot; : &quot;machine2&quot;, &quot;ip&quot; : &quot;10.0.0.2&quot; }
+]
+</code></pre>
+<pre><code>curl http://localhost:5050/machine/up \
+  -H &quot;Content-type: application/json&quot; \
+  -X POST \
+  -d @machines.json
+</code></pre>
+<p><strong>Note</strong>: The duration of the maintenance window, as indicated by the
+&quot;unavailability&quot; field in the maintenance schedule, is a best-effort guess made
+by the operator.  Stopping maintenance before the end of the unavailability
+interval is allowed, as is stopping maintenance after the end of the
+unavailability interval.  Machines are never automatically transitioned out of
+maintenance.</p>
+<p>Frameworks are informed about the completion or cancellation of maintenance when
+offers from that machine start being sent.  There is no explicit mechanism for
+notifying frameworks when maintenance has finished.  After maintenance has
+finished, new offers are no longer tagged with unavailability and inverse offers
+are no longer sent.  Also, agents running on the machine will be allowed to
+register with the Mesos master.</p>
+<h3 id="viewing-maintenance-status"><a class="header" href="#viewing-maintenance-status">Viewing maintenance status</a></h3>
+<p>The current maintenance status (Up, Draining, or Down) of each machine in the
+cluster can be viewed by accessing the master's
+<a href="endpoints/master/maintenance/status.html">/maintenance/status</a> HTTP endpoint. For
+each machine that is Draining, this endpoint also includes the frameworks' responses to
+inverse offers for resources on that machine. For more information, see the
+format of the <a href="https://github.com/apache/mesos/blob/fa36917dd142f66924c5f7ed689b87d5ceabbf79/include/mesos/maintenance/maintenance.proto#L73-L84">ClusterStatus message</a>.</p>
+<blockquote>
+<p>NOTE: The format of the data returned by this endpoint may change in a
+future release of Mesos.</p>
+</blockquote>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="framework-rate-limiting.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="upgrades.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="framework-rate-limiting.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="upgrades.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

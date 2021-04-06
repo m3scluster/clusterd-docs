@@ -1,0 +1,328 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>High Availability Master Setup - Apache Mesos</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="favicon.png">
+        
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        
+        <link rel="stylesheet" href="css/print.css" media="print">
+        
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">Fundamentals</li><li class="chapter-item expanded "><a href="architecture.html"><strong aria-hidden="true">1.</strong> Mesos Architecture providing an overview of Mesos concepts</a></li><li class="chapter-item expanded "><a href="presentations.html"><strong aria-hidden="true">2.</strong> Video and Slides of Mesos Presentations</a></li><li class="chapter-item expanded "><a href="versioning.html"><strong aria-hidden="true">3.</strong> Mesos Release and Support Policy</a></li><li class="chapter-item expanded affix "><li class="part-title">Build / Installation</li><li class="chapter-item expanded "><a href="building.html"><strong aria-hidden="true">4.</strong> Building for basic instructions on compiling and installing Mesos.</a></li><li class="chapter-item expanded "><a href="binary-packages.html"><strong aria-hidden="true">5.</strong> Binary Packages for how to use Mesos binary packages.</a></li><li class="chapter-item expanded "><a href="configuration.html"><strong aria-hidden="true">6.</strong> Configuration for build configuration options.</a></li><li class="chapter-item expanded "><a href="cmake.html"><strong aria-hidden="true">7.</strong> CMake for details about using the new CMake build system.</a></li><li class="chapter-item expanded "><a href="windows.html"><strong aria-hidden="true">8.</strong> Windows Support for the state of Windows support in Mesos.</a></li><li class="chapter-item expanded affix "><li class="part-title">Administration</li><li class="chapter-item expanded "><a href="configuration.html"><strong aria-hidden="true">9.</strong> Configuration for command-line arguments.</a></li><li class="chapter-item expanded "><a href="high-availability.html" class="active"><strong aria-hidden="true">10.</strong> High Availability Master Setup</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="replicated-log-internals.html"><strong aria-hidden="true">10.1.</strong> Replicated Log for information on the Mesos replicated log.</a></li></ol></li><li class="chapter-item expanded "><a href="agent-recovery.html"><strong aria-hidden="true">11.</strong> Fault Tolerant Agent Setup</a></li><li class="chapter-item expanded "><a href="framework-rate-limiting.html"><strong aria-hidden="true">12.</strong> Framework Rate Limiting</a></li><li class="chapter-item expanded "><a href="maintenance.html"><strong aria-hidden="true">13.</strong> Maintenance for performing maintenance on a Mesos cluster.</a></li><li class="chapter-item expanded "><a href="upgrades.html"><strong aria-hidden="true">14.</strong> Upgrades for upgrading a Mesos cluster.</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">Apache Mesos</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                        <a href="https://github.com/AVENTER-UG/mesos-docs/" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="mesos-high-availability-mode"><a class="header" href="#mesos-high-availability-mode">Mesos High-Availability Mode</a></h1>
+<p>If the Mesos master is unavailable, existing tasks can continue to execute, but new resources cannot be allocated and new tasks cannot be launched. To reduce the chance of this situation occurring, Mesos has a high-availability mode that uses multiple Mesos masters: one active master (called the <em>leader</em> or leading master) and several <em>backups</em> in case it fails. The masters elect the leader, with <a href="http://zookeeper.apache.org/">Apache ZooKeeper</a> both coordinating the election and handling leader detection by masters, agents, and scheduler drivers. More information regarding <a href="https://zookeeper.apache.org/doc/current/recipes.html#sc_leaderElection">how leader election works</a> is available on the Apache Zookeeper website.</p>
+<p>This document describes how to configure Mesos to run in high-availability mode. For more information on developing highly available frameworks, see a <a href="high-availability-framework-guide.html">companion document</a>.</p>
+<p><strong>Note</strong>: This document assumes you know how to start, run, and work with ZooKeeper, whose client library is included in the standard Mesos build.</p>
+<h2 id="usage"><a class="header" href="#usage">Usage</a></h2>
+<p>To put Mesos into high-availability mode:</p>
+<ol>
+<li>
+<p>Ensure that the ZooKeeper cluster is up and running.</p>
+</li>
+<li>
+<p>Provide the znode path to all masters, agents, and framework schedulers as follows:</p>
+<ul>
+<li>
+<p>Start the mesos-master binaries using the <code>--zk</code> flag, e.g. <code>--zk=zk://host1:port1,host2:port2,.../path</code></p>
+</li>
+<li>
+<p>Start the mesos-agent binaries with <code>--master=zk://host1:port1,host2:port2,.../path</code></p>
+</li>
+<li>
+<p>Start any framework schedulers using the same <code>zk</code> path as in the last two steps. The SchedulerDriver must be constructed with this path, as shown in the <a href="app-framework-development-guide.html">Framework Development Guide</a>.</p>
+</li>
+</ul>
+</li>
+</ol>
+<p>From now on, the Mesos masters and agents all communicate with ZooKeeper to find out which master is the current leading master. This is in addition to the usual communication between the leading master and the agents.</p>
+<p>In addition to ZooKeeper, one can get the location of the leading master by sending an HTTP request to <a href="endpoints/master/redirect.html">/redirect</a> endpoint on any master.</p>
+<p>For HTTP endpoints that only work at the leading master, requests made to endpoints at a non-leading master will result in either a <code>307 Temporary Redirect</code> (with the location of the leading master) or <code>503 Service Unavailable</code> (if the master does not know who the current leader is).</p>
+<p>Refer to the <a href="app-framework-development-guide.html">Scheduler API</a> for how to deal with leadership changes.</p>
+<h2 id="component-disconnection-handling"><a class="header" href="#component-disconnection-handling">Component Disconnection Handling</a></h2>
+<p>When a network partition disconnects a component (master, agent, or scheduler driver) from ZooKeeper, the component's Master Detector induces a timeout event. This notifies the component that it has no leading master. Depending on the component, the following happens. (Note that while a component is disconnected from ZooKeeper, a master may still be in communication with agents or schedulers and vice versa.)</p>
+<ul>
+<li>
+<p>Agents disconnected from ZooKeeper no longer know which master is the leader. They ignore messages from masters to ensure they don't act on a non-leader's decisions. When an agent reconnects to ZooKeeper, ZooKeeper informs it of the current leader and the agent stops ignoring messages from the leader.</p>
+</li>
+<li>
+<p>Masters enter leaderless state irrespective of whether they are a leader or not before the disconnection.</p>
+<ul>
+<li>
+<p>If the leader was disconnected from ZooKeeper, it aborts its process. The user/developer/administrator can then start a new master instance which will try to reconnect to ZooKeeper.</p>
+<ul>
+<li>Note that many production deployments of Mesos use a process supervisor (such as systemd or supervisord) that is configured to automatically restart the Mesos master if the process aborts unexpectedly.</li>
+</ul>
+</li>
+<li>
+<p>Otherwise, the disconnected backup waits to reconnect with ZooKeeper and possibly get elected as the new leading master.</p>
+</li>
+</ul>
+</li>
+<li>
+<p>Scheduler drivers disconnected from the leading master notify the scheduler about their disconnection from the leader.</p>
+</li>
+</ul>
+<p>When a network partition disconnects an agent from the leader:</p>
+<ul>
+<li>
+<p>The agent fails health checks from the leader.</p>
+</li>
+<li>
+<p>The leader marks the agent as deactivated and sends its tasks to the LOST state. The  <a href="app-framework-development-guide.html">Framework Development Guide</a> describes these various task states.</p>
+</li>
+<li>
+<p>Deactivated agents may not reregister with the leader and are told to shut down upon any post-deactivation communication.</p>
+</li>
+</ul>
+<h2 id="monitoring"><a class="header" href="#monitoring">Monitoring</a></h2>
+<p>For monitoring the current number of masters in the cluster communicating with each other to form a quorum, see the monitoring guide's <a href="monitoring.html#replicated-log">Replicated Log</a> on <code>registrar/log/ensemble_size</code>.
+For creating alerts covering failures in leader election, have a look at the monitoring guide's <a href="monitoring.html#basic-alerts">Basic Alerts</a> on <code>master/elected</code>.</p>
+<h2 id="implementation-details"><a class="header" href="#implementation-details">Implementation Details</a></h2>
+<p>Mesos implements two levels of ZooKeeper leader election abstractions, one in <code>src/zookeeper</code> and the other in <code>src/master</code> (look for <code>contender|detector.hpp|cpp</code>).</p>
+<ul>
+<li>
+<p>The lower level <code>LeaderContender</code> and <code>LeaderDetector</code> implement a generic ZooKeeper election algorithm loosely modeled after this
+<a href="http://zookeeper.apache.org/doc/current/recipes.html#sc_leaderElection">recipe</a> (sans herd effect handling due to the master group's small size, which is often 3).</p>
+</li>
+<li>
+<p>The higher level <code>MasterContender</code> and <code>MasterDetector</code> wrap around ZooKeeper's contender and detector abstractions as adapters to provide/interpret the ZooKeeper data.</p>
+</li>
+<li>
+<p>Each Mesos master simultaneously uses both a contender and a detector to try to elect themselves and detect who the current leader is. A separate detector is necessary because each master's WebUI redirects browser traffic to the current leader when that master is not elected. Other Mesos components (i.e., agents and scheduler drivers) use the detector to find the current leader and connect to it.</p>
+</li>
+</ul>
+<p>The notion of the group of leader candidates is implemented in <code>Group</code>. This abstraction handles reliable (through queues and retries of retryable errors under the covers) ZooKeeper group membership registration, cancellation, and monitoring. It watches for several ZooKeeper session events:</p>
+<ul>
+<li>Connection</li>
+<li>Reconnection</li>
+<li>Session Expiration</li>
+<li>ZNode creation, deletion, updates</li>
+</ul>
+<p>We also explicitly timeout our sessions when disconnected from ZooKeeper for a specified amount of time. See <code>--zk_session_timeout</code> configuration option. This is because the ZooKeeper client libraries only notify of session expiration upon reconnection. These timeouts are of particular interest for network partitions.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="configuration.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="replicated-log-internals.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="configuration.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="replicated-log-internals.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

@@ -1,0 +1,377 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Windows Support for the state of Windows support in Mesos. - Apache Mesos</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="favicon.png">
+        
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        
+        <link rel="stylesheet" href="css/print.css" media="print">
+        
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">Fundamentals</li><li class="chapter-item expanded "><a href="architecture.html"><strong aria-hidden="true">1.</strong> Mesos Architecture providing an overview of Mesos concepts</a></li><li class="chapter-item expanded "><a href="presentations.html"><strong aria-hidden="true">2.</strong> Video and Slides of Mesos Presentations</a></li><li class="chapter-item expanded "><a href="versioning.html"><strong aria-hidden="true">3.</strong> Mesos Release and Support Policy</a></li><li class="chapter-item expanded affix "><li class="part-title">Build / Installation</li><li class="chapter-item expanded "><a href="building.html"><strong aria-hidden="true">4.</strong> Building for basic instructions on compiling and installing Mesos.</a></li><li class="chapter-item expanded "><a href="binary-packages.html"><strong aria-hidden="true">5.</strong> Binary Packages for how to use Mesos binary packages.</a></li><li class="chapter-item expanded "><a href="configuration.html"><strong aria-hidden="true">6.</strong> Configuration for build configuration options.</a></li><li class="chapter-item expanded "><a href="cmake.html"><strong aria-hidden="true">7.</strong> CMake for details about using the new CMake build system.</a></li><li class="chapter-item expanded "><a href="windows.html" class="active"><strong aria-hidden="true">8.</strong> Windows Support for the state of Windows support in Mesos.</a></li><li class="chapter-item expanded affix "><li class="part-title">Administration</li><li class="chapter-item expanded "><a href="configuration.html"><strong aria-hidden="true">9.</strong> Configuration for command-line arguments.</a></li><li class="chapter-item expanded "><a href="high-availability.html"><strong aria-hidden="true">10.</strong> High Availability Master Setup</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="replicated-log-internals.html"><strong aria-hidden="true">10.1.</strong> Replicated Log for information on the Mesos replicated log.</a></li></ol></li><li class="chapter-item expanded "><a href="agent-recovery.html"><strong aria-hidden="true">11.</strong> Fault Tolerant Agent Setup</a></li><li class="chapter-item expanded "><a href="framework-rate-limiting.html"><strong aria-hidden="true">12.</strong> Framework Rate Limiting</a></li><li class="chapter-item expanded "><a href="maintenance.html"><strong aria-hidden="true">13.</strong> Maintenance for performing maintenance on a Mesos cluster.</a></li><li class="chapter-item expanded "><a href="upgrades.html"><strong aria-hidden="true">14.</strong> Upgrades for upgrading a Mesos cluster.</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">Apache Mesos</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                        <a href="https://github.com/AVENTER-UG/mesos-docs/" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="windows"><a class="header" href="#windows">Windows</a></h1>
+<p>Mesos 1.0.0 introduced experimental support for Windows.</p>
+<h2 id="building-mesos"><a class="header" href="#building-mesos">Building Mesos</a></h2>
+<h3 id="system-requirements"><a class="header" href="#system-requirements">System Requirements</a></h3>
+<ol>
+<li>
+<p>Install the latest <a href="https://www.visualstudio.com/downloads/">Visual Studio 2017</a>:
+The &quot;Community&quot; edition is sufficient (and free of charge).
+During installation, choose the &quot;Desktop development with C++&quot; workload.</p>
+</li>
+<li>
+<p>Install <a href="https://cmake.org/download/">CMake 3.8.0</a> or later.
+During installation, choose to &quot;Add CMake to the system PATH for all users&quot;.</p>
+</li>
+<li>
+<p>Install <a href="http://gnuwin32.sourceforge.net/packages/patch.htm">GNU patch for Windows</a>.</p>
+</li>
+<li>
+<p>If building from source, install <a href="https://git-scm.com/download/win">Git</a>.</p>
+</li>
+<li>
+<p>Make sure there are no spaces in your build directory.
+For example, <code>C:/Program Files (x86)/mesos</code> is an invalid build directory.</p>
+</li>
+<li>
+<p>If developing Mesos, install <a href="https://www.python.org/downloads/">Python 3</a>
+(not Python 2), in order to use our <code>support</code> scripts (e.g.
+to post and apply patches, or lint source code).</p>
+</li>
+</ol>
+<h3 id="build-instructions"><a class="header" href="#build-instructions">Build Instructions</a></h3>
+<p>Following are the instructions for Windows 10.</p>
+<pre><code># Clone (or extract) Mesos.
+git clone https://gitbox.apache.org/repos/asf/mesos.git
+cd mesos
+
+# Configure using CMake for an out-of-tree build.
+mkdir build
+cd build
+cmake .. -G &quot;Visual Studio 15 2017 Win64&quot; -T &quot;host=x64&quot;
+
+# Build Mesos.
+# To build just the Mesos agent, add `--target mesos-agent`.
+cmake --build .
+
+# The Windows agent exposes new isolators that must be used as with
+# the `--isolation` flag. To get started point the agent to a working
+# master, using eiher an IP address or zookeeper information.
+.\src\mesos-agent.exe --master=&lt;master&gt; --work_dir=&lt;work folder&gt; --launcher_dir=&lt;repository&gt;\build\src
+</code></pre>
+<h2 id="running-mesos"><a class="header" href="#running-mesos">Running Mesos</a></h2>
+<p>If you deploy the executables to another machine, you must also
+install the <a href="https://aka.ms/vs/15/release/VC_redist.x64.exe">Microsoft Visual C++ Redistributable for Visual Studio 2017</a>.</p>
+<h2 id="known-limitations"><a class="header" href="#known-limitations">Known Limitations</a></h2>
+<p>The current implementation is known to have the following limitations:</p>
+<ul>
+<li>
+<p>Only the agent should be run on Windows. The Mesos master can be
+launched, but only for testing as the master does not support
+high-availability setups on Windows.</p>
+</li>
+<li>
+<p>While Mesos supports NTFS long paths internally, tasks which do not support
+long paths must be run on agent whose <code>--work_dir</code> is a short path.</p>
+</li>
+<li>
+<p>The minimum versions of Windows supported are: Windows 10 Creators Update (AKA
+version 1703, build number 15063), and <a href="https://docs.microsoft.com/en-us/windows-server/get-started/get-started-with-1709">Windows Server, version 1709</a>.
+It is likely that this will increase, due to evolving Windows container
+support and developer features which ease porting.</p>
+</li>
+<li>
+<p>The ability to <a href="https://blogs.windows.com/buildingapps/2016/12/02/symlinks-windows-10/">create symlinks</a> as a non-admin user requires
+Developer Mode to be enabled. Otherwise the agent will need to be
+run under an administrator.</p>
+</li>
+</ul>
+<h2 id="build-configuration-examples"><a class="header" href="#build-configuration-examples">Build Configuration Examples</a></h2>
+<h3 id="building-with-ninja"><a class="header" href="#building-with-ninja">Building with Ninja</a></h3>
+<p>Instead of using MSBuild, it is also possible to build Mesos on
+Windows using <a href="https://ninja-build.org/">Ninja</a>, which can result in
+significantly faster builds. To use Ninja, you need to download it and
+ensure <code>ninja.exe</code> is in your <code>PATH</code>.</p>
+<ul>
+<li>Download the <a href="https://github.com/ninja-build/ninja/releases">Windows binary</a>.</li>
+<li>Unzip it and place <code>ninja.exe</code> in your <code>PATH</code>.</li>
+<li>Open an &quot;x64 Native Tools Command Prompt for VS 2017&quot; to set your
+environment.</li>
+<li>In that command prompt, type <code>powershell</code> to use a better shell.</li>
+<li>Similar to above, configure CMake with <code>cmake .. -G Ninja</code>.</li>
+<li>Now you can use <code>ninja</code> to build the various targets.</li>
+<li>You may want to use <code>ninja -v</code> to make it verbose, as it's otherwise
+very quiet.</li>
+</ul>
+<p>Note that with Ninja it is imperative to open the correct developer
+command prompt so that the 64-bit build tools are used, as Ninja does
+not otherwise know how to find them.</p>
+<h3 id="building-with-java"><a class="header" href="#building-with-java">Building with Java</a></h3>
+<p>This enables more unit tests, but we do not yet officially produce
+<code>mesos-master</code>.</p>
+<p>When building with Java on Windows, you must add the <a href="https://maven.apache.org/guides/getting-started/windows-prerequisites.html">Maven</a> build tool to
+your path. The <code>JAVA_HOME</code> environment variable must also be manually set.
+An installation of the Java SDK can be found form <a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html">Oracle</a>.</p>
+<p>As of this writing, Java 9 is not yet supported, but Java 8 has been tested.</p>
+<p>The Java build defaults to <code>OFF</code> because it is slow. To build the Java
+components on Windows, turn it <code>ON</code>:</p>
+<pre><code class="language-powershell">mkdir build; cd build
+$env:PATH += &quot;;C:\...\apache-maven-3.3.9\bin\&quot;
+$env:JAVA_HOME = &quot;C:\Program Files\Java\jdk1.8.0_144&quot;
+cmake .. -DENABLE_JAVA=ON -G &quot;Visual Studio 15 2017 Win64&quot; -T &quot;host=x64&quot;
+cmake --build . --target mesos-java
+</code></pre>
+<p>Note that the <code>mesos-java</code> library does not have to be manually built; as
+<code>libmesos</code> will link it when Java is enabled.</p>
+<p>Unfortunately, on Windows the <code>FindJNI</code> CMake module will populate <code>JAVA_JVM_LIBRARY</code> with
+the path to the static <code>jvm.lib</code>, but this variable must point to the shared
+library, <code>jvm.dll</code>, as it is loaded at runtime. Set it correctly like this:</p>
+<pre><code>$env:JAVA_JVM_LIBRARY = &quot;C:\Program Files\Java\jdk1.8.0_144\jre\bin\server\jvm.dll&quot;
+</code></pre>
+<p>The library may still fail to load at runtime with the following error:</p>
+<blockquote>
+<p>&quot;The specified module could not be found.&quot;</p>
+</blockquote>
+<p>If this is the case, and the path to <code>jvm.dll</code> is verified to be correct, then
+the error message actually indicates that the dependencies of <code>jvm.dll</code> could
+not be found. On Windows, the DLL search path includes the environment variable
+<code>PATH</code>, so add the <code>bin</code> folder which contains <code>server\jvm.dll</code> to <code>PATH</code>:</p>
+<pre><code>$env:PATH += &quot;;C:\Program Files\Java\jdk1.8.0_144\jre\bin&quot;
+</code></pre>
+<h3 id="building-with-openssl"><a class="header" href="#building-with-openssl">Building with OpenSSL</a></h3>
+<p>When building with OpenSSL on Windows, you must build or install a distribution
+of OpenSSL for Windows. A commonly chosen distribution is
+<a href="https://slproweb.com/products/Win32OpenSSL.html">Shining Light Productions' OpenSSL</a>.</p>
+<p>As of this writing, OpenSSL 1.1.x is supported.</p>
+<p>Use <code>-DENABLE_SSL=ON</code> to build with OpenSSL.</p>
+<p>Note that it will link to OpenSSL dynamically, so if the built executables are
+deployed elsewhere, that machine also needs OpenSSL installed.</p>
+<p>Beware that the OpenSSL installation, nor Mesos itself, comes with a certificate
+bundle, and so it is likely that certificate verification will fail.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="cmake.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="configuration.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="cmake.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="configuration.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

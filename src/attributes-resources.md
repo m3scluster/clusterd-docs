@@ -1,8 +1,3 @@
----
-title: Apache Mesos - Attributes and Resources
-layout: documentation
----
-
 # Mesos Attributes & Resources
 
 Mesos has two basic methods to describe the agents that comprise a cluster. One of these is managed by the Mesos master, the other is simply passed onwards to the frameworks using the cluster.

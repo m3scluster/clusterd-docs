@@ -1,0 +1,490 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Building for basic instructions on compiling and installing Mesos. - Apache Mesos</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="favicon.png">
+        
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        
+        <link rel="stylesheet" href="css/print.css" media="print">
+        
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">Fundamentals</li><li class="chapter-item expanded "><a href="architecture.html"><strong aria-hidden="true">1.</strong> Mesos Architecture providing an overview of Mesos concepts</a></li><li class="chapter-item expanded "><a href="presentations.html"><strong aria-hidden="true">2.</strong> Video and Slides of Mesos Presentations</a></li><li class="chapter-item expanded "><a href="versioning.html"><strong aria-hidden="true">3.</strong> Mesos Release and Support Policy</a></li><li class="chapter-item expanded affix "><li class="part-title">Build / Installation</li><li class="chapter-item expanded "><a href="building.html" class="active"><strong aria-hidden="true">4.</strong> Building for basic instructions on compiling and installing Mesos.</a></li><li class="chapter-item expanded "><a href="binary-packages.html"><strong aria-hidden="true">5.</strong> Binary Packages for how to use Mesos binary packages.</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">Apache Mesos</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="building"><a class="header" href="#building">Building</a></h1>
+<h2 id="downloading-mesos"><a class="header" href="#downloading-mesos">Downloading Mesos</a></h2>
+<p>There are different ways you can get Mesos:</p>
+<p>1. Download the latest stable release from <a href="http://mesos.apache.org/downloads/">Apache</a> (<em><strong>Recommended</strong></em>)</p>
+<pre><code>$ wget https://downloads.apache.org/mesos/1.11.0/mesos-1.11.0.tar.gz
+$ tar -zxf mesos-1.11.0.tar.gz
+</code></pre>
+<p>2. Clone the Mesos git <a href="https://gitbox.apache.org/repos/asf/mesos.git">repository</a> (<em><strong>Advanced Users Only</strong></em>)</p>
+<pre><code>$ git clone https://gitbox.apache.org/repos/asf/mesos.git
+</code></pre>
+<p><em>NOTE: If you have problems running the above commands, you may need to first run through the <em><strong>System Requirements</strong></em> section below to install the <code>wget</code>, <code>tar</code>, and <code>git</code> utilities for your system.</em></p>
+<h2 id="system-requirements"><a class="header" href="#system-requirements">System Requirements</a></h2>
+<p>Mesos runs on Linux (64 Bit) and Mac OS X (64 Bit). To build Mesos from source, GCC 4.8.1+ or Clang 3.5+ is required.</p>
+<p>On Linux, a kernel version &gt;= 2.6.28 is required at both build time and run time. For full support of process isolation under Linux a recent kernel &gt;= 3.10 is required.</p>
+<p>The Mesos agent also runs on Windows. To build Mesos from source, follow the instructions in the <a href="windows.html">Windows</a> section.</p>
+<p>Make sure your hostname is resolvable via DNS or via <code>/etc/hosts</code> to allow full support of Docker's host-networking capabilities, needed for some of the Mesos tests. When in doubt, please validate that <code>/etc/hosts</code> contains your hostname.</p>
+<h3 id="ubuntu-1404"><a class="header" href="#ubuntu-1404">Ubuntu 14.04</a></h3>
+<p>Following are the instructions for stock Ubuntu 14.04. If you are using a different OS, please install the packages accordingly.</p>
+<pre><code># Update the packages.
+$ sudo apt-get update
+
+# Install a few utility tools.
+$ sudo apt-get install -y tar wget git
+
+# Install the latest OpenJDK.
+$ sudo apt-get install -y openjdk-7-jdk
+
+# Install autotools (Only necessary if building from git repository).
+$ sudo apt-get install -y autoconf libtool
+
+# Install other Mesos dependencies.
+$ sudo apt-get -y install build-essential python-dev python-six python-virtualenv libcurl4-nss-dev libsasl2-dev libsasl2-modules maven libapr1-dev libsvn-dev
+</code></pre>
+<h3 id="ubuntu-1604"><a class="header" href="#ubuntu-1604">Ubuntu 16.04</a></h3>
+<p>Following are the instructions for stock Ubuntu 16.04. If you are using a different OS, please install the packages accordingly.</p>
+<pre><code># Update the packages.
+$ sudo apt-get update
+
+# Install a few utility tools.
+$ sudo apt-get install -y tar wget git
+
+# Install the latest OpenJDK.
+$ sudo apt-get install -y openjdk-8-jdk
+
+# Install autotools (Only necessary if building from git repository).
+$ sudo apt-get install -y autoconf libtool
+
+# Install other Mesos dependencies.
+$ sudo apt-get -y install build-essential python-dev python-six python-virtualenv libcurl4-nss-dev libsasl2-dev libsasl2-modules maven libapr1-dev libsvn-dev zlib1g-dev iputils-ping
+</code></pre>
+<h3 id="mac-os-x-1011-el-capitan-macos-1012-sierra"><a class="header" href="#mac-os-x-1011-el-capitan-macos-1012-sierra">Mac OS X 10.11 (El Capitan), macOS 10.12 (Sierra)</a></h3>
+<p>Following are the instructions for Mac OS X El Capitan. When building Mesos with the Apple-provided toolchain, the Command Line Tools from XCode &gt;= 8.0 are required; XCode 8 requires Mac OS X 10.11.5 or newer.</p>
+<pre><code># Install Python 3: https://www.python.org/downloads/
+
+# Install Command Line Tools. The Command Line Tools from XCode &gt;= 8.0 are required.
+$ xcode-select --install
+
+# Install Homebrew.
+$ ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;
+
+# Install Java.
+$ brew install Caskroom/cask/java
+
+# Install libraries.
+$ brew install wget git autoconf automake libtool subversion maven xz
+
+# Install Python dependencies.
+$ sudo easy_install pip
+$ pip install virtualenv
+</code></pre>
+<p>When compiling on macOS 10.12, the following is needed:</p>
+<pre><code># There is an incompatiblity with the system installed svn and apr headers.
+# We need the svn and apr headers from a brew installation of subversion.
+# You may need to unlink the existing version of subversion installed via
+# brew in order to configure correctly.
+$ brew unlink subversion # (If already installed)
+$ brew install subversion
+
+# When configuring, the svn and apr headers from brew will be automatically
+# detected, so no need to explicitly point to them.
+# If the build fails due to compiler warnings, `--disable-werror` can be passed
+# to configure to not treat warnings as errors.
+$ ../configure
+
+# Lastly, you may encounter the following error when the libprocess tests run:
+$ ./libprocess-tests
+Failed to obtain the IP address for '&lt;hostname&gt;'; the DNS service may not be able to resolve it: nodename nor servname provided, or not known
+
+# If so, turn on 'Remote Login' within System Preferences &gt; Sharing to resolve the issue.
+</code></pre>
+<p><em>NOTE: When upgrading from Yosemite to El Capitan, make sure to rerun <code>xcode-select --install</code> after the upgrade.</em></p>
+<h3 id="centos-66"><a class="header" href="#centos-66">CentOS 6.6</a></h3>
+<p>Following are the instructions for stock CentOS 6.6. If you are using a different OS, please install the packages accordingly.</p>
+<pre><code># Install a recent kernel for full support of process isolation.
+$ sudo rpm --import https://www.elrepo.org/RPM-GPG-KEY-elrepo.org
+$ sudo rpm -Uvh http://www.elrepo.org/elrepo-release-6-6.el6.elrepo.noarch.rpm
+$ sudo yum --enablerepo=elrepo-kernel install -y kernel-lt
+
+# Make the just installed kernel the one booted by default, and reboot.
+$ sudo sed -i 's/default=1/default=0/g' /boot/grub/grub.conf
+$ sudo reboot
+
+# Install a few utility tools. This also forces an update of `nss`,
+# which is necessary for the Java bindings to build properly.
+$ sudo yum install -y tar wget git which nss
+
+# 'Mesos &gt; 0.21.0' requires a C++ compiler with full C++11 support,
+# (e.g. GCC &gt; 4.8) which is available via 'devtoolset-2'.
+# Fetch the Scientific Linux CERN devtoolset repo file.
+$ sudo wget -O /etc/yum.repos.d/slc6-devtoolset.repo http://linuxsoft.cern.ch/cern/devtoolset/slc6-devtoolset.repo
+
+# Import the CERN GPG key.
+$ sudo rpm --import http://linuxsoft.cern.ch/cern/centos/7/os/x86_64/RPM-GPG-KEY-cern
+
+# Fetch the Apache Maven repo file.
+$ sudo wget http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo -O /etc/yum.repos.d/epel-apache-maven.repo
+
+# 'Mesos &gt; 0.21.0' requires 'subversion &gt; 1.8' devel package, which is
+# not available in the default repositories.
+# Create a WANdisco SVN repo file to install the correct version:
+$ sudo bash -c 'cat &gt; /etc/yum.repos.d/wandisco-svn.repo &lt;&lt;EOF
+[WANdiscoSVN]
+name=WANdisco SVN Repo 1.8
+enabled=1
+baseurl=http://opensource.wandisco.com/centos/6/svn-1.8/RPMS/$basearch/
+gpgcheck=1
+gpgkey=http://opensource.wandisco.com/RPM-GPG-KEY-WANdisco
+EOF'
+
+# Install essential development tools.
+$ sudo yum groupinstall -y &quot;Development Tools&quot;
+
+# Install 'devtoolset-2-toolchain' which includes GCC 4.8.2 and related packages.
+# Installing 'devtoolset-3' might be a better choice since `perf` might
+# conflict with the version of `elfutils` included in devtoolset-2.
+$ sudo yum install -y devtoolset-2-toolchain
+
+# Install other Mesos dependencies.
+$ sudo yum install -y apache-maven python-devel python-six python-virtualenv java-1.7.0-openjdk-devel zlib-devel libcurl-devel openssl-devel cyrus-sasl-devel cyrus-sasl-md5 apr-devel subversion-devel apr-util-devel
+
+# Enter a shell with 'devtoolset-2' enabled.
+$ scl enable devtoolset-2 bash
+$ g++ --version  # Make sure you've got GCC &gt; 4.8!
+
+# Process isolation is using cgroups that are managed by 'cgconfig'.
+# The 'cgconfig' service is not started by default on CentOS 6.6.
+# Also the default configuration does not attach the 'perf_event' subsystem.
+# To do this, add 'perf_event = /cgroup/perf_event;' to the entries in '/etc/cgconfig.conf'.
+$ sudo yum install -y libcgroup
+$ sudo service cgconfig start
+</code></pre>
+<h3 id="centos-71"><a class="header" href="#centos-71">CentOS 7.1</a></h3>
+<p>Following are the instructions for stock CentOS 7.1. If you are using a different OS, please install the packages accordingly.</p>
+<pre><code># Install a few utility tools
+$ sudo yum install -y tar wget git
+
+# Fetch the Apache Maven repo file.
+$ sudo wget http://repos.fedorapeople.org/repos/dchen/apache-maven/epel-apache-maven.repo -O /etc/yum.repos.d/epel-apache-maven.repo
+
+# Install the EPEL repo so that we can pull in 'libserf-1' as part of our
+# subversion install below.
+$ sudo yum install -y epel-release
+
+# 'Mesos &gt; 0.21.0' requires 'subversion &gt; 1.8' devel package,
+# which is not available in the default repositories.
+# Create a WANdisco SVN repo file to install the correct version:
+$ sudo bash -c 'cat &gt; /etc/yum.repos.d/wandisco-svn.repo &lt;&lt;EOF
+[WANdiscoSVN]
+name=WANdisco SVN Repo 1.9
+enabled=1
+baseurl=http://opensource.wandisco.com/centos/7/svn-1.9/RPMS/\$basearch/
+gpgcheck=1
+gpgkey=http://opensource.wandisco.com/RPM-GPG-KEY-WANdisco
+EOF'
+
+# Parts of Mesos require systemd in order to operate. However, Mesos
+# only supports versions of systemd that contain the 'Delegate' flag.
+# This flag was first introduced in 'systemd version 218', which is
+# lower than the default version installed by centos. Luckily, centos
+# 7.1 has a patched 'systemd &lt; 218' that contains the 'Delegate' flag.
+# Explicity update systemd to this patched version.
+$ sudo yum update systemd
+
+# Install essential development tools.
+$ sudo yum groupinstall -y &quot;Development Tools&quot;
+
+# Install other Mesos dependencies.
+$ sudo yum install -y apache-maven python-devel python-six python-virtualenv java-1.8.0-openjdk-devel zlib-devel libcurl-devel openssl-devel cyrus-sasl-devel cyrus-sasl-md5 apr-devel subversion-devel apr-util-devel
+</code></pre>
+<h3 id="windows"><a class="header" href="#windows">Windows</a></h3>
+<p>Follow the instructions in the <a href="windows.html">Windows</a> section.</p>
+<h2 id="building-mesos-posix"><a class="header" href="#building-mesos-posix">Building Mesos (Posix)</a></h2>
+<pre><code># Change working directory.
+$ cd mesos
+
+# Bootstrap (Only required if building from git repository).
+$ ./bootstrap
+
+# Configure and build.
+$ mkdir build
+$ cd build
+$ ../configure
+$ make
+</code></pre>
+<p>In order to speed up the build and reduce verbosity of the logs, you can append <code>-j &lt;number of cores&gt; V=0</code> to <code>make</code>.</p>
+<pre><code># Run test suite.
+$ make check
+
+# Install (Optional).
+$ make install
+</code></pre>
+<h2 id="examples"><a class="header" href="#examples">Examples</a></h2>
+<p>Mesos comes bundled with example frameworks written in C++, Java and Python.
+The framework binaries will only be available after running <code>make check</code>, as
+described in the <em><strong>Building Mesos</strong></em> section above.</p>
+<pre><code># Change into build directory.
+$ cd build
+
+# Start Mesos master (ensure work directory exists and has proper permissions).
+$ ./bin/mesos-master.sh --ip=127.0.0.1 --work_dir=/var/lib/mesos
+
+# Start Mesos agent (ensure work directory exists and has proper permissions).
+$ ./bin/mesos-agent.sh --master=127.0.0.1:5050 --work_dir=/var/lib/mesos
+
+# Visit the Mesos web page.
+$ http://127.0.0.1:5050
+
+# Run C++ framework (exits after successfully running some tasks).
+$ ./src/test-framework --master=127.0.0.1:5050
+
+# Run Java framework (exits after successfully running some tasks).
+$ ./src/examples/java/test-framework 127.0.0.1:5050
+
+# Run Python framework (exits after successfully running some tasks).
+$ ./src/examples/python/test-framework 127.0.0.1:5050
+</code></pre>
+<p><em>Note: These examples assume you are running Mesos on your local machine.
+Following them will not allow you to access the Mesos web page in a production
+environment (e.g. on AWS). For that you will need to specify the actual IP of
+your host when launching the Mesos master and ensure your firewall settings
+allow access to port 5050 from the outside world.</em></p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="versioning.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="binary-packages.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="versioning.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="binary-packages.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+        <!-- Livereload script (if served using the cli tool) -->
+        <script type="text/javascript">
+            var socket = new WebSocket("ws://localhost:3000/__livereload");
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

@@ -165,10 +165,7 @@
 
                 <div id="content" class="content">
                     <main>
-                        <hr />
-<h2>title: Apache Mesos - Architecture
-layout: documentation</h2>
-<h1 id="mesos-architecture"><a class="header" href="#mesos-architecture">Mesos Architecture</a></h1>
+                        <h1 id="mesos-architecture"><a class="header" href="#mesos-architecture">Mesos Architecture</a></h1>
 <p><img src="images/architecture3.jpg" alt="Mesos Architecture" /></p>
 <p>The above figure shows the main components of Mesos.  Mesos consists of a <em>master</em> daemon that manages <em>agent</em> daemons running on each cluster node, and <em>Mesos frameworks</em> that run <em>tasks</em> on these agents.</p>
 <p>The master enables fine-grained sharing of resources (CPU, RAM, ...) across
@@ -190,9 +187,6 @@ still receive offers with slave ID, whereas frameworks using the v1 HTTP API rec
 <p>In addition, this resource offer process repeats when tasks finish and new resources become free.</p>
 <p>While the thin interface provided by Mesos allows it to scale and allows the frameworks to evolve independently, one question remains: how can the constraints of a framework be satisfied without Mesos knowing about these constraints? For example, how can a framework achieve data locality without Mesos knowing which nodes store the data required by the framework? Mesos answers these questions by simply giving frameworks the ability to <strong>reject</strong> offers. A framework will reject the offers that do not satisfy its constraints and accept the ones that do.  In particular, we have found that a simple policy called delay scheduling, in which frameworks wait for a limited time to acquire nodes storing the input data, yields nearly optimal data locality.</p>
 <p>You can also read much more about the Mesos architecture in this <a href="https://www.usenix.org/conference/nsdi11/mesos-platform-fine-grained-resource-sharing-data-center">technical paper</a>.</p>
-<hr />
-<h2>title: Apache Mesos - Video and Slides of Mesos Presentations
-layout: documentation</h2>
 <h1 id="video-and-slides-of-mesos-presentations"><a class="header" href="#video-and-slides-of-mesos-presentations">Video and Slides of Mesos Presentations</a></h1>
 <p><em>(Listed in reverse chronological order)</em></p>
 <h2 id="mesoscon-north-america-2018"><a class="header" href="#mesoscon-north-america-2018">MesosCon North America 2018</a></h2>
@@ -300,9 +294,6 @@ Packt (November 2017)</p>
 <h2 id="docker-apache-mesos--dcos-run-and-manage-cloud-datacenter-a-hrefhttpswwwpacktpubcomnetworking-and-serversdocker-apache-mesos-dcos-run-and-manage-cloud-datacenter-videovideoa"><a class="header" href="#docker-apache-mesos--dcos-run-and-manage-cloud-datacenter-a-hrefhttpswwwpacktpubcomnetworking-and-serversdocker-apache-mesos-dcos-run-and-manage-cloud-datacenter-videovideoa">Docker, Apache Mesos &amp; DCOS: Run and manage cloud datacenter (<a href="https://www.packtpub.com/networking-and-servers/docker-apache-mesos-dcos-run-and-manage-cloud-datacenter-video">Video</a>)</a></h2>
 <p>Manuj Aggarwal
 Packt (January 2018) </p>
-<hr />
-<h2>title: Apache Mesos - Release and Support Policy
-layout: documentation</h2>
 <h1 id="mesos-release-and-support-policy"><a class="header" href="#mesos-release-and-support-policy">Mesos Release and Support policy</a></h1>
 <p>The Mesos versioning and release policy gives operators and developers clear guidelines on:</p>
 <ul>
@@ -698,6 +689,21 @@ setup instructions refer to the <a href="http://mesos.apache.org/documentation/l
 
         </div>
 
+        
+        <!-- Livereload script (if served using the cli tool) -->
+        <script type="text/javascript">
+            var socket = new WebSocket("ws://localhost:3000/__livereload");
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
         
 
         

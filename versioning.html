@@ -163,10 +163,7 @@
 
                 <div id="content" class="content">
                     <main>
-                        <hr />
-<h2>title: Apache Mesos - Release and Support Policy
-layout: documentation</h2>
-<h1 id="mesos-release-and-support-policy"><a class="header" href="#mesos-release-and-support-policy">Mesos Release and Support policy</a></h1>
+                        <h1 id="mesos-release-and-support-policy"><a class="header" href="#mesos-release-and-support-policy">Mesos Release and Support policy</a></h1>
 <p>The Mesos versioning and release policy gives operators and developers clear guidelines on:</p>
 <ul>
 <li>Making modifications to the existing APIs without affecting backward compatibility.</li>
@@ -306,6 +303,21 @@ option java_outer_classname = &quot;Protos&quot;;
 
         </div>
 
+        
+        <!-- Livereload script (if served using the cli tool) -->
+        <script type="text/javascript">
+            var socket = new WebSocket("ws://localhost:3000/__livereload");
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
         
 
         

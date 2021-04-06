@@ -163,10 +163,7 @@
 
                 <div id="content" class="content">
                     <main>
-                        <hr />
-<h2>title: Apache Mesos - Video and Slides of Mesos Presentations
-layout: documentation</h2>
-<h1 id="video-and-slides-of-mesos-presentations"><a class="header" href="#video-and-slides-of-mesos-presentations">Video and Slides of Mesos Presentations</a></h1>
+                        <h1 id="video-and-slides-of-mesos-presentations"><a class="header" href="#video-and-slides-of-mesos-presentations">Video and Slides of Mesos Presentations</a></h1>
 <p><em>(Listed in reverse chronological order)</em></p>
 <h2 id="mesoscon-north-america-2018"><a class="header" href="#mesoscon-north-america-2018">MesosCon North America 2018</a></h2>
 <p><a href="https://www.youtube.com/playlist?list=PL-cRvJ6sAbfjvQCLT3ktrpnVwrJKTodfm">Video playlist</a> + <a href="https://mesoscon18.sched.com/">Slides</a></p>
@@ -311,6 +308,21 @@ Packt (January 2018) </p>
 
         </div>
 
+        
+        <!-- Livereload script (if served using the cli tool) -->
+        <script type="text/javascript">
+            var socket = new WebSocket("ws://localhost:3000/__livereload");
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
         
 
         

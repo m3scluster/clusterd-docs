@@ -163,10 +163,7 @@
 
                 <div id="content" class="content">
                     <main>
-                        <hr />
-<h2>title: Apache Mesos - Architecture
-layout: documentation</h2>
-<h1 id="mesos-architecture"><a class="header" href="#mesos-architecture">Mesos Architecture</a></h1>
+                        <h1 id="mesos-architecture"><a class="header" href="#mesos-architecture">Mesos Architecture</a></h1>
 <p><img src="images/architecture3.jpg" alt="Mesos Architecture" /></p>
 <p>The above figure shows the main components of Mesos.  Mesos consists of a <em>master</em> daemon that manages <em>agent</em> daemons running on each cluster node, and <em>Mesos frameworks</em> that run <em>tasks</em> on these agents.</p>
 <p>The master enables fine-grained sharing of resources (CPU, RAM, ...) across
@@ -218,6 +215,21 @@ still receive offers with slave ID, whereas frameworks using the v1 HTTP API rec
 
         </div>
 
+        
+        <!-- Livereload script (if served using the cli tool) -->
+        <script type="text/javascript">
+            var socket = new WebSocket("ws://localhost:3000/__livereload");
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
         
 
         

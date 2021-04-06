@@ -1,0 +1,449 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>SSL - Apache Mesos</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="favicon.png">
+        
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        
+        <link rel="stylesheet" href="css/print.css" media="print">
+        
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">Fundamentals</li><li class="chapter-item expanded "><a href="architecture.html"><strong aria-hidden="true">1.</strong> Mesos Architecture providing an overview of Mesos concepts</a></li><li class="chapter-item expanded "><a href="presentations.html"><strong aria-hidden="true">2.</strong> Video and Slides of Mesos Presentations</a></li><li class="chapter-item expanded "><a href="versioning.html"><strong aria-hidden="true">3.</strong> Mesos Release and Support Policy</a></li><li class="chapter-item expanded affix "><li class="part-title">Build / Installation</li><li class="chapter-item expanded "><a href="building.html"><strong aria-hidden="true">4.</strong> Building for basic instructions on compiling and installing Mesos.</a></li><li class="chapter-item expanded "><a href="binary-packages.html"><strong aria-hidden="true">5.</strong> Binary Packages for how to use Mesos binary packages.</a></li><li class="chapter-item expanded "><a href="configuration.html"><strong aria-hidden="true">6.</strong> Configuration for build configuration options.</a></li><li class="chapter-item expanded "><a href="cmake.html"><strong aria-hidden="true">7.</strong> CMake for details about using the new CMake build system.</a></li><li class="chapter-item expanded "><a href="windows.html"><strong aria-hidden="true">8.</strong> Windows Support for the state of Windows support in Mesos.</a></li><li class="chapter-item expanded affix "><li class="part-title">Administration</li><li class="chapter-item expanded "><a href="configuration.html"><strong aria-hidden="true">9.</strong> Configuration for command-line arguments.</a></li><li class="chapter-item expanded "><a href="high-availability.html"><strong aria-hidden="true">10.</strong> High Availability Master Setup</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="replicated-log-internals.html"><strong aria-hidden="true">10.1.</strong> Replicated Log for information on the Mesos replicated log.</a></li></ol></li><li class="chapter-item expanded "><a href="agent-recovery.html"><strong aria-hidden="true">11.</strong> Fault Tolerant Agent Setup</a></li><li class="chapter-item expanded "><a href="framework-rate-limiting.html"><strong aria-hidden="true">12.</strong> Framework Rate Limiting</a></li><li class="chapter-item expanded "><a href="maintenance.html"><strong aria-hidden="true">13.</strong> Maintenance for performing maintenance on a Mesos cluster.</a></li><li class="chapter-item expanded "><a href="upgrades.html"><strong aria-hidden="true">14.</strong> Upgrades for upgrading a Mesos cluster.</a></li><li class="chapter-item expanded "><a href="downgrades.html"><strong aria-hidden="true">15.</strong> Downgrades for downgrading a Mesos cluster.</a></li><li class="chapter-item expanded "><a href="logging.html"><strong aria-hidden="true">16.</strong> Logging</a></li><li class="chapter-item expanded "><a href="monitoring.html"><strong aria-hidden="true">17.</strong> Monitoring / Metrics</a></li><li class="chapter-item expanded "><a href="cli.html"><strong aria-hidden="true">18.</strong> Debugging using the new CLI</a></li><li class="chapter-item expanded "><a href="operational-guide.html"><strong aria-hidden="true">19.</strong> Operational Guide</a></li><li class="chapter-item expanded "><a href="fetcher.html"><strong aria-hidden="true">20.</strong> Fetcher Cache Configuration</a></li><li class="chapter-item expanded "><a href="fault-domains.html"><strong aria-hidden="true">21.</strong> Fault Domains</a></li><li class="chapter-item expanded "><a href="performance-profiling.html"><strong aria-hidden="true">22.</strong> Performance Profiling for debugging performance issues in Mesos.</a></li><li class="chapter-item expanded "><a href="memory-profiling.html"><strong aria-hidden="true">23.</strong> Memory Profiling for debugging potential memory leaks in Mesos.</a></li><li class="chapter-item expanded affix "><li class="part-title">Resource Management</li><li class="chapter-item expanded "><a href="attributes-resources.html"><strong aria-hidden="true">24.</strong> Attributes and Resources for how to describe the agents that comprise a cluster.</a></li><li class="chapter-item expanded "><a href="roles.html"><strong aria-hidden="true">25.</strong> Using Resource Roles</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="weights.html"><strong aria-hidden="true">25.1.</strong> Resource Role Weights for fair sharing.</a></li><li class="chapter-item expanded "><a href="quota.html"><strong aria-hidden="true">25.2.</strong> Resource Role Quota for how to configure Mesos to provide guaranteed resource allocations for use by a role.</a></li><li class="chapter-item expanded "><a href="reservation.html"><strong aria-hidden="true">25.3.</strong> Reservations for how operators and frameworks can reserve resources on individual agents for use by a role.</a></li><li class="chapter-item expanded "><a href="shared-resources.html"><strong aria-hidden="true">25.4.</strong> Shared Resources for how to share persistent volumes between tasks managed by different executors on the same agent.</a></li></ol></li><li class="chapter-item expanded "><a href="oversubscription.html"><strong aria-hidden="true">26.</strong> Oversubscription for how to configure Mesos to take advantage of unused resources to launch “best-effort” tasks.</a></li><li class="chapter-item expanded affix "><li class="part-title">Security</li><li class="chapter-item expanded "><a href="authentication.html"><strong aria-hidden="true">27.</strong> Authentication</a></li><li class="chapter-item expanded "><a href="authorization.html"><strong aria-hidden="true">28.</strong> Authorization</a></li><li class="chapter-item expanded "><a href="ssl.html" class="active"><strong aria-hidden="true">29.</strong> SSL</a></li><li class="chapter-item expanded "><a href="secrets.html"><strong aria-hidden="true">30.</strong> Secrets for managing secrets within Mesos.</a></li><li class="chapter-item expanded affix "><li class="part-title">Containerization</li><li class="chapter-item expanded "><a href="containerizers.html"><strong aria-hidden="true">31.</strong> Containerizer Overview</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="containerizer-internals.html"><strong aria-hidden="true">31.1.</strong> Containerizer Internals for implementation details of containerizers.</a></li><li class="chapter-item expanded "><a href="docker-containerizer.html"><strong aria-hidden="true">31.2.</strong> Docker Containerizer for launching a Docker image as a Task, or as an Executor.</a></li><li class="chapter-item expanded "><a href="mesos-containerizer.html"><strong aria-hidden="true">31.3.</strong> Mesos Containerizer default containerizer, supports both Linux and POSIX systems.</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="container-image.html"><strong aria-hidden="true">31.3.1.</strong> Container Images for supporting container images in Mesos containerizer.</a></li><li class="chapter-item expanded "><a href="isolators/docker-volume.html"><strong aria-hidden="true">31.3.2.</strong> Docker Volume Support</a></li><li class="chapter-item expanded "><a href="gpu-support.html"><strong aria-hidden="true">31.3.3.</strong> Nvidia GPU Support for how to run Mesos with Nvidia GPU support.</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="sandbox.html"><strong aria-hidden="true">32.</strong> Container Sandboxes</a></li><li class="chapter-item expanded "><a href="container-volume.html"><strong aria-hidden="true">33.</strong> Container Volumes</a></li><li class="chapter-item expanded "><a href="nested-container-and-task-group.html"><strong aria-hidden="true">34.</strong> Nested Container and Task Group (Pod)</a></li><li class="chapter-item expanded "><a href="standalone-containers.html"><strong aria-hidden="true">35.</strong> Standalone Containers</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">Apache Mesos</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                        <a href="https://github.com/AVENTER-UG/mesos-docs/" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <hr />
+<h2>title: Apache Mesos - SSL in Mesos
+layout: documentation</h2>
+<h1 id="ssl-in-mesos"><a class="header" href="#ssl-in-mesos">SSL in Mesos</a></h1>
+<p>By default, all the messages that flow through the Mesos cluster are
+unencrypted, making it possible for anyone with access to the cluster to
+intercept and potentially control arbitrary tasks.</p>
+<p>SSL/TLS support was added to libprocess in Mesos 0.23.0, which encrypts the
+data that Mesos uses for network communication between Mesos components.
+Additionally, HTTPS support was added to the Mesos WebUI.</p>
+<h1 id="build-configuration"><a class="header" href="#build-configuration">Build Configuration</a></h1>
+<p>There are currently two implementations of the
+<a href="https://github.com/apache/mesos/blob/master/3rdparty/libprocess/include/process/socket.hpp">libprocess socket interface</a>
+that support SSL.</p>
+<p>The first implementation, added in Mesos 0.23.0, uses
+<a href="https://github.com/libevent/libevent">libevent</a>.
+Specifically it relies on the <code>libevent-openssl</code> library that wraps <code>openssl</code>.</p>
+<p>The second implementation, added in Mesos 1.10.0, is a generic socket
+wrapper which only relies on the OpenSSL (1.1+) library.</p>
+<p>Before building Mesos from source, assuming you have installed the
+required <a href="#Dependencies">Dependencies</a>, you can modify your configure line
+to enable SSL as follows:</p>
+<pre><code>../configure --enable-ssl
+# Or:
+../configure --enable-libevent --enable-ssl
+</code></pre>
+<h1 id="runtime-configuration"><a class="header" href="#runtime-configuration">Runtime Configuration</a></h1>
+<p>TLS support in Mesos can be configured with different levels of security. This section aims to help
+Mesos operators to better understand the trade-offs involved in them.</p>
+<p>On a high level, one can imagine to choose between three available layers of security, each
+providing additional security guarantees but also increasing the deployment complexity.</p>
+<ol>
+<li>
+<p><code>LIBPROCESS_SSL_ENABLED=true</code>. This provides external clients (e.g. curl) with the ability to
+connect to Mesos HTTP endpoints securely via TLS, verifying that the server certificate is valid
+and trusted.</p>
+</li>
+<li>
+<p><code>LIBPROCESS_SSL_VERIFY_SERVER_CERT=true</code>. In addition to the above, this ensures that Mesos components
+themselves are verifying the presence of valid and trusted server certificates when making
+outgoing connections. This prevents man-in-the-middle attacks on communications between Mesos
+components, and on communications between a Mesos component and an external server.</p>
+<p><strong>WARNING:</strong> This setting only makes sense if <code>LIBPROCESS_SSL_ENABLE_DOWNGRADE</code> is set
+to <code>false</code>, otherwise a malicious actor can simply bypass certificate verification by
+downgrading to a non-TLS connection.</p>
+</li>
+<li>
+<p><code>LIBPROCESS_SSL_REQUIRE_CLIENT_CERT=true</code>. In addition to the above, this enforces the use of TLS
+client certificates on all connections to any Mesos component. This ensures that only trusted
+clients can connect to any Mesos component, preventing reception of forged or malformed messages.</p>
+<p>This implies that all schedulers or other clients (including the web browsers used by human
+operators) that are supposed to connect to any endpoint of a Mesos component must be provided
+with valid client certificates.</p>
+<p><strong>WARNING:</strong> As above, this setting only makes sense if <code>LIBPROCESS_SSL_ENABLE_DOWNGRADE</code> is
+set to <code>false</code>.</p>
+</li>
+</ol>
+<p>For secure usage, it is recommended to set <code>LIBPROCESS_SSL_ENABLED=true</code>,
+<code>LIBPROCESS_SSL_VERIFY_SERVER_CERT=true</code>, <code>LIBPROCESS_SSL_HOSTNAME_VALIDATION_SCHEME=openssl</code>
+and <code>LIBPROCESS_SSL_ENABLE_DOWNGRADE=false</code>. This provides a good trade-off
+between security and usability.</p>
+<p>It is not recommended in general to expose Mesos components to the public internet, but in cases
+where they are the use of <code>LIBPROCESS_SSL_REQUIRE_CLIENT_CERT</code> is strongly suggested.</p>
+<h1 id="environment-variables"><a class="header" href="#environment-variables">Environment Variables</a></h1>
+<p>Once you have successfully built and installed your new binaries, here are the environment variables that are applicable to the <code>Master</code>, <code>Agent</code>, <code>Framework Scheduler/Executor</code>, or any <code>libprocess process</code>:</p>
+<p><strong>NOTE:</strong> Prior to 1.0, the SSL related environment variables used to be prefixed by <code>SSL_</code>. However, we found that they may collide with other programs and lead to unexpected results (e.g., openssl, see <a href="https://issues.apache.org/jira/browse/MESOS-5863">MESOS-5863</a> for details). To be backward compatible, we accept environment variables prefixed by both <code>SSL_</code> or <code>LIBPROCESS_SSL_</code>. New users should use the <code>LIBPROCESS_SSL_</code> version.</p>
+<h4 id="libprocess_ssl_enabledfalse0true1-defaultfalse0"><a class="header" href="#libprocess_ssl_enabledfalse0true1-defaultfalse0">LIBPROCESS_SSL_ENABLED=(false|0,true|1) [default=false|0]</a></h4>
+<p>Turn on or off SSL. When it is turned off it is the equivalent of default Mesos with libevent as the backing for events. All sockets default to the non-SSL implementation. When it is turned on, the default configuration for sockets is SSL. This means outgoing connections will use SSL, and incoming connections will be expected to speak SSL as well. None of the below flags are relevant if SSL is not enabled.  If SSL is enabled, <code>LIBPROCESS_SSL_CERT_FILE</code> and <code>LIBPROCESS_SSL_KEY_FILE</code> must be supplied.</p>
+<h4 id="libprocess_ssl_support_downgradefalse0true1-defaultfalse0"><a class="header" href="#libprocess_ssl_support_downgradefalse0true1-defaultfalse0">LIBPROCESS_SSL_SUPPORT_DOWNGRADE=(false|0,true|1) [default=false|0]</a></h4>
+<p>Control whether or not non-SSL connections can be established. If this is enabled
+<strong>on the accepting side</strong>, then the accepting side will downgrade to a non-SSL socket if the
+connecting side is attempting to communicate via non-SSL. (e.g. HTTP).</p>
+<p>If this is enabled <strong>on the connecting side</strong>, then the connecting side will retry on a non-SSL
+socket if establishing the SSL connection failed.</p>
+<p>See <a href="#Upgrading">Upgrading Your Cluster</a> for more details.</p>
+<h4 id="libprocess_ssl_key_filepath-to-key"><a class="header" href="#libprocess_ssl_key_filepath-to-key">LIBPROCESS_SSL_KEY_FILE=(path to key)</a></h4>
+<p>The location of the private key used by OpenSSL.</p>
+<pre><code>// For example, to generate a key with OpenSSL:
+openssl genrsa -des3 -f4 -passout pass:some_password -out key.pem 4096
+</code></pre>
+<h4 id="libprocess_ssl_cert_filepath-to-certificate"><a class="header" href="#libprocess_ssl_cert_filepath-to-certificate">LIBPROCESS_SSL_CERT_FILE=(path to certificate)</a></h4>
+<p>The location of the certificate that will be presented.</p>
+<pre><code>// For example, to generate a root certificate with OpenSSL:
+// (assuming the signing key already exists in `key.pem`)
+openssl req -new -x509 -passin pass:some_password -days 365 -keyout key.pem -out cert.pem
+</code></pre>
+<h4 id="libprocess_ssl_verify_certfalse0true1-defaultfalse0"><a class="header" href="#libprocess_ssl_verify_certfalse0true1-defaultfalse0">LIBPROCESS_SSL_VERIFY_CERT=(false|0,true|1) [default=false|0]</a></h4>
+<p>This is a legacy alias for the <code>LIBPROCESS_SSL_VERIFY_SERVER_CERT</code> setting.</p>
+<h4 id="libprocess_ssl_verify_server_certfalse0true1-defaultfalse0"><a class="header" href="#libprocess_ssl_verify_server_certfalse0true1-defaultfalse0">LIBPROCESS_SSL_VERIFY_SERVER_CERT=(false|0,true|1) [default=false|0]</a></h4>
+<p>This setting only affects the behaviour of libprocess in TLS client mode.</p>
+<p>If this is true, a remote server is required to present a server certificate,
+and the presented server certificates will be verified. That means
+it will be checked that the certificate is cryptographically valid,
+was generated by a trusted CA, and contains the correct hostname.</p>
+<p>If this is false, a remote server is still required to present a server certificate (unless
+an anonymous cipher is used), but the presented server certificates will not be verified.</p>
+<p><strong>NOTE:</strong> When <code>LIBPROCESS_SSL_REQUIRE_CERT</code> is true, <code>LIBPROCESS_SSL_VERIFY_CERT</code> is automatically
+set to true for backwards compatibility reasons.</p>
+<h4 id="libprocess_ssl_require_certfalse0true1-defaultfalse0"><a class="header" href="#libprocess_ssl_require_certfalse0true1-defaultfalse0">LIBPROCESS_SSL_REQUIRE_CERT=(false|0,true|1) [default=false|0]</a></h4>
+<p>This is a legacy alias for the <code>LIBPROCESS_SSL_REQUIRE_CLIENT_CERT</code> setting.</p>
+<h4 id="libprocess_ssl_require_client_certfalse0true1-defaultfalse0"><a class="header" href="#libprocess_ssl_require_client_certfalse0true1-defaultfalse0">LIBPROCESS_SSL_REQUIRE_CLIENT_CERT=(false|0,true|1) [default=false|0]</a></h4>
+<p>This setting only affects the behaviour of libprocess in TLS server mode.</p>
+<p>If this is true, enforce that certificates must be presented by connecting clients. This means all
+connections (including external tooling trying to access HTTP endpoints, like web browsers etc.)
+must present valid certificates in order to establish a connection.</p>
+<p><strong>NOTE:</strong> The specifics of what it means for the certificate to &quot;contain the correct hostname&quot;
+depend on the selected value of <code>LIBPROCESS_SSL_HOSTNAME_VALIDATION_SCHEME</code>.</p>
+<p><strong>NOTE:</strong> If this is set to false, client certificates are not verified even if they are presented
+and <code>LIBPROCESS_SSL_VERIFY_CERT</code> is set to true.</p>
+<h4 id="libprocess_ssl_verify_depthn-default4"><a class="header" href="#libprocess_ssl_verify_depthn-default4">LIBPROCESS_SSL_VERIFY_DEPTH=(N) [default=4]</a></h4>
+<p>The maximum depth used to verify certificates. The default is 4. See the OpenSSL documentation or contact your system administrator to learn why you may want to change this.</p>
+<h4 id="libprocess_ssl_verify_ipaddfalse0true1-defaultfalse0"><a class="header" href="#libprocess_ssl_verify_ipaddfalse0true1-defaultfalse0">LIBPROCESS_SSL_VERIFY_IPADD=(false|0,true|1) [default=false|0]</a></h4>
+<p>Enable IP address verification in the certificate subject alternative name extension. When set
+to <code>true</code> the peer certificate verification will be able to use the IP address of a peer connection.</p>
+<p>The specifics on when a certificate containing an IP address will we accepted depend on the
+selected value of the <code>LIBPROCESS_SSL_HOSTNAME_VALIDATION_SCHEME</code>.</p>
+<h4 id="libprocess_ssl_ca_dirpath-to-ca-directory"><a class="header" href="#libprocess_ssl_ca_dirpath-to-ca-directory">LIBPROCESS_SSL_CA_DIR=(path to CA directory)</a></h4>
+<p>The directory used to find the certificate authority / authorities. You can specify <code>LIBPROCESS_SSL_CA_DIR</code> or <code>LIBPROCESS_SSL_CA_FILE</code> depending on how you want to restrict your certificate authorization.</p>
+<h4 id="libprocess_ssl_ca_filepath-to-ca-file"><a class="header" href="#libprocess_ssl_ca_filepath-to-ca-file">LIBPROCESS_SSL_CA_FILE=(path to CA file)</a></h4>
+<p>The file used to find the certificate authority. You can specify <code>LIBPROCESS_SSL_CA_DIR</code> or <code>LIBPROCESS_SSL_CA_FILE</code> depending on how you want to restrict your certificate authorization.</p>
+<h4 id="libprocess_ssl_ciphersaccepted-ciphers-separated-by--defaultaes128-shaaes256-sharc4-shadhe-rsa-aes128-shadhe-dss-aes128-shadhe-rsa-aes256-shadhe-dss-aes256-sha"><a class="header" href="#libprocess_ssl_ciphersaccepted-ciphers-separated-by--defaultaes128-shaaes256-sharc4-shadhe-rsa-aes128-shadhe-dss-aes128-shadhe-rsa-aes256-shadhe-dss-aes256-sha">LIBPROCESS_SSL_CIPHERS=(accepted ciphers separated by ':') [default=AES128-SHA:AES256-SHA:RC4-SHA:DHE-RSA-AES128-SHA:DHE-DSS-AES128-SHA:DHE-RSA-AES256-SHA:DHE-DSS-AES256-SHA]</a></h4>
+<p>A list of <code>:</code>-separated ciphers. Use these if you want to restrict or open up the accepted ciphers for OpenSSL. Read the OpenSSL documentation or contact your system administrators to see whether you want to override the default values.</p>
+<h4 id="libprocess_ssl_enable_ssl_v3false0true1-defaultfalse0"><a class="header" href="#libprocess_ssl_enable_ssl_v3false0true1-defaultfalse0">LIBPROCESS_SSL_ENABLE_SSL_V3=(false|0,true|1) [default=false|0]</a></h4>
+<h4 id="libprocess_ssl_enable_tls_v1_0false0true1-defaultfalse0"><a class="header" href="#libprocess_ssl_enable_tls_v1_0false0true1-defaultfalse0">LIBPROCESS_SSL_ENABLE_TLS_V1_0=(false|0,true|1) [default=false|0]</a></h4>
+<h4 id="libprocess_ssl_enable_tls_v1_1false0true1-defaultfalse0"><a class="header" href="#libprocess_ssl_enable_tls_v1_1false0true1-defaultfalse0">LIBPROCESS_SSL_ENABLE_TLS_V1_1=(false|0,true|1) [default=false|0]</a></h4>
+<h4 id="libprocess_ssl_enable_tls_v1_2false0true1-defaulttrue1"><a class="header" href="#libprocess_ssl_enable_tls_v1_2false0true1-defaulttrue1">LIBPROCESS_SSL_ENABLE_TLS_V1_2=(false|0,true|1) [default=true|1]</a></h4>
+<h4 id="libprocess_ssl_enable_tls_v1_3false0true1-defaultfalse0"><a class="header" href="#libprocess_ssl_enable_tls_v1_3false0true1-defaultfalse0">LIBPROCESS_SSL_ENABLE_TLS_V1_3=(false|0,true|1) [default=false|0]</a></h4>
+<p>The above switches enable / disable the specified protocols. By default only TLS V1.2 is enabled. SSL V2 is always disabled; there is no switch to enable it. The mentality here is to restrict security by default, and force users to open it up explicitly. Many older version of the protocols have known vulnerabilities, so only enable these if you fully understand the risks.
+TLS V1.3 is not supported yet and should not be enabled. <a href="https://issues.apache.org/jira/browse/MESOS-9730">MESOS-9730</a>.
+<em>SSLv2 is disabled completely because modern versions of OpenSSL disable it using multiple compile time configuration options.</em>
+#<a name="Dependencies"></a>Dependencies</p>
+<h4 id="libprocess_ssl_ecdh_curveautolist-of-curves-separated-by--defaultauto"><a class="header" href="#libprocess_ssl_ecdh_curveautolist-of-curves-separated-by--defaultauto">LIBPROCESS_SSL_ECDH_CURVE=(auto|list of curves separated by ':') [default=auto]</a></h4>
+<p>List of elliptic curves which should be used for ECDHE-based cipher suites, in preferred order. Available values depend on the OpenSSL version used. Default value <code>auto</code> allows OpenSSL to pick the curve automatically.
+OpenSSL versions prior to <code>1.0.2</code> allow for the use of only one curve; in those cases, <code>auto</code> defaults to <code>prime256v1</code>.</p>
+<h4 id="libprocess_ssl_hostname_validation_schemelegacyopenssl-defaultlegacy"><a class="header" href="#libprocess_ssl_hostname_validation_schemelegacyopenssl-defaultlegacy">LIBPROCESS_SSL_HOSTNAME_VALIDATION_SCHEME=(legacy|openssl) [default=legacy]</a></h4>
+<p>This flag is used to select the scheme by which the hostname validation check works.</p>
+<p>Since hostname validation is part of certificate verification, this flag has no
+effect unless one of <code>LIBPROCESS_SSL_VERIFY_SERVER_CERT</code> or <code>LIBPROCESS_SSL_REQUIRE_CLIENT_CERT</code>
+is set to true.</p>
+<p>Currently, it is possible to choose between two schemes:</p>
+<ul>
+<li>
+<p><code>openssl</code>:</p>
+<p>In client mode: Perform the hostname validation checks during the TLS handshake.
+If the client connects via hostname, accept the certificate if it contains
+the hostname as common name (CN) or as a subject alternative name (SAN).
+If the client connects via IP address and <code>LIBPROCESS_SSL_VERIFY_IPADD</code> is true,
+accept the certificate if it contains the IP as a subject alternative name.</p>
+<p><strong>NOTE:</strong> If the client connects via IP address and <code>LIBPROCESS_SSL_VERIFY_IPADD</code> is false,
+the connection attempt cannot succeed.</p>
+<p>In server mode: Do not perform any hostname validation checks.</p>
+<p>This setting requires OpenSSL &gt;= 1.0.2 to be used.</p>
+</li>
+<li>
+<p><code>legacy</code>:</p>
+<p>Use a custom hostname validation algorithm that is run after the connection is established,
+and immediately close the connection if it fails.</p>
+<p>In both client and server mode:
+Do a reverse DNS lookup on the peer IP. If <code>LIBPROCESS_SSL_VERIFY_IPADD</code> is set to <code>false</code>,
+accept the certificate if it contains the first result of that lookup as either the common name
+or as a subject alternative name. If <code>LIBPROCESS_SSL_VERIFY_IPADD</code> is set to <code>true</code>,
+additionally accept the certificate if it contains the peer IP as a subject alternative name.</p>
+</li>
+</ul>
+<p>It is suggested that operators choose the 'openssl' setting unless they have
+applications relying on the legacy behaviour of the 'libprocess' scheme. It is
+using standardized APIs (<code>X509_VERIFY_PARAM_check_{host,ip}</code>) provided by OpenSSL to
+make hostname validation more uniform across applications. It is also more secure,
+since attackers that are able to forge a DNS or rDNS result can launch a successful
+man-in-the-middle attack on the 'legacy' scheme.</p>
+<h3 id="libevent"><a class="header" href="#libevent">libevent</a></h3>
+<p>If building with <code>--enable-libevent</code>, we require the OpenSSL support from
+libevent. The suggested version of libevent is
+<a href="https://github.com/libevent/libevent/releases/tag/release-2.0.22-stable"><code>2.0.22-stable</code></a>.
+As new releases come out we will try to maintain compatibility.</p>
+<pre><code>// For example, on OSX:
+brew install libevent
+</code></pre>
+<h3 id="openssl"><a class="header" href="#openssl">OpenSSL</a></h3>
+<p>We require <a href="https://github.com/openssl/openssl">OpenSSL</a>.
+There are multiple branches of OpenSSL that are being maintained by the
+community. Since security requires being vigilant, we recommend reading
+the release notes for the current releases of OpenSSL and deciding on a
+version within your organization based on your security needs.</p>
+<p>When building with libevent, Mesos is not too deeply dependent on specific
+OpenSSL versions, so there is room for you to make security decisions as
+an organization. When building without libevent, OpenSSL 1.1+ is required,
+because Mesos makes use of APIs introduced in later versions of OpenSSL.</p>
+<p>Please ensure the <code>event2</code> (when building with libevent) and
+<code>openssl</code> headers are available for building Mesos.</p>
+<pre><code>// For example, on OSX:
+brew install openssl
+</code></pre>
+<h1 id="a-nameupgradingaupgrading-your-cluster"><a class="header" href="#a-nameupgradingaupgrading-your-cluster"><a name="Upgrading"></a>Upgrading Your Cluster</a></h1>
+<p><em>There is no SSL specific requirement for upgrading different components in a specific order.</em></p>
+<p>The recommended strategy is to restart all your components to enable SSL with downgrades support enabled. Once all components have SSL enabled, then do a second restart of all your components to disable downgrades. This strategy will allow each component to be restarted independently at your own convenience with no time restrictions. It will also allow you to try SSL in a subset of your cluster.</p>
+<p><strong>NOTE:</strong> While different components in your cluster are serving SSL vs non-SSL traffic, any relative links in the WebUI may be broken. Please see the <a href="#WebUI">WebUI</a> section for details. Here are sample commands for upgrading your cluster:</p>
+<pre><code>// Restart each component with downgrade support (master, agent, framework):
+LIBPROCESS_SSL_ENABLED=true LIBPROCESS_SSL_SUPPORT_DOWNGRADE=true LIBPROCESS_SSL_KEY_FILE=&lt;path-to-your-private-key&gt; LIBPROCESS_SSL_CERT_FILE=&lt;path-to-your-certificate&gt; &lt;Any other LIBPROCESS_SSL_* environment variables you may choose&gt; &lt;your-component (e.g. bin/master.sh)&gt; &lt;your-flags&gt;
+
+// Restart each component WITHOUT downgrade support (master, agent, framework):
+LIBPROCESS_SSL_ENABLED=true LIBPROCESS_SSL_SUPPORT_DOWNGRADE=false LIBPROCESS_SSL_KEY_FILE=&lt;path-to-your-private-key&gt; LIBPROCESS_SSL_CERT_FILE=&lt;path-to-your-certificate&gt; &lt;Any other LIBPROCESS_SSL_* environment variables you may choose&gt; &lt;your-component (e.g. bin/master.sh)&gt; &lt;your-flags&gt;
+</code></pre>
+<p>Executors must be able to access the SSL environment variables and the files referred to by those variables. Environment variables can be provided to an executor by specifying <code>CommandInfo.environment</code> or by using the agent's <code>--executor_environment_variables</code> command line flag. If the agent and the executor are running in separate containers, <code>ContainerInfo.volumes</code> can be used to mount SSL files from the host into the executor's container.</p>
+<p>The end state is a cluster that is only communicating with SSL.</p>
+<p><strong>NOTE:</strong> Any tools you may use that communicate with your components must be able to speak SSL, or they will be denied. You may choose to maintain <code>LIBPROCESS_SSL_SUPPORT_DOWNGRADE=true</code> for some time as you upgrade your internal tooling. The advantage of <code>LIBPROCESS_SSL_SUPPORT_DOWNGRADE=true</code> is that all components that speak SSL will do so, while other components may still communicate over insecure channels.</p>
+<h1 id="a-namewebuiawebui"><a class="header" href="#a-namewebuiawebui"><a name="WebUI"></a>WebUI</a></h1>
+<p>The default Mesos WebUI uses relative links. Some of these links transition between endpoints served by the master and agents. The WebUI currently does not have enough information to change the 'http' vs 'https' links based on whether the target endpoint is currently being served by an SSL-enabled binary. This may cause certain links in the WebUI to be broken when a cluster is in a transition state between SSL and non-SSL. Any tools that hit these endpoints will still be able to access them as long as they hit the endpoint using the right protocol, or the <code>LIBPROCESS_SSL_SUPPORT_DOWNGRADE</code> option is set to true.</p>
+<p><strong>NOTE:</strong> Frameworks with their own WebUI will need to add HTTPS support separately.</p>
+<h3 id="certificates"><a class="header" href="#certificates">Certificates</a></h3>
+<p>Most browsers have built in protection that guard transitions between pages served using different certificates. For this reason you may choose to serve both the master and agent endpoints using a common certificate that covers multiple hostnames. If you do not do this, certain links, such as those to agent sandboxes, may seem broken as the browser treats the transition between differing certificates transition as unsafe.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="authorization.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="secrets.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="authorization.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="secrets.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

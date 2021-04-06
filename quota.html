@@ -1,0 +1,431 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Resource Role Quota for how to configure Mesos to provide guaranteed resource allocations for use by a role. - Apache Mesos</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="favicon.png">
+        
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        
+        <link rel="stylesheet" href="css/print.css" media="print">
+        
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">Fundamentals</li><li class="chapter-item expanded "><a href="architecture.html"><strong aria-hidden="true">1.</strong> Mesos Architecture providing an overview of Mesos concepts</a></li><li class="chapter-item expanded "><a href="presentations.html"><strong aria-hidden="true">2.</strong> Video and Slides of Mesos Presentations</a></li><li class="chapter-item expanded "><a href="versioning.html"><strong aria-hidden="true">3.</strong> Mesos Release and Support Policy</a></li><li class="chapter-item expanded affix "><li class="part-title">Build / Installation</li><li class="chapter-item expanded "><a href="building.html"><strong aria-hidden="true">4.</strong> Building for basic instructions on compiling and installing Mesos.</a></li><li class="chapter-item expanded "><a href="binary-packages.html"><strong aria-hidden="true">5.</strong> Binary Packages for how to use Mesos binary packages.</a></li><li class="chapter-item expanded "><a href="configuration.html"><strong aria-hidden="true">6.</strong> Configuration for build configuration options.</a></li><li class="chapter-item expanded "><a href="cmake.html"><strong aria-hidden="true">7.</strong> CMake for details about using the new CMake build system.</a></li><li class="chapter-item expanded "><a href="windows.html"><strong aria-hidden="true">8.</strong> Windows Support for the state of Windows support in Mesos.</a></li><li class="chapter-item expanded affix "><li class="part-title">Administration</li><li class="chapter-item expanded "><a href="configuration.html"><strong aria-hidden="true">9.</strong> Configuration for command-line arguments.</a></li><li class="chapter-item expanded "><a href="high-availability.html"><strong aria-hidden="true">10.</strong> High Availability Master Setup</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="replicated-log-internals.html"><strong aria-hidden="true">10.1.</strong> Replicated Log for information on the Mesos replicated log.</a></li></ol></li><li class="chapter-item expanded "><a href="agent-recovery.html"><strong aria-hidden="true">11.</strong> Fault Tolerant Agent Setup</a></li><li class="chapter-item expanded "><a href="framework-rate-limiting.html"><strong aria-hidden="true">12.</strong> Framework Rate Limiting</a></li><li class="chapter-item expanded "><a href="maintenance.html"><strong aria-hidden="true">13.</strong> Maintenance for performing maintenance on a Mesos cluster.</a></li><li class="chapter-item expanded "><a href="upgrades.html"><strong aria-hidden="true">14.</strong> Upgrades for upgrading a Mesos cluster.</a></li><li class="chapter-item expanded "><a href="downgrades.html"><strong aria-hidden="true">15.</strong> Downgrades for downgrading a Mesos cluster.</a></li><li class="chapter-item expanded "><a href="logging.html"><strong aria-hidden="true">16.</strong> Logging</a></li><li class="chapter-item expanded "><a href="monitoring.html"><strong aria-hidden="true">17.</strong> Monitoring / Metrics</a></li><li class="chapter-item expanded "><a href="cli.html"><strong aria-hidden="true">18.</strong> Debugging using the new CLI</a></li><li class="chapter-item expanded "><a href="operational-guide.html"><strong aria-hidden="true">19.</strong> Operational Guide</a></li><li class="chapter-item expanded "><a href="fetcher.html"><strong aria-hidden="true">20.</strong> Fetcher Cache Configuration</a></li><li class="chapter-item expanded "><a href="fault-domains.html"><strong aria-hidden="true">21.</strong> Fault Domains</a></li><li class="chapter-item expanded "><a href="performance-profiling.html"><strong aria-hidden="true">22.</strong> Performance Profiling for debugging performance issues in Mesos.</a></li><li class="chapter-item expanded "><a href="memory-profiling.html"><strong aria-hidden="true">23.</strong> Memory Profiling for debugging potential memory leaks in Mesos.</a></li><li class="chapter-item expanded affix "><li class="part-title">Resource Management</li><li class="chapter-item expanded "><a href="attributes-resources.html"><strong aria-hidden="true">24.</strong> Attributes and Resources for how to describe the agents that comprise a cluster.</a></li><li class="chapter-item expanded "><a href="roles.html"><strong aria-hidden="true">25.</strong> Using Resource Roles</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="weights.html"><strong aria-hidden="true">25.1.</strong> Resource Role Weights for fair sharing.</a></li><li class="chapter-item expanded "><a href="quota.html" class="active"><strong aria-hidden="true">25.2.</strong> Resource Role Quota for how to configure Mesos to provide guaranteed resource allocations for use by a role.</a></li><li class="chapter-item expanded "><a href="reservation.html"><strong aria-hidden="true">25.3.</strong> Reservations for how operators and frameworks can reserve resources on individual agents for use by a role.</a></li><li class="chapter-item expanded "><a href="shared-resources.html"><strong aria-hidden="true">25.4.</strong> Shared Resources for how to share persistent volumes between tasks managed by different executors on the same agent.</a></li></ol></li><li class="chapter-item expanded "><a href="oversubscription.html"><strong aria-hidden="true">26.</strong> Oversubscription for how to configure Mesos to take advantage of unused resources to launch “best-effort” tasks.</a></li><li class="chapter-item expanded affix "><li class="part-title">Security</li><li class="chapter-item expanded "><a href="authentication.html"><strong aria-hidden="true">27.</strong> Authentication</a></li><li class="chapter-item expanded "><a href="authorization.html"><strong aria-hidden="true">28.</strong> Authorization</a></li><li class="chapter-item expanded "><a href="ssl.html"><strong aria-hidden="true">29.</strong> SSL</a></li><li class="chapter-item expanded "><a href="secrets.html"><strong aria-hidden="true">30.</strong> Secrets for managing secrets within Mesos.</a></li><li class="chapter-item expanded affix "><li class="part-title">Containerization</li><li class="chapter-item expanded "><a href="containerizers.html"><strong aria-hidden="true">31.</strong> Containerizer Overview</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="containerizer-internals.html"><strong aria-hidden="true">31.1.</strong> Containerizer Internals for implementation details of containerizers.</a></li><li class="chapter-item expanded "><a href="docker-containerizer.html"><strong aria-hidden="true">31.2.</strong> Docker Containerizer for launching a Docker image as a Task, or as an Executor.</a></li><li class="chapter-item expanded "><a href="mesos-containerizer.html"><strong aria-hidden="true">31.3.</strong> Mesos Containerizer default containerizer, supports both Linux and POSIX systems.</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="container-image.html"><strong aria-hidden="true">31.3.1.</strong> Container Images for supporting container images in Mesos containerizer.</a></li><li class="chapter-item expanded "><a href="isolators/docker-volume.html"><strong aria-hidden="true">31.3.2.</strong> Docker Volume Support</a></li><li class="chapter-item expanded "><a href="gpu-support.html"><strong aria-hidden="true">31.3.3.</strong> Nvidia GPU Support for how to run Mesos with Nvidia GPU support.</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="sandbox.html"><strong aria-hidden="true">32.</strong> Container Sandboxes</a></li><li class="chapter-item expanded "><a href="container-volume.html"><strong aria-hidden="true">33.</strong> Container Volumes</a></li><li class="chapter-item expanded "><a href="nested-container-and-task-group.html"><strong aria-hidden="true">34.</strong> Nested Container and Task Group (Pod)</a></li><li class="chapter-item expanded "><a href="standalone-containers.html"><strong aria-hidden="true">35.</strong> Standalone Containers</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">Apache Mesos</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                        <a href="https://github.com/AVENTER-UG/mesos-docs/" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <hr />
+<h2>title: Apache Mesos - Quota
+layout: documentation</h2>
+<h1 id="quota"><a class="header" href="#quota">Quota</a></h1>
+<p>When multiple users are sharing a cluster, the operator may want to set limits
+on how many resources each user can use. Quota addresses this need and allows
+operators to set these limits on a per-role basis.</p>
+<ul>
+<li><a href="#supported-resources">Supported Resources</a></li>
+<li><a href="#updating-quotas">Setting Quotas</a></li>
+<li><a href="#viewing-quotas">Viewing Quotas</a></li>
+<li><a href="#deprecated-quota-guarantees">Deprecated: Quota Guarantees</a></li>
+<li><a href="#implementation-notes">Implementation Notes</a></li>
+</ul>
+<h2 id="supported-resources"><a class="header" href="#supported-resources">Supported Resources</a></h2>
+<p>The following resources have quota support:</p>
+<ul>
+<li><code>cpus</code></li>
+<li><code>mem</code></li>
+<li><code>disk</code></li>
+<li><code>gpus</code></li>
+<li>any custom resource of type <code>SCALAR</code></li>
+</ul>
+<p>The following resources do not have quota support:</p>
+<ul>
+<li><code>ports</code></li>
+<li>any custom resource of type <code>RANGES</code> or <code>SET</code></li>
+</ul>
+<h2 id="updating-quotas"><a class="header" href="#updating-quotas">Updating Quotas</a></h2>
+<p>By default, every role has no resource limits. To modify the resource limits
+for one or more roles, the v1 API <code>UPDATE_QUOTA</code> call is used. Note that this
+call applies the update in an all-or-nothing manner, so that if one of the
+role's quota updates is invalid or unauthorized, the entire request will not
+go through.</p>
+<p>Example:</p>
+<pre><code>curl --request POST \
+     --url http://&lt;master-ip&gt;:&lt;master-port&gt;/api/v1/ \
+     --header 'Content-Type: application/json' \
+     --data '{
+               &quot;type&quot;: &quot;UPDATE_QUOTA&quot;,
+               &quot;update_quota&quot;: {
+                 &quot;force&quot;: false,
+                 &quot;quota_configs&quot;: [
+                   {
+                     &quot;role&quot;: &quot;dev&quot;,
+                     &quot;limits&quot;: {
+                       &quot;cpus&quot;: { &quot;value&quot;: 10 },
+                       &quot;mem&quot;:  { &quot;value&quot;: 2048 },
+                       &quot;disk&quot;: { &quot;value&quot;: 4096 }
+                     }
+                   },
+                   {
+                     &quot;role&quot;: &quot;test&quot;,
+                     &quot;limits&quot;: {
+                       &quot;cpus&quot;: { &quot;value&quot;: 1 },
+                       &quot;mem&quot;:  { &quot;value&quot;: 256 },
+                       &quot;disk&quot;: { &quot;value&quot;: 512 }
+                     }
+                   }
+                 ]
+               }
+             }'
+</code></pre>
+<ul>
+<li>Note that the request will be denied if the current quota consumption is above
+the provided limit. This check can be overriden by setting <code>force</code> to <code>true</code>.</li>
+<li>Note that the master will attempt to rescind a sufficient number of offers to
+ensure that the role cannot exceed its limits.</li>
+</ul>
+<h2 id="viewing-quotas"><a class="header" href="#viewing-quotas">Viewing Quotas</a></h2>
+<h3 id="web-ui"><a class="header" href="#web-ui">Web UI</a></h3>
+<p>The 'Roles' tab in the web ui displays resource accounting information for all
+known roles. This includes the configured quota and the quota consumption.</p>
+<h3 id="api"><a class="header" href="#api">API</a></h3>
+<p>There are several endpoints for viewing quota related information.</p>
+<p>The v1 API <code>GET_QUOTA</code> call will return the quota configuration:</p>
+<pre><code>$ curl --request POST \
+     --url http://&lt;master-ip&gt;:&lt;master-port&gt;/api/v1/ \
+     --header 'Content-Type: application/json' \
+     --header 'Accept: application/json' \
+     --data '{ &quot;type&quot;: &quot;GET_QUOTA&quot; }'
+</code></pre>
+<p>Response:</p>
+<pre><code>{
+  &quot;type&quot;: &quot;GET_QUOTA&quot;,
+  &quot;get_quota&quot;: {
+    &quot;status&quot;: {
+      &quot;infos&quot;: [
+        {
+          &quot;configs&quot; : [
+            {
+              &quot;role&quot;: &quot;dev&quot;,
+              &quot;limits&quot;: {
+                &quot;cpus&quot;: { &quot;value&quot;: 10.0 },
+                &quot;mem&quot;:  { &quot;value&quot;: 2048.0 },
+                &quot;disk&quot;: { &quot;value&quot;: 4096.0 }
+              }
+            },
+            {
+              &quot;role&quot;: &quot;test&quot;,
+              &quot;limits&quot;: {
+                &quot;cpus&quot;: { &quot;value&quot;: 1.0 },
+                &quot;mem&quot;:  { &quot;value&quot;: 256.0 },
+                &quot;disk&quot;: { &quot;value&quot;: 512.0 }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
+</code></pre>
+<p>To also view the quota consumption, use the <code>/roles</code> endpoint:</p>
+<pre><code>$ curl http://&lt;master-ip&gt;:&lt;master-port&gt;/roles
+</code></pre>
+<p>Response</p>
+<pre><code>{
+  &quot;roles&quot;: [
+    {
+      &quot;name&quot;: &quot;dev&quot;,
+      &quot;weight&quot;: 1.0,
+      &quot;quota&quot;:
+      {
+        &quot;role&quot;: &quot;dev&quot;,
+        &quot;limit&quot;: {
+          &quot;cpus&quot;: 10.0,
+          &quot;mem&quot;:  2048.0,
+          &quot;disk&quot;: 4096.0
+        },
+        &quot;consumed&quot;: {
+          &quot;cpus&quot;: 2.0,
+          &quot;mem&quot;:  1024.0,
+          &quot;disk&quot;: 2048.0
+        }
+      },
+      &quot;allocated&quot;: {
+        &quot;cpus&quot;: 2.0,
+        &quot;mem&quot;:  1024.0,
+        &quot;disk&quot;: 2048.0
+      },
+      &quot;offered&quot;: {},
+      &quot;reserved&quot;: {
+        &quot;cpus&quot;: 2.0,
+        &quot;mem&quot;:  1024.0,
+        &quot;disk&quot;: 2048.0
+      },
+      &quot;frameworks&quot;: []
+    }
+  ]
+}
+</code></pre>
+<h3 id="quota-consumption"><a class="header" href="#quota-consumption">Quota Consumption</a></h3>
+<p>A role's quota consumption consists of its allocations and reservations.
+In other words, even if reservations are not allocated, they are included
+in the quota consumption. Offered resources are not charged against quota.</p>
+<h3 id="metrics"><a class="header" href="#metrics">Metrics</a></h3>
+<p>The following metric keys are exposed for quota:</p>
+<ul>
+<li><code>allocator/mesos/quota/roles/&lt;role&gt;/resources/&lt;resource&gt;/guarantee</code></li>
+<li><code>allocator/mesos/quota/roles/&lt;role&gt;/resources/&lt;resource&gt;/limit</code></li>
+<li>A quota consumption metric will be added via
+<a href="https://issues.apache.org/jira/browse/MESOS-9123">MESOS-9123</a>.</li>
+</ul>
+<h2 id="deprecated-quota-guarantees"><a class="header" href="#deprecated-quota-guarantees">Deprecated: Quota Guarantees</a></h2>
+<p>Prior to Mesos 1.9, the quota related APIs only exposed quota &quot;guarantees&quot;
+which ensured a minimum amount of resources would be available to a role.
+Setting guarantees also set implicit quota limits. In Mesos 1.9+, quota
+limits are now exposed directly per the above documentation.</p>
+<p>Quota guarantees are now deprecated in favor of using only quota limits.
+Enforcement of quota guarantees required that Mesos holds back enough
+resources to meet all of the unsatisfied quota guarantees. Since Mesos is
+moving towards an optimistic offer model (to improve multi-role / multi-
+scheduler scalability, see
+<a href="https://issues.apache.org/jira/browse/MESOS-1607">MESOS-1607</a>), it will
+become no longer possible to enforce quota guarantees by holding back
+resources. In such a model, quota limits are simple to enforce, but quota
+guarantees would require a complex &quot;effective limit&quot; propagation model to
+leave space for unsatisfied guarantees.</p>
+<p>For these reasons, quota guarantees, while still functional in Mesos 1.9,
+are now deprecated. A combination of limits and priority based preemption
+will be simpler in an optimistic offer model.</p>
+<p>For documentation on quota guarantees, please see the previous
+documentation: <a href="https://github.com/apache/mesos/blob/1.8.0/docs/quota.md">https://github.com/apache/mesos/blob/1.8.0/docs/quota.md</a></p>
+<h2 id="implementation-notes"><a class="header" href="#implementation-notes">Implementation Notes</a></h2>
+<ul>
+<li>Quota is not supported on nested roles (e.g. <code>eng/prod</code>).</li>
+<li>During failover, in order to correctly enforce limits, the allocator
+will be paused and will not issue offers until at least 80% agents
+re-register or 10 minutes elapses. These parameters will be made
+configurable: <a href="https://issues.apache.org/jira/browse/MESOS-4073">MESOS-4073</a></li>
+<li>Quota is SUPPORTED for the default <code>*</code> role now <a href="https://issues.apache.org/jira/browse/MESOS-3938">MESOS-3938</a>.</li>
+</ul>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="weights.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="reservation.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="weights.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="reservation.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

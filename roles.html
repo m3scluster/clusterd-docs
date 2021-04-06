@@ -1,0 +1,386 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Using Resource Roles - Apache Mesos</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="favicon.png">
+        
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        
+        <link rel="stylesheet" href="css/print.css" media="print">
+        
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">Fundamentals</li><li class="chapter-item expanded "><a href="architecture.html"><strong aria-hidden="true">1.</strong> Mesos Architecture providing an overview of Mesos concepts</a></li><li class="chapter-item expanded "><a href="presentations.html"><strong aria-hidden="true">2.</strong> Video and Slides of Mesos Presentations</a></li><li class="chapter-item expanded "><a href="versioning.html"><strong aria-hidden="true">3.</strong> Mesos Release and Support Policy</a></li><li class="chapter-item expanded affix "><li class="part-title">Build / Installation</li><li class="chapter-item expanded "><a href="building.html"><strong aria-hidden="true">4.</strong> Building for basic instructions on compiling and installing Mesos.</a></li><li class="chapter-item expanded "><a href="binary-packages.html"><strong aria-hidden="true">5.</strong> Binary Packages for how to use Mesos binary packages.</a></li><li class="chapter-item expanded "><a href="configuration.html"><strong aria-hidden="true">6.</strong> Configuration for build configuration options.</a></li><li class="chapter-item expanded "><a href="cmake.html"><strong aria-hidden="true">7.</strong> CMake for details about using the new CMake build system.</a></li><li class="chapter-item expanded "><a href="windows.html"><strong aria-hidden="true">8.</strong> Windows Support for the state of Windows support in Mesos.</a></li><li class="chapter-item expanded affix "><li class="part-title">Administration</li><li class="chapter-item expanded "><a href="configuration.html"><strong aria-hidden="true">9.</strong> Configuration for command-line arguments.</a></li><li class="chapter-item expanded "><a href="high-availability.html"><strong aria-hidden="true">10.</strong> High Availability Master Setup</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="replicated-log-internals.html"><strong aria-hidden="true">10.1.</strong> Replicated Log for information on the Mesos replicated log.</a></li></ol></li><li class="chapter-item expanded "><a href="agent-recovery.html"><strong aria-hidden="true">11.</strong> Fault Tolerant Agent Setup</a></li><li class="chapter-item expanded "><a href="framework-rate-limiting.html"><strong aria-hidden="true">12.</strong> Framework Rate Limiting</a></li><li class="chapter-item expanded "><a href="maintenance.html"><strong aria-hidden="true">13.</strong> Maintenance for performing maintenance on a Mesos cluster.</a></li><li class="chapter-item expanded "><a href="upgrades.html"><strong aria-hidden="true">14.</strong> Upgrades for upgrading a Mesos cluster.</a></li><li class="chapter-item expanded "><a href="downgrades.html"><strong aria-hidden="true">15.</strong> Downgrades for downgrading a Mesos cluster.</a></li><li class="chapter-item expanded "><a href="logging.html"><strong aria-hidden="true">16.</strong> Logging</a></li><li class="chapter-item expanded "><a href="monitoring.html"><strong aria-hidden="true">17.</strong> Monitoring / Metrics</a></li><li class="chapter-item expanded "><a href="cli.html"><strong aria-hidden="true">18.</strong> Debugging using the new CLI</a></li><li class="chapter-item expanded "><a href="operational-guide.html"><strong aria-hidden="true">19.</strong> Operational Guide</a></li><li class="chapter-item expanded "><a href="fetcher.html"><strong aria-hidden="true">20.</strong> Fetcher Cache Configuration</a></li><li class="chapter-item expanded "><a href="fault-domains.html"><strong aria-hidden="true">21.</strong> Fault Domains</a></li><li class="chapter-item expanded "><a href="performance-profiling.html"><strong aria-hidden="true">22.</strong> Performance Profiling for debugging performance issues in Mesos.</a></li><li class="chapter-item expanded "><a href="memory-profiling.html"><strong aria-hidden="true">23.</strong> Memory Profiling for debugging potential memory leaks in Mesos.</a></li><li class="chapter-item expanded affix "><li class="part-title">Resource Management</li><li class="chapter-item expanded "><a href="attributes-resources.html"><strong aria-hidden="true">24.</strong> Attributes and Resources for how to describe the agents that comprise a cluster.</a></li><li class="chapter-item expanded "><a href="roles.html" class="active"><strong aria-hidden="true">25.</strong> Using Resource Roles</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="weights.html"><strong aria-hidden="true">25.1.</strong> Resource Role Weights for fair sharing.</a></li><li class="chapter-item expanded "><a href="quota.html"><strong aria-hidden="true">25.2.</strong> Resource Role Quota for how to configure Mesos to provide guaranteed resource allocations for use by a role.</a></li><li class="chapter-item expanded "><a href="reservation.html"><strong aria-hidden="true">25.3.</strong> Reservations for how operators and frameworks can reserve resources on individual agents for use by a role.</a></li><li class="chapter-item expanded "><a href="shared-resources.html"><strong aria-hidden="true">25.4.</strong> Shared Resources for how to share persistent volumes between tasks managed by different executors on the same agent.</a></li></ol></li><li class="chapter-item expanded "><a href="oversubscription.html"><strong aria-hidden="true">26.</strong> Oversubscription for how to configure Mesos to take advantage of unused resources to launch “best-effort” tasks.</a></li><li class="chapter-item expanded affix "><li class="part-title">Security</li><li class="chapter-item expanded "><a href="authentication.html"><strong aria-hidden="true">27.</strong> Authentication</a></li><li class="chapter-item expanded "><a href="authorization.html"><strong aria-hidden="true">28.</strong> Authorization</a></li><li class="chapter-item expanded "><a href="ssl.html"><strong aria-hidden="true">29.</strong> SSL</a></li><li class="chapter-item expanded "><a href="secrets.html"><strong aria-hidden="true">30.</strong> Secrets for managing secrets within Mesos.</a></li><li class="chapter-item expanded affix "><li class="part-title">Containerization</li><li class="chapter-item expanded "><a href="containerizers.html"><strong aria-hidden="true">31.</strong> Containerizer Overview</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="containerizer-internals.html"><strong aria-hidden="true">31.1.</strong> Containerizer Internals for implementation details of containerizers.</a></li><li class="chapter-item expanded "><a href="docker-containerizer.html"><strong aria-hidden="true">31.2.</strong> Docker Containerizer for launching a Docker image as a Task, or as an Executor.</a></li><li class="chapter-item expanded "><a href="mesos-containerizer.html"><strong aria-hidden="true">31.3.</strong> Mesos Containerizer default containerizer, supports both Linux and POSIX systems.</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="container-image.html"><strong aria-hidden="true">31.3.1.</strong> Container Images for supporting container images in Mesos containerizer.</a></li><li class="chapter-item expanded "><a href="isolators/docker-volume.html"><strong aria-hidden="true">31.3.2.</strong> Docker Volume Support</a></li><li class="chapter-item expanded "><a href="gpu-support.html"><strong aria-hidden="true">31.3.3.</strong> Nvidia GPU Support for how to run Mesos with Nvidia GPU support.</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="sandbox.html"><strong aria-hidden="true">32.</strong> Container Sandboxes</a></li><li class="chapter-item expanded "><a href="container-volume.html"><strong aria-hidden="true">33.</strong> Container Volumes</a></li><li class="chapter-item expanded "><a href="nested-container-and-task-group.html"><strong aria-hidden="true">34.</strong> Nested Container and Task Group (Pod)</a></li><li class="chapter-item expanded "><a href="standalone-containers.html"><strong aria-hidden="true">35.</strong> Standalone Containers</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">Apache Mesos</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                        <a href="https://github.com/AVENTER-UG/mesos-docs/" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <hr />
+<h2>title: Apache Mesos - Roles
+layout: documentation</h2>
+<h1 id="roles"><a class="header" href="#roles">Roles</a></h1>
+<p>Many modern host-level operating systems (e.g. Linux, BSDs, etc) support
+multiple users. Similarly, Mesos is a multi-user cluster management system,
+with the expectation of a single Mesos cluster managing an organization's
+resources and servicing the organization's users.</p>
+<p>As such, Mesos has to address a number of requirements related to resource
+management:</p>
+<ul>
+<li>Fair sharing of the resources amongst users</li>
+<li>Providing resource guarantees to users (e.g. quota, priorities, isolation)</li>
+<li>Providing accurate resource accounting
+<ul>
+<li>How many resources are allocated / utilized / etc?</li>
+<li>Per-user accounting</li>
+</ul>
+</li>
+</ul>
+<p>In Mesos, we refer to these &quot;users&quot; as <strong>roles</strong>. More precisely, a <strong>role</strong>
+within Mesos refers to a resource consumer within the cluster. This resource
+consumer could represent a user within an organization, but it could also
+represent a team, a group, a service, a framework, etc.</p>
+<p>Schedulers subscribe to one or more roles in order to receive resources and
+schedule work on behalf of the resource consumer(s) they are servicing.</p>
+<p>Some examples of resource allocation guarantees that Mesos provides:</p>
+<ul>
+<li>Guaranteeing that a role is allocated a specified amount of resources
+(via <a href="quota.html">quota</a>).</li>
+<li>Ensuring that some (or all) of the resources on a particular agent
+are allocated to a particular role (via <a href="reservation.html">reservations</a>).</li>
+<li>Ensuring that resources are fairly shared between roles
+(via <a href="https://www.cs.berkeley.edu/%7Ealig/papers/drf.pdf">DRF</a>).</li>
+<li>Expressing that some roles should receive a higher relative share of the
+cluster (via <a href="weights.html">weights</a>).</li>
+</ul>
+<h2 id="roles-and-access-control"><a class="header" href="#roles-and-access-control">Roles and access control</a></h2>
+<p>There are two ways to control which roles a framework is allowed to subscribe
+to. First, ACLs can be used to specify which framework principals can subscribe
+to which roles. For more information, see the <a href="authorization.html">authorization</a>
+documentation.</p>
+<p>Second, a <em>role whitelist</em> can be configured by passing the <code>--roles</code> flag to
+the Mesos master at startup. This flag specifies a comma-separated list of role
+names. If the whitelist is specified, only roles that appear in the whitelist
+can be used. To change the whitelist, the Mesos master must be restarted. Note
+that in a high-availability deployment of Mesos, you should take care to ensure
+that all Mesos masters are configured with the same whitelist.</p>
+<p>In Mesos 0.26 and earlier, you should typically configure <em>both</em> ACLs and the
+whitelist, because in these versions of Mesos, any role that does not appear in
+the whitelist cannot be used.</p>
+<p>In Mesos 0.27, this behavior has changed: if <code>--roles</code> is not specified, the
+whitelist permits <em>any role name</em> to be used. Hence, in Mesos 0.27, the
+recommended practice is to only use ACLs to define which roles can be used; the
+<code>--roles</code> command-line flag is deprecated.</p>
+<h2 id="associating-frameworks-with-roles"><a class="header" href="#associating-frameworks-with-roles">Associating frameworks with roles</a></h2>
+<p>A framework specifies which roles it would like to subscribe to when it
+subscribes with the master. This is done via the <code>roles</code> field in
+<code>FrameworkInfo</code>. A framework can also change which roles it is
+subscribed to by reregistering with an updated <code>FrameworkInfo</code>.</p>
+<p>As a user, you can typically specify which role(s) a framework will
+subscribe to when you start the framework. How to do this depends on the
+user interface of the framework you're using. For example, a single user
+scheduler might take a <code>--mesos_role</code> command-line flag and a multi-user
+scheduler might take a <code>--mesos-roles</code> command-line flag or sync with
+the organization's LDAP system to automatically adjust which roles it is
+subscribed to as the organization's structure changes.</p>
+<h3 id="subscribing-to-multiple-roles"><a class="header" href="#subscribing-to-multiple-roles">Subscribing to multiple roles</a></h3>
+<p>As noted above, a framework can subscribe to multiple roles
+simultaneously. Frameworks that want to do this must opt-in to the
+<code>MULTI_ROLE</code> capability.</p>
+<p>When a framework is offered resources, those resources are associated
+with exactly <em>one</em> of the roles it has subscribed to; the framework can
+determine which role an offer is for by consulting the
+<code>allocation_info.role</code> field in the <code>Offer</code> or the
+<code>allocation_info.role</code> field in each offered <code>Resource</code> (in the current
+implementation, all the resources in a single <code>Offer</code> will be allocated
+to the same role).</p>
+<p><a id="roles-multiple-frameworks"></a></p>
+<h3 id="multiple-frameworks-in-the-same-role"><a class="header" href="#multiple-frameworks-in-the-same-role">Multiple frameworks in the same role</a></h3>
+<p>Multiple frameworks can be subscribed to the same role. This can be useful:
+for example, one framework can create a persistent volume and write data to
+it. Once the task that writes data to the persistent volume has finished,
+the volume will be offered to other frameworks subscribed to the same role;
+this might give a second (&quot;consumer&quot;) framework the opportunity to launch a
+task that reads the data produced by the first (&quot;producer&quot;) framework.</p>
+<p>However, configuring multiple frameworks to use the same role should be done
+with caution, because all the frameworks will have access to any resources that
+have been reserved for that role. For example, if a framework stores sensitive
+information on a persistent volume, that volume might be offered to a different
+framework subscribed to the same role. Similarly, if one framework creates a
+persistent volume, another framework subscribed to the same role might &quot;steal&quot;
+the volume and use it to launch a task of its own. In general, multiple
+frameworks sharing the same role should be prepared to collaborate with one
+another to ensure that role-specific resources are used appropriately.</p>
+<h2 id="associating-resources-with-roles"><a class="header" href="#associating-resources-with-roles">Associating resources with roles</a></h2>
+<p>A resource is assigned to a role using a <em>reservation</em>. Resources can either be
+reserved <em>statically</em> (when the agent that hosts the resource is started) or
+<em>dynamically</em>: frameworks and operators can specify that a certain resource
+should subsequently be reserved for use by a given role. For more information,
+see the <a href="reservation.html">reservation</a> documentation.</p>
+<h2 id="default-role"><a class="header" href="#default-role">Default role</a></h2>
+<p>The role named <code>*</code> is special. Unreserved resources are currently represented
+as having the special <code>*</code> role (the idea being that <code>*</code> matches any role). By
+default, all the resources at an agent node are unreserved (this can be changed
+via the <code>--default_role</code> command-line flag when starting the agent).</p>
+<p>In addition, when a framework registers without providing a
+<code>FrameworkInfo.role</code>, it is assigned to the <code>*</code> role. In Mesos 1.3, frameworks
+should use the <code>FrameworkInfo.roles</code> field, which does not assign a default of
+<code>*</code>, but frameworks can still specify <code>*</code> explicitly if desired. Frameworks
+and operators cannot make reservations to the <code>*</code> role.</p>
+<h2 id="invalid-role-names"><a class="header" href="#invalid-role-names">Invalid role names</a></h2>
+<p>A role name must be a valid directory name, so it cannot:</p>
+<ul>
+<li>Be an empty string</li>
+<li>Be <code>.</code> or <code>..</code></li>
+<li>Start with <code>-</code></li>
+<li>Contain any slash, backspace, or whitespace character</li>
+</ul>
+<h2 id="roles-and-resource-allocation"><a class="header" href="#roles-and-resource-allocation">Roles and resource allocation</a></h2>
+<p>By default, the Mesos master uses weighted Dominant Resource Fairness (wDRF) to
+allocate resources. In particular, this implementation of wDRF first identifies
+which <em>role</em> is furthest below its fair share of the role's dominant resource.
+Each of the frameworks subscribed to that role are then offered additional
+resources in turn.</p>
+<p>The resource allocation process can be customized by assigning
+<em><a href="weights.html">weights</a></em> to roles: a role with a weight of 2 will be allocated
+twice the fair share of a role with a weight of 1. By default, every role has a
+weight of 1. Weights can be configured using the
+<a href="endpoints/master/weights.html">/weights</a> operator endpoint, or else using the
+deprecated <code>--weights</code> command-line flag when starting the Mesos master.</p>
+<h2 id="roles-and-quota"><a class="header" href="#roles-and-quota">Roles and quota</a></h2>
+<p>In order to guarantee that a role is allocated a specific amount of resources,
+quota can be specified via the <a href="endpoints/master/quota.html">/quota</a> endpoint.</p>
+<p>The resource allocator will first attempt to satisfy the quota requirements,
+before fairly sharing the remaining resources. For more information, see the
+<a href="quota.html">quota</a> documentation.</p>
+<h2 id="role-vs-principal"><a class="header" href="#role-vs-principal">Role vs. Principal</a></h2>
+<p>A principal identifies an entity that interacts with Mesos; principals are
+similar to user names. For example, frameworks supply a principal when they
+register with the Mesos master, and operators provide a principal when using the
+operator HTTP endpoints. An entity may be required to
+<a href="authentication.html">authenticate</a> with its principal in order to prove its
+identity, and the principal may be used to <a href="authorization.html">authorize</a> actions
+performed by an entity, such as <a href="reservation.html">resource reservation</a> and
+<a href="persistent-volume.html">persistent volume</a> creation/destruction.</p>
+<p>Roles, on the other hand, are used exclusively for resource allocation, as
+covered above.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="attributes-resources.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="weights.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="attributes-resources.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="weights.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

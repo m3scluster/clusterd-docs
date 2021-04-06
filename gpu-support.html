@@ -1,0 +1,568 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Nvidia GPU Support for how to run Mesos with Nvidia GPU support. - Apache Mesos</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="favicon.png">
+        
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        
+        <link rel="stylesheet" href="css/print.css" media="print">
+        
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">Fundamentals</li><li class="chapter-item expanded "><a href="architecture.html"><strong aria-hidden="true">1.</strong> Mesos Architecture providing an overview of Mesos concepts</a></li><li class="chapter-item expanded "><a href="presentations.html"><strong aria-hidden="true">2.</strong> Video and Slides of Mesos Presentations</a></li><li class="chapter-item expanded "><a href="versioning.html"><strong aria-hidden="true">3.</strong> Mesos Release and Support Policy</a></li><li class="chapter-item expanded affix "><li class="part-title">Build / Installation</li><li class="chapter-item expanded "><a href="building.html"><strong aria-hidden="true">4.</strong> Building for basic instructions on compiling and installing Mesos.</a></li><li class="chapter-item expanded "><a href="binary-packages.html"><strong aria-hidden="true">5.</strong> Binary Packages for how to use Mesos binary packages.</a></li><li class="chapter-item expanded "><a href="configuration.html"><strong aria-hidden="true">6.</strong> Configuration for build configuration options.</a></li><li class="chapter-item expanded "><a href="cmake.html"><strong aria-hidden="true">7.</strong> CMake for details about using the new CMake build system.</a></li><li class="chapter-item expanded "><a href="windows.html"><strong aria-hidden="true">8.</strong> Windows Support for the state of Windows support in Mesos.</a></li><li class="chapter-item expanded affix "><li class="part-title">Administration</li><li class="chapter-item expanded "><a href="configuration.html"><strong aria-hidden="true">9.</strong> Configuration for command-line arguments.</a></li><li class="chapter-item expanded "><a href="high-availability.html"><strong aria-hidden="true">10.</strong> High Availability Master Setup</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="replicated-log-internals.html"><strong aria-hidden="true">10.1.</strong> Replicated Log for information on the Mesos replicated log.</a></li></ol></li><li class="chapter-item expanded "><a href="agent-recovery.html"><strong aria-hidden="true">11.</strong> Fault Tolerant Agent Setup</a></li><li class="chapter-item expanded "><a href="framework-rate-limiting.html"><strong aria-hidden="true">12.</strong> Framework Rate Limiting</a></li><li class="chapter-item expanded "><a href="maintenance.html"><strong aria-hidden="true">13.</strong> Maintenance for performing maintenance on a Mesos cluster.</a></li><li class="chapter-item expanded "><a href="upgrades.html"><strong aria-hidden="true">14.</strong> Upgrades for upgrading a Mesos cluster.</a></li><li class="chapter-item expanded "><a href="downgrades.html"><strong aria-hidden="true">15.</strong> Downgrades for downgrading a Mesos cluster.</a></li><li class="chapter-item expanded "><a href="logging.html"><strong aria-hidden="true">16.</strong> Logging</a></li><li class="chapter-item expanded "><a href="monitoring.html"><strong aria-hidden="true">17.</strong> Monitoring / Metrics</a></li><li class="chapter-item expanded "><a href="cli.html"><strong aria-hidden="true">18.</strong> Debugging using the new CLI</a></li><li class="chapter-item expanded "><a href="operational-guide.html"><strong aria-hidden="true">19.</strong> Operational Guide</a></li><li class="chapter-item expanded "><a href="fetcher.html"><strong aria-hidden="true">20.</strong> Fetcher Cache Configuration</a></li><li class="chapter-item expanded "><a href="fault-domains.html"><strong aria-hidden="true">21.</strong> Fault Domains</a></li><li class="chapter-item expanded "><a href="performance-profiling.html"><strong aria-hidden="true">22.</strong> Performance Profiling for debugging performance issues in Mesos.</a></li><li class="chapter-item expanded "><a href="memory-profiling.html"><strong aria-hidden="true">23.</strong> Memory Profiling for debugging potential memory leaks in Mesos.</a></li><li class="chapter-item expanded affix "><li class="part-title">Resource Management</li><li class="chapter-item expanded "><a href="attributes-resources.html"><strong aria-hidden="true">24.</strong> Attributes and Resources for how to describe the agents that comprise a cluster.</a></li><li class="chapter-item expanded "><a href="roles.html"><strong aria-hidden="true">25.</strong> Using Resource Roles</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="weights.html"><strong aria-hidden="true">25.1.</strong> Resource Role Weights for fair sharing.</a></li><li class="chapter-item expanded "><a href="quota.html"><strong aria-hidden="true">25.2.</strong> Resource Role Quota for how to configure Mesos to provide guaranteed resource allocations for use by a role.</a></li><li class="chapter-item expanded "><a href="reservation.html"><strong aria-hidden="true">25.3.</strong> Reservations for how operators and frameworks can reserve resources on individual agents for use by a role.</a></li><li class="chapter-item expanded "><a href="shared-resources.html"><strong aria-hidden="true">25.4.</strong> Shared Resources for how to share persistent volumes between tasks managed by different executors on the same agent.</a></li></ol></li><li class="chapter-item expanded "><a href="oversubscription.html"><strong aria-hidden="true">26.</strong> Oversubscription for how to configure Mesos to take advantage of unused resources to launch “best-effort” tasks.</a></li><li class="chapter-item expanded affix "><li class="part-title">Security</li><li class="chapter-item expanded "><a href="authentication.html"><strong aria-hidden="true">27.</strong> Authentication</a></li><li class="chapter-item expanded "><a href="authorization.html"><strong aria-hidden="true">28.</strong> Authorization</a></li><li class="chapter-item expanded "><a href="ssl.html"><strong aria-hidden="true">29.</strong> SSL</a></li><li class="chapter-item expanded "><a href="secrets.html"><strong aria-hidden="true">30.</strong> Secrets for managing secrets within Mesos.</a></li><li class="chapter-item expanded affix "><li class="part-title">Containerization</li><li class="chapter-item expanded "><a href="containerizers.html"><strong aria-hidden="true">31.</strong> Containerizer Overview</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="containerizer-internals.html"><strong aria-hidden="true">31.1.</strong> Containerizer Internals for implementation details of containerizers.</a></li><li class="chapter-item expanded "><a href="docker-containerizer.html"><strong aria-hidden="true">31.2.</strong> Docker Containerizer for launching a Docker image as a Task, or as an Executor.</a></li><li class="chapter-item expanded "><a href="mesos-containerizer.html"><strong aria-hidden="true">31.3.</strong> Mesos Containerizer default containerizer, supports both Linux and POSIX systems.</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="container-image.html"><strong aria-hidden="true">31.3.1.</strong> Container Images for supporting container images in Mesos containerizer.</a></li><li class="chapter-item expanded "><a href="isolators/docker-volume.html"><strong aria-hidden="true">31.3.2.</strong> Docker Volume Support</a></li><li class="chapter-item expanded "><a href="gpu-support.html" class="active"><strong aria-hidden="true">31.3.3.</strong> Nvidia GPU Support for how to run Mesos with Nvidia GPU support.</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="sandbox.html"><strong aria-hidden="true">32.</strong> Container Sandboxes</a></li><li class="chapter-item expanded "><a href="container-volume.html"><strong aria-hidden="true">33.</strong> Container Volumes</a></li><li class="chapter-item expanded "><a href="nested-container-and-task-group.html"><strong aria-hidden="true">34.</strong> Nested Container and Task Group (Pod)</a></li><li class="chapter-item expanded "><a href="standalone-containers.html"><strong aria-hidden="true">35.</strong> Standalone Containers</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">Apache Mesos</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                        <a href="https://github.com/AVENTER-UG/mesos-docs/" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <hr />
+<h2>title: Apache Mesos - Nvidia GPU Support
+layout: documentation</h2>
+<h1 id="nvidia-gpu-support"><a class="header" href="#nvidia-gpu-support">Nvidia GPU Support</a></h1>
+<p>Mesos 1.0.0 added first-class support for Nvidia GPUs.
+The minimum required Nvidia driver version is <code>340.29</code>.</p>
+<h2 id="overview"><a class="header" href="#overview">Overview</a></h2>
+<p>Getting up and running with GPU support in Mesos is fairly
+straightforward once you know the steps necessary to make it work as
+expected. On one side, this includes setting the necessary agent flags
+to enumerate GPUs and advertise them to the Mesos master. On the other
+side, this includes setting the proper framework capabilities so that
+the Mesos master will actually include GPUs in the resource offers it
+sends to a framework. So long as all of these constraints are met,
+accepting offers that contain GPUs and launching tasks that consume
+them should be just as straightforward as launching a traditional task
+that only consumes CPUs, memory, and disk.</p>
+<p>Mesos exposes GPUs as a simple <code>SCALAR</code> resource in the same
+way it always has for CPUs, memory, and disk. That is, a resource
+offer such as the following is now possible:</p>
+<pre><code>cpus:8; mem:1024; disk:65536; gpus:4;
+</code></pre>
+<p>However, unlike CPUs, memory, and disk, <em>only</em> whole numbers of GPUs
+can be selected. If a fractional amount is selected, launching the
+task will result in a <code>TASK_ERROR</code>.</p>
+<p>At the time of this writing, Nvidia GPU support is only available for
+tasks launched through the Mesos containerizer (i.e., no support exists
+for launching GPU capable tasks through the Docker containerizer).
+That said, the Mesos containerizer now supports running docker
+images natively, so this limitation should not affect most users.</p>
+<p>Moreover, we mimic the support provided by <a href="https://github.com/NVIDIA/nvidia-docker/wiki/NVIDIA-driver">nvidia-docker</a> to
+automatically mount the proper Nvidia drivers and tools directly into
+your docker container. This means you can easily test your GPU-enabled
+docker containers locally and deploy them to Mesos with the assurance
+that they will work without modification.</p>
+<p>In the following sections we walk through all of the flags and
+framework capabilities necessary to enable Nvidia GPU support in
+Mesos. We then show an example of setting up and running an example
+test cluster that launches tasks both with and without docker
+containers. Finally, we conclude with a step-by-step guide of how to
+install any necessary Nvidia GPU drivers on your machine.</p>
+<h2 id="agent-flags"><a class="header" href="#agent-flags">Agent Flags</a></h2>
+<p>The following isolation flags are required to enable Nvidia GPU
+support on an agent.</p>
+<pre><code>--isolation=&quot;filesystem/linux,cgroups/devices,gpu/nvidia&quot;
+</code></pre>
+<p>The <code>filesystem/linux</code> flag tells the agent to use Linux-specific
+commands to prepare the root filesystem and volumes (e.g., persistent
+volumes) for containers that require them. Specifically, it relies on
+Linux mount namespaces to prevent the mounts of a container from being
+propagated to the host mount table. In the case of GPUs, we require
+this flag to properly mount certain Nvidia binaries (e.g.,
+<code>nvidia-smi</code>) and libraries (e.g., <code>libnvidia-ml.so</code>) into a container
+when necessary.</p>
+<p>The <code>cgroups/devices</code> flag tells the agent to restrict access to a
+specific set of devices for each task that it launches (i.e., a subset
+of all devices listed in <code>/dev</code>). When used in conjunction with the
+<code>gpu/nvidia</code> flag, the <code>cgroups/devices</code> flag allows us to grant /
+revoke access to specific GPUs on a per-task basis.</p>
+<p>By default, all GPUs on an agent are automatically discovered and sent
+to the Mesos master as part of its resource offer. However, it may
+sometimes be necessary to restrict access to only a subset of the GPUs
+available on an agent. This is useful, for example, if you want to
+exclude a specific GPU device because an unwanted Nvidia graphics card
+is listed alongside a more powerful set of GPUs. When this is
+required, the following additional agent flags can be used to
+accomplish this:</p>
+<pre><code>--nvidia_gpu_devices=&quot;&lt;list_of_gpu_ids&gt;&quot;
+
+--resources=&quot;gpus:&lt;num_gpus&gt;&quot;
+</code></pre>
+<p>For the <code>--nvidia_gpu_devices</code> flag, you need to provide a comma
+separated list of GPUs, as determined by running <code>nvidia-smi</code> on the
+host where the agent is to be launched (<a href="#external-dependencies">see
+below</a> for instructions on what external
+dependencies must be installed on these hosts to run this command).
+Example output from running <code>nvidia-smi</code> on a machine with four GPUs
+can be seen below:</p>
+<pre><code>+------------------------------------------------------+
+| NVIDIA-SMI 352.79     Driver Version: 352.79         |
+|-------------------------------+----------------------+----------------------+
+| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+|===============================+======================+======================|
+|   0  Tesla M60           Off  | 0000:04:00.0     Off |                    0 |
+| N/A   34C    P0    39W / 150W |     34MiB /  7679MiB |      0%      Default |
++-------------------------------+----------------------+----------------------+
+|   1  Tesla M60           Off  | 0000:05:00.0     Off |                    0 |
+| N/A   35C    P0    39W / 150W |     34MiB /  7679MiB |      0%      Default |
++-------------------------------+----------------------+----------------------+
+|   2  Tesla M60           Off  | 0000:83:00.0     Off |                    0 |
+| N/A   38C    P0    40W / 150W |     34MiB /  7679MiB |      0%      Default |
++-------------------------------+----------------------+----------------------+
+|   3  Tesla M60           Off  | 0000:84:00.0     Off |                    0 |
+| N/A   34C    P0    39W / 150W |     34MiB /  7679MiB |     97%      Default |
++-------------------------------+----------------------+----------------------+
+</code></pre>
+<p>The GPU <code>id</code> to choose can be seen in the far left of each row. Any
+subset of these <code>ids</code> can be listed in the <code>--nvidia_gpu_devices</code>
+flag (i.e., all of the following values of this flag are valid):</p>
+<pre><code>--nvidia_gpu_devices=&quot;0&quot;
+--nvidia_gpu_devices=&quot;0,1&quot;
+--nvidia_gpu_devices=&quot;0,1,2&quot;
+--nvidia_gpu_devices=&quot;0,1,2,3&quot;
+--nvidia_gpu_devices=&quot;0,2,3&quot;
+--nvidia_gpu_devices=&quot;3,1&quot;
+etc...
+</code></pre>
+<p>For the <code>--resources=gpus:&lt;num_gpus&gt;</code> flag, the value passed to
+<code>&lt;num_gpus&gt;</code> must equal the number of GPUs listed in
+<code>--nvidia_gpu_devices</code>. If these numbers do not match, launching the
+agent will fail. This can sometimes be a source of confusion, so it
+is important to emphasize it here for clarity.</p>
+<h2 id="framework-capabilities"><a class="header" href="#framework-capabilities">Framework Capabilities</a></h2>
+<p>Once you launch an agent with the flags above, GPU resources will be
+advertised to the Mesos master along side all of the traditional
+resources such as CPUs, memory, and disk. However, the master will
+only forward offers that contain GPUs to frameworks that have
+explicitly enabled the <code>GPU_RESOURCES</code> framework capability.</p>
+<p>The choice to make frameworks explicitly opt-in to this <code>GPU_RESOURCES</code>
+capability was to keep legacy frameworks from accidentally consuming
+non-GPU resources on GPU-capable machines (and thus preventing your GPU
+jobs from running). It's not that big a deal if all of your nodes have
+GPUs, but in a mixed-node environment, it can be a big problem.</p>
+<p>An example of setting this capability in a C++-based framework can be
+seen below:</p>
+<pre><code>FrameworkInfo framework;
+framework.add_capabilities()-&gt;set_type(
+      FrameworkInfo::Capability::GPU_RESOURCES);
+
+GpuScheduler scheduler;
+
+driver = new MesosSchedulerDriver(
+    &amp;scheduler,
+    framework,
+    127.0.0.1:5050);
+
+driver-&gt;run();
+</code></pre>
+<h2 id="minimal-gpu-capable-cluster"><a class="header" href="#minimal-gpu-capable-cluster">Minimal GPU Capable Cluster</a></h2>
+<p>In this section we walk through two examples of configuring GPU-capable
+clusters and running tasks on them. The first example demonstrates the
+minimal setup required to run a command that consumes GPUs on a GPU-capable
+agent. The second example demonstrates the setup necessary to
+launch a docker container that does the same.</p>
+<p><strong>Note</strong>: Both of these examples assume you have installed the
+external dependencies required for Nvidia GPU support on Mesos. Please
+see <a href="#external-dependencies">below</a> for more information.</p>
+<h3 id="minimal-setup-without-support-for-docker-containers"><a class="header" href="#minimal-setup-without-support-for-docker-containers">Minimal Setup Without Support for Docker Containers</a></h3>
+<p>The commands below show a minimal example of bringing up a GPU-capable
+Mesos cluster on <code>localhost</code> and executing a task on it. The required
+agent flags are set as described above, and the <code>mesos-execute</code>
+command has been told to enable the <code>GPU_RESOURCES</code> framework
+capability so it can receive offers containing GPU resources.</p>
+<pre><code>$ mesos-master \
+      --ip=127.0.0.1 \
+      --work_dir=/var/lib/mesos
+
+$ mesos-agent \
+      --master=127.0.0.1:5050 \
+      --work_dir=/var/lib/mesos \
+      --isolation=&quot;cgroups/devices,gpu/nvidia&quot;
+
+$ mesos-execute \
+      --master=127.0.0.1:5050 \
+      --name=gpu-test \
+      --command=&quot;nvidia-smi&quot; \
+      --framework_capabilities=&quot;GPU_RESOURCES&quot; \
+      --resources=&quot;gpus:1&quot;
+</code></pre>
+<p>If all goes well, you should see something like the following in the
+<code>stdout</code> out of your task:</p>
+<pre><code>+------------------------------------------------------+
+| NVIDIA-SMI 352.79     Driver Version: 352.79         |
+|-------------------------------+----------------------+----------------------+
+| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+|===============================+======================+======================|
+|   0  Tesla M60           Off  | 0000:04:00.0     Off |                    0 |
+| N/A   34C    P0    39W / 150W |     34MiB /  7679MiB |      0%      Default |
++-------------------------------+----------------------+----------------------+
+</code></pre>
+<h3 id="minimal-setup-with-support-for-docker-containers"><a class="header" href="#minimal-setup-with-support-for-docker-containers">Minimal Setup With Support for Docker Containers</a></h3>
+<p>The commands below show a minimal example of bringing up a GPU-capable
+Mesos cluster on <code>localhost</code> and running a docker container on it. The
+required agent flags are set as described above, and the
+<code>mesos-execute</code> command has been told to enable the <code>GPU_RESOURCES</code>
+framework capability so it can receive offers containing GPU
+resources.  Additionally, the required flags to enable support for
+docker containers (as described <a href="container-image.html">here</a>) have been
+set up as well.</p>
+<pre><code>$ mesos-master \
+      --ip=127.0.0.1 \
+      --work_dir=/var/lib/mesos
+
+$ mesos-agent \
+      --master=127.0.0.1:5050 \
+      --work_dir=/var/lib/mesos \
+      --image_providers=docker \
+      --executor_environment_variables=&quot;{}&quot; \
+      --isolation=&quot;docker/runtime,filesystem/linux,cgroups/devices,gpu/nvidia&quot;
+
+$ mesos-execute \
+      --master=127.0.0.1:5050 \
+      --name=gpu-test \
+      --docker_image=nvidia/cuda \
+      --command=&quot;nvidia-smi&quot; \
+      --framework_capabilities=&quot;GPU_RESOURCES&quot; \
+      --resources=&quot;gpus:1&quot;
+</code></pre>
+<p>If all goes well, you should see something like the following in the
+<code>stdout</code> out of your task.</p>
+<pre><code>+------------------------------------------------------+
+| NVIDIA-SMI 352.79     Driver Version: 352.79         |
+|-------------------------------+----------------------+----------------------+
+| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+|===============================+======================+======================|
+|   0  Tesla M60           Off  | 0000:04:00.0     Off |                    0 |
+| N/A   34C    P0    39W / 150W |     34MiB /  7679MiB |      0%      Default |
++-------------------------------+----------------------+----------------------+
+</code></pre>
+<p><a name="external-dependencies"></a></p>
+<h2 id="external-dependencies"><a class="header" href="#external-dependencies">External Dependencies</a></h2>
+<p>Any host running a Mesos agent with Nvidia GPU support <strong>MUST</strong> have a
+valid Nvidia kernel driver installed. It is also <em>highly</em> recommended to
+install the corresponding user-level libraries and tools available as
+part of the Nvidia CUDA toolkit. Many jobs that use Nvidia GPUs rely
+on CUDA and not including it will severely limit the type of
+GPU-aware jobs you can run on Mesos.</p>
+<p><strong>Note:</strong> The minimum supported version of CUDA is <code>6.5</code>.</p>
+<h3 id="installing-the-required-tools"><a class="header" href="#installing-the-required-tools">Installing the Required Tools</a></h3>
+<p>The Nvidia kernel driver can be downloaded at the link below. Make
+sure to choose the proper model of GPU, operating system, and CUDA
+toolkit you plan to install on your host:</p>
+<pre><code>http://www.nvidia.com/Download/index.aspx
+</code></pre>
+<p>Unfortunately, most Linux distributions come preinstalled with an open
+source video driver called <code>Nouveau</code>. This driver conflicts with the
+Nvidia driver we are trying to install. The following guides may prove
+useful to help guide you through the process of uninstalling <code>Nouveau</code>
+before installing the Nvidia driver on CentOS or Ubuntu.</p>
+<pre><code>http://www.dedoimedo.com/computers/centos-7-nvidia.html
+http://www.allaboutlinux.eu/remove-nouveau-and-install-nvidia-driver-in-ubuntu-15-04/
+</code></pre>
+<p>After installing the Nvidia kernel driver, you can follow the
+instructions in the link below to install the Nvidia CUDA toolkit:</p>
+<pre><code>http://docs.nvidia.com/cuda/cuda-getting-started-guide-for-linux/
+</code></pre>
+<p>In addition to the steps listed in the link above, it is <em>highly</em>
+recommended to add CUDA's <code>lib</code> directory into your <code>ldcache</code> so that
+tasks launched by Mesos will know where these libraries exist and link
+with them properly.</p>
+<pre><code>sudo bash -c &quot;cat &gt; /etc/ld.so.conf.d/cuda-lib64.conf &lt;&lt; EOF
+/usr/local/cuda/lib64
+EOF&quot;
+
+sudo ldconfig
+</code></pre>
+<p>If you choose <strong>not</strong> to add CUDAs <code>lib</code> directory to your <code>ldcache</code>,
+you <strong>MUST</strong> add it to every task's <code>LD_LIBRARY_PATH</code> that requires
+it.</p>
+<p><strong>Note:</strong> This is <em>not</em> the recommended method. You have been warned.</p>
+<h3 id="verifying-the-installation"><a class="header" href="#verifying-the-installation">Verifying the Installation</a></h3>
+<p>Once the kernel driver has been installed, you can make sure
+everything is working by trying to run the bundled <code>nvidia-smi</code> tool.</p>
+<pre><code>nvidia-smi
+</code></pre>
+<p>You should see output similar to the following:</p>
+<pre><code>Thu Apr 14 11:58:17 2016
++------------------------------------------------------+
+| NVIDIA-SMI 352.79     Driver Version: 352.79         |
+|-------------------------------+----------------------+----------------------+
+| GPU  Name        Persistence-M| Bus-Id        Disp.A | Volatile Uncorr. ECC |
+| Fan  Temp  Perf  Pwr:Usage/Cap|         Memory-Usage | GPU-Util  Compute M. |
+|===============================+======================+======================|
+|   0  Tesla M60           Off  | 0000:04:00.0     Off |                    0 |
+| N/A   34C    P0    39W / 150W |     34MiB /  7679MiB |      0%      Default |
++-------------------------------+----------------------+----------------------+
+|   1  Tesla M60           Off  | 0000:05:00.0     Off |                    0 |
+| N/A   35C    P0    39W / 150W |     34MiB /  7679MiB |      0%      Default |
++-------------------------------+----------------------+----------------------+
+|   2  Tesla M60           Off  | 0000:83:00.0     Off |                    0 |
+| N/A   38C    P0    38W / 150W |     34MiB /  7679MiB |      0%      Default |
++-------------------------------+----------------------+----------------------+
+|   3  Tesla M60           Off  | 0000:84:00.0     Off |                    0 |
+| N/A   34C    P0    38W / 150W |     34MiB /  7679MiB |     99%      Default |
++-------------------------------+----------------------+----------------------+
+
++-----------------------------------------------------------------------------+
+| Processes:                                                       GPU Memory |
+|  GPU       PID  Type  Process name                               Usage      |
+|=============================================================================|
+|  No running processes found                                                 |
++-----------------------------------------------------------------------------+
+</code></pre>
+<p>To verify your CUDA installation, it is recommended to go through the instructions at the link below:</p>
+<pre><code>http://docs.nvidia.com/cuda/cuda-getting-started-guide-for-linux/#install-samples
+</code></pre>
+<p>Finally, you should get a developer to run Mesos's Nvidia GPU-related
+unit tests on your machine to ensure that everything passes (as
+described below).</p>
+<h3 id="running-mesos-unit-tests"><a class="header" href="#running-mesos-unit-tests">Running Mesos Unit Tests</a></h3>
+<p>At the time of this writing, the following Nvidia GPU specific unit
+tests exist on Mesos:</p>
+<pre><code>DockerTest.ROOT_DOCKER_NVIDIA_GPU_DeviceAllow
+DockerTest.ROOT_DOCKER_NVIDIA_GPU_InspectDevices
+NvidiaGpuTest.ROOT_CGROUPS_NVIDIA_GPU_VerifyDeviceAccess
+NvidiaGpuTest.ROOT_INTERNET_CURL_CGROUPS_NVIDIA_GPU_NvidiaDockerImage
+NvidiaGpuTest.ROOT_CGROUPS_NVIDIA_GPU_FractionalResources
+NvidiaGpuTest.NVIDIA_GPU_Discovery
+NvidiaGpuTest.ROOT_CGROUPS_NVIDIA_GPU_FlagValidation
+NvidiaGpuTest.NVIDIA_GPU_Allocator
+NvidiaGpuTest.ROOT_NVIDIA_GPU_VolumeCreation
+NvidiaGpuTest.ROOT_NVIDIA_GPU_VolumeShouldInject)
+</code></pre>
+<p>The capitalized words following the <code>'.'</code> specify test filters to
+apply when running the unit tests. In our case the filters that apply
+are <code>ROOT</code>, <code>CGROUPS</code>, and <code>NVIDIA_GPU</code>. This means that these tests
+must be run as <code>root</code> on Linux machines with <code>cgroups</code> support that
+have Nvidia GPUs installed on them. The check to verify that Nvidia
+GPUs exist is to look for the existence of the Nvidia System
+Management Interface (<code>nvidia-smi</code>) on the machine where the tests are
+being run. This binary should already be installed if the instructions
+above have been followed correctly.</p>
+<p>So long as these filters are satisfied, you can run the following to
+execute these unit tests:</p>
+<pre><code>[mesos]$ GTEST_FILTER=&quot;&quot; make -j check
+[mesos]$ sudo bin/mesos-tests.sh --gtest_filter=&quot;*NVIDIA_GPU*&quot;
+</code></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="isolators/docker-volume.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="sandbox.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="isolators/docker-volume.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="sandbox.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

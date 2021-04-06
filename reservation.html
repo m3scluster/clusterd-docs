@@ -1,0 +1,901 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Reservations for how operators and frameworks can reserve resources on individual agents for use by a role. - Apache Mesos</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="favicon.png">
+        
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        
+        <link rel="stylesheet" href="css/print.css" media="print">
+        
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">Fundamentals</li><li class="chapter-item expanded "><a href="architecture.html"><strong aria-hidden="true">1.</strong> Mesos Architecture providing an overview of Mesos concepts</a></li><li class="chapter-item expanded "><a href="presentations.html"><strong aria-hidden="true">2.</strong> Video and Slides of Mesos Presentations</a></li><li class="chapter-item expanded "><a href="versioning.html"><strong aria-hidden="true">3.</strong> Mesos Release and Support Policy</a></li><li class="chapter-item expanded affix "><li class="part-title">Build / Installation</li><li class="chapter-item expanded "><a href="building.html"><strong aria-hidden="true">4.</strong> Building for basic instructions on compiling and installing Mesos.</a></li><li class="chapter-item expanded "><a href="binary-packages.html"><strong aria-hidden="true">5.</strong> Binary Packages for how to use Mesos binary packages.</a></li><li class="chapter-item expanded "><a href="configuration.html"><strong aria-hidden="true">6.</strong> Configuration for build configuration options.</a></li><li class="chapter-item expanded "><a href="cmake.html"><strong aria-hidden="true">7.</strong> CMake for details about using the new CMake build system.</a></li><li class="chapter-item expanded "><a href="windows.html"><strong aria-hidden="true">8.</strong> Windows Support for the state of Windows support in Mesos.</a></li><li class="chapter-item expanded affix "><li class="part-title">Administration</li><li class="chapter-item expanded "><a href="configuration.html"><strong aria-hidden="true">9.</strong> Configuration for command-line arguments.</a></li><li class="chapter-item expanded "><a href="high-availability.html"><strong aria-hidden="true">10.</strong> High Availability Master Setup</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="replicated-log-internals.html"><strong aria-hidden="true">10.1.</strong> Replicated Log for information on the Mesos replicated log.</a></li></ol></li><li class="chapter-item expanded "><a href="agent-recovery.html"><strong aria-hidden="true">11.</strong> Fault Tolerant Agent Setup</a></li><li class="chapter-item expanded "><a href="framework-rate-limiting.html"><strong aria-hidden="true">12.</strong> Framework Rate Limiting</a></li><li class="chapter-item expanded "><a href="maintenance.html"><strong aria-hidden="true">13.</strong> Maintenance for performing maintenance on a Mesos cluster.</a></li><li class="chapter-item expanded "><a href="upgrades.html"><strong aria-hidden="true">14.</strong> Upgrades for upgrading a Mesos cluster.</a></li><li class="chapter-item expanded "><a href="downgrades.html"><strong aria-hidden="true">15.</strong> Downgrades for downgrading a Mesos cluster.</a></li><li class="chapter-item expanded "><a href="logging.html"><strong aria-hidden="true">16.</strong> Logging</a></li><li class="chapter-item expanded "><a href="monitoring.html"><strong aria-hidden="true">17.</strong> Monitoring / Metrics</a></li><li class="chapter-item expanded "><a href="cli.html"><strong aria-hidden="true">18.</strong> Debugging using the new CLI</a></li><li class="chapter-item expanded "><a href="operational-guide.html"><strong aria-hidden="true">19.</strong> Operational Guide</a></li><li class="chapter-item expanded "><a href="fetcher.html"><strong aria-hidden="true">20.</strong> Fetcher Cache Configuration</a></li><li class="chapter-item expanded "><a href="fault-domains.html"><strong aria-hidden="true">21.</strong> Fault Domains</a></li><li class="chapter-item expanded "><a href="performance-profiling.html"><strong aria-hidden="true">22.</strong> Performance Profiling for debugging performance issues in Mesos.</a></li><li class="chapter-item expanded "><a href="memory-profiling.html"><strong aria-hidden="true">23.</strong> Memory Profiling for debugging potential memory leaks in Mesos.</a></li><li class="chapter-item expanded affix "><li class="part-title">Resource Management</li><li class="chapter-item expanded "><a href="attributes-resources.html"><strong aria-hidden="true">24.</strong> Attributes and Resources for how to describe the agents that comprise a cluster.</a></li><li class="chapter-item expanded "><a href="roles.html"><strong aria-hidden="true">25.</strong> Using Resource Roles</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="weights.html"><strong aria-hidden="true">25.1.</strong> Resource Role Weights for fair sharing.</a></li><li class="chapter-item expanded "><a href="quota.html"><strong aria-hidden="true">25.2.</strong> Resource Role Quota for how to configure Mesos to provide guaranteed resource allocations for use by a role.</a></li><li class="chapter-item expanded "><a href="reservation.html" class="active"><strong aria-hidden="true">25.3.</strong> Reservations for how operators and frameworks can reserve resources on individual agents for use by a role.</a></li><li class="chapter-item expanded "><a href="shared-resources.html"><strong aria-hidden="true">25.4.</strong> Shared Resources for how to share persistent volumes between tasks managed by different executors on the same agent.</a></li></ol></li><li class="chapter-item expanded "><a href="oversubscription.html"><strong aria-hidden="true">26.</strong> Oversubscription for how to configure Mesos to take advantage of unused resources to launch “best-effort” tasks.</a></li><li class="chapter-item expanded affix "><li class="part-title">Security</li><li class="chapter-item expanded "><a href="authentication.html"><strong aria-hidden="true">27.</strong> Authentication</a></li><li class="chapter-item expanded "><a href="authorization.html"><strong aria-hidden="true">28.</strong> Authorization</a></li><li class="chapter-item expanded "><a href="ssl.html"><strong aria-hidden="true">29.</strong> SSL</a></li><li class="chapter-item expanded "><a href="secrets.html"><strong aria-hidden="true">30.</strong> Secrets for managing secrets within Mesos.</a></li><li class="chapter-item expanded affix "><li class="part-title">Containerization</li><li class="chapter-item expanded "><a href="containerizers.html"><strong aria-hidden="true">31.</strong> Containerizer Overview</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="containerizer-internals.html"><strong aria-hidden="true">31.1.</strong> Containerizer Internals for implementation details of containerizers.</a></li><li class="chapter-item expanded "><a href="docker-containerizer.html"><strong aria-hidden="true">31.2.</strong> Docker Containerizer for launching a Docker image as a Task, or as an Executor.</a></li><li class="chapter-item expanded "><a href="mesos-containerizer.html"><strong aria-hidden="true">31.3.</strong> Mesos Containerizer default containerizer, supports both Linux and POSIX systems.</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="container-image.html"><strong aria-hidden="true">31.3.1.</strong> Container Images for supporting container images in Mesos containerizer.</a></li><li class="chapter-item expanded "><a href="isolators/docker-volume.html"><strong aria-hidden="true">31.3.2.</strong> Docker Volume Support</a></li><li class="chapter-item expanded "><a href="gpu-support.html"><strong aria-hidden="true">31.3.3.</strong> Nvidia GPU Support for how to run Mesos with Nvidia GPU support.</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="sandbox.html"><strong aria-hidden="true">32.</strong> Container Sandboxes</a></li><li class="chapter-item expanded "><a href="container-volume.html"><strong aria-hidden="true">33.</strong> Container Volumes</a></li><li class="chapter-item expanded "><a href="nested-container-and-task-group.html"><strong aria-hidden="true">34.</strong> Nested Container and Task Group (Pod)</a></li><li class="chapter-item expanded "><a href="standalone-containers.html"><strong aria-hidden="true">35.</strong> Standalone Containers</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">Apache Mesos</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                        <a href="https://github.com/AVENTER-UG/mesos-docs/" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <hr />
+<h2>title: Apache Mesos - Reservation
+layout: documentation</h2>
+<h1 id="reservation"><a class="header" href="#reservation">Reservation</a></h1>
+<p>Mesos provides mechanisms to <strong>reserve</strong> resources in specific slaves.
+The concept was first introduced with <strong>static reservation</strong> in 0.14.0
+which enabled operators to specify the reserved resources on slave startup.
+This was extended with <strong>dynamic reservation</strong> in 0.23.0 which enabled operators
+and authorized <strong>frameworks</strong> to dynamically reserve resources in the cluster.</p>
+<p>In both types of reservations, resources are reserved for a <a href="roles.html"><strong>role</strong></a>.</p>
+<p><a name="static-reservation"></a></p>
+<h2 id="static-reservation"><a class="header" href="#static-reservation">Static Reservation</a></h2>
+<p>An operator can configure a slave with resources reserved for a role.
+The reserved resources are specified via the <code>--resources</code> flag.
+For example, suppose we have 12 CPUs and 6144 MB of RAM available on a slave and
+that we want to reserve 8 CPUs and 4096 MB of RAM for the <code>ads</code> role.
+We start the slave like so:</p>
+<pre><code>    $ mesos-slave \
+      --master=&lt;ip&gt;:&lt;port&gt; \
+      --resources=&quot;cpus:4;mem:2048;cpus(ads):8;mem(ads):4096&quot;
+</code></pre>
+<p>We now have 8 CPUs and 4096 MB of RAM reserved for <code>ads</code> on this slave.</p>
+<p><strong>CAVEAT:</strong> In order to modify a static reservation, the operator must drain and
+restart the slave with the new configuration specified in the
+<code>--resources</code> flag.</p>
+<p>It's often more convenient to specify the total resources available on
+the slave as unreserved via the <code>--resources</code> flag and manage reservations
+dynamically (see below) via the master HTTP endpoints. However static
+reservation provides a way for the operator to more deterministically control
+the reservations (roles, amount, principals) before the agent is exposed to the
+master and frameworks. One use case is for the operator to dedicate entire
+agents for specific roles.</p>
+<h2 id="dynamic-reservation"><a class="header" href="#dynamic-reservation">Dynamic Reservation</a></h2>
+<p>As mentioned in <a href="#static-reservation">Static Reservation</a>, specifying
+the reserved resources via the <code>--resources</code> flag makes the reservation static.
+That is, statically reserved resources cannot be reserved for another role nor
+be unreserved. Dynamic reservation enables operators and authorized frameworks
+to reserve and unreserve resources after slave-startup.</p>
+<ul>
+<li><code>Offer::Operation::Reserve</code> and <code>Offer::Operation::Unreserve</code> messages are
+available for <strong>frameworks</strong> to send back via the <code>acceptOffers</code> API as a
+response to a resource offer.</li>
+<li><code>/reserve</code> and <code>/unreserve</code> HTTP endpoints allow <strong>operators</strong> to manage
+dynamic reservations through the master.</li>
+</ul>
+<p>In the following sections, we will walk through examples of each of the
+interfaces described above.</p>
+<p>If two dynamic reservations are made for the same role at a single slave (using
+the same labels, if any; see below), the reservations will be combined by adding
+together the resources reserved by each request. This will result in a single
+reserved resource at the slave. Similarly, &quot;partial&quot; unreserve operations are
+allowed: an unreserve operation can release some but not all of the resources at
+a slave that have been reserved for a role. In this case, the unreserved
+resources will be subtracted from the previous reservation and any remaining
+resources will still be reserved.</p>
+<p>Dynamic reservations cannot be unreserved if they are still being used by a
+running task or if a <a href="persistent-volume.html">persistent volume</a> has been created
+using the reserved resources. In the latter case, the volume should be destroyed
+before unreserving the resources.</p>
+<h2 id="authorization"><a class="header" href="#authorization">Authorization</a></h2>
+<p>By default, frameworks and operators are authorized to reserve resources for
+any role and to unreserve dynamically reserved resources.
+<a href="authorization.html">Authorization</a> allows this behavior to be limited so that
+resources can only be reserved for particular roles, and only particular
+resources can be unreserved. For these operations to be authorized, the
+framework or operator should provide a <code>principal</code> to identify itself. To use
+authorization with reserve/unreserve operations, the Mesos master must be
+configured with the appropriate ACLs. For more information, see the
+<a href="authorization.html">authorization documentation</a>.</p>
+<p>Similarly, agents by default can register with the master with resources that
+are statically reserved for arbitrary roles.
+With <a href="authorization.html">authorization</a>,
+the master can be configured to use the <code>reserve_resources</code> ACL to check that
+the agent's <code>principal</code> is allowed to statically reserve resources for specific
+roles.</p>
+<h2 id="reservation-labels"><a class="header" href="#reservation-labels">Reservation Labels</a></h2>
+<p>Dynamic reservations can optionally include a list of <em>labels</em>, which are
+arbitrary key-value pairs. Labels can be used to associate arbitrary metadata
+with a resource reservation. For example, frameworks can use labels to identify
+the intended purpose for a portion of the resources that have been reserved at a
+given slave. Note that two reservations with different labels will not be
+combined together into a single reservation, even if the reservations are at the
+same slave and use the same role.</p>
+<h2 id="reservation-refinement"><a class="header" href="#reservation-refinement">Reservation Refinement</a></h2>
+<p>Hierarhical roles such as <code>eng/backend</code> enable the delegation of resources
+down a hierarchy, and reservation refinement is the mechanism with which
+<strong>reservations</strong> are delegated down the hierarchy. For example, a reservation
+(static or dynamic) for <code>eng</code> can be <strong>refined</strong> to <code>eng/backend</code>. When such
+a reservation is unreserved, they are returned to the previous owner. In this
+case it would be returned to <code>eng</code>. Reservation refinements can also &quot;skip&quot;
+levels. For example, <code>eng</code> can be <strong>refined</strong> directly to <code>eng/backend/db</code>.
+Again, unreserving such a reservation is returned to its previous owner <code>eng</code>.</p>
+<p><strong>NOTE:</strong> Frameworks need to enable the <code>RESERVATION_REFINEMENT</code> capability
+in order to be offered, and to create refined reservations</p>
+<h2 id="listing-reservations"><a class="header" href="#listing-reservations">Listing Reservations</a></h2>
+<p>Information about the reserved resources at each slave in the cluster can be
+found by querying the <a href="endpoints/master/slaves.html">/slaves</a> master endpoint
+(under the <code>reserved_resources_full</code> key).</p>
+<p>The same information can also be found in the <a href="endpoints/slave/state.html">/state</a>
+endpoint on the agent (under the <code>reserved_resources_full</code> key). The agent
+endpoint is useful to confirm if a reservation has been propagated to the
+agent (which can fail in the event of network partition or master/agent
+restarts).</p>
+<h2 id="examples"><a class="header" href="#examples">Examples</a></h2>
+<h3 id="framework-scheduler-api"><a class="header" href="#framework-scheduler-api">Framework Scheduler API</a></h3>
+<p><a name="offer-operation-reserve"></a></p>
+<h4 id="offeroperationreserve-without-reservation_refinement"><a class="header" href="#offeroperationreserve-without-reservation_refinement"><code>Offer::Operation::Reserve</code> (<strong>without</strong> <code>RESERVATION_REFINEMENT</code>)</a></h4>
+<p>A framework can reserve resources through the resource offer cycle. The
+reservation role must match the offer's allocation role. Suppose we
+receive a resource offer with 12 CPUs and 6144 MB of RAM unreserved, allocated
+to role <code>&quot;engineering&quot;</code>.</p>
+<pre><code>    {
+      &quot;allocation_info&quot;: { &quot;role&quot;: &quot;engineering&quot; },
+      &quot;id&quot;: &lt;offer_id&gt;,
+      &quot;framework_id&quot;: &lt;framework_id&gt;,
+      &quot;slave_id&quot;: &lt;slave_id&gt;,
+      &quot;hostname&quot;: &lt;hostname&gt;,
+      &quot;resources&quot;: [
+        {
+          &quot;allocation_info&quot;: { &quot;role&quot;: &quot;engineering&quot; },
+          &quot;name&quot;: &quot;cpus&quot;,
+          &quot;type&quot;: &quot;SCALAR&quot;,
+          &quot;scalar&quot;: { &quot;value&quot;: 12 },
+          &quot;role&quot;: &quot;*&quot;,
+        },
+        {
+          &quot;allocation_info&quot;: { &quot;role&quot;: &quot;engineering&quot; },
+          &quot;name&quot;: &quot;mem&quot;,
+          &quot;type&quot;: &quot;SCALAR&quot;,
+          &quot;scalar&quot;: { &quot;value&quot;: 6144 },
+          &quot;role&quot;: &quot;*&quot;,
+        }
+      ]
+    }
+</code></pre>
+<p>We can reserve 8 CPUs and 4096 MB of RAM by sending the following
+<code>Offer::Operation</code> message. <code>Offer::Operation::Reserve</code> has a <code>resources</code> field
+which we specify with the resources to be reserved. We must explicitly set the
+resources' <code>role</code> field to the offer's allocation role. The required value of
+the <code>principal</code> field depends on whether or not the framework provided a
+principal when it registered with the master. If a principal was provided, then
+the resources' <code>principal</code> field must be equal to the framework's principal.
+If no principal was provided during registration, then the resources'
+<code>principal</code> field can take any value, or can be left unset. Note that the
+<code>principal</code> field determines the &quot;reserver principal&quot; when
+<a href="authorization.html">authorization</a> is enabled, even if authentication is
+disabled.</p>
+<pre><code>    {
+      &quot;type&quot;: Offer::Operation::RESERVE,
+      &quot;reserve&quot;: {
+        &quot;resources&quot;: [
+          {
+            &quot;allocation_info&quot;: { &quot;role&quot;: &quot;engineering&quot; },
+            &quot;name&quot;: &quot;cpus&quot;,
+            &quot;type&quot;: &quot;SCALAR&quot;,
+            &quot;scalar&quot;: { &quot;value&quot;: 8 },
+            &quot;role&quot;: &quot;engineering&quot;,
+            &quot;reservation&quot;: {
+              &quot;principal&quot;: &lt;framework_principal&gt;
+            }
+          },
+          {
+            &quot;allocation_info&quot;: { &quot;role&quot;: &quot;engineering&quot; },
+            &quot;name&quot;: &quot;mem&quot;,
+            &quot;type&quot;: &quot;SCALAR&quot;,
+            &quot;scalar&quot;: { &quot;value&quot;: 4096 },
+            &quot;role&quot;: &quot;engineering&quot;,
+            &quot;reservation&quot;: {
+              &quot;principal&quot;: &lt;framework_principal&gt;
+            }
+          }
+        ]
+      }
+    }
+</code></pre>
+<p>If the reservation is successful, a subsequent resource offer will contain the
+following reserved resources:</p>
+<pre><code>    {
+      &quot;allocation_info&quot;: { &quot;role&quot;: &quot;engineering&quot; },
+      &quot;id&quot;: &lt;offer_id&gt;,
+      &quot;framework_id&quot;: &lt;framework_id&gt;,
+      &quot;slave_id&quot;: &lt;slave_id&gt;,
+      &quot;hostname&quot;: &lt;hostname&gt;,
+      &quot;resources&quot;: [
+        {
+          &quot;allocation_info&quot;: { &quot;role&quot;: &quot;engineering&quot; },
+          &quot;name&quot;: &quot;cpus&quot;,
+          &quot;type&quot;: &quot;SCALAR&quot;,
+          &quot;scalar&quot;: { &quot;value&quot;: 8 },
+          &quot;role&quot;: &quot;engineering&quot;,
+          &quot;reservation&quot;: {
+            &quot;principal&quot;: &lt;framework_principal&gt;
+          }
+        },
+        {
+          &quot;allocation_info&quot;: { &quot;role&quot;: &quot;engineering&quot; },
+          &quot;name&quot;: &quot;mem&quot;,
+          &quot;type&quot;: &quot;SCALAR&quot;,
+          &quot;scalar&quot;: { &quot;value&quot;: 4096 },
+          &quot;role&quot;: &quot;engineering&quot;,
+          &quot;reservation&quot;: {
+            &quot;principal&quot;: &lt;framework_principal&gt;
+          }
+        },
+      ]
+    }
+</code></pre>
+<h4 id="offeroperationunreserve-without-reservation_refinement"><a class="header" href="#offeroperationunreserve-without-reservation_refinement"><code>Offer::Operation::Unreserve</code> (<strong>without</strong> <code>RESERVATION_REFINEMENT</code>)</a></h4>
+<p>A framework can unreserve resources through the resource offer cycle.
+In <a href="#offer-operation-reserve">Offer::Operation::Reserve</a>, we reserved 8 CPUs
+and 4096 MB of RAM on a particular slave for one of our subscribed roles
+(e.g. <code>&quot;engineering&quot;</code>). The master will continue to only offer these reserved
+resources to the reservation's <code>role</code>. Suppose we would like to unreserve
+these resources. First, we receive a resource offer (copy/pasted from above):</p>
+<pre><code>    {
+      &quot;allocation_info&quot;: { &quot;role&quot;: &quot;engineering&quot; },
+      &quot;id&quot;: &lt;offer_id&gt;,
+      &quot;framework_id&quot;: &lt;framework_id&gt;,
+      &quot;slave_id&quot;: &lt;slave_id&gt;,
+      &quot;hostname&quot;: &lt;hostname&gt;,
+      &quot;resources&quot;: [
+        {
+          &quot;allocation_info&quot;: { &quot;role&quot;: &quot;engineering&quot; },
+          &quot;name&quot;: &quot;cpus&quot;,
+          &quot;type&quot;: &quot;SCALAR&quot;,
+          &quot;scalar&quot;: { &quot;value&quot;: 8 },
+          &quot;role&quot;: &quot;engineering&quot;,
+          &quot;reservation&quot;: {
+            &quot;principal&quot;: &lt;framework_principal&gt;
+          }
+        },
+        {
+          &quot;allocation_info&quot;: { &quot;role&quot;: &quot;engineering&quot; },
+          &quot;name&quot;: &quot;mem&quot;,
+          &quot;type&quot;: &quot;SCALAR&quot;,
+          &quot;scalar&quot;: { &quot;value&quot;: 4096 },
+          &quot;role&quot;: &quot;engineering&quot;,
+          &quot;reservation&quot;: {
+            &quot;principal&quot;: &lt;framework_principal&gt;
+          }
+        },
+      ]
+    }
+</code></pre>
+<p>We can unreserve the 8 CPUs and 4096 MB of RAM by sending the following
+<code>Offer::Operation</code> message. <code>Offer::Operation::Unreserve</code> has a <code>resources</code>
+field which we can use to specify the resources to be unreserved.</p>
+<pre><code>    {
+      &quot;type&quot;: Offer::Operation::UNRESERVE,
+      &quot;unreserve&quot;: {
+        &quot;resources&quot;: [
+          {
+            &quot;allocation_info&quot;: { &quot;role&quot;: &quot;engineering&quot; },
+            &quot;name&quot;: &quot;cpus&quot;,
+            &quot;type&quot;: &quot;SCALAR&quot;,
+            &quot;scalar&quot;: { &quot;value&quot;: 8 },
+            &quot;role&quot;: &quot;engineering&quot;,
+            &quot;reservation&quot;: {
+              &quot;principal&quot;: &lt;framework_principal&gt;
+            }
+          },
+          {
+            &quot;allocation_info&quot;: { &quot;role&quot;: &quot;engineering&quot; },
+            &quot;name&quot;: &quot;mem&quot;,
+            &quot;type&quot;: &quot;SCALAR&quot;,
+            &quot;scalar&quot;: { &quot;value&quot;: 4096 },
+            &quot;role&quot;: &quot;engineering&quot;,
+            &quot;reservation&quot;: {
+              &quot;principal&quot;: &lt;framework_principal&gt;
+            }
+          }
+        ]
+      }
+    }
+</code></pre>
+<p>The unreserved resources may now be offered to other frameworks.</p>
+<p><a name="offer-operation-reserve-reservation-refinement"></a></p>
+<h4 id="offeroperationreserve-with-reservation_refinement"><a class="header" href="#offeroperationreserve-with-reservation_refinement"><code>Offer::Operation::Reserve</code> (<strong>with</strong> <code>RESERVATION_REFINEMENT</code>)</a></h4>
+<p>A framework that wants to create a refined reservation needs to enable
+the <code>RESERVATION_REFINEMENT</code> capability. Doing so will allow the framework
+to use the <code>reservations</code> field in the <code>Resource</code> message in order to
+<strong>push</strong> a refined reservation.</p>
+<p>Since reserved resources are offered to any of the child roles under the role
+for which they are reserved for, they can get <strong>allocated</strong> to say,
+<code>&quot;engineering/backend&quot;</code> while being <strong>reserved</strong> for <code>&quot;engineering&quot;</code>.
+It can then be refined to be <strong>reserved</strong> for <code>&quot;engineering/backend&quot;</code>.</p>
+<p>Note that the refined reservation role must match the offer's allocation role.</p>
+<p>Suppose we receive a resource offer with 12 CPUs and 6144 MB of RAM reserved to
+<code>&quot;engineering&quot;</code>, allocated to role <code>&quot;engineering/backend&quot;</code>.</p>
+<pre><code>    {
+      &quot;allocation_info&quot;: { &quot;role&quot;: &quot;engineering/backend&quot; },
+      &quot;id&quot;: &lt;offer_id&gt;,
+      &quot;framework_id&quot;: &lt;framework_id&gt;,
+      &quot;slave_id&quot;: &lt;slave_id&gt;,
+      &quot;hostname&quot;: &lt;hostname&gt;,
+      &quot;resources&quot;: [
+        {
+          &quot;allocation_info&quot;: { &quot;role&quot;: &quot;engineering/backend&quot; },
+          &quot;name&quot;: &quot;cpus&quot;,
+          &quot;type&quot;: &quot;SCALAR&quot;,
+          &quot;scalar&quot;: { &quot;value&quot;: 12 },
+          &quot;reservations&quot;: [
+            {
+              &quot;type&quot;: &quot;DYNAMIC&quot;,
+              &quot;role&quot;: &quot;engineering&quot;,
+              &quot;principal&quot;: &lt;principal&gt;,
+            }
+          ]
+        },
+        {
+          &quot;allocation_info&quot;: { &quot;role&quot;: &quot;engineering/backend&quot; },
+          &quot;name&quot;: &quot;mem&quot;,
+          &quot;type&quot;: &quot;SCALAR&quot;,
+          &quot;scalar&quot;: { &quot;value&quot;: 6144 },
+          &quot;reservations&quot;: [
+            {
+              &quot;type&quot;: &quot;DYNAMIC&quot;,
+              &quot;role&quot;: &quot;engineering&quot;,
+              &quot;principal&quot;: &lt;principal&gt;,
+            }
+          ]
+        }
+      ]
+    }
+</code></pre>
+<p>Take note of the fact that <code>role</code> and <code>reservation</code> are not set, and that there
+is a new field called <code>reservations</code> which represents the reservation state.
+With <code>RESERVATION_REFINEMENT</code> enabled, the framework receives resources in this
+new format where solely the <code>reservations</code> field is used for the reservation
+state, rather than <code>role</code>/<code>reservation</code> pair from pre-<code>RESERVATION_REFINEMENT</code>.</p>
+<p>We can reserve 8 CPUs and 4096 MB of RAM to <code>&quot;engineering/backend&quot;</code> by sending
+the following <code>Offer::Operation</code> message. <code>Offer::Operation::Reserve</code> has
+a <code>resources</code> field which we specify with the resources to be reserved.
+We must <strong>push</strong> a new <code>ReservationInfo</code> message onto the back of
+the <code>reservations</code> field. We must explicitly set the reservation's' <code>role</code> field
+to the offer's allocation role. The optional value of the <code>principal</code> field
+depends on whether or not the framework provided a principal when it registered
+with the master. If a principal was provided, then the resources' <code>principal</code>
+field must be equal to the framework's principal. If no principal was provided
+during registration, then the resources' <code>principal</code> field can take any value,
+or can be left unset.  Note that the <code>principal</code> field determines
+the &quot;reserver principal&quot; when <a href="authorization.html">authorization</a> is enabled, even
+if authentication is disabled.</p>
+<pre><code>    {
+      &quot;type&quot;: Offer::Operation::RESERVE,
+      &quot;reserve&quot;: {
+        &quot;resources&quot;: [
+          {
+            &quot;allocation_info&quot;: { &quot;role&quot;: &quot;engineering/backend&quot; },
+            &quot;name&quot;: &quot;cpus&quot;,
+            &quot;type&quot;: &quot;SCALAR&quot;,
+            &quot;scalar&quot;: { &quot;value&quot;: 8 },
+            &quot;reservations&quot;: [
+              {
+                &quot;type&quot;: &quot;DYNAMIC&quot;,
+                &quot;role&quot;: &quot;engineering&quot;,
+                &quot;principal&quot;: &lt;principal&gt;,
+              },
+              {
+                &quot;type&quot;: &quot;DYNAMIC&quot;,
+                &quot;role&quot;: &quot;engineering/backend&quot;,
+                &quot;principal&quot;: &lt;framework_principal&gt;,
+              }
+            ]
+          },
+          {
+            &quot;allocation_info&quot;: { &quot;role&quot;: &quot;engineering/backend&quot; },
+            &quot;name&quot;: &quot;mem&quot;,
+            &quot;type&quot;: &quot;SCALAR&quot;,
+            &quot;scalar&quot;: { &quot;value&quot;: 4096 },
+            &quot;reservations&quot;: [
+              {
+                &quot;type&quot;: &quot;DYNAMIC&quot;,
+                &quot;role&quot;: &quot;engineering&quot;,
+                &quot;principal&quot;: &lt;principal&gt;,
+              },
+              {
+                &quot;type&quot;: &quot;DYNAMIC&quot;,
+                &quot;role&quot;: &quot;engineering/backend&quot;,
+                &quot;principal&quot;: &lt;framework_principal&gt;,
+              }
+            ]
+          }
+        ]
+      }
+    }
+</code></pre>
+<p>If the reservation is successful, a subsequent resource offer will contain the
+following reserved resources:</p>
+<pre><code>    {
+      &quot;allocation_info&quot;: { &quot;role&quot;: &quot;engineering/backend&quot; },
+      &quot;id&quot;: &lt;offer_id&gt;,
+      &quot;framework_id&quot;: &lt;framework_id&gt;,
+      &quot;slave_id&quot;: &lt;slave_id&gt;,
+      &quot;hostname&quot;: &lt;hostname&gt;,
+      &quot;resources&quot;: [
+        {
+          &quot;allocation_info&quot;: { &quot;role&quot;: &quot;engineering/backend&quot; },
+          &quot;name&quot;: &quot;cpus&quot;,
+          &quot;type&quot;: &quot;SCALAR&quot;,
+          &quot;scalar&quot;: { &quot;value&quot;: 8 },
+          &quot;reservations&quot;: [
+            {
+              &quot;type&quot;: &quot;DYNAMIC&quot;,
+              &quot;role&quot;: &quot;engineering&quot;,
+              &quot;principal&quot;: &lt;principal&gt;,
+            },
+            {
+              &quot;type&quot;: &quot;DYNAMIC&quot;,
+              &quot;role&quot;: &quot;engineering/backend&quot;,
+              &quot;principal&quot;: &lt;framework_principal&gt;,
+            }
+          ]
+        },
+        {
+          &quot;allocation_info&quot;: { &quot;role&quot;: &quot;engineering/backend&quot; },
+          &quot;name&quot;: &quot;mem&quot;,
+          &quot;type&quot;: &quot;SCALAR&quot;,
+          &quot;scalar&quot;: { &quot;value&quot;: 4096 },
+          &quot;reservations&quot;: [
+            {
+              &quot;type&quot;: &quot;DYNAMIC&quot;,
+              &quot;role&quot;: &quot;engineering&quot;,
+              &quot;principal&quot;: &lt;principal&gt;,
+            },
+            {
+              &quot;type&quot;: &quot;DYNAMIC&quot;,
+              &quot;role&quot;: &quot;engineering/backend&quot;,
+              &quot;principal&quot;: &lt;framework_principal&gt;,
+            }
+          ]
+        },
+      ]
+    }
+</code></pre>
+<h4 id="offeroperationunreserve-with-reservation_refinement"><a class="header" href="#offeroperationunreserve-with-reservation_refinement"><code>Offer::Operation::Unreserve</code> (<strong>with</strong> <code>RESERVATION_REFINEMENT</code>)</a></h4>
+<p>A framework can unreserve resources through the resource offer cycle.
+In <a href="#offer-operation-reserve-reservation-refinement">Offer::Operation::Reserve</a>,
+we reserved 8 CPUs and 4096 MB of RAM on a particular slave for one of our
+subscribed roles (i.e. <code>&quot;engineering/backend&quot;</code>), previously reserved for
+<code>&quot;engineering&quot;</code>. When we unreserve these resources, they are returned to
+<code>&quot;engineering&quot;</code>, by the last <code>ReservationInfo</code> added to
+the <code>reservations</code> field being <strong>popped</strong>. First, we receive a resource offer
+(copy/pasted from above):</p>
+<pre><code>    {
+      &quot;allocation_info&quot;: { &quot;role&quot;: &quot;engineering/backend&quot; },
+      &quot;id&quot;: &lt;offer_id&gt;,
+      &quot;framework_id&quot;: &lt;framework_id&gt;,
+      &quot;slave_id&quot;: &lt;slave_id&gt;,
+      &quot;hostname&quot;: &lt;hostname&gt;,
+      &quot;resources&quot;: [
+        {
+          &quot;allocation_info&quot;: { &quot;role&quot;: &quot;engineering/backend&quot; },
+          &quot;name&quot;: &quot;cpus&quot;,
+          &quot;type&quot;: &quot;SCALAR&quot;,
+          &quot;scalar&quot;: { &quot;value&quot;: 8 },
+          &quot;reservations&quot;: [
+            {
+              &quot;type&quot;: &quot;DYNAMIC&quot;,
+              &quot;role&quot;: &quot;engineering&quot;,
+              &quot;principal&quot;: &lt;principal&gt;,
+            },
+            {
+              &quot;type&quot;: &quot;DYNAMIC&quot;,
+              &quot;role&quot;: &quot;engineering/backend&quot;,
+              &quot;principal&quot;: &lt;framework_principal&gt;,
+            }
+          ]
+        },
+        {
+          &quot;allocation_info&quot;: { &quot;role&quot;: &quot;engineering/backend&quot; },
+          &quot;name&quot;: &quot;mem&quot;,
+          &quot;type&quot;: &quot;SCALAR&quot;,
+          &quot;scalar&quot;: { &quot;value&quot;: 4096 },
+          &quot;reservations&quot;: [
+            {
+              &quot;type&quot;: &quot;DYNAMIC&quot;,
+              &quot;role&quot;: &quot;engineering&quot;,
+              &quot;principal&quot;: &lt;principal&gt;,
+            },
+            {
+              &quot;type&quot;: &quot;DYNAMIC&quot;,
+              &quot;role&quot;: &quot;engineering/backend&quot;,
+              &quot;principal&quot;: &lt;framework_principal&gt;,
+            }
+          ]
+        },
+      ]
+    }
+</code></pre>
+<p>We can unreserve the 8 CPUs and 4096 MB of RAM by sending the following
+<code>Offer::Operation</code> message. <code>Offer::Operation::Unreserve</code> has a <code>resources</code>
+field which we can use to specify the resources to be unreserved.</p>
+<pre><code>    {
+      &quot;type&quot;: Offer::Operation::UNRESERVE,
+      &quot;unreserve&quot;: {
+        &quot;resources&quot;: [
+          {
+            &quot;allocation_info&quot;: { &quot;role&quot;: &quot;engineering/backend&quot; },
+            &quot;name&quot;: &quot;cpus&quot;,
+            &quot;type&quot;: &quot;SCALAR&quot;,
+            &quot;scalar&quot;: { &quot;value&quot;: 8 },
+            &quot;reservations&quot;: [
+              {
+                &quot;type&quot;: &quot;DYNAMIC&quot;,
+                &quot;role&quot;: &quot;engineering&quot;,
+                &quot;principal&quot;: &lt;principal&gt;,
+              },
+              {
+                &quot;type&quot;: &quot;DYNAMIC&quot;,
+                &quot;role&quot;: &quot;engineering/backend&quot;,
+                &quot;principal&quot;: &lt;framework_principal&gt;,
+              }
+            ]
+          },
+          {
+            &quot;allocation_info&quot;: { &quot;role&quot;: &quot;engineering/backend&quot; },
+            &quot;name&quot;: &quot;mem&quot;,
+            &quot;type&quot;: &quot;SCALAR&quot;,
+            &quot;scalar&quot;: { &quot;value&quot;: 4096 },
+            &quot;reservations&quot;: [
+              {
+                &quot;type&quot;: &quot;DYNAMIC&quot;,
+                &quot;role&quot;: &quot;engineering&quot;,
+                &quot;principal&quot;: &lt;principal&gt;,
+              },
+              {
+                &quot;type&quot;: &quot;DYNAMIC&quot;,
+                &quot;role&quot;: &quot;engineering/backend&quot;,
+                &quot;principal&quot;: &lt;framework_principal&gt;,
+              }
+            ]
+          },
+        ]
+      }
+    }
+</code></pre>
+<p>The resources will now be reserved for <code>&quot;engineering&quot;</code> again, and may now be
+offered to <code>&quot;engineering&quot;</code> role itself, or other roles under <code>&quot;engineering&quot;</code>.</p>
+<h3 id="operator-http-endpoints"><a class="header" href="#operator-http-endpoints">Operator HTTP Endpoints</a></h3>
+<p>As described above, dynamic reservations can be made by a framework scheduler,
+typically in response to a resource offer. However, dynamic reservations can
+also be created and deleted by sending HTTP requests to the <code>/reserve</code> and
+<code>/unreserve</code> endpoints, respectively. This capability is intended for use by
+operators and administrative tools.</p>
+<h4 id="reserve-since-0250"><a class="header" href="#reserve-since-0250"><code>/reserve</code> (since 0.25.0)</a></h4>
+<p>Suppose we want to reserve 8 CPUs and 4096 MB of RAM for the <code>ads</code> role on a
+slave with id=<code>&lt;slave_id&gt;</code> (note that it is up to the user to find the ID of the
+slave that hosts the desired resources; the request will fail if sufficient
+unreserved resources cannot be found on the slave). In this case, the principal
+that must be included in the <code>reservation</code> field of the reserved resources
+depends on the status of HTTP authentication on the master. If HTTP
+authentication is enabled, then the principal in the reservation should match
+the authenticated principal provided in the request's HTTP headers. If HTTP
+authentication is disabled, then the principal in the reservation can take any
+value, or can be left unset. Note that the <code>principal</code> field determines the
+&quot;reserver principal&quot; when <a href="authorization.html">authorization</a> is enabled, even if
+HTTP authentication is disabled.</p>
+<p>We send an HTTP POST request to the master's
+<a href="endpoints/master/reserve.html">/reserve</a> endpoint like so:</p>
+<pre><code>    $ curl -i \
+      -u &lt;operator_principal&gt;:&lt;password&gt; \
+      -d slaveId=&lt;slave_id&gt; \
+      -d resources='[
+        {
+          &quot;name&quot;: &quot;cpus&quot;,
+          &quot;type&quot;: &quot;SCALAR&quot;,
+          &quot;scalar&quot;: { &quot;value&quot;: 8 },
+          &quot;reservations&quot;: [
+            {
+              &quot;type&quot;: &quot;DYNAMIC&quot;,
+              &quot;role&quot;: &quot;ads&quot;,
+              &quot;principal&quot;: &lt;operator_principal&gt;,
+            }
+          ]
+        },
+        {
+          &quot;name&quot;: &quot;mem&quot;,
+          &quot;type&quot;: &quot;SCALAR&quot;,
+          &quot;scalar&quot;: { &quot;value&quot;: 4096 },
+          &quot;reservations&quot;: [
+            {
+              &quot;type&quot;: &quot;DYNAMIC&quot;,
+              &quot;role&quot;: &quot;ads&quot;,
+              &quot;principal&quot;: &lt;operator_principal&gt;,
+            }
+          ]
+        }
+      ]' \
+      -X POST http://&lt;ip&gt;:&lt;port&gt;/master/reserve
+</code></pre>
+<p>The user receives one of the following HTTP responses:</p>
+<ul>
+<li><code>202 Accepted</code>: Request accepted (see below).</li>
+<li><code>400 BadRequest</code>: Invalid arguments (e.g., missing parameters).</li>
+<li><code>401 Unauthorized</code>: Unauthenticated request.</li>
+<li><code>403 Forbidden</code>: Unauthorized request.</li>
+<li><code>409 Conflict</code>: Insufficient resources to satisfy the reserve operation.</li>
+</ul>
+<p>This endpoint returns the 202 ACCEPTED HTTP status code, which indicates that
+the reserve operation has been validated successfully by the master. The
+request is then forwarded asynchronously to the Mesos slave where the reserved
+resources are located. That asynchronous message may not be delivered or
+reserving resources at the slave might fail, in which case no resources will be
+reserved. To determine if a reserve operation has succeeded, the user can
+examine the state of the appropriate Mesos slave (e.g., via the slave's
+<a href="endpoints/slave/state.html">/state</a> HTTP endpoint).</p>
+<h4 id="unreserve-since-0250"><a class="header" href="#unreserve-since-0250"><code>/unreserve</code> (since 0.25.0)</a></h4>
+<p>Suppose we want to unreserve the resources that we dynamically reserved above.
+We can send an HTTP POST request to the master's
+<a href="endpoints/master/unreserve.html">/unreserve</a> endpoint like so:</p>
+<pre><code>    $ curl -i \
+      -u &lt;operator_principal&gt;:&lt;password&gt; \
+      -d slaveId=&lt;slave_id&gt; \
+      -d resources='[
+        {
+          &quot;name&quot;: &quot;cpus&quot;,
+          &quot;type&quot;: &quot;SCALAR&quot;,
+          &quot;scalar&quot;: { &quot;value&quot;: 8 },
+          &quot;reservations&quot;: [
+            {
+              &quot;type&quot;: &quot;DYNAMIC&quot;,
+              &quot;role&quot;: &quot;ads&quot;,
+              &quot;principal&quot;: &lt;reserver_principal&gt;,
+            }
+          ]
+        },
+        {
+          &quot;name&quot;: &quot;mem&quot;,
+          &quot;type&quot;: &quot;SCALAR&quot;,
+          &quot;scalar&quot;: { &quot;value&quot;: 4096 },
+          &quot;reservations&quot;: [
+            {
+              &quot;type&quot;: &quot;DYNAMIC&quot;,
+              &quot;role&quot;: &quot;ads&quot;,
+              &quot;principal&quot;: &lt;reserver_principal&gt;,
+            }
+          ]
+        }
+      ]' \
+      -X POST http://&lt;ip&gt;:&lt;port&gt;/master/unreserve
+</code></pre>
+<p>Note that <code>reserver_principal</code> is the principal that was used to make the
+reservation, while <code>operator_principal</code> is the principal that is attempting to
+perform the unreserve operation---in some cases, these principals might be the
+same. The <code>operator_principal</code> must be <a href="authorization.html">authorized</a> to
+unreserve reservations made by <code>reserver_principal</code>.</p>
+<p>The user receives one of the following HTTP responses:</p>
+<ul>
+<li><code>202 Accepted</code>: Request accepted (see below).</li>
+<li><code>400 BadRequest</code>: Invalid arguments (e.g., missing parameters).</li>
+<li><code>401 Unauthorized</code>: Unauthenticated request.</li>
+<li><code>403 Forbidden</code>: Unauthorized request.</li>
+<li><code>409 Conflict</code>: Insufficient resources to satisfy the unreserve operation.</li>
+</ul>
+<p>This endpoint returns the 202 ACCEPTED HTTP status code, which indicates that
+the unreserve operation has been validated successfully by the master. The
+request is then forwarded asynchronously to the Mesos slave where the reserved
+resources are located. That asynchronous message may not be delivered or
+unreserving resources at the slave might fail, in which case no resources will
+be unreserved. To determine if an unreserve operation has succeeded, the user
+can examine the state of the appropriate Mesos slave (e.g., via the slave's
+<a href="endpoints/slave/state.html">/state</a> HTTP endpoint).</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="quota.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="shared-resources.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="quota.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="shared-resources.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

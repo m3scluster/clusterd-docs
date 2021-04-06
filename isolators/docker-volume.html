@@ -1,0 +1,585 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Docker Volume Support - Apache Mesos</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="../favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="../favicon.png">
+        
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        
+        <link rel="stylesheet" href="../css/print.css" media="print">
+        
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="../fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">Fundamentals</li><li class="chapter-item expanded "><a href="../architecture.html"><strong aria-hidden="true">1.</strong> Mesos Architecture providing an overview of Mesos concepts</a></li><li class="chapter-item expanded "><a href="../presentations.html"><strong aria-hidden="true">2.</strong> Video and Slides of Mesos Presentations</a></li><li class="chapter-item expanded "><a href="../versioning.html"><strong aria-hidden="true">3.</strong> Mesos Release and Support Policy</a></li><li class="chapter-item expanded affix "><li class="part-title">Build / Installation</li><li class="chapter-item expanded "><a href="../building.html"><strong aria-hidden="true">4.</strong> Building for basic instructions on compiling and installing Mesos.</a></li><li class="chapter-item expanded "><a href="../binary-packages.html"><strong aria-hidden="true">5.</strong> Binary Packages for how to use Mesos binary packages.</a></li><li class="chapter-item expanded "><a href="../configuration.html"><strong aria-hidden="true">6.</strong> Configuration for build configuration options.</a></li><li class="chapter-item expanded "><a href="../cmake.html"><strong aria-hidden="true">7.</strong> CMake for details about using the new CMake build system.</a></li><li class="chapter-item expanded "><a href="../windows.html"><strong aria-hidden="true">8.</strong> Windows Support for the state of Windows support in Mesos.</a></li><li class="chapter-item expanded affix "><li class="part-title">Administration</li><li class="chapter-item expanded "><a href="../configuration.html"><strong aria-hidden="true">9.</strong> Configuration for command-line arguments.</a></li><li class="chapter-item expanded "><a href="../high-availability.html"><strong aria-hidden="true">10.</strong> High Availability Master Setup</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../replicated-log-internals.html"><strong aria-hidden="true">10.1.</strong> Replicated Log for information on the Mesos replicated log.</a></li></ol></li><li class="chapter-item expanded "><a href="../agent-recovery.html"><strong aria-hidden="true">11.</strong> Fault Tolerant Agent Setup</a></li><li class="chapter-item expanded "><a href="../framework-rate-limiting.html"><strong aria-hidden="true">12.</strong> Framework Rate Limiting</a></li><li class="chapter-item expanded "><a href="../maintenance.html"><strong aria-hidden="true">13.</strong> Maintenance for performing maintenance on a Mesos cluster.</a></li><li class="chapter-item expanded "><a href="../upgrades.html"><strong aria-hidden="true">14.</strong> Upgrades for upgrading a Mesos cluster.</a></li><li class="chapter-item expanded "><a href="../downgrades.html"><strong aria-hidden="true">15.</strong> Downgrades for downgrading a Mesos cluster.</a></li><li class="chapter-item expanded "><a href="../logging.html"><strong aria-hidden="true">16.</strong> Logging</a></li><li class="chapter-item expanded "><a href="../monitoring.html"><strong aria-hidden="true">17.</strong> Monitoring / Metrics</a></li><li class="chapter-item expanded "><a href="../cli.html"><strong aria-hidden="true">18.</strong> Debugging using the new CLI</a></li><li class="chapter-item expanded "><a href="../operational-guide.html"><strong aria-hidden="true">19.</strong> Operational Guide</a></li><li class="chapter-item expanded "><a href="../fetcher.html"><strong aria-hidden="true">20.</strong> Fetcher Cache Configuration</a></li><li class="chapter-item expanded "><a href="../fault-domains.html"><strong aria-hidden="true">21.</strong> Fault Domains</a></li><li class="chapter-item expanded "><a href="../performance-profiling.html"><strong aria-hidden="true">22.</strong> Performance Profiling for debugging performance issues in Mesos.</a></li><li class="chapter-item expanded "><a href="../memory-profiling.html"><strong aria-hidden="true">23.</strong> Memory Profiling for debugging potential memory leaks in Mesos.</a></li><li class="chapter-item expanded affix "><li class="part-title">Resource Management</li><li class="chapter-item expanded "><a href="../attributes-resources.html"><strong aria-hidden="true">24.</strong> Attributes and Resources for how to describe the agents that comprise a cluster.</a></li><li class="chapter-item expanded "><a href="../roles.html"><strong aria-hidden="true">25.</strong> Using Resource Roles</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../weights.html"><strong aria-hidden="true">25.1.</strong> Resource Role Weights for fair sharing.</a></li><li class="chapter-item expanded "><a href="../quota.html"><strong aria-hidden="true">25.2.</strong> Resource Role Quota for how to configure Mesos to provide guaranteed resource allocations for use by a role.</a></li><li class="chapter-item expanded "><a href="../reservation.html"><strong aria-hidden="true">25.3.</strong> Reservations for how operators and frameworks can reserve resources on individual agents for use by a role.</a></li><li class="chapter-item expanded "><a href="../shared-resources.html"><strong aria-hidden="true">25.4.</strong> Shared Resources for how to share persistent volumes between tasks managed by different executors on the same agent.</a></li></ol></li><li class="chapter-item expanded "><a href="../oversubscription.html"><strong aria-hidden="true">26.</strong> Oversubscription for how to configure Mesos to take advantage of unused resources to launch “best-effort” tasks.</a></li><li class="chapter-item expanded affix "><li class="part-title">Security</li><li class="chapter-item expanded "><a href="../authentication.html"><strong aria-hidden="true">27.</strong> Authentication</a></li><li class="chapter-item expanded "><a href="../authorization.html"><strong aria-hidden="true">28.</strong> Authorization</a></li><li class="chapter-item expanded "><a href="../ssl.html"><strong aria-hidden="true">29.</strong> SSL</a></li><li class="chapter-item expanded "><a href="../secrets.html"><strong aria-hidden="true">30.</strong> Secrets for managing secrets within Mesos.</a></li><li class="chapter-item expanded affix "><li class="part-title">Containerization</li><li class="chapter-item expanded "><a href="../containerizers.html"><strong aria-hidden="true">31.</strong> Containerizer Overview</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../containerizer-internals.html"><strong aria-hidden="true">31.1.</strong> Containerizer Internals for implementation details of containerizers.</a></li><li class="chapter-item expanded "><a href="../docker-containerizer.html"><strong aria-hidden="true">31.2.</strong> Docker Containerizer for launching a Docker image as a Task, or as an Executor.</a></li><li class="chapter-item expanded "><a href="../mesos-containerizer.html"><strong aria-hidden="true">31.3.</strong> Mesos Containerizer default containerizer, supports both Linux and POSIX systems.</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../container-image.html"><strong aria-hidden="true">31.3.1.</strong> Container Images for supporting container images in Mesos containerizer.</a></li><li class="chapter-item expanded "><a href="../isolators/docker-volume.html" class="active"><strong aria-hidden="true">31.3.2.</strong> Docker Volume Support</a></li><li class="chapter-item expanded "><a href="../gpu-support.html"><strong aria-hidden="true">31.3.3.</strong> Nvidia GPU Support for how to run Mesos with Nvidia GPU support.</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../sandbox.html"><strong aria-hidden="true">32.</strong> Container Sandboxes</a></li><li class="chapter-item expanded "><a href="../container-volume.html"><strong aria-hidden="true">33.</strong> Container Volumes</a></li><li class="chapter-item expanded "><a href="../nested-container-and-task-group.html"><strong aria-hidden="true">34.</strong> Nested Container and Task Group (Pod)</a></li><li class="chapter-item expanded "><a href="../standalone-containers.html"><strong aria-hidden="true">35.</strong> Standalone Containers</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">Apache Mesos</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                        <a href="https://github.com/AVENTER-UG/mesos-docs/" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <hr />
+<h2>title: Apache Mesos - Docker Volume Support in Mesos Containerizer
+layout: documentation</h2>
+<h1 id="docker-volume-support-in-mesos-containerizer"><a class="header" href="#docker-volume-support-in-mesos-containerizer">Docker Volume Support in Mesos Containerizer</a></h1>
+<p>Mesos 1.0 adds Docker volume support to the
+<a href="../mesos-containerizer.html">MesosContainerizer</a> (a.k.a., the universal
+containerizer) by introducing the new <code>docker/volume</code> isolator.</p>
+<p>This document describes the motivation, overall architecture, configuration
+steps for enabling Docker volume isolator, and required framework changes.</p>
+<h2 id="table-of-contents"><a class="header" href="#table-of-contents">Table of Contents</a></h2>
+<ul>
+<li><a href="#motivation">Motivation</a></li>
+<li><a href="#how-does-it-work">How does it work?</a></li>
+<li><a href="#configuration">Configuration</a>
+<ul>
+<li><a href="#pre-conditions">Pre-conditions</a></li>
+<li><a href="#configure-Docker-volume-isolator">Configuring Docker Volume Isolator</a></li>
+<li><a href="#enable-frameworks">Enabling frameworks to use Docker volumes</a>
+<ul>
+<li><a href="#volume-protobuf">Volume Protobuf</a></li>
+<li><a href="#examples">Examples</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#limitations">Limitations</a></li>
+<li><a href="#test-it-out">Test it out!</a></li>
+</ul>
+<h2 id="a-namemotivationamotivation"><a class="header" href="#a-namemotivationamotivation"><a name="motivation"></a>Motivation</a></h2>
+<p>The integration of external storage in Mesos is an attractive feature.  The
+Mesos <a href="../persistent-volume.html">persistent volume</a> primitives allow stateful
+services to persist data on an agent's local storage. However, the amount of
+storage capacity that can be directly attached to a single agent is
+limited---certain applications (e.g., databases) would like to access more data
+than can easily be attached to a single node. Using external storage can
+also simplify data migration between agents/containers, and can make backups and
+disaster recovery easier.</p>
+<p>The <a href="https://github.com/Docker/Docker/blob/master/docs/extend/plugins_volume.md">Docker Volume Driver
+API</a>
+defines an interface between the container runtime and external storage systems.
+It has been widely adopted. There are Docker volume plugins for a variety of
+storage drivers, such as <a href="https://github.com/rancher/convoy">Convoy</a>,
+<a href="https://docs.clusterhq.com/en/latest/Docker-integration/">Flocker</a>,
+<a href="https://github.com/calavera/Docker-volume-glusterfs">GlusterFS</a>, and
+<a href="https://github.com/emccode/rexray">REX-Ray</a>. Each plugin typically supports a
+variety of external storage systems, such as Amazon EBS, OpenStack Cinder, etc.</p>
+<p>Therefore, introducing support for external storage in Mesos through the
+<code>docker/volume</code> isolator provides Mesos with tremendous flexibility to
+orchestrate containers on a wide variety of external storage technologies.</p>
+<h2 id="a-namehow-does-it-workahow-does-it-work"><a class="header" href="#a-namehow-does-it-workahow-does-it-work"><a name="how-does-it-work"></a>How does it work?</a></h2>
+<p><img src="images/docker-volume-isolator.png" alt="Docker Volume Isolator Architecture" /></p>
+<p>The <code>docker/volume</code> isolator interacts with Docker volume plugins using
+<a href="https://github.com/emccode/dvdcli">dvdcli</a>, an open-source command line tool
+from EMC.</p>
+<p>When a new task with Docker volumes is launched, the <code>docker/volume</code> isolator
+will invoke <a href="https://github.com/emccode/dvdcli">dvdcli</a> to mount the
+corresponding Docker volume onto the host and then onto the container.</p>
+<p>When the task finishes or is killed, the <code>docker/volume</code> isolator will invoke
+<a href="https://github.com/emccode/dvdcli">dvdcli</a> to unmount the corresponding Docker
+volume.</p>
+<p>The detailed workflow for the <code>docker/volume</code> isolator is as follows:</p>
+<ol>
+<li>
+<p>A framework specifies external volumes in <code>ContainerInfo</code> when launching a
+task.</p>
+</li>
+<li>
+<p>The master sends the launch task message to the agent.</p>
+</li>
+<li>
+<p>The agent receives the message and asks all isolators (including the
+<code>docker/volume</code> isolator) to prepare for the container with the
+<code>ContainerInfo</code>.</p>
+</li>
+<li>
+<p>The isolator invokes <a href="https://github.com/emccode/dvdcli">dvdcli</a> to mount the
+corresponding external volume to a mount point on the host.</p>
+</li>
+<li>
+<p>The agent launches the container and bind-mounts the volume into the
+container.</p>
+</li>
+<li>
+<p>The bind-mounted volume inside the container will be unmounted from the
+container automatically when the container finishes, as the container is in
+its own mount namespace.</p>
+</li>
+<li>
+<p>The agent invokes isolator cleanup which invokes
+<a href="https://github.com/emccode/dvdcli">dvdcli</a> to unmount all mount points for
+the container.</p>
+</li>
+</ol>
+<h2 id="a-nameconfigurationaconfiguration"><a class="header" href="#a-nameconfigurationaconfiguration"><a name="configuration"></a>Configuration</a></h2>
+<p>To use the <code>docker/volume</code> isolator, there are certain actions required by
+operators and framework developers. In this section we list the steps required
+by the operator to configure <code>docker/volume</code> isolator and the steps required by
+framework developers to specify the Docker volumes.</p>
+<h3 id="a-namepre-conditionsapre-conditions"><a class="header" href="#a-namepre-conditionsapre-conditions"><a name="pre-conditions"></a>Pre-conditions</a></h3>
+<ul>
+<li>
+<p>Install <code>dvdcli</code> version
+<a href="https://github.com/emccode/dvdcli/releases/tag/v0.1.0">0.1.0</a> on each agent.</p>
+</li>
+<li>
+<p>Install the <a href="https://github.com/Docker/Docker/blob/master/docs/extend/plugins.md#volume-plugins">Docker volume
+plugin</a>
+on each agent.</p>
+</li>
+<li>
+<p>Explicitly create the Docker volumes that are going to be accessed by Mesos
+tasks. If this is not done, volumes will be implicitly created by
+<a href="https://github.com/emccode/dvdcli">dvdcli</a> but the volumes may not fit into
+framework resource requirement well.</p>
+</li>
+</ul>
+<h3 id="a-nameconfigure-docker-volume-isolatoraconfiguring-docker-volume-isolator"><a class="header" href="#a-nameconfigure-docker-volume-isolatoraconfiguring-docker-volume-isolator"><a name="configure-Docker-volume-isolator"></a>Configuring Docker Volume Isolator</a></h3>
+<p>In order to configure the <code>docker/volume</code> isolator, the operator needs to
+configure two flags at agent startup as follows:</p>
+<pre><code class="language-{.console}">  sudo mesos-agent \
+    --master=&lt;master IP&gt; \
+    --ip=&lt;agent IP&gt; \
+    --work_dir=/var/lib/mesos \
+    --isolation=filesystem/linux,docker/volume \
+    --docker_volume_checkpoint_dir=&lt;mount info checkpoint path&gt;
+</code></pre>
+<p>The <code>docker/volume</code> isolator must be specified in the <code>--isolation</code> flag at
+agent startup; the <code>docker/volume</code> isolator has a dependency on the
+<code>filesystem/linux</code> isolator.</p>
+<p>The <code>--docker_volume_checkpoint_dir</code> is an optional flag with a default value of
+<code>/var/run/mesos/isolators/docker/volume</code>. The <code>docker/volume</code> isolator will
+checkpoint all Docker volume mount point information under
+<code>--docker_volume_checkpoint_dir</code> for recovery. The checkpoint information under
+the default <code>--docker_volume_checkpoint_dir</code> will be cleaned up after agent
+restart. Therefore, it is recommended to set <code>--docker_volume_checkpoint_dir</code> to
+a directory which will survive agent restart.</p>
+<h3 id="a-nameenable-frameworksaenabling-frameworks-to-use-docker-volumes"><a class="header" href="#a-nameenable-frameworksaenabling-frameworks-to-use-docker-volumes"><a name="enable-frameworks"></a>Enabling frameworks to use Docker volumes</a></h3>
+<h4 id="a-namevolume-protobufavolume-protobuf"><a class="header" href="#a-namevolume-protobufavolume-protobuf"><a name="volume-protobuf"></a>Volume Protobuf</a></h4>
+<p>The <code>Volume</code> protobuf message has been updated to support Docker volumes.</p>
+<pre><code class="language-{.proto}">message Volume {
+  ...
+
+  required string container_path = 1;
+
+  message Source {
+    enum Type {
+      UNKNOWN = 0;
+      DOCKER_VOLUME = 1;
+    }
+
+    message DockerVolume {
+      optional string driver = 1;
+      required string name = 2;
+      optional Parameters driver_options = 3;
+    }
+
+    optional Type type = 1;
+    optional DockerVolume docker_volume = 2;
+  }
+
+  optional Source source = 5;
+}
+</code></pre>
+<p>When requesting a Docker volume for a container, the framework developer needs to
+set <code>Volume</code> for the container, which includes <code>mode</code>, <code>container_path</code> and
+<code>source</code>.</p>
+<p>The <code>source</code> field specifies where the volume comes from. Framework developers need to
+specify the <code>type</code>, Docker volume <code>driver</code>, <code>name</code> and <code>options</code>. At present,
+only the <code>DOCKER_VOLUME</code> type is supported; we plan to add support for more
+types of volumes in the future.</p>
+<p>How to specify <code>container_path</code>:</p>
+<ol>
+<li>
+<p>If you are launching a Mesos container <code>without rootfs</code>. If <code>container_path</code>
+is an absolute path, you need to make sure the absolute path exists on your
+host root file system as the container shares the host root file system;
+otherwise, the task will fail.</p>
+</li>
+<li>
+<p>For other cases like launching a Mesos container <code>without rootfs</code> and
+<code>container_path</code> is a relative path, or launching a task <code>with rootfs</code> and
+<code>container_path</code> is an absolute path, or launching a task <code>with rootfs</code> and
+<code>container_path</code> as a relative path, the isolator will help create the
+<code>container_path</code> as the mount point.</p>
+</li>
+</ol>
+<p>The following table summarizes the above rules for <code>container_path</code>:</p>
+<table class="table table-striped">
+  <tr>
+    <th></th>
+    <th>Container with rootfs</th>
+    <th>Container without rootfs</th>
+  </tr>
+  <tr>
+    <td>Absolute container_path</td>
+    <td>No need to exist</td>
+    <td>Must exist</td>
+  </tr>
+  <tr>
+    <td>Relative container_path</td>
+    <td>No need to exist</td>
+    <td>No need to exist</td>
+  </tr>
+</table>
+<h4 id="a-nameexamplesaexamples"><a class="header" href="#a-nameexamplesaexamples"><a name="examples"></a>Examples</a></h4>
+<ol>
+<li>
+<p>Launch a task with one Docker volume using the default command executor.</p>
+<pre><code class="language-{.json}">TaskInfo {
+  ...
+  &quot;command&quot; : ...,
+  &quot;container&quot; : {
+    &quot;volumes&quot; : [
+      {
+        &quot;container_path&quot; : &quot;/mnt/volume&quot;,
+        &quot;mode&quot; : &quot;RW&quot;,
+        &quot;source&quot; : {
+          &quot;type&quot; : &quot;DOCKER_VOLUME&quot;,
+          &quot;docker_volume&quot; : {
+            &quot;driver&quot; : &quot;rexray&quot;,
+            &quot;name&quot; : &quot;myvolume&quot;
+          }
+        }
+      }
+    ]
+  }
+}
+</code></pre>
+</li>
+<li>
+<p>Launch a task with two Docker volumes using the default command executor.</p>
+<pre><code class="language-{.json}">TaskInfo {
+  ...
+  &quot;command&quot; : ...,
+  &quot;container&quot; : {
+    &quot;volumes&quot; : [
+      {
+        &quot;container_path&quot; : &quot;volume1&quot;,
+        &quot;mode&quot; : &quot;RW&quot;,
+        &quot;source&quot; : {
+          &quot;type&quot; : &quot;DOCKER_VOLUME&quot;,
+          &quot;docker_volume&quot; : {
+            &quot;driver&quot; : &quot;rexray&quot;,
+            &quot;name&quot; : &quot;volume1&quot;
+          }
+        }
+      },
+      {
+        &quot;container_path&quot; : &quot;volume2&quot;,
+        &quot;mode&quot; : &quot;RW&quot;,
+        &quot;source&quot; : {
+          &quot;type&quot; : &quot;DOCKER_VOLUME&quot;,
+          &quot;docker_volume&quot; : {
+            &quot;driver&quot; : &quot;rexray&quot;,
+            &quot;name&quot; : &quot;volume2&quot;,
+            &quot;driver_options&quot; : {
+              &quot;parameter&quot; : [{
+                &quot;key&quot; : &lt;key&gt;,
+                &quot;value&quot; : &lt;value&gt;
+              }, {
+                &quot;key&quot; : &lt;key&gt;,
+                &quot;value&quot; : &lt;value&gt;
+              }]
+            }
+          }
+        }
+      }
+    ]
+  }
+}
+</code></pre>
+</li>
+</ol>
+<p><strong>NOTE</strong>: The task launch will be failed if one container uses multiple Docker
+volumes with the same <code>driver</code> and <code>name</code>.</p>
+<h2 id="a-namelimitationsalimitations"><a class="header" href="#a-namelimitationsalimitations"><a name="limitations"></a>Limitations</a></h2>
+<p>Using the same Docker volume in both the <a href="../docker-containerizer.html">Docker
+Containerizer</a> and the <a href="../mesos-containerizer.html">Mesos
+Containerizer</a> simultaneously is <strong>strongly
+discouraged</strong>, because the MesosContainerizer has its own reference
+counting to decide when to unmount a Docker volume. Otherwise, it
+would be problematic if a Docker volume is unmounted by
+MesosContainerizer but the DockerContainerizer is still using it.</p>
+<h2 id="a-nametest-it-outatest-it-out"><a class="header" href="#a-nametest-it-outatest-it-out"><a name="test-it-out"></a>Test it out!</a></h2>
+<p>This section presents examples for launching containers with Docker volumes.
+The following example is using <a href="https://github.com/rancher/convoy/">convoy</a>
+as the Docker volume driver.</p>
+<p>Start the Mesos master.</p>
+<pre><code class="language-{.console}">  $ sudo mesos-master --work_dir=/tmp/mesos/master
+</code></pre>
+<p>Start the Mesos agent.</p>
+<pre><code class="language-{.console}">  $ sudo mesos-agent \
+    --master=&lt;MASTER_IP&gt;:5050 \
+    --isolation=docker/volume,docker/runtime,filesystem/linux \
+    --work_dir=/tmp/mesos/agent \
+    --image_providers=docker \
+    --executor_environment_variables=&quot;{}&quot;
+</code></pre>
+<p>Create a volume named as <code>myvolume</code> with
+<a href="https://github.com/rancher/convoy/">convoy</a>.</p>
+<pre><code class="language-{.console}">  $ convoy create myvolume
+</code></pre>
+<p>Prepare a volume json file named as <code>myvolume.json</code> with following content.</p>
+<pre><code>  [{
+    &quot;container_path&quot;:&quot;\/tmp\/myvolume&quot;,
+    &quot;mode&quot;:&quot;RW&quot;,
+    &quot;source&quot;:
+    {
+      &quot;docker_volume&quot;:
+        {
+          &quot;driver&quot;:&quot;convoy&quot;,
+          &quot;name&quot;:&quot;myvolume&quot;
+        },
+        &quot;type&quot;:&quot;DOCKER_VOLUME&quot;
+    }
+  }]
+</code></pre>
+<p>Now, use Mesos CLI (i.e., mesos-execute) to launch a Docker container with
+<code>--volumes=&lt;path&gt;/myvolume.json</code> option.</p>
+<pre><code class="language-{.console}">  $ sudo mesos-execute \
+    --master=&lt;MASTER_IP&gt;:5050 \
+    --name=test \
+    --docker_image=ubuntu:14.04 \
+    --command=&quot;touch /tmp/myvolume/myfile&quot; \
+    --volumes=&lt;path&gt;/myvolume.json
+</code></pre>
+<p>Create another task to verify the file <code>myfile</code> was created successfully.</p>
+<pre><code class="language-{.console}">  $ sudo mesos-execute \
+    --master=&lt;MASTER_IP&gt;:5050 \
+    --name=test \
+    --docker_image=ubuntu:14.04 \
+    --command=&quot;ls /tmp/myvolume&quot; \
+    --volumes=&lt;path&gt;/myvolume.json
+</code></pre>
+<p>Check the <a href="../sandbox.html#where-is-it">sandbox</a>
+for the second task to check the file <code>myfile</code> was created successfully.</p>
+<pre><code class="language-{.console}">  $ cat stdout
+    Received SUBSCRIBED event
+    Subscribed executor on mesos002
+    Received LAUNCH event
+    Starting task test
+    Forked command at 27288
+    sh -c 'ls /tmp/myvolume/'
+    lost+found
+    myfile
+    Command exited with status 0 (pid: 27288)
+</code></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="../container-image.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="../gpu-support.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="../container-image.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="../gpu-support.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

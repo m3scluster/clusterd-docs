@@ -1,0 +1,540 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Oversubscription for how to configure Mesos to take advantage of unused resources to launch “best-effort” tasks. - Apache Mesos</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="favicon.png">
+        
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        
+        <link rel="stylesheet" href="css/print.css" media="print">
+        
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">Fundamentals</li><li class="chapter-item expanded "><a href="architecture.html"><strong aria-hidden="true">1.</strong> Mesos Architecture providing an overview of Mesos concepts</a></li><li class="chapter-item expanded "><a href="presentations.html"><strong aria-hidden="true">2.</strong> Video and Slides of Mesos Presentations</a></li><li class="chapter-item expanded "><a href="versioning.html"><strong aria-hidden="true">3.</strong> Mesos Release and Support Policy</a></li><li class="chapter-item expanded affix "><li class="part-title">Build / Installation</li><li class="chapter-item expanded "><a href="building.html"><strong aria-hidden="true">4.</strong> Building for basic instructions on compiling and installing Mesos.</a></li><li class="chapter-item expanded "><a href="binary-packages.html"><strong aria-hidden="true">5.</strong> Binary Packages for how to use Mesos binary packages.</a></li><li class="chapter-item expanded "><a href="configuration.html"><strong aria-hidden="true">6.</strong> Configuration for build configuration options.</a></li><li class="chapter-item expanded "><a href="cmake.html"><strong aria-hidden="true">7.</strong> CMake for details about using the new CMake build system.</a></li><li class="chapter-item expanded "><a href="windows.html"><strong aria-hidden="true">8.</strong> Windows Support for the state of Windows support in Mesos.</a></li><li class="chapter-item expanded affix "><li class="part-title">Administration</li><li class="chapter-item expanded "><a href="configuration.html"><strong aria-hidden="true">9.</strong> Configuration for command-line arguments.</a></li><li class="chapter-item expanded "><a href="high-availability.html"><strong aria-hidden="true">10.</strong> High Availability Master Setup</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="replicated-log-internals.html"><strong aria-hidden="true">10.1.</strong> Replicated Log for information on the Mesos replicated log.</a></li></ol></li><li class="chapter-item expanded "><a href="agent-recovery.html"><strong aria-hidden="true">11.</strong> Fault Tolerant Agent Setup</a></li><li class="chapter-item expanded "><a href="framework-rate-limiting.html"><strong aria-hidden="true">12.</strong> Framework Rate Limiting</a></li><li class="chapter-item expanded "><a href="maintenance.html"><strong aria-hidden="true">13.</strong> Maintenance for performing maintenance on a Mesos cluster.</a></li><li class="chapter-item expanded "><a href="upgrades.html"><strong aria-hidden="true">14.</strong> Upgrades for upgrading a Mesos cluster.</a></li><li class="chapter-item expanded "><a href="downgrades.html"><strong aria-hidden="true">15.</strong> Downgrades for downgrading a Mesos cluster.</a></li><li class="chapter-item expanded "><a href="logging.html"><strong aria-hidden="true">16.</strong> Logging</a></li><li class="chapter-item expanded "><a href="monitoring.html"><strong aria-hidden="true">17.</strong> Monitoring / Metrics</a></li><li class="chapter-item expanded "><a href="cli.html"><strong aria-hidden="true">18.</strong> Debugging using the new CLI</a></li><li class="chapter-item expanded "><a href="operational-guide.html"><strong aria-hidden="true">19.</strong> Operational Guide</a></li><li class="chapter-item expanded "><a href="fetcher.html"><strong aria-hidden="true">20.</strong> Fetcher Cache Configuration</a></li><li class="chapter-item expanded "><a href="fault-domains.html"><strong aria-hidden="true">21.</strong> Fault Domains</a></li><li class="chapter-item expanded "><a href="performance-profiling.html"><strong aria-hidden="true">22.</strong> Performance Profiling for debugging performance issues in Mesos.</a></li><li class="chapter-item expanded "><a href="memory-profiling.html"><strong aria-hidden="true">23.</strong> Memory Profiling for debugging potential memory leaks in Mesos.</a></li><li class="chapter-item expanded affix "><li class="part-title">Resource Management</li><li class="chapter-item expanded "><a href="attributes-resources.html"><strong aria-hidden="true">24.</strong> Attributes and Resources for how to describe the agents that comprise a cluster.</a></li><li class="chapter-item expanded "><a href="roles.html"><strong aria-hidden="true">25.</strong> Using Resource Roles</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="weights.html"><strong aria-hidden="true">25.1.</strong> Resource Role Weights for fair sharing.</a></li><li class="chapter-item expanded "><a href="quota.html"><strong aria-hidden="true">25.2.</strong> Resource Role Quota for how to configure Mesos to provide guaranteed resource allocations for use by a role.</a></li><li class="chapter-item expanded "><a href="reservation.html"><strong aria-hidden="true">25.3.</strong> Reservations for how operators and frameworks can reserve resources on individual agents for use by a role.</a></li><li class="chapter-item expanded "><a href="shared-resources.html"><strong aria-hidden="true">25.4.</strong> Shared Resources for how to share persistent volumes between tasks managed by different executors on the same agent.</a></li></ol></li><li class="chapter-item expanded "><a href="oversubscription.html" class="active"><strong aria-hidden="true">26.</strong> Oversubscription for how to configure Mesos to take advantage of unused resources to launch “best-effort” tasks.</a></li><li class="chapter-item expanded affix "><li class="part-title">Security</li><li class="chapter-item expanded "><a href="authentication.html"><strong aria-hidden="true">27.</strong> Authentication</a></li><li class="chapter-item expanded "><a href="authorization.html"><strong aria-hidden="true">28.</strong> Authorization</a></li><li class="chapter-item expanded "><a href="ssl.html"><strong aria-hidden="true">29.</strong> SSL</a></li><li class="chapter-item expanded "><a href="secrets.html"><strong aria-hidden="true">30.</strong> Secrets for managing secrets within Mesos.</a></li><li class="chapter-item expanded affix "><li class="part-title">Containerization</li><li class="chapter-item expanded "><a href="containerizers.html"><strong aria-hidden="true">31.</strong> Containerizer Overview</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="containerizer-internals.html"><strong aria-hidden="true">31.1.</strong> Containerizer Internals for implementation details of containerizers.</a></li><li class="chapter-item expanded "><a href="docker-containerizer.html"><strong aria-hidden="true">31.2.</strong> Docker Containerizer for launching a Docker image as a Task, or as an Executor.</a></li><li class="chapter-item expanded "><a href="mesos-containerizer.html"><strong aria-hidden="true">31.3.</strong> Mesos Containerizer default containerizer, supports both Linux and POSIX systems.</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="container-image.html"><strong aria-hidden="true">31.3.1.</strong> Container Images for supporting container images in Mesos containerizer.</a></li><li class="chapter-item expanded "><a href="isolators/docker-volume.html"><strong aria-hidden="true">31.3.2.</strong> Docker Volume Support</a></li><li class="chapter-item expanded "><a href="gpu-support.html"><strong aria-hidden="true">31.3.3.</strong> Nvidia GPU Support for how to run Mesos with Nvidia GPU support.</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="sandbox.html"><strong aria-hidden="true">32.</strong> Container Sandboxes</a></li><li class="chapter-item expanded "><a href="container-volume.html"><strong aria-hidden="true">33.</strong> Container Volumes</a></li><li class="chapter-item expanded "><a href="nested-container-and-task-group.html"><strong aria-hidden="true">34.</strong> Nested Container and Task Group (Pod)</a></li><li class="chapter-item expanded "><a href="standalone-containers.html"><strong aria-hidden="true">35.</strong> Standalone Containers</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">Apache Mesos</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                        <a href="https://github.com/AVENTER-UG/mesos-docs/" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <hr />
+<h2>title: Apache Mesos - Oversubscription
+layout: documentation</h2>
+<h1 id="oversubscription"><a class="header" href="#oversubscription">Oversubscription</a></h1>
+<p>High-priority user-facing services are typically provisioned on large clusters
+for peak load and unexpected load spikes. Hence, for most of time, the
+provisioned resources remain underutilized. Oversubscription takes advantage of
+temporarily unused resources to execute best-effort tasks such as background
+analytics, video/image processing, chip simulations, and other low priority
+jobs.</p>
+<h2 id="how-does-it-work"><a class="header" href="#how-does-it-work">How does it work?</a></h2>
+<p>Oversubscription was introduced in Mesos 0.23.0 and adds two new agent
+components: a Resource Estimator and a Quality of Service (QoS) Controller,
+alongside extending the existing resource allocator, resource monitor, and
+Mesos agent. The new components and their interactions are illustrated below.</p>
+<p><img src="images/oversubscription-overview.jpg" alt="Oversubscription overview" /></p>
+<h3 id="resource-estimation"><a class="header" href="#resource-estimation">Resource estimation</a></h3>
+<ul>
+<li>
+<p>(1) The first step is to identify the amount of oversubscribed resources.
+The resource estimator taps into the resource monitor and periodically gets
+usage statistics via <code>ResourceStatistic</code> messages. The resource estimator
+applies logic based on the collected resource statistics to determine the
+amount of oversubscribed resources. This can be a series of control algorithms
+based on measured resource usage slack (allocated but unused resources) and
+allocation slack.</p>
+</li>
+<li>
+<p>(2) The agent keeps polling estimates from the resource estimator and tracks
+the latest estimate.</p>
+</li>
+<li>
+<p>(3) The agent will send the total amount of oversubscribed resources to the
+master when the latest estimate is different from the previous estimate.</p>
+</li>
+</ul>
+<h3 id="resource-tracking--scheduling-algorithm"><a class="header" href="#resource-tracking--scheduling-algorithm">Resource tracking &amp; scheduling algorithm</a></h3>
+<ul>
+<li>(4) The allocator keeps track of the oversubscribed resources separately
+from regular resources and annotate those resources as <code>revocable</code>. It is up
+to the resource estimator to determine which types of resources can be
+oversubscribed. It is recommended only to oversubscribe <em>compressible</em>
+resources such as cpu shares, bandwidth, etc.</li>
+</ul>
+<h3 id="frameworks"><a class="header" href="#frameworks">Frameworks</a></h3>
+<ul>
+<li>(5) Frameworks can choose to launch tasks on revocable resources by using
+the regular <code>launchTasks()</code> API. To safe-guard frameworks that are not
+designed to deal with preemption, only frameworks registering with the
+<code>REVOCABLE_RESOURCES</code> capability set in its framework info will receive offers
+with revocable resources.  Further more, revocable resources cannot be
+dynamically reserved and persistent volumes should not be created on revocable
+disk resources.</li>
+</ul>
+<h3 id="task-launch"><a class="header" href="#task-launch">Task launch</a></h3>
+<ul>
+<li>The revocable task is launched as usual when the <code>runTask</code> request is received
+on the agent. The resources will still be marked as revocable and isolators
+can take appropriate actions, if certain resources need to be setup differently
+for revocable and regular tasks.</li>
+</ul>
+<blockquote>
+<p>NOTE: If any resource used by a task or executor is
+revocable, the whole container is treated as a revocable container and can
+therefore be killed or throttled by the QoS Controller.</p>
+</blockquote>
+<h3 id="interference-detection"><a class="header" href="#interference-detection">Interference detection</a></h3>
+<ul>
+<li>(6) When the revocable task is running, it is important to constantly
+monitor the original task running on those resources and guarantee
+performance based on an SLA.  In order to react to detected interference, the
+QoS controller needs to be able to kill or throttle running revocable tasks.</li>
+</ul>
+<h2 id="enabling-frameworks-to-use-oversubscribed-resources"><a class="header" href="#enabling-frameworks-to-use-oversubscribed-resources">Enabling frameworks to use oversubscribed resources</a></h2>
+<p>Frameworks planning to use oversubscribed resources need to register with the
+<code>REVOCABLE_RESOURCES</code> capability set:</p>
+<pre><code class="language-{.cpp}">FrameworkInfo framework;
+framework.set_name(&quot;Revocable framework&quot;);
+
+framework.add_capabilities()-&gt;set_type(
+    FrameworkInfo::Capability::REVOCABLE_RESOURCES);
+</code></pre>
+<p>From that point on, the framework will start to receive revocable resources in
+offers.</p>
+<blockquote>
+<p>NOTE: That there is no guarantee that the Mesos cluster has oversubscription
+enabled. If not, no revocable resources will be offered. See below for
+instructions how to configure Mesos for oversubscription.</p>
+</blockquote>
+<h3 id="launching-tasks-using-revocable-resources"><a class="header" href="#launching-tasks-using-revocable-resources">Launching tasks using revocable resources</a></h3>
+<p>Launching tasks using revocable resources is done through the existing
+<code>launchTasks</code> API. Revocable resources will have the <code>revocable</code> field set. See
+below for an example offer with regular and revocable resources.</p>
+<pre><code class="language-{.json}">{
+  &quot;id&quot;: &quot;20150618-112946-201330860-5050-2210-0000&quot;,
+  &quot;framework_id&quot;: &quot;20141119-101031-201330860-5050-3757-0000&quot;,
+  &quot;agent_id&quot;: &quot;20150618-112946-201330860-5050-2210-S1&quot;,
+  &quot;hostname&quot;: &quot;foobar&quot;,
+  &quot;resources&quot;: [
+    {
+      &quot;name&quot;: &quot;cpus&quot;,
+      &quot;type&quot;: &quot;SCALAR&quot;,
+      &quot;scalar&quot;: {
+        &quot;value&quot;: 2.0
+      },
+      &quot;role&quot;: &quot;*&quot;
+    }, {
+      &quot;name&quot;: &quot;mem&quot;,
+      &quot;type&quot;: &quot;SCALAR&quot;,
+      &quot;scalar&quot;: {
+        &quot;value&quot;: 512.0
+      },
+      &quot;role&quot;: &quot;*&quot;
+    },
+    {
+      &quot;name&quot;: &quot;cpus&quot;,
+      &quot;type&quot;: &quot;SCALAR&quot;,
+      &quot;scalar&quot;: {
+        &quot;value&quot;: 0.45
+      },
+      &quot;role&quot;: &quot;*&quot;,
+      &quot;revocable&quot;: {}
+    }
+  ]
+}
+</code></pre>
+<h2 id="writing-a-custom-resource-estimator"><a class="header" href="#writing-a-custom-resource-estimator">Writing a custom resource estimator</a></h2>
+<p>The resource estimator estimates and predicts the total resources used on the
+agent and informs the master about resources that can be oversubscribed. By
+default, Mesos comes with a <code>noop</code> and a <code>fixed</code> resource estimator. The <code>noop</code>
+estimator only provides an empty estimate to the agent and stalls, effectively
+disabling oversubscription. The <code>fixed</code> estimator doesn't use the actual
+measured slack, but oversubscribes the node with fixed resource amount (defined
+via a command line flag).</p>
+<p>The interface is defined below:</p>
+<pre><code class="language-{.cpp}">class ResourceEstimator
+{
+public:
+  // Initializes this resource estimator. This method needs to be
+  // called before any other member method is called. It registers
+  // a callback in the resource estimator. The callback allows the
+  // resource estimator to fetch the current resource usage for each
+  // executor on agent.
+  virtual Try&lt;Nothing&gt; initialize(
+      const lambda::function&lt;process::Future&lt;ResourceUsage&gt;()&gt;&amp; usage) = 0;
+
+  // Returns the current estimation about the *maximum* amount of
+  // resources that can be oversubscribed on the agent. A new
+  // estimation will invalidate all the previously returned
+  // estimations. The agent will be calling this method periodically
+  // to forward it to the master. As a result, the estimator should
+  // respond with an estimate every time this method is called.
+  virtual process::Future&lt;Resources&gt; oversubscribable() = 0;
+};
+</code></pre>
+<h2 id="writing-a-custom-qos-controller"><a class="header" href="#writing-a-custom-qos-controller">Writing a custom QoS controller</a></h2>
+<p>The interface for implementing custom QoS Controllers is defined below:</p>
+<pre><code class="language-{.cpp}">class QoSController
+{
+public:
+  // Initializes this QoS Controller. This method needs to be
+  // called before any other member method is called. It registers
+  // a callback in the QoS Controller. The callback allows the
+  // QoS Controller to fetch the current resource usage for each
+  // executor on agent.
+  virtual Try&lt;Nothing&gt; initialize(
+      const lambda::function&lt;process::Future&lt;ResourceUsage&gt;()&gt;&amp; usage) = 0;
+
+  // A QoS Controller informs the agent about corrections to carry
+  // out, but returning futures to QoSCorrection objects. For more
+  // information, please refer to mesos.proto.
+  virtual process::Future&lt;std::list&lt;QoSCorrection&gt;&gt; corrections() = 0;
+};
+</code></pre>
+<blockquote>
+<p>NOTE The QoS Controller must not block <code>corrections()</code>. Back the QoS
+Controller with its own libprocess actor instead.</p>
+</blockquote>
+<p>The QoS Controller informs the agent that particular corrective actions need to
+be made. Each corrective action contains information about executor or task and
+the type of action to perform.</p>
+<p>Mesos comes with a <code>noop</code> and a <code>load</code> qos controller. The <code>noop</code> controller
+does not provide any corrections, thus does not assure any quality of service
+for regular tasks. The <code>load</code> controller is ensuring the total system load
+doesn't exceed a configurable thresholds and as a result try to avoid the cpu
+congestion on the node. If the load is above the thresholds controller evicts
+all the revocable executors. These thresholds are configurable via two module
+parameters <code>load_threshold_5min</code> and <code>load_threshold_15min</code>. They represent
+standard unix load averages in the system. 1 minute system load is ignored,
+since for oversubscription use case it can be a misleading signal.</p>
+<pre><code class="language-{.proto}">message QoSCorrection {
+  enum Type {
+    KILL = 1; // Terminate an executor.
+  }
+
+  message Kill {
+    optional FrameworkID framework_id = 1;
+    optional ExecutorID executor_id = 2;
+  }
+
+  required Type type = 1;
+  optional Kill kill = 2;
+}
+</code></pre>
+<h2 id="configuring-oversubscription"><a class="header" href="#configuring-oversubscription">Configuring oversubscription</a></h2>
+<p>Five new flags has been added to the agent:</p>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th width="30%">
+        Flag
+      </th>
+      <th>
+        Explanation
+      </th>
+  </thead>
+<tr>
+    <td>
+      --oversubscribed_resources_interval=VALUE
+    </td>
+    <td>
+      The agent periodically updates the master with the current estimation
+about the total amount of oversubscribed resources that are allocated and
+available. The interval between updates is controlled by this flag. (default:
+15secs)
+    </td>
+  </tr>
+<tr>
+    <td>
+      --qos_controller=VALUE
+    </td>
+    <td>
+      The name of the QoS Controller to use for oversubscription.
+    </td>
+  </tr>
+<tr>
+    <td>
+      --qos_correction_interval_min=VALUE
+    </td>
+    <td>
+      The agent polls and carries out QoS corrections from the QoS Controller
+based on its observed performance of running tasks. The smallest interval
+between these corrections is controlled by this flag. (default: 0ns)
+    </td>
+  </tr>
+<tr>
+    <td>
+      --resource_estimator=VALUE
+    </td>
+    <td>
+      The name of the resource estimator to use for oversubscription.
+    </td>
+  </tr>
+</table>
+<p>The <code>fixed</code> resource estimator is enabled as follows:</p>
+<pre><code>--resource_estimator=&quot;org_apache_mesos_FixedResourceEstimator&quot;
+
+--modules='{
+  &quot;libraries&quot;: {
+    &quot;file&quot;: &quot;/usr/local/lib64/libfixed_resource_estimator.so&quot;,
+    &quot;modules&quot;: {
+      &quot;name&quot;: &quot;org_apache_mesos_FixedResourceEstimator&quot;,
+      &quot;parameters&quot;: {
+        &quot;key&quot;: &quot;resources&quot;,
+        &quot;value&quot;: &quot;cpus:14&quot;
+      }
+    }
+  }
+}'
+</code></pre>
+<p>In the example above, a fixed amount of 14 cpus will be offered as revocable
+resources.</p>
+<p>The <code>load</code> qos controller is enabled as follows:</p>
+<pre><code>--qos_controller=&quot;org_apache_mesos_LoadQoSController&quot;
+
+--qos_correction_interval_min=&quot;20secs&quot;
+
+--modules='{
+  &quot;libraries&quot;: {
+    &quot;file&quot;: &quot;/usr/local/lib64/libload_qos_controller.so&quot;,
+    &quot;modules&quot;: {
+      &quot;name&quot;: &quot;org_apache_mesos_LoadQoSController&quot;,
+      &quot;parameters&quot;: [
+        {
+          &quot;key&quot;: &quot;load_threshold_5min&quot;,
+          &quot;value&quot;: &quot;6&quot;
+        },
+        {
+	  &quot;key&quot;: &quot;load_threshold_15min&quot;,
+	  &quot;value&quot;: &quot;4&quot;
+        }
+      ]
+    }
+  }
+}'
+</code></pre>
+<p>In the example above, when standard unix system load average for 5 minutes will
+be above 6, or for 15 minutes will be above 4 then agent will evict all the
+<code>revocable</code> executors. <code>LoadQoSController</code> will be effectively run every 20
+seconds.</p>
+<p>To install a custom resource estimator and QoS controller, please refer to the
+<a href="modules.html">modules documentation</a>.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="shared-resources.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="authentication.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="shared-resources.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="authentication.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

@@ -1,0 +1,490 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Fetcher Cache Configuration - Apache Mesos</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="favicon.png">
+        
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        
+        <link rel="stylesheet" href="css/print.css" media="print">
+        
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">Fundamentals</li><li class="chapter-item expanded "><a href="architecture.html"><strong aria-hidden="true">1.</strong> Mesos Architecture providing an overview of Mesos concepts</a></li><li class="chapter-item expanded "><a href="presentations.html"><strong aria-hidden="true">2.</strong> Video and Slides of Mesos Presentations</a></li><li class="chapter-item expanded "><a href="versioning.html"><strong aria-hidden="true">3.</strong> Mesos Release and Support Policy</a></li><li class="chapter-item expanded affix "><li class="part-title">Build / Installation</li><li class="chapter-item expanded "><a href="building.html"><strong aria-hidden="true">4.</strong> Building for basic instructions on compiling and installing Mesos.</a></li><li class="chapter-item expanded "><a href="binary-packages.html"><strong aria-hidden="true">5.</strong> Binary Packages for how to use Mesos binary packages.</a></li><li class="chapter-item expanded "><a href="configuration.html"><strong aria-hidden="true">6.</strong> Configuration for build configuration options.</a></li><li class="chapter-item expanded "><a href="cmake.html"><strong aria-hidden="true">7.</strong> CMake for details about using the new CMake build system.</a></li><li class="chapter-item expanded "><a href="windows.html"><strong aria-hidden="true">8.</strong> Windows Support for the state of Windows support in Mesos.</a></li><li class="chapter-item expanded affix "><li class="part-title">Administration</li><li class="chapter-item expanded "><a href="configuration.html"><strong aria-hidden="true">9.</strong> Configuration for command-line arguments.</a></li><li class="chapter-item expanded "><a href="high-availability.html"><strong aria-hidden="true">10.</strong> High Availability Master Setup</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="replicated-log-internals.html"><strong aria-hidden="true">10.1.</strong> Replicated Log for information on the Mesos replicated log.</a></li></ol></li><li class="chapter-item expanded "><a href="agent-recovery.html"><strong aria-hidden="true">11.</strong> Fault Tolerant Agent Setup</a></li><li class="chapter-item expanded "><a href="framework-rate-limiting.html"><strong aria-hidden="true">12.</strong> Framework Rate Limiting</a></li><li class="chapter-item expanded "><a href="maintenance.html"><strong aria-hidden="true">13.</strong> Maintenance for performing maintenance on a Mesos cluster.</a></li><li class="chapter-item expanded "><a href="upgrades.html"><strong aria-hidden="true">14.</strong> Upgrades for upgrading a Mesos cluster.</a></li><li class="chapter-item expanded "><a href="downgrades.html"><strong aria-hidden="true">15.</strong> Downgrades for downgrading a Mesos cluster.</a></li><li class="chapter-item expanded "><a href="logging.html"><strong aria-hidden="true">16.</strong> Logging</a></li><li class="chapter-item expanded "><a href="monitoring.html"><strong aria-hidden="true">17.</strong> Monitoring / Metrics</a></li><li class="chapter-item expanded "><a href="cli.html"><strong aria-hidden="true">18.</strong> Debugging using the new CLI</a></li><li class="chapter-item expanded "><a href="operational-guide.html"><strong aria-hidden="true">19.</strong> Operational Guide</a></li><li class="chapter-item expanded "><a href="fetcher.html" class="active"><strong aria-hidden="true">20.</strong> Fetcher Cache Configuration</a></li><li class="chapter-item expanded "><a href="fault-domains.html"><strong aria-hidden="true">21.</strong> Fault Domains</a></li><li class="chapter-item expanded "><a href="performance-profiling.html"><strong aria-hidden="true">22.</strong> Performance Profiling for debugging performance issues in Mesos.</a></li><li class="chapter-item expanded "><a href="memory-profiling.html"><strong aria-hidden="true">23.</strong> Memory Profiling for debugging potential memory leaks in Mesos.</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">Apache Mesos</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                        <a href="https://github.com/AVENTER-UG/mesos-docs/" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="mesos-fetcher"><a class="header" href="#mesos-fetcher">Mesos Fetcher</a></h1>
+<p>Mesos 0.23.0 introduced experimental support for the Mesos <em>fetcher cache</em>.</p>
+<p>In this context we loosely regard the term &quot;downloading&quot; as to include copying
+from local file systems.</p>
+<h2 id="what-is-the-mesos-fetcher"><a class="header" href="#what-is-the-mesos-fetcher">What is the Mesos fetcher?</a></h2>
+<p>The Mesos fetcher is a mechanism to download resources into the <a href="sandbox.html">sandbox
+directory</a> of a task in preparation of running
+the task. As part of a TaskInfo message, the framework ordering the task's
+execution provides a list of <code>CommandInfo::URI</code> protobuf values, which becomes
+the input to the Mesos fetcher.</p>
+<p>The Mesos fetcher can copy files from a local filesytem and it also natively
+supports the HTTP, HTTPS, FTP and FTPS protocols. If the requested URI is based
+on some other protocol, then the fetcher tries to utilise a local Hadoop client
+and hence supports any protocol supported by the Hadoop client, e.g., HDFS, S3.
+See the agent <a href="configuration/agent.html">configuration documentation</a>
+for how to configure the agent with a path to the Hadoop client.</p>
+<p>By default, each requested URI is downloaded directly into the sandbox directory
+and repeated requests for the same URI leads to downloading another copy of the
+same resource. Alternatively, the fetcher can be instructed to cache URI
+downloads in a dedicated directory for reuse by subsequent downloads.</p>
+<p>The Mesos fetcher mechanism comprises of these two parts:</p>
+<ol>
+<li>
+<p>The agent-internal Fetcher Process (in terms of libprocess) that controls and
+coordinates all fetch actions. Every agent instance has exactly one internal
+fetcher instance that is used by every kind of containerizer.</p>
+</li>
+<li>
+<p>The external program <code>mesos-fetcher</code> that is invoked by the former. It
+performs all network and disk operations except file deletions and file size
+queries for cache-internal bookkeeping. It is run as an external OS process in
+order to shield the agent process from I/O-related hazards. It takes
+instructions in form of an environment variable containing a JSON object with
+detailed fetch action descriptions.</p>
+</li>
+</ol>
+<h2 id="the-fetch-procedure"><a class="header" href="#the-fetch-procedure">The fetch procedure</a></h2>
+<p>Frameworks launch tasks by calling the scheduler driver method <code>launchTasks()</code>,
+passing <code>CommandInfo</code> protobuf structures as arguments. This type of structure
+specifies (among other things) a command and a list of URIs that need to be
+&quot;fetched&quot; into the sandbox directory on the agent node as a precondition for
+task execution. Hence, when the agent receives a request to launch a task, it
+calls upon its fetcher, first, to provision the specified resources into the
+sandbox directory. If fetching fails, the task is not started and the reported
+task status is <code>TASK_FAILED</code>.</p>
+<p>All URIs requested for a given task are fetched sequentially in a single
+invocation of mesos-fetcher. Here, avoiding download concurrency reduces the
+risk of bandwidth issues somewhat. However, multiple fetch operations can be
+active concurrently due to multiple task launch requests.</p>
+<h3 id="the-uri-protobuf-structure"><a class="header" href="#the-uri-protobuf-structure">The URI protobuf structure</a></h3>
+<p>Before mesos-fetcher is started, the specific fetch actions to be performed for
+each URI are determined based on the following protobuf structure. (See
+<code>include/mesos/mesos.proto</code> for more details.)</p>
+<pre><code>message CommandInfo {
+  message URI {
+    required string value = 1;
+    optional bool executable = 2;
+    optional bool extract = 3 [default = true];
+    optional bool cache = 4;
+    optional string output_file = 5;
+  }
+  ...
+  optional string user = 5;
+}
+</code></pre>
+<p>The field &quot;value&quot; contains the URI.</p>
+<p>If the &quot;executable&quot; field is &quot;true&quot;, the &quot;extract&quot; field is ignored and
+has no effect.</p>
+<p>If the &quot;cache&quot; field is true, the fetcher cache is to be used for the URI.</p>
+<p>If the &quot;output_file&quot; field is set, the fetcher will use that name for the copy
+stored in the sandbox directory. &quot;output_file&quot; may contain a directory
+component, in which case the path described must be a relative path.</p>
+<h3 id="specifying-a-user-name"><a class="header" href="#specifying-a-user-name">Specifying a user name</a></h3>
+<p>The framework may pass along a user name that becomes a fetch parameter. This
+causes its executors and tasks to run under a specific user. However, if the
+&quot;user&quot; field in the CommandInfo structure is specified, it takes precedence for
+the affected task.</p>
+<p>If a user name is specified either way, the fetcher first validates that it is
+in fact a valid user name on the agent. If it is not, fetching fails right here.
+Otherwise, the sandbox directory is assigned to the specified user as owner
+(using <code>chown</code>) at the end of the fetch procedure, before task execution begins.</p>
+<p>The user name in play has an important effect on caching.  Caching is managed on
+a per-user base, i.e. the combination of user name and &quot;uri&quot; uniquely
+identifies a cacheable fetch result. If no user name has been specified, this
+counts for the cache as a separate user, too. Thus cache files for each valid
+user are segregated from all others, including those without a specified user.</p>
+<p>This means that the exact same URI will be downloaded and cached multiple times
+if different users are indicated.</p>
+<h3 id="executable-fetch-results"><a class="header" href="#executable-fetch-results">Executable fetch results</a></h3>
+<p>By default, fetched files are not executable.</p>
+<p>If the field &quot;executable&quot; is set to &quot;true&quot;, the fetch result will be changed to
+be executable (by &quot;chmod&quot;) for every user. This happens at the end of the fetch
+procedure, in the sandbox directory only. It does not affect any cache file.</p>
+<h3 id="archive-extraction"><a class="header" href="#archive-extraction">Archive extraction</a></h3>
+<p>If the &quot;extract&quot; field is &quot;true&quot;, which is the default, then files with
+a recognized extension that hints at packed or compressed archives are unpacked
+in the sandbox directory. These file extensions are recognized:</p>
+<ul>
+<li>.tar, .tar.gz, .tar.bz2, .tar.xz</li>
+<li>.gz, .tgz, .tbz2, .txz, .zip</li>
+</ul>
+<p>In case the cache is bypassed, both the archive and the unpacked results will be
+found together in the sandbox. In case a cache file is unpacked, only the
+extraction result will be found in the sandbox.</p>
+<p>The &quot;output_file&quot; field is useful here for cases where the URI ends with query
+parameters, since these will otherwise end up in the file copied to the sandbox
+and will subsequently fail to be recognized as archives.</p>
+<h3 id="bypassing-the-cache"><a class="header" href="#bypassing-the-cache">Bypassing the cache</a></h3>
+<p>By default, the URI field &quot;cache&quot; is not present. If this is the case or its
+value is &quot;false&quot; the fetcher downloads directly into the sandbox directory.</p>
+<p>The same also happens dynamically as a fallback strategy if anything goes wrong
+when preparing a fetch operation that involves the cache. In this case, a
+warning message is logged. Possible fallback conditions are:</p>
+<ul>
+<li>The server offering the URI does not respond or reports an error.</li>
+<li>The URI's download size could not be determined.</li>
+<li>There is not enough space in the cache, even after attempting to evict files.</li>
+</ul>
+<h3 id="fetching-through-the-cache"><a class="header" href="#fetching-through-the-cache">Fetching through the cache</a></h3>
+<p>If the URI's &quot;cache&quot; field has the value &quot;true&quot;, then the fetcher cache is in
+effect. If a URI is encountered for the first time (for the same user), it is
+first downloaded into the cache, then copied to the sandbox directory from
+there. If the same URI is encountered again, and a corresponding cache file is
+resident in the cache or still en route into the cache, then downloading is
+omitted and the fetcher proceeds directly to copying from the cache. Competing
+requests for the same URI simply wait upon completion of the first request that
+occurs. Thus every URI is downloaded at most once (per user) as long as it is
+cached.</p>
+<p>Every cache file stays resident for an unspecified amount of time and can be
+removed at the fetcher's discretion at any moment, except while it is in direct
+use:</p>
+<ul>
+<li>It is still being downloaded by this fetch procedure.</li>
+<li>It is still being downloaded by a concurrent fetch procedure for a different
+task.</li>
+<li>It is being copied or extracted from the cache.</li>
+</ul>
+<p>Once a cache file has been removed, the related URI will thereafter be treated
+as described above for the first encounter.</p>
+<p>Unfortunately, there is no mechanism to refresh a cache entry in the current
+experimental version of the fetcher cache. A future feature may force updates
+based on checksum queries to the URI.</p>
+<p>Recommended practice for now:</p>
+<p>The framework should start using a fresh unique URI whenever the resource's
+content has changed.</p>
+<h3 id="determining-resource-sizes"><a class="header" href="#determining-resource-sizes">Determining resource sizes</a></h3>
+<p>Before downloading a resource to the cache, the fetcher first determines the
+size of the expected resource. It uses these methods depending on the nature of
+the URI.</p>
+<ul>
+<li>Local file sizes are probed with systems calls (that follow symbolic links).</li>
+<li>HTTP/HTTPS URIs are queried for the &quot;content-length&quot; field in the header. This
+is performed by <code>curl</code>. The reported asset size must be greater than zero or
+the URI is deemed invalid.</li>
+<li>FTP/FTPS is not supported at the time of writing.</li>
+<li>Everything else is queried by the local HDFS client.</li>
+</ul>
+<p>If any of this reports an error, the fetcher then falls back on bypassing the
+cache as described above.</p>
+<p>WARNING: Only URIs for which download sizes can be queried up front and for
+which accurate sizes are reported reliably are eligible for any fetcher cache
+involvement. If actual cache file sizes exceed the physical capacity of the
+cache directory in any way, all further agent behavior is completely
+unspecified. Do not use any cache feature with any URI for which you have any
+doubts!</p>
+<p>To mitigate this problem, cache files that have been found to be larger than
+expected are deleted immediately after downloading and delivering the
+requested content to the sandbox. Thus exceeding total capacity at least
+does not accumulate over subsequent fetcher runs.</p>
+<p>If you know for sure that size aberrations are within certain limits you can
+specify a cache directory size that is sufficiently smaller than your actual
+physical volume and fetching should work.</p>
+<p>In case of cache files that are smaller then expected, the cache will
+dynamically adjust its own bookkeeping according to actual sizes.</p>
+<h3 id="cache-eviction"><a class="header" href="#cache-eviction">Cache eviction</a></h3>
+<p>After determining the prospective size of a cache file and before downloading
+it, the cache attempts to ensure that at least as much space as is needed for
+this file is available and can be written into. If this is immediately the case,
+the requested amount of space is simply marked as reserved. Otherwise, missing
+space is freed up by &quot;cache eviction&quot;. This means that the cache removes files
+at its own discretion until the given space target is met or exceeded.</p>
+<p>The eviction process fails if too many files are in use and therefore not
+evictable or if the cache is simply too small. Either way, the fetcher then
+falls back on bypassing the cache for the given URI as described above.</p>
+<p>If multiple evictions happen concurrently, each of them is pursuing its own
+separate space goals. However, leftover freed up space from one effort is
+automatically awarded to others.</p>
+<h2 id="http-and-socks-proxy-settings"><a class="header" href="#http-and-socks-proxy-settings">HTTP and SOCKS proxy settings</a></h2>
+<p>Sometimes it is desirable to use a proxy to download the file. The Mesos
+fetcher uses libcurl internally for downloading content from
+HTTP/HTTPS/FTP/FTPS servers, and libcurl can use a proxy automatically if
+certain environment variables are set.</p>
+<p>The respective environment variable name is <code>[protocol]_proxy</code>, where
+<code>protocol</code> can be one of socks4, socks5, http, https.</p>
+<p>For example, the value of the <code>http_proxy</code> environment variable would be used
+as the proxy for fetching http contents, while <code>https_proxy</code> would be used for
+fetching https contents. Pay attention that these variable names must be
+entirely in lower case.</p>
+<p>The value of the proxy variable is of the format
+<code>[protocol://][user:password@]machine[:port]</code>, where <code>protocol</code> can be one of
+socks4, socks5, http, https.</p>
+<p>FTP/FTPS requests with a proxy also make use of an HTTP/HTTPS proxy. Even
+though in general this constrains the available FTP protocol operations,
+everything the fetcher uses is supported.</p>
+<p>Your proxy settings can be placed in <code>/etc/default/mesos-slave</code>. Here is an
+example:</p>
+<pre><code>export http_proxy=https://proxy.example.com:3128
+export https_proxy=https://proxy.example.com:3128
+</code></pre>
+<p>The fetcher will pick up these environment variable settings since the utility
+program <code>mesos-fetcher</code> which it employs is a child of mesos-agent.</p>
+<p>For more details, please check the
+<a href="http://curl.haxx.se/libcurl/c/libcurl-tutorial.html">libcurl manual</a>.</p>
+<h2 id="agent-flags"><a class="header" href="#agent-flags">Agent flags</a></h2>
+<p>It is highly recommended to set these flags explicitly to values other than
+their defaults or to not use the fetcher cache in production.</p>
+<ul>
+<li>&quot;fetcher_cache_size&quot;, default value: enough for testing.</li>
+<li>&quot;fetcher_cache_dir&quot;, default value: somewhere inside the directory specified
+by the &quot;work_dir&quot; flag, which is OK for testing.</li>
+</ul>
+<p>Recommended practice:</p>
+<ul>
+<li>Use a separate volume as fetcher cache. Do not specify a directory as fetcher
+cache directory that competes with any other contributor for the underlying
+volume's space.</li>
+<li>Set the cache directory size flag of the agent to less than your actual cache
+volume's physical size. Use a safety margin, especially if you do not know
+for sure if all frameworks are going to be compliant.</li>
+</ul>
+<p>Ultimate remedy:</p>
+<p>You can disable the fetcher cache entirely on each agent by setting its
+&quot;fetcher_cache_size&quot; flag to zero bytes.</p>
+<h2 id="future-features"><a class="header" href="#future-features">Future Features</a></h2>
+<p>The following features would be relatively easy to implement additionally.</p>
+<ul>
+<li>Perform cache updates based on resource check sums. For example, query the md5
+field in HTTP headers to determine when a resource at a URL has changed.</li>
+<li>Respect HTTP cache-control directives.</li>
+<li>Enable caching for ftp/ftps.</li>
+<li>Use symbolic links or bind mounts to project cached resources into the
+sandbox, read-only.</li>
+<li>Have a choice whether to copy the extracted archive into the sandbox.</li>
+<li>Have a choice whether to delete the archive after extraction bypassing the
+cache.</li>
+<li>Make the segregation of cache files by user optional.</li>
+<li>Extract content while downloading when bypassing the cache.</li>
+<li>Prefetch resources for subsequent tasks. This can happen concurrently with
+running the present task, right after fetching its own resources.</li>
+</ul>
+<h2 id="implementation-details"><a class="header" href="#implementation-details">Implementation Details</a></h2>
+<p>The <a href="fetcher-cache-internals.html">Mesos Fetcher Cache Internals</a> describes how the fetcher cache is implemented.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="operational-guide.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="fault-domains.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="operational-guide.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="fault-domains.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

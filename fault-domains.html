@@ -1,0 +1,328 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Fault Domains - Apache Mesos</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="favicon.png">
+        
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        
+        <link rel="stylesheet" href="css/print.css" media="print">
+        
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">Fundamentals</li><li class="chapter-item expanded "><a href="architecture.html"><strong aria-hidden="true">1.</strong> Mesos Architecture providing an overview of Mesos concepts</a></li><li class="chapter-item expanded "><a href="presentations.html"><strong aria-hidden="true">2.</strong> Video and Slides of Mesos Presentations</a></li><li class="chapter-item expanded "><a href="versioning.html"><strong aria-hidden="true">3.</strong> Mesos Release and Support Policy</a></li><li class="chapter-item expanded affix "><li class="part-title">Build / Installation</li><li class="chapter-item expanded "><a href="building.html"><strong aria-hidden="true">4.</strong> Building for basic instructions on compiling and installing Mesos.</a></li><li class="chapter-item expanded "><a href="binary-packages.html"><strong aria-hidden="true">5.</strong> Binary Packages for how to use Mesos binary packages.</a></li><li class="chapter-item expanded "><a href="configuration.html"><strong aria-hidden="true">6.</strong> Configuration for build configuration options.</a></li><li class="chapter-item expanded "><a href="cmake.html"><strong aria-hidden="true">7.</strong> CMake for details about using the new CMake build system.</a></li><li class="chapter-item expanded "><a href="windows.html"><strong aria-hidden="true">8.</strong> Windows Support for the state of Windows support in Mesos.</a></li><li class="chapter-item expanded affix "><li class="part-title">Administration</li><li class="chapter-item expanded "><a href="configuration.html"><strong aria-hidden="true">9.</strong> Configuration for command-line arguments.</a></li><li class="chapter-item expanded "><a href="high-availability.html"><strong aria-hidden="true">10.</strong> High Availability Master Setup</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="replicated-log-internals.html"><strong aria-hidden="true">10.1.</strong> Replicated Log for information on the Mesos replicated log.</a></li></ol></li><li class="chapter-item expanded "><a href="agent-recovery.html"><strong aria-hidden="true">11.</strong> Fault Tolerant Agent Setup</a></li><li class="chapter-item expanded "><a href="framework-rate-limiting.html"><strong aria-hidden="true">12.</strong> Framework Rate Limiting</a></li><li class="chapter-item expanded "><a href="maintenance.html"><strong aria-hidden="true">13.</strong> Maintenance for performing maintenance on a Mesos cluster.</a></li><li class="chapter-item expanded "><a href="upgrades.html"><strong aria-hidden="true">14.</strong> Upgrades for upgrading a Mesos cluster.</a></li><li class="chapter-item expanded "><a href="downgrades.html"><strong aria-hidden="true">15.</strong> Downgrades for downgrading a Mesos cluster.</a></li><li class="chapter-item expanded "><a href="logging.html"><strong aria-hidden="true">16.</strong> Logging</a></li><li class="chapter-item expanded "><a href="monitoring.html"><strong aria-hidden="true">17.</strong> Monitoring / Metrics</a></li><li class="chapter-item expanded "><a href="cli.html"><strong aria-hidden="true">18.</strong> Debugging using the new CLI</a></li><li class="chapter-item expanded "><a href="operational-guide.html"><strong aria-hidden="true">19.</strong> Operational Guide</a></li><li class="chapter-item expanded "><a href="fetcher.html"><strong aria-hidden="true">20.</strong> Fetcher Cache Configuration</a></li><li class="chapter-item expanded "><a href="fault-domains.html" class="active"><strong aria-hidden="true">21.</strong> Fault Domains</a></li><li class="chapter-item expanded "><a href="performance-profiling.html"><strong aria-hidden="true">22.</strong> Performance Profiling for debugging performance issues in Mesos.</a></li><li class="chapter-item expanded "><a href="memory-profiling.html"><strong aria-hidden="true">23.</strong> Memory Profiling for debugging potential memory leaks in Mesos.</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">Apache Mesos</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                        <a href="https://github.com/AVENTER-UG/mesos-docs/" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <hr />
+<h2>title: Apache Mesos - Domains and Regions
+layout: documentation</h2>
+<h1 id="regions-and-fault-domains"><a class="header" href="#regions-and-fault-domains">Regions and Fault Domains</a></h1>
+<p>Starting with Mesos 1.5, it is possible to place Mesos masters and agents into
+<em>domains</em>, which are logical groups of machines that share some characteristics.</p>
+<p>Currently, fault domains are the only supported type of domains, which are
+groups of machines with similar failure characteristics.</p>
+<p>A fault domain is a 2 level hierarchy of regions and zones. The mapping from
+fault domains to physical infrastructure is up to the operator to configure,
+although it is recommended that machines in the same zones have low latency to
+each other.</p>
+<p>In cloud environments, regions and zones can be mapped to the &quot;region&quot; and
+&quot;availability zone&quot; concepts exposed by most cloud providers, respectively.
+In on-premise deployments, regions and zones can be mapped to data centers and
+racks, respectively.</p>
+<p>Schedulers may prefer to place network-intensive workloads in the same domain,
+as this may improve performance. Conversely, a single failure that affects a
+host in a domain may be more likely to affect other hosts in the same domain;
+hence, schedulers may prefer to place workloads that require high availability
+in multiple domains. For example, all the hosts in a single rack might lose
+power or network connectivity simultaneously.</p>
+<p>The <code>--domain</code> flag can be used to specify the fault domain of a master or
+agent node. The value of this flag must be a file path or a JSON dictionary
+with the key <code>fault_domain</code> and subkeys <code>region</code> and <code>zone</code> mapping to
+arbitrary strings:</p>
+<pre><code>mesos-master --domain='{&quot;fault_domain&quot;: {&quot;region&quot;: {&quot;name&quot;:&quot;eu&quot;}, &quot;zone&quot;: { &quot;name&quot;:&quot;rack1&quot;}}}'
+
+mesos-agent  --domain='{&quot;fault_domain&quot;: {&quot;region&quot;: {&quot;name&quot;:&quot;eu&quot;}, &quot;zone&quot;: {&quot;name&quot;:&quot;rack2&quot;}}}'
+</code></pre>
+<p>Frameworks can learn about the domain of an agent by inspecting the <code>domain</code>
+field in the received offer, which contains a <code>DomainInfo</code> that has the
+same structure as the JSON dictionary above.</p>
+<h1 id="constraints"><a class="header" href="#constraints">Constraints</a></h1>
+<p>When configuring fault domains for the masters and agents, the following
+constraints must be obeyed:</p>
+<ul>
+<li>
+<p>If a mesos master is not configured with a domain, it will reject connection
+attempts from agents with a domain.</p>
+<p>This is done because the master is not able to determine whether or not the
+agent would be remote in this case.</p>
+</li>
+<li>
+<p>Agents with no configured domain are assumed to be in the same domain as the
+master.</p>
+<p>If this behaviour isn't desired, the <code>--require_agent_domain</code> flag on the
+master can be used to enforce that domains are configured on all agents by
+having the master reject all registration attempts by agents without a
+configured domain.</p>
+</li>
+<li>
+<p>If one master is configured with a domain, all other masters must be in the
+same &quot;region&quot; to avoid cross-region quorum writes. It is recommended to put
+them in different zones within that region for high availability.</p>
+</li>
+<li>
+<p>The default DRF resource allocator will only offer resources from agents in
+the same region as the master. To receive offers from all regions, a
+framework must set the <code>REGION_AWARE</code> capability bit in its FrameworkInfo.</p>
+</li>
+</ul>
+<h1 id="example"><a class="header" href="#example">Example</a></h1>
+<p>A short example will serve to illustrate these concepts. WayForward Technologies
+runs a successful website that allows users to purchase things that they want
+to have.</p>
+<p>To do this, it owns a data center in San Francisco, in which it runs a number of
+custom Mesos frameworks. All agents within the data center are configured with
+the same region <code>sf</code>, and the individual racks inside the data center are used
+as zones.</p>
+<p>The three mesos masters are placed in different server racks in the data center,
+which gives them enough isolation to withstand events like a whole rack losing
+power or network connectivity but still have low-enough latency for
+quorum writes.</p>
+<p>One of the provided services is a real-time view of the company's inventory.
+The framework providing this service is placing all of its tasks in the same
+zone as the database server, to take advantage of the high-speed, low-latency
+link so it can always display the latest results.</p>
+<p>During peak hours, it might happen that the computing power required to operate
+the website exceeds the capacity of the data center. To avoid unnecessary
+hardware purchases, WayForward Technologies contracted with a third-party cloud
+provider TPC. The machines from this provider are placed in a different
+region <code>tpc</code>, and the zones are configured to correspond to the availability
+zones provided by TPC. All relevant frameworks are updated with the
+<code>REGION_AWARE</code> bit in their <code>FrameworkInfo</code> and their scheduling logic is
+updated so that they can schedule tasks in the cloud if required.</p>
+<p>Non-region aware frameworks will now only receive offers from agents within
+the data center, where the master nodes reside. Region-aware frameworks are
+supposed to know when and if they should place their tasks in the data center
+or with the cloud provider.</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="fetcher.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="performance-profiling.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="fetcher.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="performance-profiling.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

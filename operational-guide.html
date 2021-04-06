@@ -1,0 +1,287 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Operational Guide - Apache Mesos</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="favicon.png">
+        
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        
+        <link rel="stylesheet" href="css/print.css" media="print">
+        
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">Fundamentals</li><li class="chapter-item expanded "><a href="architecture.html"><strong aria-hidden="true">1.</strong> Mesos Architecture providing an overview of Mesos concepts</a></li><li class="chapter-item expanded "><a href="presentations.html"><strong aria-hidden="true">2.</strong> Video and Slides of Mesos Presentations</a></li><li class="chapter-item expanded "><a href="versioning.html"><strong aria-hidden="true">3.</strong> Mesos Release and Support Policy</a></li><li class="chapter-item expanded affix "><li class="part-title">Build / Installation</li><li class="chapter-item expanded "><a href="building.html"><strong aria-hidden="true">4.</strong> Building for basic instructions on compiling and installing Mesos.</a></li><li class="chapter-item expanded "><a href="binary-packages.html"><strong aria-hidden="true">5.</strong> Binary Packages for how to use Mesos binary packages.</a></li><li class="chapter-item expanded "><a href="configuration.html"><strong aria-hidden="true">6.</strong> Configuration for build configuration options.</a></li><li class="chapter-item expanded "><a href="cmake.html"><strong aria-hidden="true">7.</strong> CMake for details about using the new CMake build system.</a></li><li class="chapter-item expanded "><a href="windows.html"><strong aria-hidden="true">8.</strong> Windows Support for the state of Windows support in Mesos.</a></li><li class="chapter-item expanded affix "><li class="part-title">Administration</li><li class="chapter-item expanded "><a href="configuration.html"><strong aria-hidden="true">9.</strong> Configuration for command-line arguments.</a></li><li class="chapter-item expanded "><a href="high-availability.html"><strong aria-hidden="true">10.</strong> High Availability Master Setup</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="replicated-log-internals.html"><strong aria-hidden="true">10.1.</strong> Replicated Log for information on the Mesos replicated log.</a></li></ol></li><li class="chapter-item expanded "><a href="agent-recovery.html"><strong aria-hidden="true">11.</strong> Fault Tolerant Agent Setup</a></li><li class="chapter-item expanded "><a href="framework-rate-limiting.html"><strong aria-hidden="true">12.</strong> Framework Rate Limiting</a></li><li class="chapter-item expanded "><a href="maintenance.html"><strong aria-hidden="true">13.</strong> Maintenance for performing maintenance on a Mesos cluster.</a></li><li class="chapter-item expanded "><a href="upgrades.html"><strong aria-hidden="true">14.</strong> Upgrades for upgrading a Mesos cluster.</a></li><li class="chapter-item expanded "><a href="downgrades.html"><strong aria-hidden="true">15.</strong> Downgrades for downgrading a Mesos cluster.</a></li><li class="chapter-item expanded "><a href="logging.html"><strong aria-hidden="true">16.</strong> Logging</a></li><li class="chapter-item expanded "><a href="monitoring.html"><strong aria-hidden="true">17.</strong> Monitoring / Metrics</a></li><li class="chapter-item expanded "><a href="cli.html"><strong aria-hidden="true">18.</strong> Debugging using the new CLI</a></li><li class="chapter-item expanded "><a href="operational-guide.html" class="active"><strong aria-hidden="true">19.</strong> Operational Guide</a></li><li class="chapter-item expanded "><a href="fetcher.html"><strong aria-hidden="true">20.</strong> Fetcher Cache Configuration</a></li><li class="chapter-item expanded "><a href="fault-domains.html"><strong aria-hidden="true">21.</strong> Fault Domains</a></li><li class="chapter-item expanded "><a href="performance-profiling.html"><strong aria-hidden="true">22.</strong> Performance Profiling for debugging performance issues in Mesos.</a></li><li class="chapter-item expanded "><a href="memory-profiling.html"><strong aria-hidden="true">23.</strong> Memory Profiling for debugging potential memory leaks in Mesos.</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">Apache Mesos</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                        <a href="https://github.com/AVENTER-UG/mesos-docs/" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="operational-guide"><a class="header" href="#operational-guide">Operational Guide</a></h1>
+<h2 id="using-a-process-supervisor"><a class="header" href="#using-a-process-supervisor">Using a process supervisor</a></h2>
+<p>Mesos uses a &quot;<a href="https://en.wikipedia.org/wiki/Fail-fast">fail-fast</a>&quot; approach to error handling: if a serious error occurs, Mesos will typically exit rather than trying to continue running in a possibly erroneous state. For example, when Mesos is configured for <a href="high-availability.html">high availability</a>, the leading master will abort itself when it discovers it has been partitioned away from the Zookeeper quorum. This is a safety precaution to ensure the previous leader doesn't continue communicating in an unsafe state.</p>
+<p>To ensure that such failures are handled appropriately, production deployments of Mesos typically use a <em>process supervisor</em> (such as systemd or supervisord) to detect when Mesos processes exit. The supervisor can be configured to restart the failed process automatically and/or to notify the cluster operator to investigate the situation.</p>
+<h2 id="changing-the-master-quorum"><a class="header" href="#changing-the-master-quorum">Changing the master quorum</a></h2>
+<p>The master leverages a <a href="replicated-log-internals.html">Paxos-based replicated log</a> as its storage backend (<code>--registry=replicated_log</code> is the only storage backend currently supported). Each master participates in the ensemble as a log replica. The <code>--quorum</code> flag determines a majority of the masters.</p>
+<p>The following table shows the tolerance to master failures for each quorum size:</p>
+<table><thead><tr><th align="right">Masters</th><th align="right">Quorum Size</th><th align="right">Failure Tolerance</th></tr></thead><tbody>
+<tr><td align="right">1</td><td align="right">1</td><td align="right">0</td></tr>
+<tr><td align="right">3</td><td align="right">2</td><td align="right">1</td></tr>
+<tr><td align="right">5</td><td align="right">3</td><td align="right">2</td></tr>
+<tr><td align="right">...</td><td align="right">...</td><td align="right">...</td></tr>
+<tr><td align="right">2N - 1</td><td align="right">N</td><td align="right">N - 1</td></tr>
+</tbody></table>
+<p>It is recommended to run with 3 or 5 masters, when desiring high availability.</p>
+<h3 id="note"><a class="header" href="#note">NOTE</a></h3>
+<p>When configuring the quorum, it is essential to ensure that there are only so many masters running as specified in the table above. If additional masters are running, this violates the quorum and the log may be corrupted! As a result, it is recommended to gate the running of the master process with something that enforces a static whitelist of the master hosts. See <a href="https://issues.apache.org/jira/browse/MESOS-1546">MESOS-1546</a> for adding a safety whitelist within Mesos itself.</p>
+<p>For online reconfiguration of the log, see: <a href="https://issues.apache.org/jira/browse/MESOS-683">MESOS-683</a>.</p>
+<h3 id="increasing-the-quorum-size"><a class="header" href="#increasing-the-quorum-size">Increasing the quorum size</a></h3>
+<p>As the size of a cluster grows, it may be desired to increase the quorum size for additional fault tolerance.</p>
+<p>The following steps indicate how to increment the quorum size, using 3 -&gt; 5 masters as an example (quorum size 2 -&gt; 3):</p>
+<ol>
+<li>Initially, 3 masters are running with <code>--quorum=2</code></li>
+<li>Restart the original 3 masters with <code>--quorum=3</code></li>
+<li>Start 2 additional masters with <code>--quorum=3</code></li>
+</ol>
+<p>To increase the quorum by N, repeat this process to increment the quorum size N times.</p>
+<p>NOTE: Currently, moving out of a single master setup requires wiping the replicated log
+state and starting fresh. This will wipe all persistent data (e.g., agents, maintenance
+information, quota information, etc). To move from 1 master to 3 masters:</p>
+<ol>
+<li>Stop the standalone master.</li>
+<li>Remove the replicated log data (<code>replicated_log</code> under the <code>--work_dir</code>).</li>
+<li>Start the original master and two new masters with <code>--quorum=2</code></li>
+</ol>
+<h3 id="decreasing-the-quorum-size"><a class="header" href="#decreasing-the-quorum-size">Decreasing the quorum size</a></h3>
+<p>The following steps indicate how to decrement the quorum size, using 5 -&gt; 3 masters as an example (quorum size 3 -&gt; 2):</p>
+<ol>
+<li>Initially, 5 masters are running with <code>--quorum=3</code></li>
+<li>Remove 2 masters from the cluster, ensure they will not be restarted (see NOTE section above). Now 3 masters are running with <code>--quorum=3</code></li>
+<li>Restart the 3 masters with <code>--quorum=2</code></li>
+</ol>
+<p>To decrease the quorum by N, repeat this process to decrement the quorum size N times.</p>
+<h3 id="replacing-a-master"><a class="header" href="#replacing-a-master">Replacing a master</a></h3>
+<p>Please see the NOTE section above. So long as the failed master is guaranteed to not re-join the ensemble, it is safe to start a new master <em>with an empty log</em> and allow it to catch up.</p>
+<h2 id="external-access-for-mesos-master"><a class="header" href="#external-access-for-mesos-master">External access for Mesos master</a></h2>
+<p>If the default IP (or the command line arg <code>--ip</code>) is an internal IP, then external entities such as framework schedulers will be unable to reach the master. To address that scenario, an externally accessible IP:port can be setup via the <code>--advertise_ip</code> and <code>--advertise_port</code> command line arguments of <code>mesos-master</code>. If configured, external entities such as framework schedulers interact with the advertise_ip:advertise_port from where the request needs to be proxied to the internal IP:port on which the Mesos master is listening.</p>
+<h2 id="http-requests-to-non-leading-master"><a class="header" href="#http-requests-to-non-leading-master">HTTP requests to non-leading master</a></h2>
+<p>HTTP requests to some master endpoints (e.g., <a href="endpoints/master/state.html">/state</a>, <a href="endpoints/master/machine/down.html">/machine/down</a>) can only be answered by the leading master. Such requests made to a non-leading master will result in either a <code>307 Temporary Redirect</code> (with the location of the leading master) or <code>503 Service Unavailable</code> (if the master does not know who the current leader is).</p>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="cli.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+                            <a rel="next" href="fetcher.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="cli.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+                    <a rel="next" href="fetcher.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

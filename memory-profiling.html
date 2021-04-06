@@ -1,0 +1,396 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Memory Profiling for debugging potential memory leaks in Mesos. - Apache Mesos</title>
+        
+        
+
+
+        <!-- Custom HTML head -->
+        
+
+
+        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        
+        <link rel="icon" href="favicon.svg">
+        
+        
+        <link rel="shortcut icon" href="favicon.png">
+        
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        
+        <link rel="stylesheet" href="css/print.css" media="print">
+        
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        
+        <link rel="stylesheet" href="fonts/fonts.css">
+        
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+        
+
+        
+    </head>
+    <body>
+        <!-- Provide site root to javascript -->
+        <script type="text/javascript">
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script type="text/javascript">
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script type="text/javascript">
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script type="text/javascript">
+            var html = document.querySelector('html');
+            var sidebar = 'hidden';
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">Fundamentals</li><li class="chapter-item expanded "><a href="architecture.html"><strong aria-hidden="true">1.</strong> Mesos Architecture providing an overview of Mesos concepts</a></li><li class="chapter-item expanded "><a href="presentations.html"><strong aria-hidden="true">2.</strong> Video and Slides of Mesos Presentations</a></li><li class="chapter-item expanded "><a href="versioning.html"><strong aria-hidden="true">3.</strong> Mesos Release and Support Policy</a></li><li class="chapter-item expanded affix "><li class="part-title">Build / Installation</li><li class="chapter-item expanded "><a href="building.html"><strong aria-hidden="true">4.</strong> Building for basic instructions on compiling and installing Mesos.</a></li><li class="chapter-item expanded "><a href="binary-packages.html"><strong aria-hidden="true">5.</strong> Binary Packages for how to use Mesos binary packages.</a></li><li class="chapter-item expanded "><a href="configuration.html"><strong aria-hidden="true">6.</strong> Configuration for build configuration options.</a></li><li class="chapter-item expanded "><a href="cmake.html"><strong aria-hidden="true">7.</strong> CMake for details about using the new CMake build system.</a></li><li class="chapter-item expanded "><a href="windows.html"><strong aria-hidden="true">8.</strong> Windows Support for the state of Windows support in Mesos.</a></li><li class="chapter-item expanded affix "><li class="part-title">Administration</li><li class="chapter-item expanded "><a href="configuration.html"><strong aria-hidden="true">9.</strong> Configuration for command-line arguments.</a></li><li class="chapter-item expanded "><a href="high-availability.html"><strong aria-hidden="true">10.</strong> High Availability Master Setup</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="replicated-log-internals.html"><strong aria-hidden="true">10.1.</strong> Replicated Log for information on the Mesos replicated log.</a></li></ol></li><li class="chapter-item expanded "><a href="agent-recovery.html"><strong aria-hidden="true">11.</strong> Fault Tolerant Agent Setup</a></li><li class="chapter-item expanded "><a href="framework-rate-limiting.html"><strong aria-hidden="true">12.</strong> Framework Rate Limiting</a></li><li class="chapter-item expanded "><a href="maintenance.html"><strong aria-hidden="true">13.</strong> Maintenance for performing maintenance on a Mesos cluster.</a></li><li class="chapter-item expanded "><a href="upgrades.html"><strong aria-hidden="true">14.</strong> Upgrades for upgrading a Mesos cluster.</a></li><li class="chapter-item expanded "><a href="downgrades.html"><strong aria-hidden="true">15.</strong> Downgrades for downgrading a Mesos cluster.</a></li><li class="chapter-item expanded "><a href="logging.html"><strong aria-hidden="true">16.</strong> Logging</a></li><li class="chapter-item expanded "><a href="monitoring.html"><strong aria-hidden="true">17.</strong> Monitoring / Metrics</a></li><li class="chapter-item expanded "><a href="cli.html"><strong aria-hidden="true">18.</strong> Debugging using the new CLI</a></li><li class="chapter-item expanded "><a href="operational-guide.html"><strong aria-hidden="true">19.</strong> Operational Guide</a></li><li class="chapter-item expanded "><a href="fetcher.html"><strong aria-hidden="true">20.</strong> Fetcher Cache Configuration</a></li><li class="chapter-item expanded "><a href="fault-domains.html"><strong aria-hidden="true">21.</strong> Fault Domains</a></li><li class="chapter-item expanded "><a href="performance-profiling.html"><strong aria-hidden="true">22.</strong> Performance Profiling for debugging performance issues in Mesos.</a></li><li class="chapter-item expanded "><a href="memory-profiling.html" class="active"><strong aria-hidden="true">23.</strong> Memory Profiling for debugging potential memory leaks in Mesos.</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky bordered">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                        
+                    </div>
+
+                    <h1 class="menu-title">Apache Mesos</h1>
+
+                    <div class="right-buttons">
+                        
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        
+                        
+                        <a href="https://github.com/AVENTER-UG/mesos-docs/" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script type="text/javascript">
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="memory-profiling-with-mesos-and-jemalloc"><a class="header" href="#memory-profiling-with-mesos-and-jemalloc">Memory Profiling with Mesos and Jemalloc</a></h1>
+<p>On Linux systems, Mesos is able to leverage the memory-profiling capabilities of
+the <a href="http://jemalloc.net">jemalloc</a> general-purpose allocator to provide
+powerful debugging tools for investigating memory-related issues.</p>
+<p>These include detailed real-time statistics of the current memory usage, as well
+as information about the location and frequency of individual allocations.</p>
+<p>This generally works by having libprocess detect at runtime whether the current
+process is using jemalloc as its memory allocator, and if so enable a number of
+HTTP endpoints described below that allow operators to generate the desired data
+at runtime.</p>
+<p><a name="requirements"></a></p>
+<h2 id="requirements"><a class="header" href="#requirements">Requirements</a></h2>
+<p>A prerequisite for memory profiling is a suitable allocator. Currently only
+jemalloc is supported, which can be connected via one of the following ways.</p>
+<p>The recommended method is to specify the <code>--enable-jemalloc-allocator</code>
+compile-time flag, which causes the <code>mesos-master</code> and <code>mesos-agent</code> binaries
+to be statically linked against a bundled version of jemalloc that will be
+compiled with the correct compile-time flags.</p>
+<p>Alternatively and analogous to other bundled dependencies of Mesos, it is of
+course also possible to use a <em>suitable</em> custom version of jemalloc with the
+<code>--with-jemalloc=&lt;/path-to-jemalloc&gt;</code> flag.</p>
+<p><strong>NOTE:</strong> Suitable here means that jemalloc should have been built with the
+<code>--enable-stats</code> and <code>--enable-prof</code> flags, and that the string
+<code>prof:true;prof_active:false</code> is part of the malloc configuration. The latter
+condition can be satisfied either at configuration or at run-time, see the
+section on <code>MALLOC_CONF</code> below.</p>
+<p>The third way is to use the <code>LD_PRELOAD</code> mechanism to preload a <code>libjemalloc.so</code>
+shared library that is present on the system at runtime. The <code>MemoryProfiler</code>
+class in libprocess will automatically detect this and enable its memory
+profiling support.</p>
+<p>The generated profile dumps will be written to a random directory under <code>TMPDIR</code>
+if set, otherwise in a subdirectory of <code>/tmp</code>.</p>
+<p>Finally, note that since jemalloc was designed to be used in highly concurrent
+allocation scenarios, it can improve performance over the default system
+allocator. In this case, it can be beneficial to build Mesos with jemalloc even
+if there is no intention to use the memory profiling functionality.</p>
+<h2 id="usage"><a class="header" href="#usage">Usage</a></h2>
+<p>There are two independent sets of data that can be collected from jemalloc:
+memory statistics and heap profiling information.</p>
+<p>Using any of the endpoints described below
+<a href="#requirements">requires the jemalloc allocator</a> and starting the <code>mesos-agent</code>
+or <code>mesos-master</code> binary with the option <code>--memory_profiling=true</code> (or setting
+the environment variable <code>LIBPROCESS_MEMORY_PROFILING=true</code> for other binaries
+using libprocess).</p>
+<h3 id="memory-statistics"><a class="header" href="#memory-statistics">Memory Statistics</a></h3>
+<p>The <code>/statistics</code> endpoint returns exact statistics about the memory usage in
+JSON format, for example the number of bytes currently allocated and the size
+distribution of these allocations.</p>
+<p>It takes no parameters and will return the results in JSON format:</p>
+<pre><code>http://example.org:5050/memory-profiler/statistics
+</code></pre>
+<p>Be aware that the returned JSON is quite large, so when accessing this endpoint
+from a terminal, it is advisable to redirect the results into a file.</p>
+<h3 id="heap-profiling"><a class="header" href="#heap-profiling">Heap Profiling</a></h3>
+<p>The profiling done by jemalloc works by sampling from the calls to <code>malloc()</code>
+according to a configured probability distribution, and storing stack traces for
+the sampled calls in a separate memory area. These can then be dumped into files
+on the filesystem, so-called heap profiles.</p>
+<p>To start a profiling run one would access the <code>/start</code> endpoint:</p>
+<pre><code>http://example.org:5050/memory-profiler/start?duration=5mins
+</code></pre>
+<p>followed by downloading one of the generated files described below after the
+duration has elapsed. The remaining time of the current profiling run can be
+verified via the <code>/state</code> endpoint:</p>
+<pre><code>http://example.org:5050/memory-profiler/state
+</code></pre>
+<p>Since profiling information is stored process-global by jemalloc, only a single
+concurrent profiling run is allowed. Additionally, only the results of the most
+recently finished run are stored on disk.</p>
+<p>The profile collection can also be stopped early with the <code>/stop</code> endpoint:</p>
+<pre><code>http://example.org:5050/memory-profiler/stop
+</code></pre>
+<p>To analyze the generated profiling data, the results are offered in three
+different formats.</p>
+<h4 id="raw-profile"><a class="header" href="#raw-profile">Raw profile</a></h4>
+<pre><code>http://example.org:5050/memory-profiler/download/raw
+</code></pre>
+<p>This returns a file in a plain text format containing the raw backtraces
+collected, i.e., lists of memory addresses. It can be interactively analyzed
+and rendered using the <code>jeprof</code> tool provided by the jemalloc project. For more
+information on this file format, check out <a href="http://jemalloc.net/jemalloc.3.html#heap_profile_format">the official jemalloc
+documentation</a>.</p>
+<h4 id="symbolized-profile"><a class="header" href="#symbolized-profile">Symbolized profile</a></h4>
+<pre><code>http://example.org:5050/memory-profiler/download/text
+</code></pre>
+<p>This is similar to the raw format above, except that <code>jeprof</code> is called on the
+host machine to attempt to read symbol information from the current binary and
+replace raw memory addresses in the profile by human-readable symbol names.</p>
+<p>Usage of this endpoint requires that <code>jeprof</code> is present on the host machine
+and on the <code>PATH</code>, and no useful information will be generated unless the binary
+contains symbol information.</p>
+<h4 id="call-graph"><a class="header" href="#call-graph">Call graph</a></h4>
+<pre><code>http://example.org:5050/memory-profiler/download/graph
+</code></pre>
+<p>This endpoint returns an image in SVG format that shows a graphical
+representation of the samples backtraces.</p>
+<p>Usage of this endpoint requires that <code>jeprof</code> and <code>dot</code> are present on the host
+machine and on the <code>PATH</code> of mesos, and no useful information will be generated
+unless the binary contains symbol information.</p>
+<h4 id="overview"><a class="header" href="#overview">Overview</a></h4>
+<p>Which of these is needed will depend on the circumstances of the application
+deployment and of the bug that is investigated.</p>
+<p>For example, the call graph presents information in a visual, immediately useful
+form, but is difficult to filter and post-process if non-default output options
+are desired.</p>
+<p>On the other hand, in many debian-like environments symbol information is by
+default stripped from binaries to save space and shipped in separate packages.
+In such an environment, if it is not permitted to install additional packages on
+the host running Mesos, one would store the raw profiles and enrich them with
+symbol information locally.</p>
+<h2 id="jeprof-installation"><a class="header" href="#jeprof-installation">Jeprof Installation</a></h2>
+<p>As described above, the <code>/download/text</code> and <code>/download/graph</code> endpoints require
+the <code>jeprof</code> program installed on the host system. Where possible, it is
+recommended to install <code>jeprof</code> through the system package manager, where it is
+usually packaged alongside with jemalloc itself.</p>
+<p>Alternatively, a copy of the script can be found under
+<code>3rdparty/jemalloc-5.0.1/bin/jeprof</code> in the build directory, or can be
+downloaded directly from the internet using a command like:</p>
+<pre><code>$ curl https://raw.githubusercontent.com/jemalloc/jemalloc/dev/bin/jeprof.in | sed s/@jemalloc_version@/5.0.1/ &gt;jeprof
+</code></pre>
+<p>Note that <code>jeprof</code> is just a perl script that post-processes the raw profiles.
+It has no connection to the jemalloc library besides being distributed in the
+same package. In particular, it is generally not required to have matching
+versions of jemalloc and <code>jeprof</code>.</p>
+<p>If <code>jeprof</code> is installed manually, one also needs to take care to install the
+necessary dependencies. In particular, this include the <code>perl</code> interpreter to
+execute the script itself and the <code>dot</code> binary to generate graph files.</p>
+<h2 id="command-line-usage"><a class="header" href="#command-line-usage">Command-line Usage</a></h2>
+<p>In some circumstances, it might be desired to automate the downloading of heap
+profiles by writing a simple script. A simple example for how this might look
+like this:</p>
+<pre><code>#!/bin/bash
+
+SECONDS=600
+HOST=example.org:5050
+
+curl ${HOST}/memory-profiler/start?duration=${SECONDS}
+sleep $((${SECONDS} + 1))
+wget ${HOST}/memory-profiler/download/raw
+</code></pre>
+<p>A more sophisticated script would additionally store the <code>id</code> value returned by
+the call to <code>/start</code> and pass it as a paremter to <code>/download</code>, to ensure that a
+new run was not started in the meantime.</p>
+<h2 id="using-the-malloc_conf-interface"><a class="header" href="#using-the-malloc_conf-interface">Using the <code>MALLOC_CONF</code> Interface</a></h2>
+<p>The jemalloc allocator provides a native interface to control the memory
+profiling behaviour. The usual way to provide settings through this interface is
+by setting the environment variable <code>MALLOC_CONF</code>.</p>
+<p><strong>NOTE:</strong> If libprocess detects that memory profiling was started through
+<code>MALLOC_CONF</code>, it will reject starting a profiling run of its own to avoid
+interference.</p>
+<p>The <code>MALLOC_CONF</code> interface provides a number of options that are not exposed by
+libprocess, like generating heap profiles automatically after a certain amount
+of memory has been allocated, or whenever memory usage reaches a new high-water
+mark. The full list of settings is described on the
+<a href="http://jemalloc.net/jemalloc.3.html">jemalloc man page</a>.</p>
+<p>On the other hand, features like starting and stopping the profiling at runtime
+or getting the information provided by the <code>/statistics</code> endpoint can not be
+achieved through the <code>MALLOC_CONF</code> interface.</p>
+<p>For example, to create a dump automatically for every 1 GiB worth of recorded
+allocations, one might use the configuration:</p>
+<pre><code>MALLOC_CONF=&quot;prof:true,prof_prefix:/path/to/folder,lg_prof_interval=20&quot;
+</code></pre>
+<p>To debug memory allocations during early startup, profiling can be activated
+before accessing the <code>/start</code> endpoint:</p>
+<pre><code>MALLOC_CONF=&quot;prof:true,prof_active:true&quot;
+</code></pre>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                        
+                            <a rel="prev" href="performance-profiling.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                        
+
+                        
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                
+                    <a rel="prev" href="performance-profiling.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                
+
+                
+            </nav>
+
+        </div>
+
+        
+
+        
+
+        
+
+        
+        <script type="text/javascript">
+            window.playground_copyable = true;
+        </script>
+        
+
+        
+
+        
+        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
+        
+
+        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
+        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
+        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+
+        <!-- Custom JS scripts -->
+        
+
+        
+
+    </body>
+</html>

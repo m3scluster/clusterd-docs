@@ -4,37 +4,24 @@
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
         <title>Docker Volume Support - Apache Mesos</title>
-        
-        
 
 
         <!-- Custom HTML head -->
         
-
-
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
-        
         <link rel="icon" href="../favicon.svg">
-        
-        
         <link rel="shortcut icon" href="../favicon.png">
-        
         <link rel="stylesheet" href="../css/variables.css">
         <link rel="stylesheet" href="../css/general.css">
         <link rel="stylesheet" href="../css/chrome.css">
-        
         <link rel="stylesheet" href="../css/print.css" media="print">
-        
 
         <!-- Fonts -->
         <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
-        
         <link rel="stylesheet" href="../fonts/fonts.css">
-        
 
         <!-- Highlight.js Stylesheets -->
         <link rel="stylesheet" href="../highlight.css">
@@ -42,19 +29,18 @@
         <link rel="stylesheet" href="../ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
-        
 
-        
     </head>
     <body>
+    <div id="body-container">
         <!-- Provide site root to javascript -->
-        <script type="text/javascript">
+        <script>
             var path_to_root = "../";
             var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
-        <script type="text/javascript">
+        <script>
             try {
                 var theme = localStorage.getItem('mdbook-theme');
                 var sidebar = localStorage.getItem('mdbook-sidebar');
@@ -70,7 +56,7 @@
         </script>
 
         <!-- Set the theme before any content is loaded, prevents flash -->
-        <script type="text/javascript">
+        <script>
             var theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
@@ -82,7 +68,7 @@
         </script>
 
         <!-- Hide / unhide sidebar before it is displayed -->
-        <script type="text/javascript">
+        <script>
             var html = document.querySelector('html');
             var sidebar = 'hidden';
             if (document.body.clientWidth >= 1080) {
@@ -103,8 +89,7 @@
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
-                
-                <div id="menu-bar-hover-placeholder"></div>
+                                <div id="menu-bar-hover-placeholder"></div>
                 <div id="menu-bar" class="menu-bar sticky bordered">
                     <div class="left-buttons">
                         <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
@@ -114,39 +99,33 @@
                             <i class="fa fa-paint-brush"></i>
                         </button>
                         <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
-                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
                         </ul>
-                        
                         <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
                             <i class="fa fa-search"></i>
                         </button>
-                        
                     </div>
 
                     <h1 class="menu-title">Apache Mesos</h1>
 
                     <div class="right-buttons">
-                        
                         <a href="../print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
-                        
-                        
                         <a href="https://github.com/AVENTER-UG/mesos-docs/" title="Git repository" aria-label="Git repository">
                             <i id="git-repository-button" class="fa fa-github"></i>
                         </a>
-                        
+
                     </div>
                 </div>
 
-                
                 <div id="search-wrapper" class="hidden">
                     <form id="searchbar-outer" class="searchbar-outer">
-                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
                     </form>
                     <div id="searchresults-outer" class="searchresults-outer hidden">
                         <div id="searchresults-header" class="searchresults-header"></div>
@@ -154,10 +133,9 @@
                         </ul>
                     </div>
                 </div>
-                
 
                 <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
-                <script type="text/javascript">
+                <script>
                     document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
                     document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
                     Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
@@ -195,7 +173,7 @@ steps for enabling Docker volume isolator, and required framework changes.</p>
 <li><a href="#limitations">Limitations</a></li>
 <li><a href="#test-it-out">Test it out!</a></li>
 </ul>
-<h2 id="a-namemotivationamotivation"><a class="header" href="#a-namemotivationamotivation"><a name="motivation"></a>Motivation</a></h2>
+<h2 id="motivation"><a class="header" href="#motivation"><a name="motivation"></a>Motivation</a></h2>
 <p>The integration of external storage in Mesos is an attractive feature.  The
 Mesos <a href="../persistent-volume.html">persistent volume</a> primitives allow stateful
 services to persist data on an agent's local storage. However, the amount of
@@ -216,7 +194,7 @@ variety of external storage systems, such as Amazon EBS, OpenStack Cinder, etc.<
 <p>Therefore, introducing support for external storage in Mesos through the
 <code>docker/volume</code> isolator provides Mesos with tremendous flexibility to
 orchestrate containers on a wide variety of external storage technologies.</p>
-<h2 id="a-namehow-does-it-workahow-does-it-work"><a class="header" href="#a-namehow-does-it-workahow-does-it-work"><a name="how-does-it-work"></a>How does it work?</a></h2>
+<h2 id="how-does-it-work"><a class="header" href="#how-does-it-work"><a name="how-does-it-work"></a>How does it work?</a></h2>
 <p><img src="images/docker-volume-isolator.png" alt="Docker Volume Isolator Architecture" /></p>
 <p>The <code>docker/volume</code> isolator interacts with Docker volume plugins using
 <a href="https://github.com/emccode/dvdcli">dvdcli</a>, an open-source command line tool
@@ -260,12 +238,12 @@ its own mount namespace.</p>
 the container.</p>
 </li>
 </ol>
-<h2 id="a-nameconfigurationaconfiguration"><a class="header" href="#a-nameconfigurationaconfiguration"><a name="configuration"></a>Configuration</a></h2>
+<h2 id="configuration"><a class="header" href="#configuration"><a name="configuration"></a>Configuration</a></h2>
 <p>To use the <code>docker/volume</code> isolator, there are certain actions required by
 operators and framework developers. In this section we list the steps required
 by the operator to configure <code>docker/volume</code> isolator and the steps required by
 framework developers to specify the Docker volumes.</p>
-<h3 id="a-namepre-conditionsapre-conditions"><a class="header" href="#a-namepre-conditionsapre-conditions"><a name="pre-conditions"></a>Pre-conditions</a></h3>
+<h3 id="pre-conditions"><a class="header" href="#pre-conditions"><a name="pre-conditions"></a>Pre-conditions</a></h3>
 <ul>
 <li>
 <p>Install <code>dvdcli</code> version
@@ -283,7 +261,7 @@ tasks. If this is not done, volumes will be implicitly created by
 framework resource requirement well.</p>
 </li>
 </ul>
-<h3 id="a-nameconfigure-docker-volume-isolatoraconfiguring-docker-volume-isolator"><a class="header" href="#a-nameconfigure-docker-volume-isolatoraconfiguring-docker-volume-isolator"><a name="configure-Docker-volume-isolator"></a>Configuring Docker Volume Isolator</a></h3>
+<h3 id="configuring-docker-volume-isolator"><a class="header" href="#configuring-docker-volume-isolator"><a name="configure-Docker-volume-isolator"></a>Configuring Docker Volume Isolator</a></h3>
 <p>In order to configure the <code>docker/volume</code> isolator, the operator needs to
 configure two flags at agent startup as follows:</p>
 <pre><code class="language-{.console}">  sudo mesos-agent \
@@ -303,8 +281,8 @@ checkpoint all Docker volume mount point information under
 the default <code>--docker_volume_checkpoint_dir</code> will be cleaned up after agent
 restart. Therefore, it is recommended to set <code>--docker_volume_checkpoint_dir</code> to
 a directory which will survive agent restart.</p>
-<h3 id="a-nameenable-frameworksaenabling-frameworks-to-use-docker-volumes"><a class="header" href="#a-nameenable-frameworksaenabling-frameworks-to-use-docker-volumes"><a name="enable-frameworks"></a>Enabling frameworks to use Docker volumes</a></h3>
-<h4 id="a-namevolume-protobufavolume-protobuf"><a class="header" href="#a-namevolume-protobufavolume-protobuf"><a name="volume-protobuf"></a>Volume Protobuf</a></h4>
+<h3 id="enabling-frameworks-to-use-docker-volumes"><a class="header" href="#enabling-frameworks-to-use-docker-volumes"><a name="enable-frameworks"></a>Enabling frameworks to use Docker volumes</a></h3>
+<h4 id="volume-protobuf"><a class="header" href="#volume-protobuf"><a name="volume-protobuf"></a>Volume Protobuf</a></h4>
 <p>The <code>Volume</code> protobuf message has been updated to support Docker volumes.</p>
 <pre><code class="language-{.proto}">message Volume {
   ...
@@ -371,7 +349,7 @@ otherwise, the task will fail.</p>
     <td>No need to exist</td>
   </tr>
 </table>
-<h4 id="a-nameexamplesaexamples"><a class="header" href="#a-nameexamplesaexamples"><a name="examples"></a>Examples</a></h4>
+<h4 id="examples"><a class="header" href="#examples"><a name="examples"></a>Examples</a></h4>
 <ol>
 <li>
 <p>Launch a task with one Docker volume using the default command executor.</p>
@@ -442,7 +420,7 @@ otherwise, the task will fail.</p>
 </ol>
 <p><strong>NOTE</strong>: The task launch will be failed if one container uses multiple Docker
 volumes with the same <code>driver</code> and <code>name</code>.</p>
-<h2 id="a-namelimitationsalimitations"><a class="header" href="#a-namelimitationsalimitations"><a name="limitations"></a>Limitations</a></h2>
+<h2 id="limitations"><a class="header" href="#limitations"><a name="limitations"></a>Limitations</a></h2>
 <p>Using the same Docker volume in both the <a href="../docker-containerizer.html">Docker
 Containerizer</a> and the <a href="../mesos-containerizer.html">Mesos
 Containerizer</a> simultaneously is <strong>strongly
@@ -450,7 +428,7 @@ discouraged</strong>, because the MesosContainerizer has its own reference
 counting to decide when to unmount a Docker volume. Otherwise, it
 would be problematic if a Docker volume is unmounted by
 MesosContainerizer but the DockerContainerizer is still using it.</p>
-<h2 id="a-nametest-it-outatest-it-out"><a class="header" href="#a-nametest-it-outatest-it-out"><a name="test-it-out"></a>Test it out!</a></h2>
+<h2 id="test-it-out"><a class="header" href="#test-it-out"><a name="test-it-out"></a>Test it out!</a></h2>
 <p>This section presents examples for launching containers with Docker volumes.
 The following example is using <a href="https://github.com/rancher/convoy/">convoy</a>
 as the Docker volume driver.</p>
@@ -519,17 +497,13 @@ for the second task to check the file <code>myfile</code> was created successful
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                        
                             <a rel="prev" href="../container-image.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
-                        
 
-                        
                             <a rel="next" href="../gpu-support.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
-                        
 
                         <div style="clear: both"></div>
                     </nav>
@@ -537,49 +511,36 @@ for the second task to check the file <code>myfile</code> was created successful
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                
                     <a rel="prev" href="../container-image.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
-                
 
-                
                     <a rel="next" href="../gpu-support.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
-                
             </nav>
 
         </div>
 
-        
 
-        
 
-        
 
-        
-        <script type="text/javascript">
+        <script>
             window.playground_copyable = true;
         </script>
-        
 
-        
 
-        
-        <script src="../elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="../mark.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="../searcher.js" type="text/javascript" charset="utf-8"></script>
-        
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
 
-        <script src="../clipboard.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="../highlight.js" type="text/javascript" charset="utf-8"></script>
-        <script src="../book.js" type="text/javascript" charset="utf-8"></script>
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
 
         <!-- Custom JS scripts -->
-        
 
-        
 
+    </div>
     </body>
 </html>

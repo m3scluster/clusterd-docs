@@ -4,37 +4,24 @@
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
         <title>Container Network Interface (CNI) - Apache Mesos</title>
-        
-        
 
 
         <!-- Custom HTML head -->
         
-
-
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
-        
         <link rel="icon" href="favicon.svg">
-        
-        
         <link rel="shortcut icon" href="favicon.png">
-        
         <link rel="stylesheet" href="css/variables.css">
         <link rel="stylesheet" href="css/general.css">
         <link rel="stylesheet" href="css/chrome.css">
-        
         <link rel="stylesheet" href="css/print.css" media="print">
-        
 
         <!-- Fonts -->
         <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
-        
         <link rel="stylesheet" href="fonts/fonts.css">
-        
 
         <!-- Highlight.js Stylesheets -->
         <link rel="stylesheet" href="highlight.css">
@@ -42,19 +29,18 @@
         <link rel="stylesheet" href="ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
-        
 
-        
     </head>
     <body>
+    <div id="body-container">
         <!-- Provide site root to javascript -->
-        <script type="text/javascript">
+        <script>
             var path_to_root = "";
             var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
-        <script type="text/javascript">
+        <script>
             try {
                 var theme = localStorage.getItem('mdbook-theme');
                 var sidebar = localStorage.getItem('mdbook-sidebar');
@@ -70,7 +56,7 @@
         </script>
 
         <!-- Set the theme before any content is loaded, prevents flash -->
-        <script type="text/javascript">
+        <script>
             var theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
@@ -82,7 +68,7 @@
         </script>
 
         <!-- Hide / unhide sidebar before it is displayed -->
-        <script type="text/javascript">
+        <script>
             var html = document.querySelector('html');
             var sidebar = 'hidden';
             if (document.body.clientWidth >= 1080) {
@@ -103,8 +89,7 @@
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
-                
-                <div id="menu-bar-hover-placeholder"></div>
+                                <div id="menu-bar-hover-placeholder"></div>
                 <div id="menu-bar" class="menu-bar sticky bordered">
                     <div class="left-buttons">
                         <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
@@ -114,39 +99,33 @@
                             <i class="fa fa-paint-brush"></i>
                         </button>
                         <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
-                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
                         </ul>
-                        
                         <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
                             <i class="fa fa-search"></i>
                         </button>
-                        
                     </div>
 
                     <h1 class="menu-title">Apache Mesos</h1>
 
                     <div class="right-buttons">
-                        
                         <a href="print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
-                        
-                        
                         <a href="https://github.com/AVENTER-UG/mesos-docs/" title="Git repository" aria-label="Git repository">
                             <i id="git-repository-button" class="fa fa-github"></i>
                         </a>
-                        
+
                     </div>
                 </div>
 
-                
                 <div id="search-wrapper" class="hidden">
                     <form id="searchbar-outer" class="searchbar-outer">
-                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
                     </form>
                     <div id="searchresults-outer" class="searchresults-outer hidden">
                         <div id="searchresults-header" class="searchresults-header"></div>
@@ -154,10 +133,9 @@
                         </ul>
                     </div>
                 </div>
-                
 
                 <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
-                <script type="text/javascript">
+                <script>
                     document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
                     document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
                     Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
@@ -205,7 +183,7 @@ default.</p>
 </ul>
 </li>
 </ul>
-<h3 id="a-namemotivationamotivation"><a class="header" href="#a-namemotivationamotivation"><a name="motivation"></a>Motivation</a></h3>
+<h3 id="motivation"><a class="header" href="#motivation"><a name="motivation"></a>Motivation</a></h3>
 <p>Having a separate network namespace for each container is attractive
 for orchestration engines such as Mesos, since it provides containers
 with network isolation and allows users to operate on containers as if
@@ -242,13 +220,13 @@ ipvlan, macvlan, Calico, Weave and Flannel.</p>
 <p>Thus, introducing support for CNI in Mesos through the <code>network/cni</code>
 isolator provides Mesos with tremendous flexibility to orchestrate
 containers on a wide variety of network technologies.</p>
-<h3 id="a-nameusageausage"><a class="header" href="#a-nameusageausage"><a name="usage"></a>Usage</a></h3>
+<h3 id="usage"><a class="header" href="#usage"><a name="usage"></a>Usage</a></h3>
 <p>The <code>network/cni</code> isolator is enabled by default.  However, to use the
 isolator there are certain actions required by the operator and the
 frameworks. In this section we specify the steps required by the
 operator to configure CNI networks on Mesos and the steps required by
 frameworks to attach containers to a CNI network.</p>
-<h4 id="a-nameconfiguring-cni-networksaconfiguring-cni-networks"><a class="header" href="#a-nameconfiguring-cni-networksaconfiguring-cni-networks"><a name="configuring-cni-networks"></a>Configuring CNI networks</a></h4>
+<h4 id="configuring-cni-networks"><a class="header" href="#configuring-cni-networks"><a name="configuring-cni-networks"></a>Configuring CNI networks</a></h4>
 <p>In order to configure the <code>network/cni</code> isolator the operator
 specifies two flags at Agent startup as follows:</p>
 <pre><code class="language-{.console}">sudo mesos-slave --master=&lt;master IP&gt; --ip=&lt;Agent IP&gt;
@@ -269,7 +247,7 @@ isolator) will not affect container orchestration.</p>
 across reboot and allow <code>network/cni</code> isolator to carry out network
 cleanup post reboot. This is useful for the CNI networks that depend
 on the isolator to clean their network state.</p>
-<h4 id="a-nameadding-modifying-deletingaaddingdeletingmodifying-cni-networks"><a class="header" href="#a-nameadding-modifying-deletingaaddingdeletingmodifying-cni-networks"><a name="adding-modifying-deleting"></a>Adding/Deleting/Modifying CNI networks</a></h4>
+<h4 id="addingdeletingmodifying-cni-networks"><a class="header" href="#addingdeletingmodifying-cni-networks"><a name="adding-modifying-deleting"></a>Adding/Deleting/Modifying CNI networks</a></h4>
 <p>The <code>network/cni</code> isolator learns about all the CNI networks by
 reading the CNI configuration specified in <code>--network_cni_config_dir</code>.
 Hence, if the operator wants to add a CNI network, the corresponding
@@ -297,7 +275,7 @@ operator deletes a CNI network the <code>network/cni</code> isolator will
 &quot;unlearn&quot; the CNI network (since it will have a reference to this CNI
 network when it started) in case a framework tries to launch a
 container on the deleted CNI network.</p>
-<h4 id="a-nameattaching-containers-to-cni-networksaattaching-containers-to-cni-networks"><a class="header" href="#a-nameattaching-containers-to-cni-networksaattaching-containers-to-cni-networks"><a name="attaching-containers-to-cni-networks"></a>Attaching containers to CNI networks</a></h4>
+<h4 id="attaching-containers-to-cni-networks"><a class="header" href="#attaching-containers-to-cni-networks"><a name="attaching-containers-to-cni-networks"></a>Attaching containers to CNI networks</a></h4>
 <p>Frameworks can specify the CNI network to which they want their
 containers to be attached by setting the <code>name</code> field in the
 <code>NetworkInfo</code> protobuf. The <code>name</code> field was introduced in the
@@ -320,7 +298,7 @@ container to the host network as well as other CNI networks you
 will need to attach the container to a CNI network (such as
 bridge/macvlan) that, in turn, is attached to the host network.
 </code></pre>
-<h4 id="a-namenetwork-labels-and-port-mappingpassing-network-labels-and-port-mapping-information-to-cni-pluginsa"><a class="header" href="#a-namenetwork-labels-and-port-mappingpassing-network-labels-and-port-mapping-information-to-cni-pluginsa"><a name="network-labels-and-port-mapping">Passing network labels and port-mapping information to CNI plugins</a></a></h4>
+<h4 id="passing-network-labels-and-port-mapping-information-to-cni-plugins"><a class="header" href="#passing-network-labels-and-port-mapping-information-to-cni-plugins"><a name="network-labels-and-port-mapping">Passing network labels and port-mapping information to CNI plugins</a></a></h4>
 <p>When invoking CNI plugins (e.g., with command ADD), the isolator will
 pass on some Mesos meta-data to the plugins by specifying the <code>args</code>
 field in the <a href="https://github.com/containernetworking/cni/blob/master/SPEC.md#network-configuration">network configuration
@@ -358,7 +336,7 @@ spec, it is the prerogative of the CNI plugins to use this meta-data
 information as they see fit while attaching/detaching containers to a CNI
 network. E.g., CNI plugins could use <code>labels</code> to enforce domain
 specific policies, or <code>port_mappings</code> to implement NAT rules.</p>
-<h4 id="a-nameaccessing-container-network-namespaceaaccessing-container-network-namespace"><a class="header" href="#a-nameaccessing-container-network-namespaceaaccessing-container-network-namespace"><a name="accessing-container-network-namespace"></a>Accessing container network namespace</a></h4>
+<h4 id="accessing-container-network-namespace"><a class="header" href="#accessing-container-network-namespace"><a name="accessing-container-network-namespace"></a>Accessing container network namespace</a></h4>
 <p>The <code>network/cni</code> isolator allocates a network namespace to a
 container when it needs to attach the container to a CNI network. The
 network namespace is checkpointed on the host file system and can be
@@ -389,7 +367,7 @@ running the command:</p>
 completed, executing commands within the container network namespace
 would be simplified and we will no longer have a dependency on the
 <code>iproute2</code> package to debug Mesos container networking.</p>
-<h3 id="a-namenetworking-recipesanetworking-recipes"><a class="header" href="#a-namenetworking-recipesanetworking-recipes"><a name="networking-recipes"></a>Networking Recipes</a></h3>
+<h3 id="networking-recipes"><a class="header" href="#networking-recipes"><a name="networking-recipes"></a>Networking Recipes</a></h3>
 <p>This section presents examples for launching containers on different
 CNI networks. For each of the examples the assumption is that the CNI
 configurations are present at <code>/var/lib/mesos/cni/config</code>, and the
@@ -414,7 +392,7 @@ modified to take a <code>--networks</code> flag which will allow this example
 framework to launch containers on the specified network. You can find
 the <code>mesos-execute</code> framework in your Mesos installation directory at
 <code>&lt;mesos installation&gt;/bin/mesos-execute</code>.</p>
-<h4 id="a-namea-bridge-networkaa-bridge-network"><a class="header" href="#a-namea-bridge-networkaa-bridge-network"><a name="a-bridge-network"></a>A bridge network</a></h4>
+<h4 id="a-bridge-network"><a class="header" href="#a-bridge-network"><a name="a-bridge-network"></a>A bridge network</a></h4>
 <p>The
 <a href="https://github.com/containernetworking/cni/blob/master/Documentation/bridge.md">bridge</a>
 plugin attaches containers to a Linux bridge. Linux bridges could be
@@ -495,7 +473,7 @@ $ sudo ip netns exec 5baff64c ip route show
 default via 192.168.0.1 dev eth0
 192.168.0.0/16 dev eth0  proto kernel  scope link  src 192.168.0.2
 </code></pre>
-<h4 id="a-namea-port-mapper-plugina-port-mapper-plugin-for-cni-networksa"><a class="header" href="#a-namea-port-mapper-plugina-port-mapper-plugin-for-cni-networksa"><a name="a-port-mapper-plugin">A port-mapper plugin for CNI networks</a></a></h4>
+<h4 id="a-port-mapper-plugin-for-cni-networks"><a class="header" href="#a-port-mapper-plugin-for-cni-networks"><a name="a-port-mapper-plugin">A port-mapper plugin for CNI networks</a></a></h4>
 <p>For private, isolated, networks such as a bridge network where the IP
 address of a container is not routeable from outside the host it
 becomes imperative to provide containers with DNAT capabilities so
@@ -574,7 +552,7 @@ port-mapping information itself is learned by looking at the
 by Mesos to the port-mapper plugin. Please refer to the &quot;<a href="#passing-network-labels-and-port-mapping-information-to-cni-plugins">Passing
 network labels and port-mapping information to CNI
 plugins</a>&quot; section for more details.</p>
-<h4 id="a-namea-calico-networka-calico-networka"><a class="header" href="#a-namea-calico-networka-calico-networka"><a name="a-calico-network">A Calico network</a></a></h4>
+<h4 id="a-calico-network"><a class="header" href="#a-calico-network"><a name="a-calico-network">A Calico network</a></a></h4>
 <p><a href="https://projectcalico.org/">Calico</a> provides 3rd-party CNI plugin
 that works out-of-the-box with Mesos CNI.</p>
 <p>Calico takes a pure Layer-3 approach to networking, allocating a
@@ -588,7 +566,7 @@ constraints.</p>
 <p>For information on setting up and using Calico-CNI, see <a href="https://docs.projectcalico.org/v2.6/getting-started/mesos/">Calico's
 guide on integerating with
 Mesos</a>.</p>
-<h4 id="a-namea-cilium-networka-cilium-networka"><a class="header" href="#a-namea-cilium-networka-cilium-networka"><a name="a-cilium-network">A Cilium network</a></a></h4>
+<h4 id="a-cilium-network"><a class="header" href="#a-cilium-network"><a name="a-cilium-network">A Cilium network</a></a></h4>
 <p><a href="https://www.cilium.io">Cilium</a> provides a CNI plugin that works with Mesos.</p>
 <p>Cilium brings HTTP-aware network security filtering to Linux container
 frameworks. Using a new Linux kernel technology called BPF, Cilium
@@ -596,7 +574,7 @@ provides a simple and efficient way to define and enforce both
 network-layer and HTTP-layer security policies.</p>
 <p>For more information on using Cilium with Mesos, check out the
 <a href="http://docs.cilium.io/try-mesos">Getting Started Using Mesos Guide</a>.</p>
-<h4 id="a-namea-weave-networka-weave-networka"><a class="header" href="#a-namea-weave-networka-weave-networka"><a name="a-weave-network">A Weave network</a></a></h4>
+<h4 id="a-weave-network"><a class="header" href="#a-weave-network"><a name="a-weave-network">A Weave network</a></a></h4>
 <p><a href="https://weave.works">Weave</a> provides a CNI implementation that works
 out-of-the-box with Mesos.</p>
 <p>Weave provides hassle free configuration by assigning an
@@ -614,17 +592,13 @@ documentation</a></p>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                        
                             <a rel="prev" href="networking-for-mesos-managed-containers.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <i class="fa fa-angle-left"></i>
                             </a>
-                        
 
-                        
                             <a rel="next" href="isolators/network-port-mapping.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <i class="fa fa-angle-right"></i>
                             </a>
-                        
 
                         <div style="clear: both"></div>
                     </nav>
@@ -632,49 +606,36 @@ documentation</a></p>
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                
                     <a rel="prev" href="networking-for-mesos-managed-containers.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <i class="fa fa-angle-left"></i>
                     </a>
-                
 
-                
                     <a rel="next" href="isolators/network-port-mapping.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <i class="fa fa-angle-right"></i>
                     </a>
-                
             </nav>
 
         </div>
 
-        
 
-        
 
-        
 
-        
-        <script type="text/javascript">
+        <script>
             window.playground_copyable = true;
         </script>
-        
 
-        
 
-        
-        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
-        
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
 
-        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
-        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
 
         <!-- Custom JS scripts -->
-        
 
-        
 
+    </div>
     </body>
 </html>

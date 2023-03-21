@@ -4,39 +4,25 @@
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
         <title>Apache Mesos</title>
-        
         <meta name="robots" content="noindex" />
-        
-        
 
 
         <!-- Custom HTML head -->
         
-
-
-        <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="theme-color" content="#ffffff" />
 
-        
         <link rel="icon" href="favicon.svg">
-        
-        
         <link rel="shortcut icon" href="favicon.png">
-        
         <link rel="stylesheet" href="css/variables.css">
         <link rel="stylesheet" href="css/general.css">
         <link rel="stylesheet" href="css/chrome.css">
-        
         <link rel="stylesheet" href="css/print.css" media="print">
-        
 
         <!-- Fonts -->
         <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
-        
         <link rel="stylesheet" href="fonts/fonts.css">
-        
 
         <!-- Highlight.js Stylesheets -->
         <link rel="stylesheet" href="highlight.css">
@@ -44,19 +30,18 @@
         <link rel="stylesheet" href="ayu-highlight.css">
 
         <!-- Custom theme stylesheets -->
-        
 
-        
     </head>
     <body>
+    <div id="body-container">
         <!-- Provide site root to javascript -->
-        <script type="text/javascript">
+        <script>
             var path_to_root = "";
             var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
         </script>
 
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
-        <script type="text/javascript">
+        <script>
             try {
                 var theme = localStorage.getItem('mdbook-theme');
                 var sidebar = localStorage.getItem('mdbook-sidebar');
@@ -72,7 +57,7 @@
         </script>
 
         <!-- Set the theme before any content is loaded, prevents flash -->
-        <script type="text/javascript">
+        <script>
             var theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
@@ -84,7 +69,7 @@
         </script>
 
         <!-- Hide / unhide sidebar before it is displayed -->
-        <script type="text/javascript">
+        <script>
             var html = document.querySelector('html');
             var sidebar = 'hidden';
             if (document.body.clientWidth >= 1080) {
@@ -105,8 +90,7 @@
         <div id="page-wrapper" class="page-wrapper">
 
             <div class="page">
-                
-                <div id="menu-bar-hover-placeholder"></div>
+                                <div id="menu-bar-hover-placeholder"></div>
                 <div id="menu-bar" class="menu-bar sticky bordered">
                     <div class="left-buttons">
                         <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
@@ -116,39 +100,33 @@
                             <i class="fa fa-paint-brush"></i>
                         </button>
                         <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
-                            <li role="none"><button role="menuitem" class="theme" id="light">Light (default)</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
                             <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
                         </ul>
-                        
                         <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
                             <i class="fa fa-search"></i>
                         </button>
-                        
                     </div>
 
                     <h1 class="menu-title">Apache Mesos</h1>
 
                     <div class="right-buttons">
-                        
                         <a href="print.html" title="Print this book" aria-label="Print this book">
                             <i id="print-button" class="fa fa-print"></i>
                         </a>
-                        
-                        
                         <a href="https://github.com/AVENTER-UG/mesos-docs/" title="Git repository" aria-label="Git repository">
                             <i id="git-repository-button" class="fa fa-github"></i>
                         </a>
-                        
+
                     </div>
                 </div>
 
-                
                 <div id="search-wrapper" class="hidden">
                     <form id="searchbar-outer" class="searchbar-outer">
-                        <input type="search" name="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
                     </form>
                     <div id="searchresults-outer" class="searchresults-outer hidden">
                         <div id="searchresults-header" class="searchresults-header"></div>
@@ -156,10 +134,9 @@
                         </ul>
                     </div>
                 </div>
-                
 
                 <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
-                <script type="text/javascript">
+                <script>
                     document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
                     document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
                     Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
@@ -191,7 +168,7 @@ still receive offers with slave ID, whereas frameworks using the v1 HTTP API rec
 <p>In addition, this resource offer process repeats when tasks finish and new resources become free.</p>
 <p>While the thin interface provided by Mesos allows it to scale and allows the frameworks to evolve independently, one question remains: how can the constraints of a framework be satisfied without Mesos knowing about these constraints? For example, how can a framework achieve data locality without Mesos knowing which nodes store the data required by the framework? Mesos answers these questions by simply giving frameworks the ability to <strong>reject</strong> offers. A framework will reject the offers that do not satisfy its constraints and accept the ones that do.  In particular, we have found that a simple policy called delay scheduling, in which frameworks wait for a limited time to acquire nodes storing the input data, yields nearly optimal data locality.</p>
 <p>You can also read much more about the Mesos architecture in this <a href="https://www.usenix.org/conference/nsdi11/mesos-platform-fine-grained-resource-sharing-data-center">technical paper</a>.</p>
-<h1 id="video-and-slides-of-mesos-presentations"><a class="header" href="#video-and-slides-of-mesos-presentations">Video and Slides of Mesos Presentations</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="video-and-slides-of-mesos-presentations"><a class="header" href="#video-and-slides-of-mesos-presentations">Video and Slides of Mesos Presentations</a></h1>
 <p><em>(Listed in reverse chronological order)</em></p>
 <h2 id="mesoscon-north-america-2018"><a class="header" href="#mesoscon-north-america-2018">MesosCon North America 2018</a></h2>
 <p><a href="https://www.youtube.com/playlist?list=PL-cRvJ6sAbfjvQCLT3ktrpnVwrJKTodfm">Video playlist</a> + <a href="https://mesoscon18.sched.com/">Slides</a></p>
@@ -295,10 +272,10 @@ Presented Summer 2010 at <a href="http://yahoo.com">Yahoo</a></p>
 <p><a href="https://www.packtpub.com/big-data-and-business-intelligence/automated-machine-learning-pipeline-mesos-integrated-course">Video</a>
 Karl Whitford
 Packt (November 2017)</p>
-<h2 id="docker-apache-mesos--dcos-run-and-manage-cloud-datacenter-a-hrefhttpswwwpacktpubcomnetworking-and-serversdocker-apache-mesos-dcos-run-and-manage-cloud-datacenter-videovideoa"><a class="header" href="#docker-apache-mesos--dcos-run-and-manage-cloud-datacenter-a-hrefhttpswwwpacktpubcomnetworking-and-serversdocker-apache-mesos-dcos-run-and-manage-cloud-datacenter-videovideoa">Docker, Apache Mesos &amp; DCOS: Run and manage cloud datacenter (<a href="https://www.packtpub.com/networking-and-servers/docker-apache-mesos-dcos-run-and-manage-cloud-datacenter-video">Video</a>)</a></h2>
+<h2 id="docker-apache-mesos--dcos-run-and-manage-cloud-datacenter-video"><a class="header" href="#docker-apache-mesos--dcos-run-and-manage-cloud-datacenter-video">Docker, Apache Mesos &amp; DCOS: Run and manage cloud datacenter (<a href="https://www.packtpub.com/networking-and-servers/docker-apache-mesos-dcos-run-and-manage-cloud-datacenter-video">Video</a>)</a></h2>
 <p>Manuj Aggarwal
 Packt (January 2018) </p>
-<h1 id="mesos-release-and-support-policy"><a class="header" href="#mesos-release-and-support-policy">Mesos Release and Support policy</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="mesos-release-and-support-policy"><a class="header" href="#mesos-release-and-support-policy">Mesos Release and Support policy</a></h1>
 <p>The Mesos versioning and release policy gives operators and developers clear guidelines on:</p>
 <ul>
 <li>Making modifications to the existing APIs without affecting backward compatibility.</li>
@@ -400,7 +377,7 @@ option java_outer_classname = &quot;Protos&quot;;
 </code></pre>
 <p>The users of the API send requests (and receive responses) based on the versioned protobufs. We implemented <a href="https://github.com/apache/mesos/blob/master/src/internal/evolve.hpp">evolve</a>/<a href="https://github.com/apache/mesos/blob/master/src/internal/devolve.hpp">devolve</a> converters that can convert protobufs from any supported version to the internal protobuf and vice versa.</p>
 <p>Internally, message passing between various Mesos components would use the internal unversioned protobufs. When sending response (if any) back to the user of the API, the unversioned protobuf would be converted back to a versioned protobuf.</p>
-<h1 id="building"><a class="header" href="#building">Building</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="building"><a class="header" href="#building">Building</a></h1>
 <h2 id="downloading-mesos"><a class="header" href="#downloading-mesos">Downloading Mesos</a></h2>
 <p>There are different ways you can get Mesos:</p>
 <p>1. Download the latest stable release from <a href="http://mesos.apache.org/downloads/">Apache</a> (<em><strong>Recommended</strong></em>)</p>
@@ -641,7 +618,7 @@ Following them will not allow you to access the Mesos web page in a production
 environment (e.g. on AWS). For that you will need to specify the actual IP of
 your host when launching the Mesos master and ensure your firewall settings
 allow access to port 5050 from the outside world.</em></p>
-<h1 id="binary-packages"><a class="header" href="#binary-packages">Binary Packages</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="binary-packages"><a class="header" href="#binary-packages">Binary Packages</a></h1>
 <h2 id="downloading-the-mesos-rpm"><a class="header" href="#downloading-the-mesos-rpm">Downloading the Mesos RPM</a></h2>
 <p>Download and install the latest stable CentOS7 RPM binary from the <a href="http://rpm.aventer.biz/CentOS/7/x86_64/">Repository</a>:</p>
 <pre><code>$ cat &gt; /tmp/aventer.repo &lt;&lt;EOF
@@ -671,7 +648,7 @@ Substitute <code>baseurl</code> the with the appropriate URL for your operating 
 </code></pre>
 <p>This is the simplest way to try out Mesos after downloading the RPM. For more complex and production
 setup instructions refer to the <a href="http://mesos.apache.org/documentation/latest/#administration">Administration</a> section of the docs.</p>
-<h1 id="mesos-runtime-configuration"><a class="header" href="#mesos-runtime-configuration">Mesos Runtime Configuration</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="mesos-runtime-configuration"><a class="header" href="#mesos-runtime-configuration">Mesos Runtime Configuration</a></h1>
 <p>The Mesos master and agent can take a variety of configuration options
 through command-line arguments or environment variables. A list of the
 available options can be seen by running <code>mesos-master --help</code> or
@@ -708,7 +685,7 @@ found by running the binary with the flag <code>--help</code>, for example <code
 <p>See <a href="configuration/autotools.html">configuration/autotools.md</a>.</p>
 <h2 id="cmake-options"><a class="header" href="#cmake-options">CMake Options</a></h2>
 <p>See <a href="configuration/cmake.html">configuration/cmake.md</a>.</p>
-<h1 id="install-cmake-37"><a class="header" href="#install-cmake-37">Install CMake 3.7+</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="install-cmake-37"><a class="header" href="#install-cmake-37">Install CMake 3.7+</a></h1>
 <h2 id="linux"><a class="header" href="#linux">Linux</a></h2>
 <p>Install the latest version of CMake from <a href="https://cmake.org/download/">CMake.org</a>.
 A self-extracting tarball is available to make this process painless.</p>
@@ -1020,7 +997,7 @@ an administrative prompt.</p>
 <p>Note that on Windows, the patch file must have CRLF line endings. A file with LF
 line endings will cause the error: &quot;Assertion failed, hunk, file patch.c, line
 343&quot;. For this reason, it is required to checkout the Mesos repo with <code>git config core.autocrlf true</code>.</p>
-<h1 id="windows-2"><a class="header" href="#windows-2">Windows</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="windows-2"><a class="header" href="#windows-2">Windows</a></h1>
 <p>Mesos 1.0.0 introduced experimental support for Windows.</p>
 <h2 id="building-mesos"><a class="header" href="#building-mesos">Building Mesos</a></h2>
 <h3 id="system-requirements-1"><a class="header" href="#system-requirements-1">System Requirements</a></h3>
@@ -1159,7 +1136,7 @@ of OpenSSL for Windows. A commonly chosen distribution is
 deployed elsewhere, that machine also needs OpenSSL installed.</p>
 <p>Beware that the OpenSSL installation, nor Mesos itself, comes with a certificate
 bundle, and so it is likely that certificate verification will fail.</p>
-<h1 id="mesos-runtime-configuration-1"><a class="header" href="#mesos-runtime-configuration-1">Mesos Runtime Configuration</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="mesos-runtime-configuration-1"><a class="header" href="#mesos-runtime-configuration-1">Mesos Runtime Configuration</a></h1>
 <p>The Mesos master and agent can take a variety of configuration options
 through command-line arguments or environment variables. A list of the
 available options can be seen by running <code>mesos-master --help</code> or
@@ -1196,7 +1173,7 @@ found by running the binary with the flag <code>--help</code>, for example <code
 <p>See <a href="configuration/autotools.html">configuration/autotools.md</a>.</p>
 <h2 id="cmake-options-1"><a class="header" href="#cmake-options-1">CMake Options</a></h2>
 <p>See <a href="configuration/cmake.html">configuration/cmake.md</a>.</p>
-<h1 id="mesos-high-availability-mode"><a class="header" href="#mesos-high-availability-mode">Mesos High-Availability Mode</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="mesos-high-availability-mode"><a class="header" href="#mesos-high-availability-mode">Mesos High-Availability Mode</a></h1>
 <p>If the Mesos master is unavailable, existing tasks can continue to execute, but new resources cannot be allocated and new tasks cannot be launched. To reduce the chance of this situation occurring, Mesos has a high-availability mode that uses multiple Mesos masters: one active master (called the <em>leader</em> or leading master) and several <em>backups</em> in case it fails. The masters elect the leader, with <a href="http://zookeeper.apache.org/">Apache ZooKeeper</a> both coordinating the election and handling leader detection by masters, agents, and scheduler drivers. More information regarding <a href="https://zookeeper.apache.org/doc/current/recipes.html#sc_leaderElection">how leader election works</a> is available on the Apache Zookeeper website.</p>
 <p>This document describes how to configure Mesos to run in high-availability mode. For more information on developing highly available frameworks, see a <a href="high-availability-framework-guide.html">companion document</a>.</p>
 <p><strong>Note</strong>: This document assumes you know how to start, run, and work with ZooKeeper, whose client library is included in the standard Mesos build.</p>
@@ -1286,7 +1263,7 @@ For creating alerts covering failures in leader election, have a look at the mon
 <li>ZNode creation, deletion, updates</li>
 </ul>
 <p>We also explicitly timeout our sessions when disconnected from ZooKeeper for a specified amount of time. See <code>--zk_session_timeout</code> configuration option. This is because the ZooKeeper client libraries only notify of session expiration upon reconnection. These timeouts are of particular interest for network partitions.</p>
-<h1 id="the-mesos-replicated-log"><a class="header" href="#the-mesos-replicated-log">The Mesos Replicated Log</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="the-mesos-replicated-log"><a class="header" href="#the-mesos-replicated-log">The Mesos Replicated Log</a></h1>
 <p>Mesos provides a library that lets you create replicated fault-tolerant append-only logs; this library is known as the <em>replicated log</em>. The Mesos master uses this library to store cluster state in a replicated, durable way; the library is also available for use by frameworks to store replicated framework state or to implement the common &quot;<a href="https://en.wikipedia.org/wiki/State_machine_replication">replicated state machine</a>&quot; pattern.</p>
 <h2 id="what-is-the-replicated-log"><a class="header" href="#what-is-the-replicated-log">What is the replicated log?</a></h2>
 <p><img src="images/log-cluster.png" alt="Aurora and the Replicated Log" /></p>
@@ -1300,7 +1277,7 @@ For creating alerts covering failures in leader election, have a look at the mon
 <p>Similarly, the replicated log can be used to build <a href="https://en.wikipedia.org/wiki/State_machine_replication">replicated state machines</a>. In this scenario, each log entry contains a state machine command. Since replicas are strongly consistent, all servers will execute the same commands in the same order.</p>
 <h2 id="implementation"><a class="header" href="#implementation">Implementation</a></h2>
 <p><img src="images/log-architecture.png" alt="Replicated Log Architecture" /></p>
-<p>The replicated log uses the <a href="https://en.wikipedia.org/wiki/Paxos_%28computer_science%29">Paxos consensus algorithm</a> to ensure that all replicas agree on every log entry's value. It is similar to what's described in <a href="https://ramcloud.stanford.edu/%7Eongaro/userstudy/paxos.pdf">these slides</a>. Readers who are familiar with Paxos can skip this section.</p>
+<p>The replicated log uses the <a href="https://en.wikipedia.org/wiki/Paxos_%28computer_science%29">Paxos consensus algorithm</a> to ensure that all replicas agree on every log entry's value. It is similar to what's described in <a href="https://ramcloud.stanford.edu/~ongaro/userstudy/paxos.pdf">these slides</a>. Readers who are familiar with Paxos can skip this section.</p>
 <p>The above figure is an implementation overview. When a user wants to append data to the log, the system creates a log writer. The log writer internally creates a coordinator. The coordinator contacts all replicas and executes the Paxos algorithm to make sure all replicas agree about the appended data. The coordinator is sometimes referred to as the <a href="https://en.wikipedia.org/wiki/Paxos_%28computer_science%29"><em>proposer</em></a>.</p>
 <p>Each replica keeps an array of log entries. The array index is the log position. Each log entry is composed of three components: the value written by the user, the associated Paxos state and a <em>learned</em> bit where true means this log entry's value has been agreed. Therefore, a replica in our implementation is both an <a href="https://en.wikipedia.org/wiki/Paxos_%28computer_science%29"><em>acceptor</em></a> and a <a href="https://en.wikipedia.org/wiki/Paxos_%28computer_science%29"><em>learner</em></a>.</p>
 <h3 id="reaching-consensus-for-a-single-log-entry"><a class="header" href="#reaching-consensus-for-a-single-log-entry">Reaching consensus for a single log entry</a></h3>
@@ -1320,7 +1297,7 @@ For creating alerts covering failures in leader election, have a look at the mon
 <h3 id="reducing-log-size-using-garbage-collection"><a class="header" href="#reducing-log-size-using-garbage-collection">Reducing log size using garbage collection</a></h3>
 <p>In case the log grows large, the application has the choice to truncate the log. To perform a truncation, we append a special log entry whose value is the log position to which the user wants to truncate the log. A replica can actually truncate the log once this special log entry has been learned.</p>
 <h3 id="unique-proposal-number"><a class="header" href="#unique-proposal-number">Unique proposal number</a></h3>
-<p>Many of the <a href="https://research.microsoft.com/en-us/um/people/lamport/pubs/paxos-simple.pdf">Paxos research papers</a> assume that each proposal number is globally unique, and a coordinator can always come up with a proposal number that is larger than any other proposal numbers in the system. However, implementing this is not trivial, especially in a distributed environment. <a href="https://ramcloud.stanford.edu/%7Eongaro/userstudy/paxos.pdf">Some researchers suggest</a> concatenating a globally unique server id to each proposal number. But it is still not clear how to generate a globally unique id for each server.</p>
+<p>Many of the <a href="https://research.microsoft.com/en-us/um/people/lamport/pubs/paxos-simple.pdf">Paxos research papers</a> assume that each proposal number is globally unique, and a coordinator can always come up with a proposal number that is larger than any other proposal numbers in the system. However, implementing this is not trivial, especially in a distributed environment. <a href="https://ramcloud.stanford.edu/~ongaro/userstudy/paxos.pdf">Some researchers suggest</a> concatenating a globally unique server id to each proposal number. But it is still not clear how to generate a globally unique id for each server.</p>
 <p>Our solution does not make the above assumptions. A coordinator can use an arbitrary proposal number initially. During the promise phase, if a replica knows a proposal number higher than the proposal number used by the coordinator, it will send the largest known proposal number back to the coordinator. The coordinator will retry the promise phase with a higher proposal number.</p>
 <p>To avoid livelock (e.g., when two coordinators completing), we inject a randomly delay between T and 2T before each retry. T has to be chosen carefully. On one hand, we want T &gt;&gt; broadcast time such that one coordinator usually times out and wins before others wake up. On the other hand, we want T to be as small as possible such that we can reduce the wait time. Currently, we use T = 100ms. This idea is actually borrowed from <a href="https://ramcloud.stanford.edu/wiki/download/attachments/11370504/raft.pdf">Raft</a>.</p>
 <h2 id="automatic-replica-recovery"><a class="header" href="#automatic-replica-recovery">Automatic replica recovery</a></h2>
@@ -1349,7 +1326,7 @@ For creating alerts covering failures in leader election, have a look at the mon
 <p>A truncation can take place during the non-leading replica catch-up. The replica may try to fill the truncated position if truncation happens after the replica has recovered <em>begin</em> and <em>end</em> positions, which may lead to producing inconsistent data during log replay. In order to protect against it we use a special tombstone flag that signals to the replica that the position was truncated and <em>begin</em> needs to be adjusted. The replica is not blocked from truncations during or after catching-up, which means that the user may need to retry the catch-up procedure if positions that were recovered became truncated during log replay.</p>
 <h2 id="future-work"><a class="header" href="#future-work">Future work</a></h2>
 <p>Currently, replicated log does not support dynamic quorum size change, also known as <em>reconfiguration</em>. Supporting reconfiguration would allow us more easily to add, move or swap hosts for replicas. We plan to support reconfiguration in the future.</p>
-<h1 id="agent-recovery"><a class="header" href="#agent-recovery">Agent Recovery</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="agent-recovery"><a class="header" href="#agent-recovery">Agent Recovery</a></h1>
 <p>If the <code>mesos-agent</code> process on a host exits (perhaps due to a Mesos bug or
 because the operator kills the process while <a href="upgrades.html">upgrading Mesos</a>),
 any executors/tasks that were being managed by the <code>mesos-agent</code> process will
@@ -1456,7 +1433,7 @@ the flag explicitly:</p>
 ExecStart=/usr/bin/mesos-agent
 KillMode=control-cgroup
 </code></pre>
-<h1 id="framework-rate-limiting"><a class="header" href="#framework-rate-limiting">Framework Rate Limiting</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="framework-rate-limiting"><a class="header" href="#framework-rate-limiting">Framework Rate Limiting</a></h1>
 <p>Framework rate limiting is a feature introduced in Mesos 0.20.0.</p>
 <h2 id="what-is-framework-rate-limiting"><a class="header" href="#what-is-framework-rate-limiting">What is Framework Rate Limiting</a></h2>
 <p>In a multi-framework environment, this feature aims to protect the throughput of high-SLA (e.g., production, service) frameworks by having the master throttle messages from other (e.g., development, batch) frameworks.</p>
@@ -1525,7 +1502,7 @@ However since this kind of calculation is imprecise, you should start with small
 <p>When a framework <strong>exceeds the capacity</strong>, a FrameworkErrorMessage is sent back to the framework which will <a href="https://github.com/apache/mesos/blob/master/src/sched/sched.cpp">abort the scheduler driver and invoke the error() callback</a>. It doesn't kill any tasks or the scheduler itself. The framework developer can choose to restart or failover the scheduler instance to remedy the consequences of dropped messages (unless your framework doesn't assume all messages sent to the master are processed).</p>
 <p>After version 0.20.0 we are going to iterate on this feature by having the master send an early alert when the message queue for this framework <strong>starts to build up</strong> (<a href="https://issues.apache.org/jira/browse/MESOS-1664">MESOS-1664</a>, consider it a &quot;soft limit&quot;). The scheduler can react by throttling itself (to avoid the error message) or ignoring this alert if it's a temporary burst by design.</p>
 <p>Before the early alerting is implemented we <strong>don't recommend using the rate limiting feature to throttle production frameworks</strong> for now unless you are sure about the consequences of the error message. Of course it's OK to use it to protect production frameworks by throttling other frameworks and it doesn't have any effect on the master if it's not explicitly enabled.</p>
-<h1 id="performing-node-maintenance-in-a-mesos-cluster"><a class="header" href="#performing-node-maintenance-in-a-mesos-cluster">Performing Node Maintenance in a Mesos Cluster</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="performing-node-maintenance-in-a-mesos-cluster"><a class="header" href="#performing-node-maintenance-in-a-mesos-cluster">Performing Node Maintenance in a Mesos Cluster</a></h1>
 <p>Operators regularly need to perform maintenance tasks on machines that comprise
 a Mesos cluster.  Most Mesos upgrades can be done without affecting running
 tasks, but there are situations where maintenance may affect running tasks.
@@ -1905,7 +1882,7 @@ format of the <a href="https://github.com/apache/mesos/blob/fa36917dd142f66924c5
 <p>NOTE: The format of the data returned by this endpoint may change in a
 future release of Mesos.</p>
 </blockquote>
-<hr />
+<div style="break-before: page; page-break-before: always;"></div><hr />
 <h2>title: Apache Mesos - Upgrading Mesos
 layout: documentation</h2>
 <h1 id="upgrading-mesos"><a class="header" href="#upgrading-mesos">Upgrading Mesos</a></h1>
@@ -3373,7 +3350,7 @@ Restart the masters with --authentication=true.</li>
 <li>Install the new agent binaries and restart the agents.</li>
 <li>Install the new master binaries and restart the masters.</li>
 </ol>
-<h1 id="downgrade-mesos"><a class="header" href="#downgrade-mesos">Downgrade Mesos</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="downgrade-mesos"><a class="header" href="#downgrade-mesos">Downgrade Mesos</a></h1>
 <p>This document serves as a guide for users who wish to downgrade from an
 existing Mesos cluster to a previous version. This usually happens when
 rolling back from problematic upgrades. Mesos provides compatibility
@@ -3448,7 +3425,7 @@ these minimum capabilities and remediation for downgrade errors.</p>
   </td>
 </tr>
 </table>
-<h1 id="logging"><a class="header" href="#logging">Logging</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="logging"><a class="header" href="#logging">Logging</a></h1>
 <p>Mesos handles the logs of each Mesos component differently depending on the
 degree of control Mesos has over the source code of the component.</p>
 <p>Roughly, these categories are:</p>
@@ -3459,7 +3436,7 @@ degree of control Mesos has over the source code of the component.</p>
 Frameworks and <a href="high-availability.html">ZooKeeper</a>.  These are expected to
 implement their own logging solution.</li>
 </ul>
-<h2 id="a-nameinternalainternal"><a class="header" href="#a-nameinternalainternal"><a name="Internal"></a>Internal</a></h2>
+<h2 id="internal"><a class="header" href="#internal"><a name="Internal"></a>Internal</a></h2>
 <p>The Mesos Master and Agent use the
 <a href="https://github.com/google/glog">Google's logging library</a>.
 For information regarding the command-line options used to configure this
@@ -3474,7 +3451,7 @@ HTTP endpoint which temporarily toggles verbose logging:</p>
 <p>The effect is analogous to setting the <code>GLOG_v</code> environment variable prior
 to starting the Master/Agent, except the logging level will revert to the
 original level after the given duration.</p>
-<h2 id="a-namecontainersacontainers"><a class="header" href="#a-namecontainersacontainers"><a name="Containers"></a>Containers</a></h2>
+<h2 id="containers"><a class="header" href="#containers"><a name="Containers"></a>Containers</a></h2>
 <p>For background, see <a href="containerizers.html">the containerizer documentation</a>.</p>
 <p>Mesos does not assume any structured logging for entities running inside
 containers.  Instead, Mesos will store the stdout and stderr of containers
@@ -3632,7 +3609,7 @@ instance of the <code>ContainerLogger</code>.  This means more than one <code>Co
 may be running in a single Agent.  However, each Agent will only run a single
 type of <code>ContainerLogger</code>.</li>
 </ul>
-<h1 id="mesos-observability-metrics"><a class="header" href="#mesos-observability-metrics">Mesos Observability Metrics</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="mesos-observability-metrics"><a class="header" href="#mesos-observability-metrics">Mesos Observability Metrics</a></h1>
 <p>This document describes the observability metrics provided by Mesos master and
 agent nodes. This document also provides some initial guidance on which metrics
 you should monitor to detect abnormal situations in your cluster.</p>
@@ -5779,7 +5756,7 @@ completed CSI calls made to the plugin.</p>
   <td>Counter</td>
 </tr>
 </table>
-<h1 id="the-new-cli"><a class="header" href="#the-new-cli">The new CLI</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="the-new-cli"><a class="header" href="#the-new-cli">The new CLI</a></h1>
 <p>The new Mesos Command Line Interface provides one executable Python 3
 script to run all default commands and additional custom plugins.</p>
 <p>Two of the subcommands available allow you to debug running containers:</p>
@@ -5831,20 +5808,21 @@ plugins = [
   #   ]
   #   path = &quot;/mesos&quot;
 </code></pre>
-<h1 id="operational-guide"><a class="header" href="#operational-guide">Operational Guide</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="operational-guide"><a class="header" href="#operational-guide">Operational Guide</a></h1>
 <h2 id="using-a-process-supervisor"><a class="header" href="#using-a-process-supervisor">Using a process supervisor</a></h2>
 <p>Mesos uses a &quot;<a href="https://en.wikipedia.org/wiki/Fail-fast">fail-fast</a>&quot; approach to error handling: if a serious error occurs, Mesos will typically exit rather than trying to continue running in a possibly erroneous state. For example, when Mesos is configured for <a href="high-availability.html">high availability</a>, the leading master will abort itself when it discovers it has been partitioned away from the Zookeeper quorum. This is a safety precaution to ensure the previous leader doesn't continue communicating in an unsafe state.</p>
 <p>To ensure that such failures are handled appropriately, production deployments of Mesos typically use a <em>process supervisor</em> (such as systemd or supervisord) to detect when Mesos processes exit. The supervisor can be configured to restart the failed process automatically and/or to notify the cluster operator to investigate the situation.</p>
 <h2 id="changing-the-master-quorum"><a class="header" href="#changing-the-master-quorum">Changing the master quorum</a></h2>
 <p>The master leverages a <a href="replicated-log-internals.html">Paxos-based replicated log</a> as its storage backend (<code>--registry=replicated_log</code> is the only storage backend currently supported). Each master participates in the ensemble as a log replica. The <code>--quorum</code> flag determines a majority of the masters.</p>
 <p>The following table shows the tolerance to master failures for each quorum size:</p>
-<table><thead><tr><th align="right">Masters</th><th align="right">Quorum Size</th><th align="right">Failure Tolerance</th></tr></thead><tbody>
-<tr><td align="right">1</td><td align="right">1</td><td align="right">0</td></tr>
-<tr><td align="right">3</td><td align="right">2</td><td align="right">1</td></tr>
-<tr><td align="right">5</td><td align="right">3</td><td align="right">2</td></tr>
-<tr><td align="right">...</td><td align="right">...</td><td align="right">...</td></tr>
-<tr><td align="right">2N - 1</td><td align="right">N</td><td align="right">N - 1</td></tr>
+<div class="table-wrapper"><table><thead><tr><th style="text-align: right">Masters</th><th style="text-align: right">Quorum Size</th><th style="text-align: right">Failure Tolerance</th></tr></thead><tbody>
+<tr><td style="text-align: right">1</td><td style="text-align: right">1</td><td style="text-align: right">0</td></tr>
+<tr><td style="text-align: right">3</td><td style="text-align: right">2</td><td style="text-align: right">1</td></tr>
+<tr><td style="text-align: right">5</td><td style="text-align: right">3</td><td style="text-align: right">2</td></tr>
+<tr><td style="text-align: right">...</td><td style="text-align: right">...</td><td style="text-align: right">...</td></tr>
+<tr><td style="text-align: right">2N - 1</td><td style="text-align: right">N</td><td style="text-align: right">N - 1</td></tr>
 </tbody></table>
+</div>
 <p>It is recommended to run with 3 or 5 masters, when desiring high availability.</p>
 <h3 id="note"><a class="header" href="#note">NOTE</a></h3>
 <p>When configuring the quorum, it is essential to ensure that there are only so many masters running as specified in the table above. If additional masters are running, this violates the quorum and the log may be corrupted! As a result, it is recommended to gate the running of the master process with something that enforces a static whitelist of the master hosts. See <a href="https://issues.apache.org/jira/browse/MESOS-1546">MESOS-1546</a> for adding a safety whitelist within Mesos itself.</p>
@@ -5880,7 +5858,7 @@ information, quota information, etc). To move from 1 master to 3 masters:</p>
 <p>If the default IP (or the command line arg <code>--ip</code>) is an internal IP, then external entities such as framework schedulers will be unable to reach the master. To address that scenario, an externally accessible IP:port can be setup via the <code>--advertise_ip</code> and <code>--advertise_port</code> command line arguments of <code>mesos-master</code>. If configured, external entities such as framework schedulers interact with the advertise_ip:advertise_port from where the request needs to be proxied to the internal IP:port on which the Mesos master is listening.</p>
 <h2 id="http-requests-to-non-leading-master"><a class="header" href="#http-requests-to-non-leading-master">HTTP requests to non-leading master</a></h2>
 <p>HTTP requests to some master endpoints (e.g., <a href="endpoints/master/state.html">/state</a>, <a href="endpoints/master/machine/down.html">/machine/down</a>) can only be answered by the leading master. Such requests made to a non-leading master will result in either a <code>307 Temporary Redirect</code> (with the location of the leading master) or <code>503 Service Unavailable</code> (if the master does not know who the current leader is).</p>
-<h1 id="mesos-fetcher"><a class="header" href="#mesos-fetcher">Mesos Fetcher</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="mesos-fetcher"><a class="header" href="#mesos-fetcher">Mesos Fetcher</a></h1>
 <p>Mesos 0.23.0 introduced experimental support for the Mesos <em>fetcher cache</em>.</p>
 <p>In this context we loosely regard the term &quot;downloading&quot; as to include copying
 from local file systems.</p>
@@ -6132,7 +6110,7 @@ running the present task, right after fetching its own resources.</li>
 </ul>
 <h2 id="implementation-details-2"><a class="header" href="#implementation-details-2">Implementation Details</a></h2>
 <p>The <a href="fetcher-cache-internals.html">Mesos Fetcher Cache Internals</a> describes how the fetcher cache is implemented.</p>
-<hr />
+<div style="break-before: page; page-break-before: always;"></div><hr />
 <h2>title: Apache Mesos - Domains and Regions
 layout: documentation</h2>
 <h1 id="regions-and-fault-domains"><a class="header" href="#regions-and-fault-domains">Regions and Fault Domains</a></h1>
@@ -6222,7 +6200,7 @@ updated so that they can schedule tasks in the cloud if required.</p>
 the data center, where the master nodes reside. Region-aware frameworks are
 supposed to know when and if they should place their tasks in the data center
 or with the cloud provider.</p>
-<h1 id="performance-profiling"><a class="header" href="#performance-profiling">Performance Profiling</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="performance-profiling"><a class="header" href="#performance-profiling">Performance Profiling</a></h1>
 <p>This document over time will be home to various guides on how to use various profiling tools to do performance analysis of Mesos.</p>
 <h2 id="flamescope"><a class="header" href="#flamescope">Flamescope</a></h2>
 <p><a href="https://github.com/Netflix/flamescope">Flamescope</a> is a visualization tool for exploring different time ranges as <a href="https://github.com/brendangregg/FlameGraph">flamegraphs</a>. In order to use the tool, you first need to obtain stack traces, here's how to obtain a 60 second recording of the mesos master process at 100 hertz using Linux perf:</p>
@@ -6232,7 +6210,7 @@ $ gzip mesos-master.stacks
 </code></pre>
 <p>If you'd like to solicit help in analyzing the performance data, upload the <code>mesos-master.stacks.gz</code> to a publicly accessible location and file with <code>dev@mesos.apache.org</code> for analysis, or send the file over <a href="http://mesos.slack.com">slack</a> to the #performance channel.</p>
 <p>Alternatively, to do the analysis yourself, place mesos-master.stacks into the <code>examples</code> folder of a flamescope git checkout.</p>
-<h1 id="memory-profiling-with-mesos-and-jemalloc"><a class="header" href="#memory-profiling-with-mesos-and-jemalloc">Memory Profiling with Mesos and Jemalloc</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="memory-profiling-with-mesos-and-jemalloc"><a class="header" href="#memory-profiling-with-mesos-and-jemalloc">Memory Profiling with Mesos and Jemalloc</a></h1>
 <p>On Linux systems, Mesos is able to leverage the memory-profiling capabilities of
 the <a href="http://jemalloc.net">jemalloc</a> general-purpose allocator to provide
 powerful debugging tools for investigating memory-related issues.</p>
@@ -6398,7 +6376,7 @@ allocations, one might use the configuration:</p>
 before accessing the <code>/start</code> endpoint:</p>
 <pre><code>MALLOC_CONF=&quot;prof:true,prof_active:true&quot;
 </code></pre>
-<h1 id="mesos-attributes--resources"><a class="header" href="#mesos-attributes--resources">Mesos Attributes &amp; Resources</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="mesos-attributes--resources"><a class="header" href="#mesos-attributes--resources">Mesos Attributes &amp; Resources</a></h1>
 <p>Mesos has two basic methods to describe the agents that comprise a cluster. One of these is managed by the Mesos master, the other is simply passed onwards to the frameworks using the cluster.</p>
 <h2 id="types"><a class="header" href="#types">Types</a></h2>
 <p>The types of values that are supported by Attributes and Resources in Mesos are scalar, ranges, sets and text.</p>
@@ -6577,7 +6555,7 @@ resourceRole : text | &quot;*&quot;
 <li><code>level</code> with scalar value 10</li>
 <li><code>keys</code> with range value <code>1000</code> through <code>1500</code> (inclusive)</li>
 </ul>
-<hr />
+<div style="break-before: page; page-break-before: always;"></div><hr />
 <h2>title: Apache Mesos - Roles
 layout: documentation</h2>
 <h1 id="roles"><a class="header" href="#roles">Roles</a></h1>
@@ -6610,7 +6588,7 @@ schedule work on behalf of the resource consumer(s) they are servicing.</p>
 <li>Ensuring that some (or all) of the resources on a particular agent
 are allocated to a particular role (via <a href="reservation.html">reservations</a>).</li>
 <li>Ensuring that resources are fairly shared between roles
-(via <a href="https://www.cs.berkeley.edu/%7Ealig/papers/drf.pdf">DRF</a>).</li>
+(via <a href="https://www.cs.berkeley.edu/~alig/papers/drf.pdf">DRF</a>).</li>
 <li>Expressing that some roles should receive a higher relative share of the
 cluster (via <a href="weights.html">weights</a>).</li>
 </ul>
@@ -6725,7 +6703,7 @@ performed by an entity, such as <a href="reservation.html">resource reservation<
 <a href="persistent-volume.html">persistent volume</a> creation/destruction.</p>
 <p>Roles, on the other hand, are used exclusively for resource allocation, as
 covered above.</p>
-<hr />
+<div style="break-before: page; page-break-before: always;"></div><hr />
 <h2>title: Apache Mesos - Weights
 layout: documentation</h2>
 <h1 id="weights"><a class="header" href="#weights">Weights</a></h1>
@@ -6806,7 +6784,7 @@ configured weights, for example:</p>
 <li><code>200 OK</code>: Success.</li>
 <li><code>401 Unauthorized</code>: Unauthenticated request.</li>
 </ul>
-<hr />
+<div style="break-before: page; page-break-before: always;"></div><hr />
 <h2>title: Apache Mesos - Quota
 layout: documentation</h2>
 <h1 id="quota"><a class="header" href="#quota">Quota</a></h1>
@@ -6999,7 +6977,7 @@ re-register or 10 minutes elapses. These parameters will be made
 configurable: <a href="https://issues.apache.org/jira/browse/MESOS-4073">MESOS-4073</a></li>
 <li>Quota is SUPPORTED for the default <code>*</code> role now <a href="https://issues.apache.org/jira/browse/MESOS-3938">MESOS-3938</a>.</li>
 </ul>
-<hr />
+<div style="break-before: page; page-break-before: always;"></div><hr />
 <h2>title: Apache Mesos - Reservation
 layout: documentation</h2>
 <h1 id="reservation"><a class="header" href="#reservation">Reservation</a></h1>
@@ -7662,7 +7640,7 @@ unreserving resources at the slave might fail, in which case no resources will
 be unreserved. To determine if an unreserve operation has succeeded, the user
 can examine the state of the appropriate Mesos slave (e.g., via the slave's
 <a href="endpoints/slave/state.html">/state</a> HTTP endpoint).</p>
-<hr />
+<div style="break-before: page; page-break-before: always;"></div><hr />
 <h2>title: Apache Mesos - Shared Persistent Volumes
 layout: documentation</h2>
 <h1 id="shared-persistent-volumes"><a class="header" href="#shared-persistent-volumes">Shared Persistent Volumes</a></h1>
@@ -7780,7 +7758,7 @@ feature.</p>
 &quot;<a href="http://schd.ws/hosted_files/mesosconeu2016/08/MesosConEurope2016PPVv1.0.pdf">Practical Persistent Volumes</a>&quot;.</p>
 </li>
 </ul>
-<hr />
+<div style="break-before: page; page-break-before: always;"></div><hr />
 <h2>title: Apache Mesos - Oversubscription
 layout: documentation</h2>
 <h1 id="oversubscription"><a class="header" href="#oversubscription">Oversubscription</a></h1>
@@ -8082,7 +8060,7 @@ be above 6, or for 15 minutes will be above 4 then agent will evict all the
 seconds.</p>
 <p>To install a custom resource estimator and QoS controller, please refer to the
 <a href="modules.html">modules documentation</a>.</p>
-<hr />
+<div style="break-before: page; page-break-before: always;"></div><hr />
 <h2>title: Apache Mesos - Authentication
 layout: documentation</h2>
 <h1 id="authentication"><a class="header" href="#authentication">Authentication</a></h1>
@@ -8358,7 +8336,7 @@ provided with Mesos as follows:</p>
 </code></pre>
 </li>
 </ol>
-<hr />
+<div style="break-before: page; page-break-before: always;"></div><hr />
 <h2>title: Apache Mesos - Authorization
 layout: documentation</h2>
 <h1 id="authorization-1"><a class="header" href="#authorization-1">Authorization</a></h1>
@@ -9199,7 +9177,7 @@ This code on the Mesos side, on its part, must ensure that it does not store
 does not leak <code>ObjectApprover</code>s).</p>
 <p>NOTE: As the <code>ObjectApprover</code> is run synchronously in a different actor process
 <code>ObjectApprover.approved()</code> call must not block!</p>
-<hr />
+<div style="break-before: page; page-break-before: always;"></div><hr />
 <h2>title: Apache Mesos - SSL in Mesos
 layout: documentation</h2>
 <h1 id="ssl-in-mesos"><a class="header" href="#ssl-in-mesos">SSL in Mesos</a></h1>
@@ -9392,7 +9370,7 @@ because Mesos makes use of APIs introduced in later versions of OpenSSL.</p>
 <pre><code>// For example, on OSX:
 brew install openssl
 </code></pre>
-<h1 id="a-nameupgradingaupgrading-your-cluster"><a class="header" href="#a-nameupgradingaupgrading-your-cluster"><a name="Upgrading"></a>Upgrading Your Cluster</a></h1>
+<h1 id="upgrading-your-cluster"><a class="header" href="#upgrading-your-cluster"><a name="Upgrading"></a>Upgrading Your Cluster</a></h1>
 <p><em>There is no SSL specific requirement for upgrading different components in a specific order.</em></p>
 <p>The recommended strategy is to restart all your components to enable SSL with downgrades support enabled. Once all components have SSL enabled, then do a second restart of all your components to disable downgrades. This strategy will allow each component to be restarted independently at your own convenience with no time restrictions. It will also allow you to try SSL in a subset of your cluster.</p>
 <p><strong>NOTE:</strong> While different components in your cluster are serving SSL vs non-SSL traffic, any relative links in the WebUI may be broken. Please see the <a href="ssl.html#WebUI">WebUI</a> section for details. Here are sample commands for upgrading your cluster:</p>
@@ -9405,12 +9383,12 @@ LIBPROCESS_SSL_ENABLED=true LIBPROCESS_SSL_SUPPORT_DOWNGRADE=false LIBPROCESS_SS
 <p>Executors must be able to access the SSL environment variables and the files referred to by those variables. Environment variables can be provided to an executor by specifying <code>CommandInfo.environment</code> or by using the agent's <code>--executor_environment_variables</code> command line flag. If the agent and the executor are running in separate containers, <code>ContainerInfo.volumes</code> can be used to mount SSL files from the host into the executor's container.</p>
 <p>The end state is a cluster that is only communicating with SSL.</p>
 <p><strong>NOTE:</strong> Any tools you may use that communicate with your components must be able to speak SSL, or they will be denied. You may choose to maintain <code>LIBPROCESS_SSL_SUPPORT_DOWNGRADE=true</code> for some time as you upgrade your internal tooling. The advantage of <code>LIBPROCESS_SSL_SUPPORT_DOWNGRADE=true</code> is that all components that speak SSL will do so, while other components may still communicate over insecure channels.</p>
-<h1 id="a-namewebuiawebui"><a class="header" href="#a-namewebuiawebui"><a name="WebUI"></a>WebUI</a></h1>
+<h1 id="webui"><a class="header" href="#webui"><a name="WebUI"></a>WebUI</a></h1>
 <p>The default Mesos WebUI uses relative links. Some of these links transition between endpoints served by the master and agents. The WebUI currently does not have enough information to change the 'http' vs 'https' links based on whether the target endpoint is currently being served by an SSL-enabled binary. This may cause certain links in the WebUI to be broken when a cluster is in a transition state between SSL and non-SSL. Any tools that hit these endpoints will still be able to access them as long as they hit the endpoint using the right protocol, or the <code>LIBPROCESS_SSL_SUPPORT_DOWNGRADE</code> option is set to true.</p>
 <p><strong>NOTE:</strong> Frameworks with their own WebUI will need to add HTTPS support separately.</p>
 <h3 id="certificates"><a class="header" href="#certificates">Certificates</a></h3>
 <p>Most browsers have built in protection that guard transitions between pages served using different certificates. For this reason you may choose to serve both the master and agent endpoints using a common certificate that covers multiple hostnames. If you do not do this, certain links, such as those to agent sandboxes, may seem broken as the browser treats the transition between differing certificates transition as unsafe.</p>
-<hr />
+<div style="break-before: page; page-break-before: always;"></div><hr />
 <h2>title: Apache Mesos - Secrets Handling
 layout: documentation</h2>
 <h1 id="secrets"><a class="header" href="#secrets">Secrets</a></h1>
@@ -9531,7 +9509,7 @@ The secret can then be referenced in the <code>Image</code> protobuf as follows:
 };
 </code></pre>
 <p>The default implementation simply resolves value-based Secrets. A custom secret-resolver module can be specified using the <code>--secret_resolver=&lt;module-name&gt;</code> agent flag.</p>
-<hr />
+<div style="break-before: page; page-break-before: always;"></div><hr />
 <h2>title: Apache Mesos - Containerizers
 layout: documentation</h2>
 <h1 id="containerizers-1"><a class="header" href="#containerizers-1">Containerizers</a></h1>
@@ -9607,7 +9585,7 @@ might not be provided by other container technologies.</li>
 <li><a href="containerizer-internals.html">Containerizer Internals</a> for
 implementation details of containerizers.</li>
 </ul>
-<hr />
+<div style="break-before: page; page-break-before: always;"></div><hr />
 <h2>title: Apache Mesos - Containerizer Internals
 layout: documentation</h2>
 <h1 id="containerizer"><a class="header" href="#containerizer">Containerizer</a></h1>
@@ -9758,7 +9736,7 @@ means that the nested container shares the namespace from its parent
 container.</p>
 <h6 id="posix-launcher-tbd"><a class="header" href="#posix-launcher-tbd">Posix launcher (TBD)</a></h6>
 <p><a name="Isolators"></a></p>
-<h5 id="a-hrefmesos-containerizerhtmlisolatorsisolatorsa"><a class="header" href="#a-hrefmesos-containerizerhtmlisolatorsisolatorsa"><a href="mesos-containerizer.html#isolators">Isolators</a></a></h5>
+<h5 id="isolators"><a class="header" href="#isolators"><a href="mesos-containerizer.html#isolators">Isolators</a></a></h5>
 <p><a href="mesos-containerizer.html#isolators">Isolators</a> are responsible for creating
 an environment for the containers where resources like cpu, network,
 storage and memory can be isolated from other containers.</p>
@@ -9778,7 +9756,7 @@ storage and memory can be isolated from other containers.</p>
 <li>RUNNING</li>
 <li>DESTROYING</li>
 </ul>
-<hr />
+<div style="break-before: page; page-break-before: always;"></div><hr />
 <h2>title: Apache Mesos - Docker Containerizer
 layout: documentation</h2>
 <h1 id="docker-containerizer-2"><a class="header" href="#docker-containerizer-2">Docker Containerizer</a></h1>
@@ -9896,7 +9874,7 @@ Docker container or not.</p>
 assumes the containerizer is running in a container itself and
 modifies the mechanism it recovers and launches docker containers
 accordingly.</p>
-<hr />
+<div style="break-before: page; page-break-before: always;"></div><hr />
 <h2>title: Apache Mesos - Mesos Containerizer
 layout: documentation</h2>
 <h1 id="mesos-containerizer-2"><a class="header" href="#mesos-containerizer-2">Mesos Containerizer</a></h1>
@@ -9906,7 +9884,7 @@ such as control cgroups and namespaces. It is composable so operators
 can selectively enable different <a href="mesos-containerizer.html#isolators">isolators</a>.</p>
 <p>It also provides basic support for POSIX systems (e.g., OSX) but
 without any actual isolation, only resource usage reporting.</p>
-<h2 id="isolators"><a class="header" href="#isolators">Isolators</a></h2>
+<h2 id="isolators-1"><a class="header" href="#isolators-1">Isolators</a></h2>
 <p>Isolators are components that each define an aspect of how a tasks
 execution environment (or container) is constructed. Isolators can
 control how containers are isolated from each other, how task resource
@@ -9957,10 +9935,10 @@ can write modules that implement custom isolators.</p>
 <li><a href="isolators/windows.html#cpu-limits">windows/cpu</a></li>
 <li><a href="isolators/windows.html#memory-limits">windows/mem</a></li>
 </ul>
-<hr />
+<div style="break-before: page; page-break-before: always;"></div><hr />
 <h2>title: Apache Mesos - Supporting Container Images in Mesos Containerizer
 layout: documentation</h2>
-<h1 id="supporting-container-images-in-a-hrefmesos-containerizerhtmlmesos-containerizera"><a class="header" href="#supporting-container-images-in-a-hrefmesos-containerizerhtmlmesos-containerizera">Supporting Container Images in <a href="mesos-containerizer.html">Mesos Containerizer</a></a></h1>
+<h1 id="supporting-container-images-in-mesos-containerizer"><a class="header" href="#supporting-container-images-in-mesos-containerizer">Supporting Container Images in <a href="mesos-containerizer.html">Mesos Containerizer</a></a></h1>
 <h2 id="motivation-1"><a class="header" href="#motivation-1">Motivation</a></h2>
 <p>Mesos currently supports several <a href="containerizers.html">containerizers</a>,
 notably the Mesos containerizer and the Docker containerizer. Mesos
@@ -10336,7 +10314,7 @@ and isolator features, visit <a href="mesos-containerizer.html">Mesos
 Containerizer</a>.  For more information on
 launching Docker containers through the Docker containerizer, visit
 <a href="docker-containerizer.html">Docker Containerizer</a>.</p>
-<hr />
+<div style="break-before: page; page-break-before: always;"></div><hr />
 <h2>title: Apache Mesos - Docker Volume Support in Mesos Containerizer
 layout: documentation</h2>
 <h1 id="docker-volume-support-in-mesos-containerizer"><a class="header" href="#docker-volume-support-in-mesos-containerizer">Docker Volume Support in Mesos Containerizer</a></h1>
@@ -10364,7 +10342,7 @@ steps for enabling Docker volume isolator, and required framework changes.</p>
 <li><a href="isolators/docker-volume.html#limitations">Limitations</a></li>
 <li><a href="isolators/docker-volume.html#test-it-out">Test it out!</a></li>
 </ul>
-<h2 id="a-namemotivationamotivation"><a class="header" href="#a-namemotivationamotivation"><a name="motivation"></a>Motivation</a></h2>
+<h2 id="motivation-2"><a class="header" href="#motivation-2"><a name="motivation"></a>Motivation</a></h2>
 <p>The integration of external storage in Mesos is an attractive feature.  The
 Mesos <a href="isolators/../persistent-volume.html">persistent volume</a> primitives allow stateful
 services to persist data on an agent's local storage. However, the amount of
@@ -10385,7 +10363,7 @@ variety of external storage systems, such as Amazon EBS, OpenStack Cinder, etc.<
 <p>Therefore, introducing support for external storage in Mesos through the
 <code>docker/volume</code> isolator provides Mesos with tremendous flexibility to
 orchestrate containers on a wide variety of external storage technologies.</p>
-<h2 id="a-namehow-does-it-workahow-does-it-work"><a class="header" href="#a-namehow-does-it-workahow-does-it-work"><a name="how-does-it-work"></a>How does it work?</a></h2>
+<h2 id="how-does-it-work-2"><a class="header" href="#how-does-it-work-2"><a name="how-does-it-work"></a>How does it work?</a></h2>
 <p><img src="isolators/images/docker-volume-isolator.png" alt="Docker Volume Isolator Architecture" /></p>
 <p>The <code>docker/volume</code> isolator interacts with Docker volume plugins using
 <a href="https://github.com/emccode/dvdcli">dvdcli</a>, an open-source command line tool
@@ -10429,12 +10407,12 @@ its own mount namespace.</p>
 the container.</p>
 </li>
 </ol>
-<h2 id="a-nameconfigurationaconfiguration"><a class="header" href="#a-nameconfigurationaconfiguration"><a name="configuration"></a>Configuration</a></h2>
+<h2 id="configuration-1"><a class="header" href="#configuration-1"><a name="configuration"></a>Configuration</a></h2>
 <p>To use the <code>docker/volume</code> isolator, there are certain actions required by
 operators and framework developers. In this section we list the steps required
 by the operator to configure <code>docker/volume</code> isolator and the steps required by
 framework developers to specify the Docker volumes.</p>
-<h3 id="a-namepre-conditionsapre-conditions"><a class="header" href="#a-namepre-conditionsapre-conditions"><a name="pre-conditions"></a>Pre-conditions</a></h3>
+<h3 id="pre-conditions"><a class="header" href="#pre-conditions"><a name="pre-conditions"></a>Pre-conditions</a></h3>
 <ul>
 <li>
 <p>Install <code>dvdcli</code> version
@@ -10452,7 +10430,7 @@ tasks. If this is not done, volumes will be implicitly created by
 framework resource requirement well.</p>
 </li>
 </ul>
-<h3 id="a-nameconfigure-docker-volume-isolatoraconfiguring-docker-volume-isolator"><a class="header" href="#a-nameconfigure-docker-volume-isolatoraconfiguring-docker-volume-isolator"><a name="configure-Docker-volume-isolator"></a>Configuring Docker Volume Isolator</a></h3>
+<h3 id="configuring-docker-volume-isolator"><a class="header" href="#configuring-docker-volume-isolator"><a name="configure-Docker-volume-isolator"></a>Configuring Docker Volume Isolator</a></h3>
 <p>In order to configure the <code>docker/volume</code> isolator, the operator needs to
 configure two flags at agent startup as follows:</p>
 <pre><code class="language-{.console}">  sudo mesos-agent \
@@ -10472,8 +10450,8 @@ checkpoint all Docker volume mount point information under
 the default <code>--docker_volume_checkpoint_dir</code> will be cleaned up after agent
 restart. Therefore, it is recommended to set <code>--docker_volume_checkpoint_dir</code> to
 a directory which will survive agent restart.</p>
-<h3 id="a-nameenable-frameworksaenabling-frameworks-to-use-docker-volumes"><a class="header" href="#a-nameenable-frameworksaenabling-frameworks-to-use-docker-volumes"><a name="enable-frameworks"></a>Enabling frameworks to use Docker volumes</a></h3>
-<h4 id="a-namevolume-protobufavolume-protobuf"><a class="header" href="#a-namevolume-protobufavolume-protobuf"><a name="volume-protobuf"></a>Volume Protobuf</a></h4>
+<h3 id="enabling-frameworks-to-use-docker-volumes"><a class="header" href="#enabling-frameworks-to-use-docker-volumes"><a name="enable-frameworks"></a>Enabling frameworks to use Docker volumes</a></h3>
+<h4 id="volume-protobuf"><a class="header" href="#volume-protobuf"><a name="volume-protobuf"></a>Volume Protobuf</a></h4>
 <p>The <code>Volume</code> protobuf message has been updated to support Docker volumes.</p>
 <pre><code class="language-{.proto}">message Volume {
   ...
@@ -10540,7 +10518,7 @@ otherwise, the task will fail.</p>
     <td>No need to exist</td>
   </tr>
 </table>
-<h4 id="a-nameexamplesaexamples"><a class="header" href="#a-nameexamplesaexamples"><a name="examples"></a>Examples</a></h4>
+<h4 id="examples-5"><a class="header" href="#examples-5"><a name="examples"></a>Examples</a></h4>
 <ol>
 <li>
 <p>Launch a task with one Docker volume using the default command executor.</p>
@@ -10611,7 +10589,7 @@ otherwise, the task will fail.</p>
 </ol>
 <p><strong>NOTE</strong>: The task launch will be failed if one container uses multiple Docker
 volumes with the same <code>driver</code> and <code>name</code>.</p>
-<h2 id="a-namelimitationsalimitations"><a class="header" href="#a-namelimitationsalimitations"><a name="limitations"></a>Limitations</a></h2>
+<h2 id="limitations"><a class="header" href="#limitations"><a name="limitations"></a>Limitations</a></h2>
 <p>Using the same Docker volume in both the <a href="isolators/../docker-containerizer.html">Docker
 Containerizer</a> and the <a href="isolators/../mesos-containerizer.html">Mesos
 Containerizer</a> simultaneously is <strong>strongly
@@ -10619,7 +10597,7 @@ discouraged</strong>, because the MesosContainerizer has its own reference
 counting to decide when to unmount a Docker volume. Otherwise, it
 would be problematic if a Docker volume is unmounted by
 MesosContainerizer but the DockerContainerizer is still using it.</p>
-<h2 id="a-nametest-it-outatest-it-out"><a class="header" href="#a-nametest-it-outatest-it-out"><a name="test-it-out"></a>Test it out!</a></h2>
+<h2 id="test-it-out-1"><a class="header" href="#test-it-out-1"><a name="test-it-out"></a>Test it out!</a></h2>
 <p>This section presents examples for launching containers with Docker volumes.
 The following example is using <a href="https://github.com/rancher/convoy/">convoy</a>
 as the Docker volume driver.</p>
@@ -10683,7 +10661,7 @@ for the second task to check the file <code>myfile</code> was created successful
     myfile
     Command exited with status 0 (pid: 27288)
 </code></pre>
-<hr />
+<div style="break-before: page; page-break-before: always;"></div><hr />
 <h2>title: Apache Mesos - Nvidia GPU Support
 layout: documentation</h2>
 <h1 id="nvidia-gpu-support"><a class="header" href="#nvidia-gpu-support">Nvidia GPU Support</a></h1>
@@ -11013,7 +10991,7 @@ execute these unit tests:</p>
 <pre><code>[mesos]$ GTEST_FILTER=&quot;&quot; make -j check
 [mesos]$ sudo bin/mesos-tests.sh --gtest_filter=&quot;*NVIDIA_GPU*&quot;
 </code></pre>
-<hr />
+<div style="break-before: page; page-break-before: always;"></div><hr />
 <h2>title: Apache Mesos - Sandbox
 layout: documentation</h2>
 <h1 id="mesos-sandbox"><a class="header" href="#mesos-sandbox">Mesos &quot;Sandbox&quot;</a></h1>
@@ -11031,7 +11009,7 @@ the executor's tasks.</li>
 <p><strong>NOTE:</strong> With the introduction of <a href="persistent-volume.html">persistent volumes</a>,
 executors and tasks should never create files outside of the sandbox.  However,
 some containerizers do not enforce this sandboxing.</p>
-<h2 id="a-namewhere-is-itawhere-is-the-sandbox"><a class="header" href="#a-namewhere-is-itawhere-is-the-sandbox"><a name="where-is-it"></a>Where is the sandbox?</a></h2>
+<h2 id="where-is-the-sandbox"><a class="header" href="#where-is-the-sandbox"><a name="where-is-it"></a>Where is the sandbox?</a></h2>
 <p>The sandbox is located within the agent's working directory (which is specified
 via the <code>--work_dir</code> flag).  To find a particular executor's sandbox, you must
 know the agent's ID, the executor's framework's ID, and the executor's ID.
@@ -11162,7 +11140,7 @@ After the delay, the files are deleted.</p>
 scheduled for garbage collection are pruned based on the available disk and
 the <code>--gc_disk_headroom</code> agent flag.
 See <a href="configuration/agent.html#gc_disk_headroom">the formula here</a>.</p>
-<hr />
+<div style="break-before: page; page-break-before: always;"></div><hr />
 <h2>title: Apache Mesos - Container Volumes
 layout: documentation</h2>
 <h1 id="container-volumes"><a class="header" href="#container-volumes">Container Volumes</a></h1>
@@ -11281,11 +11259,11 @@ the parent container.</p>
 <p>See more details in this <a href="isolators/docker-volume.html">doc</a>.</p>
 <h3 id="secret-volume-source"><a class="header" href="#secret-volume-source">SECRET Volume Source</a></h3>
 <p>See more details in this <a href="secrets.html#file-based-secrets">doc</a>.</p>
-<hr />
+<div style="break-before: page; page-break-before: always;"></div><hr />
 <h2>title: Apache Mesos - Mesos Nested Container and Task Group
 layout: documentation</h2>
 <h1 id="overview-5"><a class="header" href="#overview-5">Overview</a></h1>
-<h2 id="motivation-2"><a class="header" href="#motivation-2">Motivation</a></h2>
+<h2 id="motivation-3"><a class="header" href="#motivation-3">Motivation</a></h2>
 <p>A <a href="http://kubernetes.io/docs/user-guide/pods">pod</a> can be defined as
 a set of containers co-located and co-managed on an agent that share
 some resources (e.g., network namespace, volumes) but not others
@@ -11601,7 +11579,7 @@ executor.</p>
 <li><a href="http://kubernetes.io/docs/user-guide/pods/">Kubernetes Pods</a></li>
 <li><a href="https://github.com/docker/docker/issues/8781">Docker Pods</a></li>
 </ul>
-<hr />
+<div style="break-before: page; page-break-before: always;"></div><hr />
 <h2>title: Apache Mesos - Standalone Containers
 layout: documentation</h2>
 <h1 id="standalone-containers"><a class="header" href="#standalone-containers">Standalone Containers</a></h1>
@@ -11767,7 +11745,7 @@ no status update mechanism to report the exit status of the container.</p>
 <p>Standalone container sandboxes must be manually cleaned up by the operator and
 are located in the agent's work directory under
 <code>/containers/&lt;my-standalone-container-id&gt;</code>.</p>
-<h2 id="networking-support-in-mesos"><a class="header" href="#networking-support-in-mesos">Networking support in Mesos</a></h2>
+<div style="break-before: page; page-break-before: always;"></div><h2 id="networking-support-in-mesos"><a class="header" href="#networking-support-in-mesos">Networking support in Mesos</a></h2>
 <h3 id="table-of-contents-1"><a class="header" href="#table-of-contents-1">Table of contents</a></h3>
 <ul>
 <li><a href="networking.html#introduction">Introduction</a></li>
@@ -11780,7 +11758,7 @@ are located in the agent's work directory under
 </li>
 <li><a href="networking.html#retrieve-network-info">Retrieving network information for a container</a></li>
 </ul>
-<h3 id="a-nameintroductionaintroduction"><a class="header" href="#a-nameintroductionaintroduction"><a name="introduction"></a>Introduction</a></h3>
+<h3 id="introduction"><a class="header" href="#introduction"><a name="introduction"></a>Introduction</a></h3>
 <p>Mesos supports two container runtime engines, the <code>MesosContainerizer</code>
 and the <code>DockerContainerizer</code>. Both the container run time engines
 provide IP-per-container support allowing containers to be attached to
@@ -11825,8 +11803,8 @@ frameworks, to attach containers to IP networks. It also describes the
 interfaces provided to retrieve IP address and other network related
 information for a container, once the container has been attached to
 an IP network.</p>
-<h3 id="a-nameattaching-containersaattaching-containers-to-ip-networks"><a class="header" href="#a-nameattaching-containersaattaching-containers-to-ip-networks"><a name="attaching-containers"></a>Attaching containers to IP networks</a></h3>
-<h4 id="a-nameattaching-containers-mesosamesos-containerizer"><a class="header" href="#a-nameattaching-containers-mesosamesos-containerizer"><a name="attaching-containers-mesos"></a>Mesos containerizer</a></h4>
+<h3 id="attaching-containers-to-ip-networks"><a class="header" href="#attaching-containers-to-ip-networks"><a name="attaching-containers"></a>Attaching containers to IP networks</a></h3>
+<h4 id="mesos-containerizer-3"><a class="header" href="#mesos-containerizer-3"><a name="attaching-containers-mesos"></a>Mesos containerizer</a></h4>
 <p><code>MesosContainerizer</code> has the <a href="cni.html"><code>network/cni</code></a> isolator enabled
 by default, which implements CNI (Container Network Interface). The
 <code>network/cni</code> isolator identifies CNI networks by using canonical
@@ -11834,7 +11812,7 @@ names. When frameworks want to associate containers to a specific CNI
 network they specify a network name in the <code>name</code> field of the <code> NetworkInfo</code> protobuf. Details about the configuration and interaction
 of Mesos containers with CNI networks can be found in the
 documentation describing <a href="cni.html">&quot;CNI support for Mesos containers&quot;</a>.</p>
-<h4 id="a-nameattaching-containers-dockeradocker-containerizer"><a class="header" href="#a-nameattaching-containers-dockeradocker-containerizer"><a name="attaching-containers-docker"></a>Docker containerizer</a></h4>
+<h4 id="docker-containerizer-3"><a class="header" href="#docker-containerizer-3"><a name="attaching-containers-docker"></a>Docker containerizer</a></h4>
 <p>Starting docker 1.9, there are four networking modes available in
 Docker: NONE, HOST, BRIDGE and USER. <a href="https://docs.docker.com/engine/userguide/networking/dockernetworks/">&quot;Docker container
 networks&quot;</a>
@@ -11874,7 +11852,7 @@ the user-defined docker network.</p>
 called <code>NAT</code>, so on Windows agents, the <code>BRIDGE</code> mode will be interpretted as
 <code>NAT</code>. If the network mode is not specified, then the default mode will be
 chosen, which is <code>HOST</code> on Linux and <code>NAT</code> on Windows.</p>
-<h4 id="a-namelimitations-dockeralimitations-of-docker-containerizer"><a class="header" href="#a-namelimitations-dockeralimitations-of-docker-containerizer"><a name="limitations-docker"></a>Limitations of Docker containerizer</a></h4>
+<h4 id="limitations-of-docker-containerizer"><a class="header" href="#limitations-of-docker-containerizer"><a name="limitations-docker"></a>Limitations of Docker containerizer</a></h4>
 <p>One limitation that the <code>DockerContainerizer</code> imposes on the
 containers using the USER network mode is that these containers cannot
 be attached to multiple docker networks. The reason this limitation
@@ -11883,7 +11861,7 @@ Docker requires the container to be created first and then attached to
 the different networks. This model of orchestration does not fit the
 current implementation of the <code>DockerContainerizer</code> and hence the
 restriction of limiting docker container to a single network.</p>
-<h3 id="a-nameretrieve-network-infoaretrieving-network-information-for-a-container"><a class="header" href="#a-nameretrieve-network-infoaretrieving-network-information-for-a-container"><a name="retrieve-network-info"></a>Retrieving network information for a container</a></h3>
+<h3 id="retrieving-network-information-for-a-container"><a class="header" href="#retrieving-network-information-for-a-container"><a name="retrieve-network-info"></a>Retrieving network information for a container</a></h3>
 <p>Whenever a task runs on a Mesos agent, the executor associated with
 the task returns a <code>TaskStatus</code> protobuf associated with the task.
 Containerizers (Mesos or Docker) responsible for the container will
@@ -11895,7 +11873,7 @@ container will be reflected in the <code>NetworkInfo</code> protobuf instances.<
 <p>The <code>TaskStatus</code> associated with each task can be accessed at the
 Agent's <code>state</code> endpoint on which the task is running or it can be
 accessed in the Master's <code>state</code> endpoint.</p>
-<hr />
+<div style="break-before: page; page-break-before: always;"></div><hr />
 <h2>title: Apache Mesos - Networking for Mesos-Managed Containers
 layout: documentation</h2>
 <h1 id="networking-for-mesos-managed-containers"><a class="header" href="#networking-for-mesos-managed-containers">Networking for Mesos-Managed Containers</a></h1>
@@ -11916,7 +11894,7 @@ coexist with the newer ones.</p>
 <p>The rest of this document describes the overall architecture of all the involved
 components, configuration steps for enabling IP-per-container, and required
 framework changes.</p>
-<h2 id="how-does-it-work-2"><a class="header" href="#how-does-it-work-2">How does it work?</a></h2>
+<h2 id="how-does-it-work-3"><a class="header" href="#how-does-it-work-3">How does it work?</a></h2>
 <p><img src="images/networking-architecture.png" alt="Mesos Networking Architecture" /></p>
 <p>A key observation is that the networking support is enabled via a Mesos module
 and thus the Mesos master and agents are completely oblivious of it. It is
@@ -12024,7 +12002,7 @@ address(es) associated with the lost Agent. The IPAM may have a grace period
 before the address(es) are recycled.</p>
 </li>
 </ol>
-<h2 id="configuration-1"><a class="header" href="#configuration-1">Configuration</a></h2>
+<h2 id="configuration-2"><a class="header" href="#configuration-2">Configuration</a></h2>
 <p>The network isolator module is not part of standard Mesos distribution. However,
 there is an example implementation at https://github.com/mesosphere/net-modules.</p>
 <p>Once the network isolation module has been built into a shared dynamic library,
@@ -12252,7 +12230,7 @@ module to perform any cleanups such as recovering resources and releasing IP
 addresses as needed.</p>
 </li>
 </ol>
-<h2 id="container-network-interface-cni-for-mesos-containers"><a class="header" href="#container-network-interface-cni-for-mesos-containers">Container Network Interface (CNI) for Mesos Containers</a></h2>
+<div style="break-before: page; page-break-before: always;"></div><h2 id="container-network-interface-cni-for-mesos-containers"><a class="header" href="#container-network-interface-cni-for-mesos-containers">Container Network Interface (CNI) for Mesos Containers</a></h2>
 <p>This document describes the <code>network/cni</code> isolator, a network isolator
 for the <a href="mesos-containerizer.html">MesosContainerizer</a> that implements
 the <a href="https://github.com/containernetworking/cni">Container Network Interface
@@ -12290,7 +12268,7 @@ default.</p>
 </ul>
 </li>
 </ul>
-<h3 id="a-namemotivationamotivation-1"><a class="header" href="#a-namemotivationamotivation-1"><a name="motivation"></a>Motivation</a></h3>
+<h3 id="motivation-4"><a class="header" href="#motivation-4"><a name="motivation"></a>Motivation</a></h3>
 <p>Having a separate network namespace for each container is attractive
 for orchestration engines such as Mesos, since it provides containers
 with network isolation and allows users to operate on containers as if
@@ -12327,13 +12305,13 @@ ipvlan, macvlan, Calico, Weave and Flannel.</p>
 <p>Thus, introducing support for CNI in Mesos through the <code>network/cni</code>
 isolator provides Mesos with tremendous flexibility to orchestrate
 containers on a wide variety of network technologies.</p>
-<h3 id="a-nameusageausage"><a class="header" href="#a-nameusageausage"><a name="usage"></a>Usage</a></h3>
+<h3 id="usage-2"><a class="header" href="#usage-2"><a name="usage"></a>Usage</a></h3>
 <p>The <code>network/cni</code> isolator is enabled by default.  However, to use the
 isolator there are certain actions required by the operator and the
 frameworks. In this section we specify the steps required by the
 operator to configure CNI networks on Mesos and the steps required by
 frameworks to attach containers to a CNI network.</p>
-<h4 id="a-nameconfiguring-cni-networksaconfiguring-cni-networks"><a class="header" href="#a-nameconfiguring-cni-networksaconfiguring-cni-networks"><a name="configuring-cni-networks"></a>Configuring CNI networks</a></h4>
+<h4 id="configuring-cni-networks"><a class="header" href="#configuring-cni-networks"><a name="configuring-cni-networks"></a>Configuring CNI networks</a></h4>
 <p>In order to configure the <code>network/cni</code> isolator the operator
 specifies two flags at Agent startup as follows:</p>
 <pre><code class="language-{.console}">sudo mesos-slave --master=&lt;master IP&gt; --ip=&lt;Agent IP&gt;
@@ -12354,7 +12332,7 @@ isolator) will not affect container orchestration.</p>
 across reboot and allow <code>network/cni</code> isolator to carry out network
 cleanup post reboot. This is useful for the CNI networks that depend
 on the isolator to clean their network state.</p>
-<h4 id="a-nameadding-modifying-deletingaaddingdeletingmodifying-cni-networks"><a class="header" href="#a-nameadding-modifying-deletingaaddingdeletingmodifying-cni-networks"><a name="adding-modifying-deleting"></a>Adding/Deleting/Modifying CNI networks</a></h4>
+<h4 id="addingdeletingmodifying-cni-networks"><a class="header" href="#addingdeletingmodifying-cni-networks"><a name="adding-modifying-deleting"></a>Adding/Deleting/Modifying CNI networks</a></h4>
 <p>The <code>network/cni</code> isolator learns about all the CNI networks by
 reading the CNI configuration specified in <code>--network_cni_config_dir</code>.
 Hence, if the operator wants to add a CNI network, the corresponding
@@ -12382,7 +12360,7 @@ operator deletes a CNI network the <code>network/cni</code> isolator will
 &quot;unlearn&quot; the CNI network (since it will have a reference to this CNI
 network when it started) in case a framework tries to launch a
 container on the deleted CNI network.</p>
-<h4 id="a-nameattaching-containers-to-cni-networksaattaching-containers-to-cni-networks"><a class="header" href="#a-nameattaching-containers-to-cni-networksaattaching-containers-to-cni-networks"><a name="attaching-containers-to-cni-networks"></a>Attaching containers to CNI networks</a></h4>
+<h4 id="attaching-containers-to-cni-networks"><a class="header" href="#attaching-containers-to-cni-networks"><a name="attaching-containers-to-cni-networks"></a>Attaching containers to CNI networks</a></h4>
 <p>Frameworks can specify the CNI network to which they want their
 containers to be attached by setting the <code>name</code> field in the
 <code>NetworkInfo</code> protobuf. The <code>name</code> field was introduced in the
@@ -12405,7 +12383,7 @@ container to the host network as well as other CNI networks you
 will need to attach the container to a CNI network (such as
 bridge/macvlan) that, in turn, is attached to the host network.
 </code></pre>
-<h4 id="a-namenetwork-labels-and-port-mappingpassing-network-labels-and-port-mapping-information-to-cni-pluginsa"><a class="header" href="#a-namenetwork-labels-and-port-mappingpassing-network-labels-and-port-mapping-information-to-cni-pluginsa"><a name="network-labels-and-port-mapping">Passing network labels and port-mapping information to CNI plugins</a></a></h4>
+<h4 id="passing-network-labels-and-port-mapping-information-to-cni-plugins"><a class="header" href="#passing-network-labels-and-port-mapping-information-to-cni-plugins"><a name="network-labels-and-port-mapping">Passing network labels and port-mapping information to CNI plugins</a></a></h4>
 <p>When invoking CNI plugins (e.g., with command ADD), the isolator will
 pass on some Mesos meta-data to the plugins by specifying the <code>args</code>
 field in the <a href="https://github.com/containernetworking/cni/blob/master/SPEC.md#network-configuration">network configuration
@@ -12443,7 +12421,7 @@ spec, it is the prerogative of the CNI plugins to use this meta-data
 information as they see fit while attaching/detaching containers to a CNI
 network. E.g., CNI plugins could use <code>labels</code> to enforce domain
 specific policies, or <code>port_mappings</code> to implement NAT rules.</p>
-<h4 id="a-nameaccessing-container-network-namespaceaaccessing-container-network-namespace"><a class="header" href="#a-nameaccessing-container-network-namespaceaaccessing-container-network-namespace"><a name="accessing-container-network-namespace"></a>Accessing container network namespace</a></h4>
+<h4 id="accessing-container-network-namespace"><a class="header" href="#accessing-container-network-namespace"><a name="accessing-container-network-namespace"></a>Accessing container network namespace</a></h4>
 <p>The <code>network/cni</code> isolator allocates a network namespace to a
 container when it needs to attach the container to a CNI network. The
 network namespace is checkpointed on the host file system and can be
@@ -12474,7 +12452,7 @@ running the command:</p>
 completed, executing commands within the container network namespace
 would be simplified and we will no longer have a dependency on the
 <code>iproute2</code> package to debug Mesos container networking.</p>
-<h3 id="a-namenetworking-recipesanetworking-recipes"><a class="header" href="#a-namenetworking-recipesanetworking-recipes"><a name="networking-recipes"></a>Networking Recipes</a></h3>
+<h3 id="networking-recipes"><a class="header" href="#networking-recipes"><a name="networking-recipes"></a>Networking Recipes</a></h3>
 <p>This section presents examples for launching containers on different
 CNI networks. For each of the examples the assumption is that the CNI
 configurations are present at <code>/var/lib/mesos/cni/config</code>, and the
@@ -12499,7 +12477,7 @@ modified to take a <code>--networks</code> flag which will allow this example
 framework to launch containers on the specified network. You can find
 the <code>mesos-execute</code> framework in your Mesos installation directory at
 <code>&lt;mesos installation&gt;/bin/mesos-execute</code>.</p>
-<h4 id="a-namea-bridge-networkaa-bridge-network"><a class="header" href="#a-namea-bridge-networkaa-bridge-network"><a name="a-bridge-network"></a>A bridge network</a></h4>
+<h4 id="a-bridge-network"><a class="header" href="#a-bridge-network"><a name="a-bridge-network"></a>A bridge network</a></h4>
 <p>The
 <a href="https://github.com/containernetworking/cni/blob/master/Documentation/bridge.md">bridge</a>
 plugin attaches containers to a Linux bridge. Linux bridges could be
@@ -12580,7 +12558,7 @@ $ sudo ip netns exec 5baff64c ip route show
 default via 192.168.0.1 dev eth0
 192.168.0.0/16 dev eth0  proto kernel  scope link  src 192.168.0.2
 </code></pre>
-<h4 id="a-namea-port-mapper-plugina-port-mapper-plugin-for-cni-networksa"><a class="header" href="#a-namea-port-mapper-plugina-port-mapper-plugin-for-cni-networksa"><a name="a-port-mapper-plugin">A port-mapper plugin for CNI networks</a></a></h4>
+<h4 id="a-port-mapper-plugin-for-cni-networks"><a class="header" href="#a-port-mapper-plugin-for-cni-networks"><a name="a-port-mapper-plugin">A port-mapper plugin for CNI networks</a></a></h4>
 <p>For private, isolated, networks such as a bridge network where the IP
 address of a container is not routeable from outside the host it
 becomes imperative to provide containers with DNAT capabilities so
@@ -12659,7 +12637,7 @@ port-mapping information itself is learned by looking at the
 by Mesos to the port-mapper plugin. Please refer to the &quot;<a href="cni.html#passing-network-labels-and-port-mapping-information-to-cni-plugins">Passing
 network labels and port-mapping information to CNI
 plugins</a>&quot; section for more details.</p>
-<h4 id="a-namea-calico-networka-calico-networka"><a class="header" href="#a-namea-calico-networka-calico-networka"><a name="a-calico-network">A Calico network</a></a></h4>
+<h4 id="a-calico-network"><a class="header" href="#a-calico-network"><a name="a-calico-network">A Calico network</a></a></h4>
 <p><a href="https://projectcalico.org/">Calico</a> provides 3rd-party CNI plugin
 that works out-of-the-box with Mesos CNI.</p>
 <p>Calico takes a pure Layer-3 approach to networking, allocating a
@@ -12673,7 +12651,7 @@ constraints.</p>
 <p>For information on setting up and using Calico-CNI, see <a href="https://docs.projectcalico.org/v2.6/getting-started/mesos/">Calico's
 guide on integerating with
 Mesos</a>.</p>
-<h4 id="a-namea-cilium-networka-cilium-networka"><a class="header" href="#a-namea-cilium-networka-cilium-networka"><a name="a-cilium-network">A Cilium network</a></a></h4>
+<h4 id="a-cilium-network"><a class="header" href="#a-cilium-network"><a name="a-cilium-network">A Cilium network</a></a></h4>
 <p><a href="https://www.cilium.io">Cilium</a> provides a CNI plugin that works with Mesos.</p>
 <p>Cilium brings HTTP-aware network security filtering to Linux container
 frameworks. Using a new Linux kernel technology called BPF, Cilium
@@ -12681,7 +12659,7 @@ provides a simple and efficient way to define and enforce both
 network-layer and HTTP-layer security policies.</p>
 <p>For more information on using Cilium with Mesos, check out the
 <a href="http://docs.cilium.io/try-mesos">Getting Started Using Mesos Guide</a>.</p>
-<h4 id="a-namea-weave-networka-weave-networka"><a class="header" href="#a-namea-weave-networka-weave-networka"><a name="a-weave-network">A Weave network</a></a></h4>
+<h4 id="a-weave-network"><a class="header" href="#a-weave-network"><a name="a-weave-network">A Weave network</a></a></h4>
 <p><a href="https://weave.works">Weave</a> provides a CNI implementation that works
 out-of-the-box with Mesos.</p>
 <p>Weave provides hassle free configuration by assigning an
@@ -12694,7 +12672,7 @@ maintain, even when there are multiple hops.</p>
 <p>For more information on setting up and using Weave CNI, see <a href="https://www.weave.works/docs/net/latest/cni-plugin/">Weave's
 CNI
 documentation</a></p>
-<hr />
+<div style="break-before: page; page-break-before: always;"></div><hr />
 <h2>title: Apache Mesos - Port Mapping Network Isolator
 layout: documentation</h2>
 <h1 id="port-mapping-network-isolator"><a class="header" href="#port-mapping-network-isolator">Port Mapping Network Isolator</a></h1>
@@ -12739,7 +12717,7 @@ add a configure option:</p>
 <pre><code>$ ./configure --with-network-isolator
 $ make
 </code></pre>
-<h2 id="configuration-2"><a class="header" href="#configuration-2">Configuration</a></h2>
+<h2 id="configuration-3"><a class="header" href="#configuration-3">Configuration</a></h2>
 <p>The port mapping network isolator is enabled on the agent by adding
 <code>network/port_mapping</code> to the agent command line <code>--isolation</code> flag.</p>
 <pre><code>--isolation=&quot;network/port_mapping&quot;
@@ -13023,7 +13001,7 @@ for each of these elements includes:</p>
     }
 ]
 </code></pre>
-<hr />
+<div style="break-before: page; page-break-before: always;"></div><hr />
 <h2>title: Apache Mesos - Multiple Disks
 layout: documentation</h2>
 <h1 id="multiple-disks"><a class="header" href="#multiple-disks">Multiple Disks</a></h1>
@@ -13152,7 +13130,7 @@ destroyed, Mesos will remove all the files and directories stored in the volume,
 but will <strong>not</strong> remove the root directory (i.e., the mount point).</p>
 <p>Operators should be aware of these distinctions when inspecting or cleaning up
 remnant data.</p>
-<hr />
+<div style="break-before: page; page-break-before: always;"></div><hr />
 <h2>title: Apache Mesos - Persistent Volumes
 layout: documentation</h2>
 <h1 id="persistent-volumes"><a class="header" href="#persistent-volumes">Persistent Volumes</a></h1>
@@ -13167,7 +13145,7 @@ previous task's output as its input.</p>
 to store their data within Mesos rather than having to resort to
 workarounds (e.g., writing task state to a distributed filesystem that
 is mounted at a well-known location outside the task's sandbox).</p>
-<h2 id="usage-2"><a class="header" href="#usage-2">Usage</a></h2>
+<h2 id="usage-3"><a class="header" href="#usage-3">Usage</a></h2>
 <p>Persistent volumes can only be created from <strong>reserved</strong> disk resources, whether
 it be statically reserved or dynamically reserved. A dynamically reserved
 persistent volume also cannot be unreserved without first explicitly destroying
@@ -13889,7 +13867,7 @@ in previous releases, destroying a volume would remove the Mesos-level metadata
 but would not remove the volume's data from the agent's filesystem. Mesos 1.1
 introduced support for <a href="shared-resources.html">shared persistent volumes</a>. Mesos
 1.6 introduced experimental support for resizing persistent volumes.</p>
-<hr />
+<div style="break-before: page; page-break-before: always;"></div><hr />
 <h2>title: Apache Mesos - Container Storage Interface (CSI) Support
 layout: documentation</h2>
 <h1 id="container-storage-interface-csi-support"><a class="header" href="#container-storage-interface-csi-support">Container Storage Interface (CSI) Support</a></h1>
@@ -13898,7 +13876,7 @@ layout: documentation</h2>
 <p>Currently, only CSI spec version 0.2 is supported in Mesos 1.6+ due to
 incompatible changes between CSI version 0.1 and version 0.2. CSI version 0.1 is
 supported in Mesos 1.5.</p>
-<h2 id="motivation-3"><a class="header" href="#motivation-3">Motivation</a></h2>
+<h2 id="motivation-5"><a class="header" href="#motivation-5">Motivation</a></h2>
 <h3 id="current-limitations-of-storage-support-in-mesos"><a class="header" href="#current-limitations-of-storage-support-in-mesos">Current Limitations of Storage Support in Mesos</a></h3>
 <p>Prior to 1.5, Mesos supports both <a href="persistent-volume.html">local persistent volumes</a>
 as well as <a href="isolators/docker-volume.html">external persistent volumes</a>. However,
@@ -14550,7 +14528,7 @@ plugin containers are running and restart them if needed (e.g., failed).</p>
 <p>The CSI plugin containers are launched using the standalone container API
 provided by the Mesos agent. See more details about standalone container in the
 <a href="standalone-container.html">standalone container doc</a>.</p>
-<h2 id="limitations"><a class="header" href="#limitations">Limitations</a></h2>
+<h2 id="limitations-1"><a class="header" href="#limitations-1">Limitations</a></h2>
 <ul>
 <li>Only local disk resources are supported currently. That means the disk
 resources are tied to a particular agent node and cannot be used on a
@@ -14560,7 +14538,7 @@ currently should package the CSI plugins in binary format and use the
 <a href="fetcher.html">fetcher</a> to fetch the binary executable.</li>
 <li><code>BLOCK</code> type disk resources are not supported yet.</li>
 </ul>
-<hr />
+<div style="break-before: page; page-break-before: always;"></div><hr />
 <h2>title: Apache Mesos - Running Workloads in Mesos
 layout: documentation</h2>
 <h1 id="workloads-in-mesos"><a class="header" href="#workloads-in-mesos">Workloads in Mesos</a></h1>
@@ -14786,7 +14764,7 @@ scheduler API endpoint:</p>
   }
 }
 </code></pre>
-<hr />
+<div style="break-before: page; page-break-before: always;"></div><hr />
 <h2>title: Apache Mesos - Framework Development Guide
 layout: documentation</h2>
 <h1 id="framework-development-guide"><a class="header" href="#framework-development-guide">Framework Development Guide</a></h1>
@@ -15076,7 +15054,7 @@ discovery system in the form of key/value pairs. Note that anything passed
 through this field is not guaranteed to be supported moving forward.
 Nevertheless, this field provides extensibility. Common uses of this field will
 allow us to identify use cases that require first class support.</p>
-<hr />
+<div style="break-before: page; page-break-before: always;"></div><hr />
 <h2>title: Apache Mesos - Designing Highly Available Mesos Frameworks
 layout: documentation</h2>
 <h1 id="designing-highly-available-mesos-frameworks"><a class="header" href="#designing-highly-available-mesos-frameworks">Designing Highly Available Mesos Frameworks</a></h1>
@@ -15519,7 +15497,7 @@ failover, even after the <code>agent_reregister_timeout</code> has fired. This m
 frameworks might see a <code>TASK_LOST</code> update for a task but then later discover
 that the task is running (because the agent where it was running was allowed to
 reconnect).</p>
-<hr />
+<div style="break-before: page; page-break-before: always;"></div><hr />
 <h2>title: Apache Mesos - Reconciliation
 layout: documentation</h2>
 <h1 id="task-reconciliation"><a class="header" href="#task-reconciliation">Task Reconciliation</a></h1>
@@ -15652,7 +15630,7 @@ resource provider is recovering or gone.</p>
 <p>Similar to task reconciliation, we recommend that schedulers implement a
 periodic reconciliation loop for operations in order to defend against network
 failures and bugs in the scheduler and/or Mesos master.</p>
-<hr />
+<div style="break-before: page; page-break-before: always;"></div><hr />
 <h2>title: Apache Mesos - Task State Reasons
 layout: documentation</h2>
 <h1 id="task-state-reasons"><a class="header" href="#task-state-reasons">Task State Reasons</a></h1>
@@ -15997,7 +15975,7 @@ update was sent.</p>
                    by the agent upon its re-registration. See comments for
                    <code> REASON_RECONCILIATION </code>.
 </td></tr></table>
-<hr />
+<div style="break-before: page; page-break-before: always;"></div><hr />
 <h2>title: Apache Mesos - Task Health Checking and Generalized Checks
 layout: documentation</h2>
 <h1 id="task-health-checking-and-generalized-checks"><a class="header" href="#task-health-checking-and-generalized-checks">Task Health Checking and Generalized Checks</a></h1>
@@ -16493,7 +16471,7 @@ health check but still in a grace period. An extra state should be introduced
 <li>Task's health status cannot be assigned from outside, e.g., by an operator via
 an endpoint.</li>
 </ul>
-<hr />
+<div style="break-before: page; page-break-before: always;"></div><hr />
 <h2>title: Apache Mesos - Scheduler HTTP API
 layout: documentation</h2>
 <h1 id="scheduler-http-api"><a class="header" href="#scheduler-http-api">Scheduler HTTP API</a></h1>
@@ -17258,7 +17236,7 @@ Connection: keep-alive
 }
 </code></pre>
 <p>If the scheduler knows the list of master's hostnames for a cluster, it could use this mechanism to find the leading master to subscribe with. Alternatively, the scheduler could use a library that detects the leading master given a ZooKeeper (or etcd) URL. For a C++ library that does ZooKeeper based master detection please look at <code>src/scheduler/scheduler.cpp</code>.</p>
-<hr />
+<div style="break-before: page; page-break-before: always;"></div><hr />
 <h2>title: Apache Mesos - Executor HTTP API
 layout: documentation</h2>
 <h1 id="executor-http-api"><a class="header" href="#executor-http-api">Executor HTTP API</a></h1>
@@ -17660,9 +17638,7 @@ HTTP/1.1 202 Accepted
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                        
 
-                        
 
                         <div style="clear: both"></div>
                     </nav>
@@ -17670,49 +17646,35 @@ HTTP/1.1 202 Accepted
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                
 
-                
             </nav>
 
         </div>
 
-        
 
-        
 
-        
 
-        
-        <script type="text/javascript">
+        <script>
             window.playground_copyable = true;
         </script>
-        
 
-        
 
-        
-        <script src="elasticlunr.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="mark.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="searcher.js" type="text/javascript" charset="utf-8"></script>
-        
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
 
-        <script src="clipboard.min.js" type="text/javascript" charset="utf-8"></script>
-        <script src="highlight.js" type="text/javascript" charset="utf-8"></script>
-        <script src="book.js" type="text/javascript" charset="utf-8"></script>
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
 
         <!-- Custom JS scripts -->
-        
 
-        
-        
-        <script type="text/javascript">
+        <script>
         window.addEventListener('load', function() {
             window.setTimeout(window.print, 100);
         });
         </script>
-        
-        
 
+    </div>
     </body>
 </html>

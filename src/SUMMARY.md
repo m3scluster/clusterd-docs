@@ -14,6 +14,14 @@
 - [CMake for details about using the new CMake build system.](cmake.md)
 - [Windows Support for the state of Windows support in Mesos.](windows.md)
 
+# Configuration
+- [Agent Options](configuration/agent.md)
+- [Autotools Options](configuration/autotools.md)
+- [CMake Options](configuration/cmake.md)
+- [Libprocess Options](configuration/libprocess.md)
+- [Master and Agent Options](configuration/master-and-agent.md)
+- [Master Options](configuration/master.md)
+
 # Administration
 
 - [Configuration for command-line arguments.](configuration.md)

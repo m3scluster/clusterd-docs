@@ -1,8 +1,3 @@
----
-title: Apache Mesos - Autotools Options
-layout: documentation
----
-
 # Autotools Options
 
 *The most up-to-date options can be found with `./configure --help`.*

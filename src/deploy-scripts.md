@@ -1,8 +1,3 @@
----
-title: Apache Mesos - Deployment Scripts
-layout: documentation
----
-
 # Deployment Scripts
 
 Mesos includes a set of scripts in `[install-prefix]/sbin` that can be used to deploy it on a cluster. To use these scripts, you need to create two configuration files:

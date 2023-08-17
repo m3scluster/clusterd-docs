@@ -1,8 +1,3 @@
----
-title: Apache Mesos - CMake Options
-layout: documentation
----
-
 # CMake Options
 
 *The most up-to-date options can be found with `cmake .. -LAH`.*

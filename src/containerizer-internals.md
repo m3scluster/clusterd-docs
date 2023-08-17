@@ -1,9 +1,3 @@
----
-title: Apache Mesos - Containerizer Internals
-layout: documentation
----
-
-
 # Containerizer
 
 Containerizers are Mesos components responsible for launching

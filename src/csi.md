@@ -1,8 +1,3 @@
----
-title: Apache Mesos - Container Storage Interface (CSI) Support
-layout: documentation
----
-
 # Container Storage Interface (CSI) Support
 
 This document describes the [Container Storage Interface](https://github.com/container-storage-interface/spec)

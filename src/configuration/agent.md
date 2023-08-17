@@ -1,9 +1,4 @@
----
-title: Apache Mesos - Agent Options
-layout: documentation
----
-
-# Agent Options
+# ClusterD Agent Options
 
 ## Required Flags
 

@@ -1,8 +1,3 @@
----
-title: Apache Mesos - Master and Agent Options
-layout: documentation
----
-
 # Master and Agent Options
 
 *These options can be supplied to both masters and agents.*

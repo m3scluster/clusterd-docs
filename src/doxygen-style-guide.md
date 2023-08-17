@@ -1,9 +1,4 @@
----
-title: Apache Mesos - Doxygen Style Guide
-layout: documentation
----
-
-# Apache Mesos Doxygen Style Guide
+# ClusterD Doxygen Style Guide
 
 This guide introduces a consistent style
 for [documenting Mesos source code](http://mesos.apache.org/api/latest/c++)

@@ -1,8 +1,3 @@
----
-title: Apache Mesos - Advanced Contribution Guidelines
-layout: documentation
----
-
 # Advanced Contribution Guidelines
 
 ## Prerequisites

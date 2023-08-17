@@ -1,8 +1,3 @@
----
-title: Apache Mesos - Libprocess Options
-layout: documentation
----
-
 # Libprocess Options
 
 *The bundled libprocess library can be controlled with the following environment variables.*

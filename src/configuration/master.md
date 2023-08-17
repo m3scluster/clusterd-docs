@@ -1,8 +1,3 @@
----
-title: Apache Mesos - Master Options
-layout: documentation
----
-
 # Master Options
 
 ## Required Flags

@@ -1,8 +1,3 @@
----
-title: Apache Mesos - Using cquery for Code Navigation
-layout: documentation
----
-
 # Using cquery for Code Navigation
 
 Instead of using `grep` and other tools to find your way through the

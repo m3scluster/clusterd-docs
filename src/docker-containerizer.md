@@ -1,8 +1,3 @@
----
-title: Apache Mesos - Docker Containerizer
-layout: documentation
----
-
 # Docker Containerizer
 
 Mesos 0.20.0 adds the support for launching tasks that contains Docker

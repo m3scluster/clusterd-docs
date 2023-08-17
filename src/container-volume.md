@@ -1,8 +1,3 @@
----
-title: Apache Mesos - Container Volumes
-layout: documentation
----
-
 # Container Volumes
 
 For each volume a container specifies (i.e., `ContainerInfo.volumes`),

@@ -1,10 +1,3 @@
----
-title: Apache Mesos - Developer Guide
-layout: documentation
----
-
-# Developer Guide
-
 This document is distinct from the [C++ Style Guide](c++-style-guide.md) as it
 covers best practices, design patterns, and other tribal knowledge, not just how
 to format code correctly.

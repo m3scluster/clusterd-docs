@@ -315,6 +315,15 @@ via the CFS bandwidth limiting subfeature. (default: false)
   </td>
 </tr>
 
+<tr id="enable_cgroupsv2">
+  <td>
+    --enable_cgroupsv2
+  </td>
+  <td>
+  Enable support for cgroupsv2 (Currently only the Docker executor supports CgroupsV2. Set these flag to true, will break the Mesos contrainerizer).
+  </td>
+</tr>
+
 <tr id="cgroups_hierarchy">
   <td>
     --cgroups_hierarchy=VALUE

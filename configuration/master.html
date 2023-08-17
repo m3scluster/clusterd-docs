@@ -1,0 +1,914 @@
+<!DOCTYPE HTML>
+<html lang="en" class="sidebar-visible no-js light">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Master Options - ClusterD - Continued development of Apache Mesos</title>
+
+
+        <!-- Custom HTML head -->
+        
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff" />
+
+        <link rel="icon" href="../favicon.svg">
+        <link rel="shortcut icon" href="../favicon.png">
+        <link rel="stylesheet" href="../css/variables.css">
+        <link rel="stylesheet" href="../css/general.css">
+        <link rel="stylesheet" href="../css/chrome.css">
+        <link rel="stylesheet" href="../css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="../fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="../highlight.css">
+        <link rel="stylesheet" href="../tomorrow-night.css">
+        <link rel="stylesheet" href="../ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "../";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            var html = document.querySelector('html');
+            html.classList.remove('no-js')
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add('js');
+        </script>
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var html = document.querySelector('html');
+            var sidebar = null;
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <div class="sidebar-scrollbox">
+                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">Fundamentals</li><li class="chapter-item expanded "><a href="../architecture.html"><strong aria-hidden="true">1.</strong> Mesos Architecture providing an overview of Mesos concepts</a></li><li class="chapter-item expanded "><a href="../presentations.html"><strong aria-hidden="true">2.</strong> Video and Slides of Mesos Presentations</a></li><li class="chapter-item expanded "><a href="../versioning.html"><strong aria-hidden="true">3.</strong> Mesos Release and Support Policy</a></li><li class="chapter-item expanded affix "><li class="part-title">Build / Installation</li><li class="chapter-item expanded "><a href="../building.html"><strong aria-hidden="true">4.</strong> Building for basic instructions on compiling and installing Mesos.</a></li><li class="chapter-item expanded "><a href="../binary-packages.html"><strong aria-hidden="true">5.</strong> Binary Packages for how to use Mesos binary packages.</a></li><li class="chapter-item expanded "><a href="../configuration.html"><strong aria-hidden="true">6.</strong> Configuration for build configuration options.</a></li><li class="chapter-item expanded "><a href="../cmake.html"><strong aria-hidden="true">7.</strong> CMake for details about using the new CMake build system.</a></li><li class="chapter-item expanded "><a href="../windows.html"><strong aria-hidden="true">8.</strong> Windows Support for the state of Windows support in Mesos.</a></li><li class="chapter-item expanded affix "><li class="part-title">Configuration</li><li class="chapter-item expanded "><a href="../configuration/agent.html"><strong aria-hidden="true">9.</strong> Agent Options</a></li><li class="chapter-item expanded "><a href="../configuration/autotools.html"><strong aria-hidden="true">10.</strong> Autotools Options</a></li><li class="chapter-item expanded "><a href="../configuration/cmake.html"><strong aria-hidden="true">11.</strong> CMake Options</a></li><li class="chapter-item expanded "><a href="../configuration/libprocess.html"><strong aria-hidden="true">12.</strong> Libprocess Options</a></li><li class="chapter-item expanded "><a href="../configuration/master-and-agent.html"><strong aria-hidden="true">13.</strong> Master and Agent Options</a></li><li class="chapter-item expanded "><a href="../configuration/master.html" class="active"><strong aria-hidden="true">14.</strong> Master Options</a></li><li class="chapter-item expanded affix "><li class="part-title">Administration</li><li class="chapter-item expanded "><a href="../configuration.html"><strong aria-hidden="true">15.</strong> Configuration for command-line arguments.</a></li><li class="chapter-item expanded "><a href="../high-availability.html"><strong aria-hidden="true">16.</strong> High Availability Master Setup</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../replicated-log-internals.html"><strong aria-hidden="true">16.1.</strong> Replicated Log for information on the Mesos replicated log.</a></li></ol></li><li class="chapter-item expanded "><a href="../agent-recovery.html"><strong aria-hidden="true">17.</strong> Fault Tolerant Agent Setup</a></li><li class="chapter-item expanded "><a href="../framework-rate-limiting.html"><strong aria-hidden="true">18.</strong> Framework Rate Limiting</a></li><li class="chapter-item expanded "><a href="../maintenance.html"><strong aria-hidden="true">19.</strong> Maintenance for performing maintenance on a Mesos cluster.</a></li><li class="chapter-item expanded "><a href="../upgrades.html"><strong aria-hidden="true">20.</strong> Upgrades for upgrading a Mesos cluster.</a></li><li class="chapter-item expanded "><a href="../downgrades.html"><strong aria-hidden="true">21.</strong> Downgrades for downgrading a Mesos cluster.</a></li><li class="chapter-item expanded "><a href="../logging.html"><strong aria-hidden="true">22.</strong> Logging</a></li><li class="chapter-item expanded "><a href="../monitoring.html"><strong aria-hidden="true">23.</strong> Monitoring / Metrics</a></li><li class="chapter-item expanded "><a href="../cli.html"><strong aria-hidden="true">24.</strong> Debugging using the new CLI</a></li><li class="chapter-item expanded "><a href="../operational-guide.html"><strong aria-hidden="true">25.</strong> Operational Guide</a></li><li class="chapter-item expanded "><a href="../fetcher.html"><strong aria-hidden="true">26.</strong> Fetcher Cache Configuration</a></li><li class="chapter-item expanded "><a href="../fault-domains.html"><strong aria-hidden="true">27.</strong> Fault Domains</a></li><li class="chapter-item expanded "><a href="../performance-profiling.html"><strong aria-hidden="true">28.</strong> Performance Profiling for debugging performance issues in Mesos.</a></li><li class="chapter-item expanded "><a href="../memory-profiling.html"><strong aria-hidden="true">29.</strong> Memory Profiling for debugging potential memory leaks in Mesos.</a></li><li class="chapter-item expanded affix "><li class="part-title">Resource Management</li><li class="chapter-item expanded "><a href="../attributes-resources.html"><strong aria-hidden="true">30.</strong> Attributes and Resources for how to describe the agents that comprise a cluster.</a></li><li class="chapter-item expanded "><a href="../roles.html"><strong aria-hidden="true">31.</strong> Using Resource Roles</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../weights.html"><strong aria-hidden="true">31.1.</strong> Resource Role Weights for fair sharing.</a></li><li class="chapter-item expanded "><a href="../quota.html"><strong aria-hidden="true">31.2.</strong> Resource Role Quota for how to configure Mesos to provide guaranteed resource allocations for use by a role.</a></li><li class="chapter-item expanded "><a href="../reservation.html"><strong aria-hidden="true">31.3.</strong> Reservations for how operators and frameworks can reserve resources on individual agents for use by a role.</a></li><li class="chapter-item expanded "><a href="../shared-resources.html"><strong aria-hidden="true">31.4.</strong> Shared Resources for how to share persistent volumes between tasks managed by different executors on the same agent.</a></li></ol></li><li class="chapter-item expanded "><a href="../oversubscription.html"><strong aria-hidden="true">32.</strong> Oversubscription for how to configure Mesos to take advantage of unused resources to launch “best-effort” tasks.</a></li><li class="chapter-item expanded affix "><li class="part-title">Security</li><li class="chapter-item expanded "><a href="../authentication.html"><strong aria-hidden="true">33.</strong> Authentication</a></li><li class="chapter-item expanded "><a href="../authorization.html"><strong aria-hidden="true">34.</strong> Authorization</a></li><li class="chapter-item expanded "><a href="../ssl.html"><strong aria-hidden="true">35.</strong> SSL</a></li><li class="chapter-item expanded "><a href="../secrets.html"><strong aria-hidden="true">36.</strong> Secrets for managing secrets within Mesos.</a></li><li class="chapter-item expanded affix "><li class="part-title">Containerization</li><li class="chapter-item expanded "><a href="../containerizers.html"><strong aria-hidden="true">37.</strong> Containerizer Overview</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../containerizer-internals.html"><strong aria-hidden="true">37.1.</strong> Containerizer Internals for implementation details of containerizers.</a></li><li class="chapter-item expanded "><a href="../docker-containerizer.html"><strong aria-hidden="true">37.2.</strong> Docker Containerizer for launching a Docker image as a Task, or as an Executor.</a></li><li class="chapter-item expanded "><a href="../mesos-containerizer.html"><strong aria-hidden="true">37.3.</strong> Mesos Containerizer default containerizer, supports both Linux and POSIX systems.</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../container-image.html"><strong aria-hidden="true">37.3.1.</strong> Container Images for supporting container images in Mesos containerizer.</a></li><li class="chapter-item expanded "><a href="../isolators/docker-volume.html"><strong aria-hidden="true">37.3.2.</strong> Docker Volume Support</a></li><li class="chapter-item expanded "><a href="../gpu-support.html"><strong aria-hidden="true">37.3.3.</strong> Nvidia GPU Support for how to run Mesos with Nvidia GPU support.</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../sandbox.html"><strong aria-hidden="true">38.</strong> Container Sandboxes</a></li><li class="chapter-item expanded "><a href="../container-volume.html"><strong aria-hidden="true">39.</strong> Container Volumes</a></li><li class="chapter-item expanded "><a href="../nested-container-and-task-group.html"><strong aria-hidden="true">40.</strong> Nested Container and Task Group (Pod)</a></li><li class="chapter-item expanded "><a href="../standalone-containers.html"><strong aria-hidden="true">41.</strong> Standalone Containers</a></li><li class="chapter-item expanded affix "><li class="part-title">Networking</li><li class="chapter-item expanded "><a href="../networking.html"><strong aria-hidden="true">42.</strong> Networking Overview</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../networking-for-mesos-managed-containers.html"><strong aria-hidden="true">42.1.</strong> Networking in Detail</a></li><li class="chapter-item expanded "><a href="../cni.html"><strong aria-hidden="true">42.2.</strong> Container Network Interface (CNI)</a></li><li class="chapter-item expanded "><a href="../isolators/network-port-mapping.html"><strong aria-hidden="true">42.3.</strong> Port Mapping Isolator</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">Storage</li><li class="chapter-item expanded "><a href="../multiple-disk.html"><strong aria-hidden="true">43.</strong> Multiple Disks for how to allow tasks to use multiple isolated disk resources.</a></li><li class="chapter-item expanded "><a href="../persistent-volume.html"><strong aria-hidden="true">44.</strong> Persistent Volume for how to allow tasks to access persistent storage resources.</a></li><li class="chapter-item expanded "><a href="../csi.html"><strong aria-hidden="true">45.</strong> Container Storage Interface (CSI) Support</a></li><li class="chapter-item expanded affix "><li class="part-title">Scheduler and Executor Development</li><li class="chapter-item expanded "><a href="../running-workloads.html"><strong aria-hidden="true">46.</strong> Running Workloads in Mesos explains how a scheduler can specify and run tasks.</a></li><li class="chapter-item expanded "><a href="../app-framework-development-guide.html"><strong aria-hidden="true">47.</strong> Framework Development Guide describes how to build applications on top of Mesos.</a></li><li class="chapter-item expanded "><a href="../high-availability-framework-guide.html"><strong aria-hidden="true">48.</strong> Guide for Designing Highly Available Mesos Frameworks</a></li><li class="chapter-item expanded "><a href="../reconciliation.html"><strong aria-hidden="true">49.</strong> Reconciliation for ensuring a framework’s state remains eventually consistent in the face of failures.</a></li><li class="chapter-item expanded "><a href="../task-state-reasons.html"><strong aria-hidden="true">50.</strong> Task State Reasons describes how task state reasons are used in Mesos.</a></li><li class="chapter-item expanded "><a href="../health-checks.html"><strong aria-hidden="true">51.</strong> Task Health Checking</a></li><li class="chapter-item expanded "><a href="../scheduler-http-api.html"><strong aria-hidden="true">52.</strong> v1 Scheduler HTTP API for communication between schedulers and the Mesos master.</a></li><li class="chapter-item expanded "><a href="../executor-http-api.html"><strong aria-hidden="true">53.</strong> v1 Executor HTTP API describes the new HTTP API for communication between executors and the Mesos agent.</a></li></ol>
+            </div>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
+        </nav>
+
+        <!-- Track and set sidebar scroll position -->
+        <script>
+            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
+            sidebarScrollbox.addEventListener('click', function(e) {
+                if (e.target.tagName === 'A') {
+                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
+                }
+            }, { passive: true });
+            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+            sessionStorage.removeItem('sidebar-scroll');
+            if (sidebarScrollTop) {
+                // preserve sidebar scroll position when navigating via links within sidebar
+                sidebarScrollbox.scrollTop = sidebarScrollTop;
+            } else {
+                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+                var activeSection = document.querySelector('#sidebar .active');
+                if (activeSection) {
+                    activeSection.scrollIntoView({ block: 'center' });
+                }
+            }
+        </script>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </button>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">ClusterD - Continued development of Apache Mesos</h1>
+
+                    <div class="right-buttons">
+                        <a href="../print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+                        <a href="https://github.com/m3scluster/clusterd-docs/" title="Git repository" aria-label="Git repository">
+                            <i id="git-repository-button" class="fa fa-github"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="master-options"><a class="header" href="#master-options">Master Options</a></h1>
+<h2 id="required-flags"><a class="header" href="#required-flags">Required Flags</a></h2>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th width="30%">
+        Flag
+      </th>
+      <th>
+        Explanation
+      </th>
+    </tr>
+  </thead>
+<tr id="quorum">
+  <td>
+    --quorum=VALUE
+  </td>
+  <td>
+The size of the quorum of replicas when using <code>replicated_log</code> based
+registry. It is imperative to set this value to be a majority of
+masters i.e., <code>quorum > (number of masters)/2</code>.
+<b>NOTE</b>: Not required if master is run in standalone mode (non-HA).
+  </td>
+</tr>
+<tr id="work_dir">
+  <td>
+    --work_dir=VALUE
+  </td>
+  <td>
+Path of the master work directory. This is where the persistent
+information of the cluster will be stored. Note that locations like
+<code>/tmp</code> which are cleaned automatically are not suitable for the work
+directory when running in production, since long-running masters could
+lose data when cleanup occurs. (Example: <code>/var/lib/mesos/master</code>)
+  </td>
+</tr>
+<tr id="zk">
+  <td>
+    --zk=VALUE
+  </td>
+  <td>
+ZooKeeper URL (used for leader election amongst masters).
+May be one of:
+<pre><code>zk://host1:port1,host2:port2,.../path
+zk://username:password@host1:port1,host2:port2,.../path
+file:///path/to/file (where file contains one of the above)</code></pre>
+<b>NOTE</b>: Not required if master is run in standalone mode (non-HA).
+  </td>
+</tr>
+</table>
+<h2 id="optional-flags"><a class="header" href="#optional-flags">Optional Flags</a></h2>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th width="30%">
+        Flag
+      </th>
+      <th>
+        Explanation
+      </th>
+    </tr>
+  </thead>
+<tr id="acls">
+  <td>
+    --acls=VALUE
+  </td>
+  <td>
+The value could be a JSON-formatted string of ACLs
+or a file path containing the JSON-formatted ACLs used
+for authorization. Path could be of the form <code>file:///path/to/file</code>
+or <code>/path/to/file</code>.
+<p/>
+Note that if the flag <code>--authorizers</code> is provided with a value
+different than <code>local</code>, the ACLs contents will be
+ignored.
+<p/>
+See the ACLs protobuf in acls.proto for the expected format.
+<p/>
+Example:
+<pre><code>{
+  "register_frameworks": [
+    {
+      "principals": { "type": "ANY" },
+      "roles": { "values": ["a"] }
+    }
+  ],
+  "run_tasks": [
+    {
+      "principals": { "values": ["a", "b"] },
+      "users": { "values": ["c"] }
+    }
+  ],
+  "teardown_frameworks": [
+    {
+      "principals": { "values": ["a", "b"] },
+      "framework_principals": { "values": ["c"] }
+    }
+  ],
+  "set_quotas": [
+    {
+      "principals": { "values": ["a"] },
+      "roles": { "values": ["a", "b"] }
+    }
+  ],
+  "remove_quotas": [
+    {
+      "principals": { "values": ["a"] },
+      "quota_principals": { "values": ["a"] }
+    }
+  ],
+  "get_endpoints": [
+    {
+      "principals": { "values": ["a"] },
+      "paths": { "values": ["/flags"] }
+    }
+  ]
+}</code></pre>
+  </td>
+</tr>
+<tr id="agent_ping_timeout">
+  <td>
+    --agent_ping_timeout=VALUE,
+    <p/>
+    --slave_ping_timeout=VALUE
+  </td>
+  <td>
+The timeout within which an agent is expected to respond to a
+ping from the master. Agents that do not respond within
+max_agent_ping_timeouts ping retries will be marked unreachable.
+<b>NOTE</b>: The total ping timeout (<code>agent_ping_timeout</code> multiplied by
+<code>max_agent_ping_timeouts</code>) should be greater than the ZooKeeper
+session timeout to prevent useless re-registration attempts.
+(default: 15secs)
+  </td>
+</tr>
+<tr id="agent_removal_rate_limit">
+  <td>
+    --agent_removal_rate_limit=VALUE
+    <p/>
+    --slave_removal_rate_limit=VALUE
+  </td>
+  <td>
+The maximum rate (e.g., <code>1/10mins</code>, <code>2/3hrs</code>, etc) at which agents
+will be removed from the master when they fail health checks.
+By default, agents will be removed as soon as they fail the health
+checks. The value is of the form <code>(Number of agents)/(Duration)</code>.
+  </td>
+</tr>
+<tr id="agent_reregister_timeout">
+  <td>
+    --agent_reregister_timeout=VALUE
+    <p/>
+    --slave_reregister_timeout=VALUE
+  </td>
+  <td>
+The timeout within which an agent is expected to reregister.
+Agents reregister when they become disconnected from the master
+or when a new master is elected as the leader. Agents that do not
+reregister within the timeout will be marked unreachable in the
+registry; if/when the agent reregisters with the master, any
+non-partition-aware tasks running on the agent will be terminated.
+<b>NOTE</b>: This value has to be at least 10mins. (default: 10mins)
+  </td>
+</tr>
+<tr id="allocation_interval">
+  <td>
+    --allocation_interval=VALUE
+  </td>
+  <td>
+Amount of time to wait between performing
+(batch) allocations (e.g., 500ms, 1sec, etc). (default: 1secs)
+  </td>
+</tr>
+<tr id="allocator">
+  <td>
+    --allocator=VALUE
+  </td>
+  <td>
+Allocator to use for resource allocation to frameworks.
+Use the default <code>HierarchicalDRF</code> allocator, or
+load an alternate allocator module using <code>--modules</code>.
+(default: HierarchicalDRF)
+  </td>
+</tr>
+<tr id="min_allocatable_resources">
+  <td>
+    --min_allocatable_resources=VALUE
+  </td>
+  <td>
+One or more sets of resource quantities that define the minimum allocatable
+resource for the allocator. The allocator will only offer resources that
+meets the quantity requirement of at least one of the specified sets. For
+`SCALAR` type resources, its quantity is its scalar value. For `RANGES` and
+`SET` type, their quantities are the number of different instances in the
+range or set. For example, `range:[1-5]` has a quantity of 5 and `set:{a,b}`
+has a quantity of 2. The resources in each set should be delimited by
+semicolons (acting as logical AND), and each set should be delimited by the
+pipe character (acting as logical OR).
+(Example: `disk:1|cpus:1;mem:32;ports:1` configures the allocator to only offer
+resources if they contain a disk resource of at least 1 megabyte, or if they
+at least contain 1 cpu, 32 megabytes of memory and 1 port.)
+(default: cpus:0.01|mem:32).
+  </td>
+</tr>
+<tr id="authenticate_agents">
+  <td>
+    --[no-]authenticate_agents,
+    <p/>
+    --[no-]authenticate_slaves
+  </td>
+  <td>
+If <code>true</code> only authenticated agents are allowed to register.
+If <code>false</code> unauthenticated agents are also allowed to register. (default: false)
+  </td>
+</tr>
+<tr id="authenticate_frameworks">
+  <td>
+    --[no-]authenticate_frameworks,
+    <p/>
+    --[no-]authenticate
+  </td>
+  <td>
+If <code>true</code>, only authenticated frameworks are allowed to register. If
+<code>false</code>, unauthenticated frameworks are also allowed to register. For
+HTTP based frameworks use the <code>--authenticate_http_frameworks</code> flag. (default: false)
+  </td>
+</tr>
+<tr id="authenticate_http_frameworks">
+  <td>
+    --[no-]authenticate_http_frameworks
+  </td>
+  <td>
+If <code>true</code>, only authenticated HTTP based frameworks are allowed to
+register. If <code>false</code>, HTTP frameworks are not authenticated. (default: false)
+  </td>
+</tr>
+<tr id="authenticators">
+  <td>
+    --authenticators=VALUE
+  </td>
+  <td>
+Authenticator implementation to use when authenticating frameworks
+and/or agents. Use the default <code>crammd5</code>, or
+load an alternate authenticator module using <code>--modules</code>. (default: crammd5)
+  </td>
+</tr>
+<tr id="authentication_v0_timeout">
+  <td>
+    --authentication_v0_timeout=VALUE
+  </td>
+  <td>
+The timeout within which an authentication is expected to complete against a v0 framework or agent. This does not apply to the v0 or v1 HTTP APIs. (default: <code>15secs</code>)
+  </td>
+</tr>
+<tr id="authorizers">
+  <td>
+    --authorizers=VALUE
+  </td>
+  <td>
+Authorizer implementation to use when authorizing actions that
+require it.
+Use the default <code>local</code>, or
+load an alternate authorizer module using <code>--modules</code>.
+<p/>
+Note that if the flag <code>--authorizers</code> is provided with a value
+different than the default <code>local</code>, the ACLs
+passed through the <code>--acls</code> flag will be ignored.
+<p/>
+Currently there is no support for multiple authorizers. (default: local)
+  </td>
+</tr>
+<tr id="cluster">
+  <td>
+    --cluster=VALUE
+  </td>
+  <td>
+Human readable name for the cluster, displayed in the webui.
+  </td>
+</tr>
+<tr id="credentials">
+  <td>
+    --credentials=VALUE
+  </td>
+  <td>
+Path to a JSON-formatted file containing credentials.
+Path can be of the form <code>file:///path/to/file</code> or <code>/path/to/file</code>.
+Example:
+<pre><code>{
+  "credentials": [
+    {
+      "principal": "sherman",
+      "secret": "kitesurf"
+    }
+  ]
+}</code></pre>
+  </td>
+</tr>
+<tr id="fair_sharing_excluded_resource_names">
+  <td>
+    --fair_sharing_excluded_resource_names=VALUE
+  </td>
+  <td>
+A comma-separated list of the resource names (e.g. 'gpus') that will be excluded
+from fair sharing constraints. This may be useful in cases where the fair
+sharing implementation currently has limitations. E.g. See the problem of
+"scarce" resources:
+    <a href="http://www.mail-archive.com/dev@mesos.apache.org/msg35631.html">msg35631</a>
+    <a href="https://issues.apache.org/jira/browse/MESOS-5377">MESOS-5377</a>
+  </td>
+</tr>
+<tr id="filter_gpu_resources">
+  <td>
+    --[no-]filter_gpu_resources
+  </td>
+  <td>
+When set to true, this flag will cause the mesos master to filter all offers
+from agents with GPU resources by only sending them to frameworks that opt into
+the 'GPU_RESOURCES' framework capability. When set to false, this flag will
+cause the master to not filter offers from agents with GPU resources, and
+indiscriminately send them to all frameworks whether they set the
+'GPU_RESOURCES' capability or not.  This flag is meant as a temporary workaround
+towards the eventual deprecation of the 'GPU_RESOURCES' capability. Please see
+the following for more information:
+    <a href="https://www.mail-archive.com/dev@mesos.apache.org/msg37571.html">msg37571</a>
+    <a href="https://issues.apache.org/jira/browse/MESOS-7576">MESOS-7576</a>
+  </td>
+</tr>
+<tr id="framework_sorter">
+  <td>
+    --framework_sorter=VALUE
+  </td>
+  <td>
+Policy to use for allocating resources between a given role's
+frameworks. Options are the same as for <code>--role_sorter</code>.
+(default: drf)
+  </td>
+</tr>
+<tr id="http_framework_authenticators">
+  <td>
+    --http_framework_authenticators=VALUE
+  </td>
+  <td>
+HTTP authenticator implementation to use when authenticating HTTP frameworks.
+Use the <code>basic</code> authenticator or load an alternate HTTP authenticator
+module using <code>--modules</code>. This must be used in conjunction with
+<code>--authenticate_http_frameworks</code>.
+<p/>
+Currently there is no support for multiple HTTP authenticators.
+  </td>
+</tr>
+<tr id="log_auto_initialize">
+  <td>
+    --[no-]log_auto_initialize
+  </td>
+  <td>
+Whether to automatically initialize the [replicated log](../replicated-log-internals.md)
+used for the registry. If this is set to false, the log has to be manually
+initialized when used for the very first time. (default: true)
+  </td>
+</tr>
+<tr id="master_contender">
+  <td>
+    --master_contender=VALUE
+  </td>
+  <td>
+The symbol name of the master contender to use. This symbol should exist in a
+module specified through the <code>--modules</code> flag. Cannot be used in
+conjunction with <code>--zk</code>. Must be used in conjunction with
+<code>--master_detector</code>.
+  </td>
+</tr>
+<tr id="master_detector">
+  <td>
+    --master_detector=VALUE
+  </td>
+  <td>
+The symbol name of the master detector to use. This symbol should exist in a
+module specified through the <code>--modules</code> flag. Cannot be used in
+conjunction with <code>--zk</code>. Must be used in conjunction with
+<code>--master_contender</code>.
+  </td>
+</tr>
+<tr id="max_agent_ping_timeouts">
+  <td>
+    --max_agent_ping_timeouts=VALUE,
+    <p/>
+    --max_slave_ping_timeouts=VALUE
+  </td>
+  <td>
+The number of times an agent can fail to respond to a
+ping from the master. Agents that do not respond within
+<code>max_agent_ping_timeouts</code> ping retries will be marked unreachable.
+(default: 5)
+  </td>
+</tr>
+<tr id="max_completed_frameworks">
+  <td>
+    --max_completed_frameworks=VALUE
+  </td>
+  <td>
+Maximum number of completed frameworks to store in memory. (default: 50)
+  </td>
+</tr>
+<tr id="max_completed_tasks_per_framework">
+  <td>
+    --max_completed_tasks_per_framework=VALUE
+  </td>
+  <td>
+Maximum number of completed tasks per framework to store in memory. (default: 1000)
+  </td>
+</tr>
+<tr id="max_operator_event_stream_subscribers">
+  <td>
+    --max_operator_event_stream_subscribers=VALUE
+  </td>
+  <td>
+Maximum number of simultaneous subscribers to the master's operator event
+stream. If new connections bring the total number of subscribers over this
+value, older connections will be closed by the master.
+<p>This flag should generally not be changed unless the operator is mitigating
+known problems with their network setup, such as clients/proxies that do not
+close connections to the master.
+(default: 1000)</p>
+</td>
+</tr>
+<tr id="max_unreachable_tasks_per_framework">
+  <td>
+    --max_unreachable_tasks_per_framework=VALUE
+  </td>
+  <td>
+Maximum number of unreachable tasks per framework to store in memory. (default: 1000)
+  </td>
+</tr>
+<tr id="offer_timeout">
+  <td>
+    --offer_timeout=VALUE
+  </td>
+  <td>
+Duration of time before an offer is rescinded from a framework.
+This helps fairness when running frameworks that hold on to offers,
+or frameworks that accidentally drop offers.
+If not set, offers do not timeout.
+  </td>
+</tr>
+<tr id="offer_constraints_re2_max_mem">
+  <td>
+    --offer_constraints_re2_max_mem=VALUE
+  </td>
+  <td>
+Limit on the memory usage of each RE2 regular expression in
+framework's offer constraints. If `OfferConstraints` contain a regex
+from which a RE2 object cannot be constructed without exceeding this
+limit, then framework's attempt to subscribe or update subscription
+with these `OfferConstraints` will fail. (default: 4KB)
+  </td>
+</tr>
+<tr id="offer_constraints_re2_max_program_size">
+  <td>
+    --offer_constraints_re2_max_program_size=VALUE
+  </td>
+  <td>
+Limit on the RE2 program size of each regular expression in
+framework's offer constraints. If `OfferConstraints` contain a regex
+which results in a RE2 object exceeding this limit,
+then framework's attempt to subscribe or update subscription
+with these `OfferConstraints` will fail. (default: 100)
+  </td>
+</tr>
+<tr id="publish_per_framework_metrics">
+  <td>
+    --[no-]publish_per_framework_metrics
+  </td>
+  <td>
+If <code>true</code>, an extensive set of metrics for each active framework will
+be published. These metrics are useful for understanding cluster behavior,
+but can be overwhelming for very large numbers of frameworks. (default: true)
+  </td>
+</tr>
+<tr id="rate_limits">
+  <td>
+    --rate_limits=VALUE
+  </td>
+  <td>
+The value could be a JSON-formatted string of rate limits
+or a file path containing the JSON-formatted rate limits used
+for framework rate limiting.
+Path could be of the form <code>file:///path/to/file</code>
+or <code>/path/to/file</code>.
+<p/>
+See the RateLimits protobuf in mesos.proto for the expected format.
+<p/>
+Example:
+<pre><code>{
+  "limits": [
+    {
+      "principal": "foo",
+      "qps": 55.5
+    },
+    {
+      "principal": "bar"
+    }
+  ],
+  "aggregate_default_qps": 33.3
+}</code></pre>
+  </td>
+</tr>
+<tr id="recovery_agent_removal_limit">
+  <td>
+    --recovery_agent_removal_limit=VALUE,
+    <p/>
+    --recovery_slave_removal_limit=VALUE
+  </td>
+  <td>
+For failovers, limit on the percentage of agents that can be removed
+from the registry *and* shutdown after the re-registration timeout
+elapses. If the limit is exceeded, the master will fail over rather
+than remove the agents.
+This can be used to provide safety guarantees for production
+environments. Production environments may expect that across master
+failovers, at most a certain percentage of agents will fail
+permanently (e.g. due to rack-level failures).
+Setting this limit would ensure that a human needs to get
+involved should an unexpected widespread failure of agents occur
+in the cluster.
+Values: [0%-100%] (default: 100%)
+  </td>
+</tr>
+<tr id="registry">
+  <td>
+    --registry=VALUE
+  </td>
+  <td>
+Persistence strategy for the registry; available options are
+<code>replicated_log</code>, <code>in_memory</code> (for testing). (default: replicated_log)
+  </td>
+</tr>
+<tr id="registry_fetch_timeout">
+  <td>
+    --registry_fetch_timeout=VALUE
+  </td>
+  <td>
+Duration of time to wait in order to fetch data from the registry
+after which the operation is considered a failure. (default: 1mins)
+  </td>
+</tr>
+<tr id="registry_gc_interval">
+  <td>
+    --registry_gc_interval=VALUE
+  </td>
+  <td>
+How often to garbage collect the registry. The current leading
+master will periodically discard information from the registry.
+How long registry state is retained is controlled by other
+parameters (e.g., <code>registry_max_agent_age</code>,
+<code>registry_max_agent_count</code>); this parameter controls
+how often the master will examine the registry to see if data
+should be discarded. (default: 15mins)
+  </td>
+</tr>
+<tr id="registry_max_agent_age">
+  <td>
+    --registry_max_agent_age=VALUE
+  </td>
+  <td>
+Maximum length of time to store information in the registry about
+agents that are not currently connected to the cluster. This
+information allows frameworks to determine the status of unreachable
+and gone agents. Note that the registry always stores
+information on all connected agents. If there are more than
+<code>registry_max_agent_count</code> partitioned/gone agents, agent
+information may be discarded from the registry sooner than indicated
+by this parameter. (default: 2weeks)
+  </td>
+</tr>
+<tr id="registry_max_agent_count">
+  <td>
+    --registry_max_agent_count=VALUE
+  </td>
+  <td>
+Maximum number of partitioned/gone agents to store in the
+registry. This information allows frameworks to determine the status
+of disconnected agents. Note that the registry always stores
+information about all connected agents. See also the
+<code>registry_max_agent_age</code> flag. (default: 102400)
+  </td>
+</tr>
+<tr id="registry_store_timeout">
+  <td>
+    --registry_store_timeout=VALUE
+  </td>
+  <td>
+Duration of time to wait in order to store data in the registry
+after which the operation is considered a failure. (default: 20secs)
+  </td>
+</tr>
+<tr id="require_agent_domain">
+  <td>
+    --[no-]require_agent_domain
+  </td>
+  <td>
+If true, only agents with a configured domain can register. (default: false)
+  </td>
+</tr>
+<tr id="roles">
+  <td>
+    --roles=VALUE
+  </td>
+  <td>
+A comma-separated list of the allocation roles that frameworks
+in this cluster may belong to. This flag is deprecated;
+if it is not specified, any role name can be used.
+  </td>
+</tr>
+<tr id="root_submissions">
+  <td>
+    --[no-]root_submissions
+  </td>
+  <td>
+Can root submit frameworks? (default: true)
+  </td>
+</tr>
+<tr id="role_sorter">
+  <td>
+    --role_sorter=VALUE
+  </td>
+  <td>
+Policy to use for allocating resources between roles. May be one of:
+dominant_resource_fairness (drf) or weighted random uniform distribution
+(random) (default: drf)
+  </td>
+</tr>
+<tr id="webui_dir">
+  <td>
+    --webui_dir=VALUE
+  </td>
+  <td>
+Directory path of the webui files/assets (default: /usr/local/share/mesos/webui)
+  </td>
+</tr>
+<tr id="weights">
+  <td>
+    --weights=VALUE
+  </td>
+  <td>
+A comma-separated list of role/weight pairs of the form
+<code>role=weight,role=weight</code>. Weights can be used to control the
+relative share of cluster resources that is offered to different roles. This
+flag is deprecated. Instead, operators should configure weights dynamically
+using the <code>/weights</code> HTTP endpoint.
+  </td>
+</tr>
+<tr id="whitelist">
+  <td>
+    --whitelist=VALUE
+  </td>
+  <td>
+Path to a file which contains a list of agents (one per line) to
+advertise offers for. The file is watched and periodically re-read to
+refresh the agent whitelist. By default there is no whitelist: all
+machines are accepted. Path can be of the form
+<code>file:///path/to/file</code> or <code>/path/to/file</code>.
+  </td>
+</tr>
+</table>
+<h2 id="network-isolator-flags"><a class="header" href="#network-isolator-flags">Network Isolator Flags</a></h2>
+<p><em>Available when configured with <code>--with-network-isolator</code>.</em></p>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th width="30%">
+        Flag
+      </th>
+      <th>
+        Explanation
+      </th>
+    </tr>
+  </thead>
+<tr id="max_executors_per_agent">
+  <td>
+    --max_executors_per_agent=VALUE,
+    <p/>
+     --max_executors_per_slave=VALUE
+  </td>
+  <td>
+Maximum number of executors allowed per agent. The network
+monitoring/isolation technique imposes an implicit resource
+acquisition on each executor (# ephemeral ports), as a result
+one can only run a certain number of executors on each agent.
+  </td>
+</tr>
+</table>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="../configuration/master-and-agent.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+
+                            <a rel="next" href="../configuration.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="../configuration/master-and-agent.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+
+                    <a rel="next" href="../configuration.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+            </nav>
+
+        </div>
+
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="../elasticlunr.min.js"></script>
+        <script src="../mark.min.js"></script>
+        <script src="../searcher.js"></script>
+
+        <script src="../clipboard.min.js"></script>
+        <script src="../highlight.js"></script>
+        <script src="../book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+    </div>
+    </body>
+</html>

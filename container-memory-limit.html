@@ -3,7 +3,7 @@
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
-        <title>Fault Tolerant Agent Setup - ClusterD - Continued development of Apache Mesos</title>
+        <title>Updating the memory limit of a running container - ClusterD - Continued development of Apache Mesos</title>
 
 
         <!-- Custom HTML head -->
@@ -177,123 +177,178 @@
 
                 <div id="mdbook-content" class="content">
                     <main>
-                        <h1 id="agent-recovery"><a class="header" href="#agent-recovery">Agent Recovery</a></h1>
-<p>If the <code>mesos-agent</code> process on a host exits (perhaps due to a Mesos bug or
-because the operator kills the process while <a href="upgrades.html">upgrading Mesos</a>),
-any executors/tasks that were being managed by the <code>mesos-agent</code> process will
-continue to run.</p>
-<p>By default, all the executors/tasks that were being managed by the old
-<code>mesos-agent</code> process are expected to gracefully exit on their own, and
-will be shut down after the agent restarted if they did not.</p>
-<p>However, if a framework enabled  <em>checkpointing</em> when it registered with the
-master, any executors belonging to that framework can reconnect to the new
-<code>mesos-agent</code> process and continue running uninterrupted. Hence, enabling
-framework checkpointing allows tasks to tolerate Mesos agent upgrades and
-unexpected <code>mesos-agent</code> crashes without experiencing any downtime.</p>
-<p>Agent recovery works by having the agent checkpoint information about its own
-state and about the tasks and executors it is managing to local disk, for
-example the <code>SlaveInfo</code>, <code>FrameworkInfo</code> and <code>ExecutorInfo</code> messages or the
-unacknowledged status updates of running tasks.</p>
-<p>When the agent restarts, it will verify that its current configuration, set
-from the environment variables and command-line flags, is compatible with the
-checkpointed information and will refuse to restart if not.</p>
-<p>A special case occurs when the agent detects that its host system was rebooted
-since the last run of the agent: The agent will try to recover its previous ID
-as usual, but if that fails it will actually erase the information of the
-previous run and will register with the master as a new agent.</p>
-<p>Note that executors and tasks that exited between agent shutdown and restart
-are not automatically restarted during agent recovery.</p>
-<h2 id="framework-configuration"><a class="header" href="#framework-configuration">Framework Configuration</a></h2>
-<p>A framework can control whether its executors will be recovered by setting
-the <code>checkpoint</code> flag in its <code>FrameworkInfo</code> when registering with the master.
-Enabling this feature results in increased I/O overhead at each agent that runs
-tasks launched by the framework. By default, frameworks do <strong>not</strong> checkpoint
-their state.</p>
-<h2 id="agent-configuration"><a class="header" href="#agent-configuration">Agent Configuration</a></h2>
-<p>Four <a href="configuration/agent.html">configuration flags</a> control the recovery
-behavior of a Mesos agent:</p>
+                        <hr>
+<h2 id="title-apache-mesos---updating-a-running-container-memory-limit-layout-documentation"><a class="header" href="#title-apache-mesos---updating-a-running-container-memory-limit-layout-documentation">title: Apache Mesos - Updating a Running Container Memory Limit
+layout: documentation</a></h2>
+<h1 id="updating-a-running-container-memory-limit"><a class="header" href="#updating-a-running-container-memory-limit">Updating a Running Container Memory Limit</a></h1>
+<h2 id="overview"><a class="header" href="#overview">Overview</a></h2>
+<p>The agent operator API provides the <code>UPDATE_CONTAINER_MEMORY_LIMIT</code> call for
+changing the memory allocation and hard limit of a running task container
+without restarting it. The same call can increase or decrease the limit and
+works with both the Mesos Containerizer and the Docker Containerizer.</p>
+<p>The operation is local to one agent. A Mesos <code>ContainerID</code> is meaningful to
+the agent that owns it, so the request must be sent directly to that agent’s
+<code>/api/v1</code> endpoint rather than to the master or another agent.</p>
+<p>This feature changes runtime enforcement only. It does not change the task’s
+resources in the master’s allocator, offers, quota accounting, or framework
+state. A scheduler that requires an accounting-aware resource resize must use
+an appropriate scheduler-level workflow instead.</p>
+<h2 id="requirements"><a class="header" href="#requirements">Requirements</a></h2>
+<p>The following conditions must be met:</p>
 <ul>
-<li>
-<p><code>strict</code>: Whether to do agent recovery in strict mode [Default: true].</p>
-<ul>
-<li>If strict=true, all recovery errors are considered fatal.</li>
-<li>If strict=false, any errors (e.g., corruption in checkpointed data) during
-recovery are ignored and as much state as possible is recovered.</li>
+<li>The target is a running, top-level task container. Nested container IDs are
+rejected.</li>
+<li>The request is sent to the agent that owns the container.</li>
+<li>The memory limit is a positive, finite number expressed in MiB.</li>
+<li>The agent has memory isolation enabled for its selected containerizer.</li>
+<li>On Linux with cgroups v2, the memory controller is available and delegated
+to the agent’s hierarchy.</li>
+<li>If <code>--authenticate_http_readwrite=true</code> is configured, the client supplies
+credentials accepted by the agent’s read/write HTTP authentication realm.</li>
 </ul>
-</li>
-<li>
-<p><code>reconfiguration_policy</code>: Which kind of configuration changes are accepted
-when trying to recover [Default: equal].</p>
-<ul>
-<li>If reconfiguration_policy=equal, no configuration changes are accepted.</li>
-<li>If reconfiguration_policy=additive, the agent will allow the new
-configuration to contain additional attributes, increased resourced or an
-additional fault domain. For a more detailed description, see
-<a href="https://gitbox.apache.org/repos/asf?p=mesos.git;a=blob;f=src/slave/compatibility.hpp;h=78b421a01abe5d2178c93832577577a7ba282b38;hb=HEAD#l37">this</a>.</li>
-</ul>
-</li>
-<li>
-<p><code>recover</code>: Whether to recover status updates and reconnect with old
-executors [Default: reconnect]</p>
-<ul>
-<li>If recover=reconnect, reconnect with any old live executors, provided
-the executor’s framework enabled checkpointing.</li>
-<li>If recover=cleanup, kill any old live executors and exit. Use this
-option when doing an incompatible agent or executor upgrade!
-<strong>NOTE:</strong> If no checkpointing information exists, no recovery is performed
-and the agent registers with the master as a new agent.</li>
-</ul>
-</li>
-<li>
-<p><code>recovery_timeout</code>: Amount of time allotted for the agent to
-recover [Default: 15 mins].</p>
-<ul>
-<li>If the agent takes longer than <code>recovery_timeout</code> to recover, any
-executors that are waiting to reconnect to the agent will self-terminate.
-<strong>NOTE:</strong> If none of the frameworks have enabled checkpointing, the
-executors and tasks running at an agent die when the agent dies and are
-not recovered.</li>
-</ul>
-</li>
-</ul>
-<p>A restarted agent should reregister with master within a timeout (75 seconds
-by default: see the <code>--max_agent_ping_timeouts</code> and <code>--agent_ping_timeout</code>
-<a href="configuration.html">configuration flags</a>). If the agent takes longer than this
-timeout to reregister, the master shuts down the agent, which in turn will
-shutdown any live executors/tasks.</p>
-<p>Therefore, it is highly recommended to automate the process of restarting an
-agent, e.g. using a process supervisor such as <a href="http://mmonit.com/monit/">monit</a>
-or <code>systemd</code>.</p>
-<h2 id="known-issues-with-systemd-and-process-lifetime"><a class="header" href="#known-issues-with-systemd-and-process-lifetime">Known issues with <code>systemd</code> and process lifetime</a></h2>
-<p>There is a known issue when using <code>systemd</code> to launch the <code>mesos-agent</code>. A
-description of the problem can be found in <a href="https://issues.apache.org/jira/browse/MESOS-3425">MESOS-3425</a>
-and all relevant work can be tracked in the epic <a href="https://issues.apache.org/jira/browse/MESOS-3007">MESOS-3007</a>.</p>
-<p>This problem was fixed in Mesos <code>0.25.0</code> for the mesos containerizer when
-cgroups isolation is enabled. Further fixes for the posix isolators and docker
-containerizer are available in <code>0.25.1</code>, <code>0.26.1</code>, <code>0.27.1</code>, and <code>0.28.0</code>.</p>
-<p>It is recommended that you use the default <a href="http://www.freedesktop.org/software/systemd/man/systemd.kill.html">KillMode</a>
-for systemd processes, which is <code>control-group</code>, which kills all child processes
-when the agent stops. This ensures that “side-car” processes such as the
-<code>fetcher</code> and <code>perf</code> are terminated alongside the agent.
-The systemd patches for Mesos explicitly move executors and their children into
-a separate systemd slice, dissociating their lifetime from the agent. This
-ensures the executors survive agent restarts.</p>
-<p>The following excerpt of a <code>systemd</code> unit configuration file shows how to set
-the flag explicitly:</p>
-<pre><code>[Service]
-ExecStart=/usr/bin/mesos-agent
-KillMode=control-cgroup
+<p>For Docker tasks, the Docker Containerizer must be enabled, for example with
+<code>--containerizers=docker,mesos</code>. The exact isolation flags depend on the
+deployment, but they must enable the memory controller used by the agent.</p>
+<h2 id="calling-the-api"><a class="header" href="#calling-the-api">Calling the API</a></h2>
+<p>Set the URL of the agent that owns the container, its HTTP credentials, the
+Mesos container ID, and the new limit:</p>
+<pre><code class="language-bash">AGENT_URL='https://agent.example.com:5051'
+HTTP_USER='operator'
+HTTP_PASSWORD='replace-with-password'
+CONTAINER_ID='848b24db-a7f7-4d38-997a-c33c2c5ae669'
+MEMORY_MIB=256
 </code></pre>
-<footer id="open-on-gh">Found a bug? <a href="https://github.com/m3scluster/clusterd-docs//edit/main/src/agent-recovery.md">Edit this page on GitHub.</a></footer>
+<p>Send the operator call:</p>
+<pre><code class="language-bash">curl --fail-with-body --silent --show-error \
+  --user "${HTTP_USER}:${HTTP_PASSWORD}" \
+  --request POST \
+  --header 'Content-Type: application/json' \
+  --header 'Accept: application/json' \
+  --data "$(printf \
+    '{"type":"UPDATE_CONTAINER_MEMORY_LIMIT","update_container_memory_limit":{"container_id":{"value":"%s"},"memory_limit":{"value":%s}}}' \
+    "${CONTAINER_ID}" "${MEMORY_MIB}")" \
+  --write-out '\nHTTP %{http_code}\n' \
+  "${AGENT_URL}/api/v1"
+</code></pre>
+<p>Add <code>--insecure</code> only for a test deployment whose certificate cannot be
+verified. Production clients should validate the agent certificate.</p>
+<p>A successful synchronous update returns an empty response body and
+<code>200 OK</code>:</p>
+<pre><code class="language-text">HTTP 200
+</code></pre>
+<p>To test a decrease, set a lower value and repeat the same request:</p>
+<pre><code class="language-bash">MEMORY_MIB=64
+</code></pre>
+<h2 id="finding-the-correct-container-and-agent"><a class="header" href="#finding-the-correct-container-and-agent">Finding the Correct Container and Agent</a></h2>
+<p>Use framework or operator state to determine the agent that runs the task and
+then obtain the task’s Mesos <code>ContainerID</code>. Do not use the task ID, executor
+ID, Docker image ID, or Docker container ID in the request.</p>
+<p>With the Docker Containerizer, Docker container names normally use the form
+<code>mesos-&lt;ContainerID&gt;</code>. On the owning agent, the following diagnostic command
+lists the mapping:</p>
+<pre><code class="language-bash">docker ps --no-trunc --format '{{.ID}} {{.Names}}'
+</code></pre>
+<p>For example:</p>
+<pre><code class="language-text">410ca96979a1... mesos-848b24db-a7f7-4d38-997a-c33c2c5ae669
+</code></pre>
+<p>The value required by the API is
+<code>848b24db-a7f7-4d38-997a-c33c2c5ae669</code>. If the API returns <code>404 Not Found</code>
+while the workload is running, first verify that <code>AGENT_URL</code> identifies the
+agent that owns this container ID.</p>
+<h2 id="verifying-cgroups-v2-enforcement"><a class="header" href="#verifying-cgroups-v2-enforcement">Verifying cgroups v2 Enforcement</a></h2>
+<p>On the agent, find the Docker container process and its unified cgroup:</p>
+<pre><code class="language-bash">DOCKER_NAME="mesos-${CONTAINER_ID}"
+PID="$(docker inspect --format '{{.State.Pid}}' "${DOCKER_NAME}")"
+CGROUP="$(awk -F: '$1 == "0" {print $3}' "/proc/${PID}/cgroup")"
+</code></pre>
+<p>Read the kernel values:</p>
+<pre><code class="language-bash">cat "/sys/fs/cgroup${CGROUP}/memory.low"
+cat "/sys/fs/cgroup${CGROUP}/memory.max"
+cat "/sys/fs/cgroup${CGROUP}/memory.current"
+</code></pre>
+<p>For a limit of 256 MiB, both <code>memory.low</code> and <code>memory.max</code> are set to
+<code>268435456</code>. For 64 MiB, both values are <code>67108864</code>.</p>
+<p><code>memory.low</code> protects the assigned memory under system-wide pressure, while
+<code>memory.max</code> is the hard ceiling. If a new <code>memory.max</code> is below
+<code>memory.current</code>, the kernel attempts to reclaim memory. If reclaim cannot
+bring usage below the new ceiling, the cgroup OOM killer may terminate
+processes in the container. Operators should inspect <code>memory.current</code> before
+large decreases.</p>
+<h2 id="technical-flow"><a class="header" href="#technical-flow">Technical Flow</a></h2>
+<p>The request follows the standard typed agent operator API path:</p>
+<ol>
+<li>The agent registers <code>/api/v1</code> in the read/write HTTP authentication realm.
+The endpoint accepts <code>POST</code> requests encoded as JSON or Protobuf.</li>
+<li>The request is deserialized into <code>mesos::agent::Call</code>. The call type and
+payload are defined in <code>include/mesos/agent/agent.proto</code> and its v1
+counterpart.</li>
+<li>Agent call validation requires the
+<code>update_container_memory_limit</code> payload, validates the <code>ContainerID</code>,
+rejects nested IDs, and requires a positive finite scalar value.</li>
+<li>The handler checks the containerizer’s set of running containers. An ID
+that is not present on this agent produces <code>404 Not Found</code>.</li>
+<li>The handler builds a memory resource request and a <code>mem</code> resource limit in
+MiB, then invokes the generic
+<code>Containerizer::update(containerId, resourceRequests, resourceLimits)</code>
+interface.</li>
+<li>The selected containerizer stores the new runtime values and applies them
+through its platform-specific backend.</li>
+</ol>
+<h3 id="mesos-containerizer"><a class="header" href="#mesos-containerizer">Mesos Containerizer</a></h3>
+<p>The Mesos Containerizer fans the update out to its isolators. With the
+cgroups v2 memory controller, <code>MemoryControllerProcess::update</code> converts MiB
+to bytes, clamps the result to the controller’s minimum, and writes the value
+to both <code>memory.low</code> and <code>memory.max</code>. The hard limit is written for increases
+and decreases.</p>
+<h3 id="docker-containerizer"><a class="header" href="#docker-containerizer">Docker Containerizer</a></h3>
+<p>The Docker Containerizer inspects the Docker container when necessary to
+obtain its host PID. Under cgroups v2 it resolves the unified cgroup from that
+PID, rejects the hierarchy root as a safety check, and writes <code>memory.low</code> and
+<code>memory.max</code> in the resolved cgroup. This supports systemd scope paths and
+other Docker cgroup layouts without deriving a path from the Mesos container
+ID.</p>
+<p>Under cgroups v1, the Docker backend writes
+<code>memory.soft_limit_in_bytes</code> and <code>memory.limit_in_bytes</code>. Both increases and
+decreases of the hard limit are applied there as well.</p>
+<h2 id="scope-and-durability"><a class="header" href="#scope-and-durability">Scope and Durability</a></h2>
+<p>The update is a runtime override on one agent. It deliberately does not
+modify master-side resource accounting. In particular:</p>
+<ul>
+<li>the allocator still accounts for the memory originally assigned to the
+task;</li>
+<li>the framework’s task resources are not rewritten;</li>
+<li>no new resources are offered or consumed by this call; and</li>
+<li>the override is not a checkpointed, scheduler-visible resize contract.</li>
+</ul>
+<p>Later lifecycle processing, recovery, re-registration, or another resource
+update can recompute and reapply the task’s normal limits. Clients that need
+the override for the lifetime of a task should monitor it and be prepared to
+reapply it after agent recovery. Do not rely on the override surviving an
+agent restart.</p>
+<h2 id="errors-and-troubleshooting"><a class="header" href="#errors-and-troubleshooting">Errors and Troubleshooting</a></h2>
+<ul>
+<li><code>400 Bad Request</code>: Check that the payload field is present, the ID is a
+valid top-level <code>ContainerID</code>, and the MiB value is positive and finite.</li>
+<li><code>401 Unauthorized</code>: Supply credentials for the agent’s read/write HTTP
+authentication realm.</li>
+<li><code>404 Not Found</code>: Send the request to the agent that owns the container and
+verify that the container is still running.</li>
+<li><code>500 Internal Server Error</code>: Inspect the agent log for container inspection,
+cgroup path, controller delegation, or control-file write failures.</li>
+</ul>
+<p>Agent logs include the principal, container ID, requested MiB value, and the
+cgroup control files updated by the backend. These messages are useful for
+distinguishing request-routing failures from kernel enforcement failures.</p>
+<footer id="open-on-gh">Found a bug? <a href="https://github.com/m3scluster/clusterd-docs//edit/main/src/container-memory-limit.md">Edit this page on GitHub.</a></footer>
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
-                            <a rel="prev" href="replicated-log-internals.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                            <a rel="prev" href="attributes-resources.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                                 <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                             </a>
 
-                            <a rel="next prefetch" href="framework-rate-limiting.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                            <a rel="next prefetch" href="roles.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                                 <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
                             </a>
 
@@ -303,11 +358,11 @@ KillMode=control-cgroup
             </div>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
-                    <a rel="prev" href="replicated-log-internals.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                    <a rel="prev" href="attributes-resources.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
                         <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                     </a>
 
-                    <a rel="next prefetch" href="framework-rate-limiting.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                    <a rel="next prefetch" href="roles.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
                         <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
                     </a>
             </nav>

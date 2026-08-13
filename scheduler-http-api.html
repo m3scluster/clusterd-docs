@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="en" class="sidebar-visible no-js light">
+<html lang="en" class="light sidebar-visible" dir="ltr">
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
@@ -7,43 +7,57 @@
 
 
         <!-- Custom HTML head -->
-        
+
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="theme-color" content="#ffffff" />
+        <meta name="theme-color" content="#ffffff">
 
-        <link rel="icon" href="favicon.svg">
-        <link rel="shortcut icon" href="favicon.png">
-        <link rel="stylesheet" href="css/variables.css">
-        <link rel="stylesheet" href="css/general.css">
-        <link rel="stylesheet" href="css/chrome.css">
-        <link rel="stylesheet" href="css/print.css" media="print">
+        <link rel="icon" href="favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="favicon-8114d1fc.png">
+        <link rel="stylesheet" href="css/variables-8adf115d.css">
+        <link rel="stylesheet" href="css/general-e96d0476.css">
+        <link rel="stylesheet" href="css/chrome-d279d366.css">
+        <link rel="stylesheet" href="css/print-9e4910d8.css" media="print">
 
         <!-- Fonts -->
-        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
-        <link rel="stylesheet" href="fonts/fonts.css">
+        <link rel="stylesheet" href="fonts/fonts-9644e21d.css">
 
         <!-- Highlight.js Stylesheets -->
-        <link rel="stylesheet" href="highlight.css">
-        <link rel="stylesheet" href="tomorrow-night.css">
-        <link rel="stylesheet" href="ayu-highlight.css">
+        <link rel="stylesheet" id="mdbook-highlight-css" href="highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
 
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "searchindex-c0e7f0eb.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc-1084839a.js"></script>
     </head>
     <body>
-    <div id="body-container">
-        <!-- Provide site root to javascript -->
-        <script>
-            var path_to_root = "";
-            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
-        </script>
-
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
         <script>
             try {
-                var theme = localStorage.getItem('mdbook-theme');
-                var sidebar = localStorage.getItem('mdbook-sidebar');
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
 
                 if (theme.startsWith('"') && theme.endsWith('"')) {
                     localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
@@ -57,80 +71,69 @@
 
         <!-- Set the theme before any content is loaded, prevents flash -->
         <script>
-            var theme;
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
-            var html = document.querySelector('html');
-            html.classList.remove('no-js')
+            const html = document.documentElement;
             html.classList.remove('light')
             html.classList.add(theme);
-            html.classList.add('js');
+            html.classList.add("js");
         </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
 
         <!-- Hide / unhide sidebar before it is displayed -->
         <script>
-            var html = document.querySelector('html');
-            var sidebar = null;
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
             if (document.body.clientWidth >= 1080) {
                 try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
                 sidebar = sidebar || 'visible';
             } else {
                 sidebar = 'hidden';
+                sidebar_toggle.checked = false;
             }
-            html.classList.remove('sidebar-visible');
-            html.classList.add("sidebar-" + sidebar);
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
         </script>
 
-        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">Fundamentals</li><li class="chapter-item expanded "><a href="architecture.html"><strong aria-hidden="true">1.</strong> Mesos Architecture providing an overview of Mesos concepts</a></li><li class="chapter-item expanded "><a href="presentations.html"><strong aria-hidden="true">2.</strong> Video and Slides of Mesos Presentations</a></li><li class="chapter-item expanded "><a href="versioning.html"><strong aria-hidden="true">3.</strong> Mesos Release and Support Policy</a></li><li class="chapter-item expanded affix "><li class="part-title">Build / Installation</li><li class="chapter-item expanded "><a href="building.html"><strong aria-hidden="true">4.</strong> Building for basic instructions on compiling and installing Mesos.</a></li><li class="chapter-item expanded "><a href="binary-packages.html"><strong aria-hidden="true">5.</strong> Binary Packages for how to use Mesos binary packages.</a></li><li class="chapter-item expanded "><a href="configuration.html"><strong aria-hidden="true">6.</strong> Configuration for build configuration options.</a></li><li class="chapter-item expanded "><a href="cmake.html"><strong aria-hidden="true">7.</strong> CMake for details about using the new CMake build system.</a></li><li class="chapter-item expanded "><a href="windows.html"><strong aria-hidden="true">8.</strong> Windows Support for the state of Windows support in Mesos.</a></li><li class="chapter-item expanded affix "><li class="part-title">Configuration</li><li class="chapter-item expanded "><a href="configuration/agent.html"><strong aria-hidden="true">9.</strong> Agent Options</a></li><li class="chapter-item expanded "><a href="configuration/autotools.html"><strong aria-hidden="true">10.</strong> Autotools Options</a></li><li class="chapter-item expanded "><a href="configuration/cmake.html"><strong aria-hidden="true">11.</strong> CMake Options</a></li><li class="chapter-item expanded "><a href="configuration/libprocess.html"><strong aria-hidden="true">12.</strong> Libprocess Options</a></li><li class="chapter-item expanded "><a href="configuration/master-and-agent.html"><strong aria-hidden="true">13.</strong> Master and Agent Options</a></li><li class="chapter-item expanded "><a href="configuration/master.html"><strong aria-hidden="true">14.</strong> Master Options</a></li><li class="chapter-item expanded affix "><li class="part-title">Administration</li><li class="chapter-item expanded "><a href="configuration.html"><strong aria-hidden="true">15.</strong> Configuration for command-line arguments.</a></li><li class="chapter-item expanded "><a href="high-availability.html"><strong aria-hidden="true">16.</strong> High Availability Master Setup</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="replicated-log-internals.html"><strong aria-hidden="true">16.1.</strong> Replicated Log for information on the Mesos replicated log.</a></li></ol></li><li class="chapter-item expanded "><a href="agent-recovery.html"><strong aria-hidden="true">17.</strong> Fault Tolerant Agent Setup</a></li><li class="chapter-item expanded "><a href="framework-rate-limiting.html"><strong aria-hidden="true">18.</strong> Framework Rate Limiting</a></li><li class="chapter-item expanded "><a href="maintenance.html"><strong aria-hidden="true">19.</strong> Maintenance for performing maintenance on a Mesos cluster.</a></li><li class="chapter-item expanded "><a href="upgrades.html"><strong aria-hidden="true">20.</strong> Upgrades for upgrading a Mesos cluster.</a></li><li class="chapter-item expanded "><a href="downgrades.html"><strong aria-hidden="true">21.</strong> Downgrades for downgrading a Mesos cluster.</a></li><li class="chapter-item expanded "><a href="logging.html"><strong aria-hidden="true">22.</strong> Logging</a></li><li class="chapter-item expanded "><a href="monitoring.html"><strong aria-hidden="true">23.</strong> Monitoring / Metrics</a></li><li class="chapter-item expanded "><a href="cli.html"><strong aria-hidden="true">24.</strong> Debugging using the new CLI</a></li><li class="chapter-item expanded "><a href="operational-guide.html"><strong aria-hidden="true">25.</strong> Operational Guide</a></li><li class="chapter-item expanded "><a href="fetcher.html"><strong aria-hidden="true">26.</strong> Fetcher Cache Configuration</a></li><li class="chapter-item expanded "><a href="fault-domains.html"><strong aria-hidden="true">27.</strong> Fault Domains</a></li><li class="chapter-item expanded "><a href="performance-profiling.html"><strong aria-hidden="true">28.</strong> Performance Profiling for debugging performance issues in Mesos.</a></li><li class="chapter-item expanded "><a href="memory-profiling.html"><strong aria-hidden="true">29.</strong> Memory Profiling for debugging potential memory leaks in Mesos.</a></li><li class="chapter-item expanded affix "><li class="part-title">Resource Management</li><li class="chapter-item expanded "><a href="attributes-resources.html"><strong aria-hidden="true">30.</strong> Attributes and Resources for how to describe the agents that comprise a cluster.</a></li><li class="chapter-item expanded "><a href="roles.html"><strong aria-hidden="true">31.</strong> Using Resource Roles</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="weights.html"><strong aria-hidden="true">31.1.</strong> Resource Role Weights for fair sharing.</a></li><li class="chapter-item expanded "><a href="quota.html"><strong aria-hidden="true">31.2.</strong> Resource Role Quota for how to configure Mesos to provide guaranteed resource allocations for use by a role.</a></li><li class="chapter-item expanded "><a href="reservation.html"><strong aria-hidden="true">31.3.</strong> Reservations for how operators and frameworks can reserve resources on individual agents for use by a role.</a></li><li class="chapter-item expanded "><a href="shared-resources.html"><strong aria-hidden="true">31.4.</strong> Shared Resources for how to share persistent volumes between tasks managed by different executors on the same agent.</a></li></ol></li><li class="chapter-item expanded "><a href="oversubscription.html"><strong aria-hidden="true">32.</strong> Oversubscription for how to configure Mesos to take advantage of unused resources to launch “best-effort” tasks.</a></li><li class="chapter-item expanded affix "><li class="part-title">Security</li><li class="chapter-item expanded "><a href="authentication.html"><strong aria-hidden="true">33.</strong> Authentication</a></li><li class="chapter-item expanded "><a href="authorization.html"><strong aria-hidden="true">34.</strong> Authorization</a></li><li class="chapter-item expanded "><a href="ssl.html"><strong aria-hidden="true">35.</strong> SSL</a></li><li class="chapter-item expanded "><a href="secrets.html"><strong aria-hidden="true">36.</strong> Secrets for managing secrets within Mesos.</a></li><li class="chapter-item expanded affix "><li class="part-title">Containerization</li><li class="chapter-item expanded "><a href="containerizers.html"><strong aria-hidden="true">37.</strong> Containerizer Overview</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="containerizer-internals.html"><strong aria-hidden="true">37.1.</strong> Containerizer Internals for implementation details of containerizers.</a></li><li class="chapter-item expanded "><a href="docker-containerizer.html"><strong aria-hidden="true">37.2.</strong> Docker Containerizer for launching a Docker image as a Task, or as an Executor.</a></li><li class="chapter-item expanded "><a href="mesos-containerizer.html"><strong aria-hidden="true">37.3.</strong> Mesos Containerizer default containerizer, supports both Linux and POSIX systems.</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="container-image.html"><strong aria-hidden="true">37.3.1.</strong> Container Images for supporting container images in Mesos containerizer.</a></li><li class="chapter-item expanded "><a href="isolators/docker-volume.html"><strong aria-hidden="true">37.3.2.</strong> Docker Volume Support</a></li><li class="chapter-item expanded "><a href="gpu-support.html"><strong aria-hidden="true">37.3.3.</strong> Nvidia GPU Support for how to run Mesos with Nvidia GPU support.</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="sandbox.html"><strong aria-hidden="true">38.</strong> Container Sandboxes</a></li><li class="chapter-item expanded "><a href="container-volume.html"><strong aria-hidden="true">39.</strong> Container Volumes</a></li><li class="chapter-item expanded "><a href="nested-container-and-task-group.html"><strong aria-hidden="true">40.</strong> Nested Container and Task Group (Pod)</a></li><li class="chapter-item expanded "><a href="standalone-containers.html"><strong aria-hidden="true">41.</strong> Standalone Containers</a></li><li class="chapter-item expanded affix "><li class="part-title">Networking</li><li class="chapter-item expanded "><a href="networking.html"><strong aria-hidden="true">42.</strong> Networking Overview</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="networking-for-mesos-managed-containers.html"><strong aria-hidden="true">42.1.</strong> Networking in Detail</a></li><li class="chapter-item expanded "><a href="cni.html"><strong aria-hidden="true">42.2.</strong> Container Network Interface (CNI)</a></li><li class="chapter-item expanded "><a href="isolators/network-port-mapping.html"><strong aria-hidden="true">42.3.</strong> Port Mapping Isolator</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">Storage</li><li class="chapter-item expanded "><a href="multiple-disk.html"><strong aria-hidden="true">43.</strong> Multiple Disks for how to allow tasks to use multiple isolated disk resources.</a></li><li class="chapter-item expanded "><a href="persistent-volume.html"><strong aria-hidden="true">44.</strong> Persistent Volume for how to allow tasks to access persistent storage resources.</a></li><li class="chapter-item expanded "><a href="csi.html"><strong aria-hidden="true">45.</strong> Container Storage Interface (CSI) Support</a></li><li class="chapter-item expanded affix "><li class="part-title">Scheduler and Executor Development</li><li class="chapter-item expanded "><a href="running-workloads.html"><strong aria-hidden="true">46.</strong> Running Workloads in Mesos explains how a scheduler can specify and run tasks.</a></li><li class="chapter-item expanded "><a href="app-framework-development-guide.html"><strong aria-hidden="true">47.</strong> Framework Development Guide describes how to build applications on top of Mesos.</a></li><li class="chapter-item expanded "><a href="high-availability-framework-guide.html"><strong aria-hidden="true">48.</strong> Guide for Designing Highly Available Mesos Frameworks</a></li><li class="chapter-item expanded "><a href="reconciliation.html"><strong aria-hidden="true">49.</strong> Reconciliation for ensuring a framework’s state remains eventually consistent in the face of failures.</a></li><li class="chapter-item expanded "><a href="task-state-reasons.html"><strong aria-hidden="true">50.</strong> Task State Reasons describes how task state reasons are used in Mesos.</a></li><li class="chapter-item expanded "><a href="health-checks.html"><strong aria-hidden="true">51.</strong> Task Health Checking</a></li><li class="chapter-item expanded "><a href="scheduler-http-api.html" class="active"><strong aria-hidden="true">52.</strong> v1 Scheduler HTTP API for communication between schedulers and the Mesos master.</a></li><li class="chapter-item expanded "><a href="executor-http-api.html"><strong aria-hidden="true">53.</strong> v1 Executor HTTP API describes the new HTTP API for communication between executors and the Mesos agent.</a></li></ol>
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
             </div>
-            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
 
-        <!-- Track and set sidebar scroll position -->
-        <script>
-            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
-            sidebarScrollbox.addEventListener('click', function(e) {
-                if (e.target.tagName === 'A') {
-                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
-                }
-            }, { passive: true });
-            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
-            sessionStorage.removeItem('sidebar-scroll');
-            if (sidebarScrollTop) {
-                // preserve sidebar scroll position when navigating via links within sidebar
-                sidebarScrollbox.scrollTop = sidebarScrollTop;
-            } else {
-                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
-                var activeSection = document.querySelector('#sidebar .active');
-                if (activeSection) {
-                    activeSection.scrollIntoView({ block: 'center' });
-                }
-            }
-        </script>
-
-        <div id="page-wrapper" class="page-wrapper">
+        <div id="mdbook-page-wrapper" class="page-wrapper">
 
             <div class="page">
-                                <div id="menu-bar-hover-placeholder"></div>
-                <div id="menu-bar" class="menu-bar sticky">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
                     <div class="left-buttons">
-                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
-                            <i class="fa fa-bars"></i>
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
                         </button>
-                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
-                            <i class="fa fa-paint-brush"></i>
-                        </button>
-                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
-                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
                         </ul>
-                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
-                            <i class="fa fa-search"></i>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
                         </button>
                     </div>
 
@@ -138,40 +141,45 @@
 
                     <div class="right-buttons">
                         <a href="print.html" title="Print this book" aria-label="Print this book">
-                            <i id="print-button" class="fa fa-print"></i>
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
                         </a>
                         <a href="https://github.com/m3scluster/clusterd-docs/" title="Git repository" aria-label="Git repository">
-                            <i id="git-repository-button" class="fa fa-github"></i>
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
                         </a>
 
                     </div>
                 </div>
 
-                <div id="search-wrapper" class="hidden">
-                    <form id="searchbar-outer" class="searchbar-outer">
-                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
                     </form>
-                    <div id="searchresults-outer" class="searchresults-outer hidden">
-                        <div id="searchresults-header" class="searchresults-header"></div>
-                        <ul id="searchresults">
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
                         </ul>
                     </div>
                 </div>
 
                 <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
                 <script>
-                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
-                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
-                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
                         link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
                     });
                 </script>
 
-                <div id="content" class="content">
+                <div id="mdbook-content" class="content">
                     <main>
-                        <hr />
-<h2>title: Apache Mesos - Scheduler HTTP API
-layout: documentation</h2>
+                        <hr>
+<h2 id="title-apache-mesos---scheduler-http-api-layout-documentation"><a class="header" href="#title-apache-mesos---scheduler-http-api-layout-documentation">title: Apache Mesos - Scheduler HTTP API
+layout: documentation</a></h2>
 <h1 id="scheduler-http-api"><a class="header" href="#scheduler-http-api">Scheduler HTTP API</a></h1>
 <p>A Mesos scheduler can be built in two different ways:</p>
 <ol>
@@ -189,7 +197,7 @@ languages).</p>
 <p>By using the new HTTP API. This allows Mesos schedulers to be developed
 without using C++ or a native client library; instead, a custom scheduler
 interacts with the Mesos master via HTTP requests, as described below. Although
-it is theoretically possible to use the HTTP scheduler API &quot;directly&quot; (e.g., by
+it is theoretically possible to use the HTTP scheduler API “directly” (e.g., by
 using a generic HTTP library), most scheduler developers should use a library for
 their language of choice that manages the details of the HTTP API; see the
 document on <a href="api-client-libraries.html">HTTP API client libraries</a> for a list.</p>
@@ -198,9 +206,9 @@ document on <a href="api-client-libraries.html">HTTP API client libraries</a> fo
 <p>The v1 Scheduler HTTP API was introduced in Mesos 0.24.0. As of Mesos 1.0, it is
 considered stable and is the recommended way to develop new Mesos schedulers.</p>
 <h2 id="overview"><a class="header" href="#overview">Overview</a></h2>
-<p>The scheduler interacts with Mesos via the <a href="endpoints/master/api/v1/scheduler.html">/api/v1/scheduler</a> master endpoint. We refer to this endpoint with its suffix &quot;/scheduler&quot; in the rest of this document. This endpoint accepts HTTP POST requests with data encoded as JSON (Content-Type: application/json) or binary Protobuf (Content-Type: application/x-protobuf). The first request that a scheduler sends to &quot;/scheduler&quot; endpoint is called SUBSCRIBE and results in a streaming response (&quot;200 OK&quot; status code with Transfer-Encoding: chunked).</p>
+<p>The scheduler interacts with Mesos via the <a href="endpoints/master/api/v1/scheduler.html">/api/v1/scheduler</a> master endpoint. We refer to this endpoint with its suffix “/scheduler” in the rest of this document. This endpoint accepts HTTP POST requests with data encoded as JSON (Content-Type: application/json) or binary Protobuf (Content-Type: application/x-protobuf). The first request that a scheduler sends to “/scheduler” endpoint is called SUBSCRIBE and results in a streaming response (“200 OK” status code with Transfer-Encoding: chunked).</p>
 <p><strong>Schedulers are expected to keep the subscription connection open as long as possible (barring errors in network, software, hardware, etc.) and incrementally process the response.</strong> HTTP client libraries that can only parse the response after the connection is closed cannot be used. For the encoding used, please refer to <strong>Events</strong> section below.</p>
-<p>All subsequent (non-<code>SUBSCRIBE</code>) requests to the &quot;/scheduler&quot; endpoint (see details below in <strong>Calls</strong> section) must be sent using a different connection than the one used for subscription. Schedulers can submit requests using more than one different HTTP connection.</p>
+<p>All subsequent (non-<code>SUBSCRIBE</code>) requests to the “/scheduler” endpoint (see details below in <strong>Calls</strong> section) must be sent using a different connection than the one used for subscription. Schedulers can submit requests using more than one different HTTP connection.</p>
 <p>The master responds to HTTP POST requests that require asynchronous processing with status <strong>202 Accepted</strong> (or, for unsuccessful requests, with 4xx or 5xx status codes; details in later sections). The <strong>202 Accepted</strong> response means that a request has been accepted for processing, not that the processing of the request has been completed. The request might or might not be acted upon by Mesos (e.g., master fails during the processing of the request). Any asynchronous responses from these requests will be streamed on the long-lived subscription connection.</p>
 <p>The master responds to HTTP POST requests that can be answered synchronously and immediately with status <strong>200 OK</strong> (or, for unsuccessful requests, with 4xx or 5xx status codes; details in later sections), possibly including a response body encoded in JSON or Protobuf. The encoding depends on the <strong>Accept</strong> header present in the request (the default encoding is JSON).</p>
 <h2 id="calls"><a class="header" href="#calls">Calls</a></h2>
@@ -210,9 +218,9 @@ considered stable and is the recommended way to develop new Mesos schedulers.</p
 <p>The response returned from the <code>SUBSCRIBE</code> call (see <a href="#subscribe">below</a>) is encoded in RecordIO format, which essentially prepends to a single record (either JSON or serialized Protobuf) its length in bytes, followed by a newline and then the data. See <a href="recordio.html">RecordIO Format</a> for details.</p>
 <p><a id="subscribe"></a></p>
 <h3 id="subscribe"><a class="header" href="#subscribe">SUBSCRIBE</a></h3>
-<p>This is the first step in the communication process between the scheduler and the master. This is also to be considered as subscription to the &quot;/scheduler&quot; event stream.</p>
+<p>This is the first step in the communication process between the scheduler and the master. This is also to be considered as subscription to the “/scheduler” event stream.</p>
 <p>To subscribe with the master, the scheduler sends an HTTP POST with a <code>SUBSCRIBE</code> message including the required FrameworkInfo, the list of initially suppressed roles and the initial offer constraints. The initially suppressed roles, as well as roles for which offer constraints are specified, must be contained in the set of roles in FrameworkInfo. Note that Mesos 1.11.0 simply ignores constraints for invalid roles, but this might change in the future.</p>
-<p>Note that if &quot;subscribe.framework_info.id&quot; and &quot;FrameworkID&quot; are not set, the master considers the scheduler as a new one and subscribes it by assigning it a FrameworkID. The HTTP response is a stream in RecordIO format; the event stream begins with either a <code>SUBSCRIBED</code> event or an <code>ERROR</code> event (see details in <strong>Events</strong> section). The response also includes the <code>Mesos-Stream-Id</code> header, which is used by the master to uniquely identify the subscribed scheduler instance. This stream ID header should be included in all subsequent non-<code>SUBSCRIBE</code> calls sent over this subscription connection to the master. The value of <code>Mesos-Stream-Id</code> is guaranteed to be at most 128 bytes in length.</p>
+<p>Note that if “subscribe.framework_info.id” and “FrameworkID” are not set, the master considers the scheduler as a new one and subscribes it by assigning it a FrameworkID. The HTTP response is a stream in RecordIO format; the event stream begins with either a <code>SUBSCRIBED</code> event or an <code>ERROR</code> event (see details in <strong>Events</strong> section). The response also includes the <code>Mesos-Stream-Id</code> header, which is used by the master to uniquely identify the subscribed scheduler instance. This stream ID header should be included in all subsequent non-<code>SUBSCRIBE</code> calls sent over this subscription connection to the master. The value of <code>Mesos-Stream-Id</code> is guaranteed to be at most 128 bytes in length.</p>
 <pre><code>SUBSCRIBE Request (JSON):
 
 POST /api/v1/scheduler  HTTP/1.1
@@ -223,22 +231,22 @@ Accept: application/json
 Connection: close
 
 {
-   &quot;type&quot;		: &quot;SUBSCRIBE&quot;,
-   &quot;subscribe&quot;	: {
-      &quot;framework_info&quot;	: {
-        &quot;user&quot; :  &quot;foo&quot;,
-        &quot;name&quot; :  &quot;Example HTTP Framework&quot;,
-        &quot;roles&quot;: [&quot;test1&quot;, &quot;test2&quot;],
-        &quot;capabilities&quot; : [{&quot;type&quot;: &quot;MULTI_ROLE&quot;}]
+   "type"		: "SUBSCRIBE",
+   "subscribe"	: {
+      "framework_info"	: {
+        "user" :  "foo",
+        "name" :  "Example HTTP Framework",
+        "roles": ["test1", "test2"],
+        "capabilities" : [{"type": "MULTI_ROLE"}]
       },
-      &quot;suppressed_roles&quot; : [&quot;test2&quot;],
-      &quot;offer_constraints&quot; : {
-        &quot;role_constraints&quot;: {
-          &quot;test1&quot;: {
-            &quot;groups&quot;: [{
-              &quot;attribute_constraints&quot;: [{
-                &quot;selector&quot;: {&quot;attribute_name&quot;: &quot;foo&quot;},
-                &quot;predicate&quot;: {&quot;exists&quot;: {}}
+      "suppressed_roles" : ["test2"],
+      "offer_constraints" : {
+        "role_constraints": {
+          "test1": {
+            "groups": [{
+              "attribute_constraints": [{
+                "selector": {"attribute_name": "foo"},
+                "predicate": {"exists": {}}
               }]
             }]
           }
@@ -256,24 +264,24 @@ Mesos-Stream-Id: 130ae4e3-6b13-4ef4-baa9-9f2e85c3e9af
 
 &lt;event length&gt;
 {
- &quot;type&quot;			: &quot;SUBSCRIBED&quot;,
- &quot;subscribed&quot;	: {
-     &quot;framework_id&quot;               : {&quot;value&quot;:&quot;12220-3440-12532-2345&quot;},
-     &quot;heartbeat_interval_seconds&quot; : 15
+ "type"			: "SUBSCRIBED",
+ "subscribed"	: {
+     "framework_id"               : {"value":"12220-3440-12532-2345"},
+     "heartbeat_interval_seconds" : 15
   }
 }
 &lt;more events&gt;
 </code></pre>
-<p>Alternatively, if &quot;subscribe.framework_info.id&quot; and &quot;FrameworkID&quot; are set, the master considers this a request from an already subscribed scheduler reconnecting after a disconnection (e.g., due to master/scheduler failover or network disconnection) and responds
+<p>Alternatively, if “subscribe.framework_info.id” and “FrameworkID” are set, the master considers this a request from an already subscribed scheduler reconnecting after a disconnection (e.g., due to master/scheduler failover or network disconnection) and responds
 with a <code>SUBSCRIBED</code> event. For further details, see the <strong>Disconnections</strong> section below.</p>
-<p>NOTE: In the old version of the API, (re-)registered callbacks also included MasterInfo, which contained information about the master the driver currently connected to. With the new API, since schedulers explicitly subscribe with the leading master (see details below in <strong>Master Detection</strong> section), it's not relevant anymore.</p>
+<p>NOTE: In the old version of the API, (re-)registered callbacks also included MasterInfo, which contained information about the master the driver currently connected to. With the new API, since schedulers explicitly subscribe with the leading master (see details below in <strong>Master Detection</strong> section), it’s not relevant anymore.</p>
 <p>NOTE: By providing a different FrameworkInfo and/or set of suppressed roles
 and/or offer constraints, a re-subscribing scheduler can change some of the
 fields of FrameworkInfo, the set of suppressed roles and/or offer constraints.
 Allowed changes and their effects are consistent with those that can be
 performed via <code>UPDATE_FRAMEWORK</code> call (see below).</p>
 <p>If subscription fails for whatever reason (e.g., invalid request), an HTTP 4xx response is returned with the error message as part of the body and the connection is closed.</p>
-<p>A scheduler can make additional HTTP requests to the &quot;/scheduler&quot; endpoint only after it has opened a persistent connection to it by sending a <code>SUBSCRIBE</code> request and received a <code>SUBSCRIBED</code> response. Calls made without subscription will result in &quot;403 Forbidden&quot; instead of a &quot;202 Accepted&quot; response. A scheduler might also receive a &quot;400 Bad Request&quot; response if the HTTP request is malformed (e.g., malformed HTTP headers).</p>
+<p>A scheduler can make additional HTTP requests to the “/scheduler” endpoint only after it has opened a persistent connection to it by sending a <code>SUBSCRIBE</code> request and received a <code>SUBSCRIBED</code> response. Calls made without subscription will result in “403 Forbidden” instead of a “202 Accepted” response. A scheduler might also receive a “400 Bad Request” response if the HTTP request is malformed (e.g., malformed HTTP headers).</p>
 <p>Note that the <code>Mesos-Stream-Id</code> header should <strong>never</strong> be included with a <code>SUBSCRIBE</code> call; the master will always provide a new unique stream ID for each subscription.</p>
 <h3 id="teardown"><a class="header" href="#teardown">TEARDOWN</a></h3>
 <p>Sent by the scheduler when it wants to tear itself down. When Mesos receives this request it will shut down all executors (and consequently kill tasks). It then removes the framework and closes all open connections from this scheduler to the Master.</p>
@@ -285,15 +293,15 @@ Content-Type: application/json
 Mesos-Stream-Id: 130ae4e3-6b13-4ef4-baa9-9f2e85c3e9af
 
 {
-  &quot;framework_id&quot;	: {&quot;value&quot; : &quot;12220-3440-12532-2345&quot;},
-  &quot;type&quot;			: &quot;TEARDOWN&quot;
+  "framework_id"	: {"value" : "12220-3440-12532-2345"},
+  "type"			: "TEARDOWN"
 }
 
 TEARDOWN Response:
 HTTP/1.1 202 Accepted
 </code></pre>
 <h3 id="accept"><a class="header" href="#accept">ACCEPT</a></h3>
-<p>Sent by the scheduler when it accepts offer(s) sent by the master. The <code>ACCEPT</code> request includes the type of operations (e.g., launch task, launch task group, reserve resources, create volumes) that the scheduler wants to perform on the offers. Note that until the scheduler replies (accepts or declines) to an offer, the offer's resources are considered allocated to the offer's role and to the framework. Also, any of the offer's resources not used in the <code>ACCEPT</code> call (e.g., to launch a task or task group) are considered declined and might be reoffered to other frameworks, meaning that they will not be reoffered to the scheduler for the amount of time defined by the filter. The same <code>OfferID</code> cannot be used in more than one <code>ACCEPT</code> call. These semantics might change when we add new features to Mesos (e.g., persistence, reservations, optimistic offers, resizeTask, etc.).</p>
+<p>Sent by the scheduler when it accepts offer(s) sent by the master. The <code>ACCEPT</code> request includes the type of operations (e.g., launch task, launch task group, reserve resources, create volumes) that the scheduler wants to perform on the offers. Note that until the scheduler replies (accepts or declines) to an offer, the offer’s resources are considered allocated to the offer’s role and to the framework. Also, any of the offer’s resources not used in the <code>ACCEPT</code> call (e.g., to launch a task or task group) are considered declined and might be reoffered to other frameworks, meaning that they will not be reoffered to the scheduler for the amount of time defined by the filter. The same <code>OfferID</code> cannot be used in more than one <code>ACCEPT</code> call. These semantics might change when we add new features to Mesos (e.g., persistence, reservations, optimistic offers, resizeTask, etc.).</p>
 <p>The scheduler API uses <code>Filters.refuse_seconds</code> to specify the duration for which resources are considered declined. If <code>filters</code> is not set, then the default value defined in <a href="https://github.com/apache/mesos/blob/master/include/mesos/v1/mesos.proto">mesos.proto</a> will be used.</p>
 <p>NOTE: Mesos will cap <code>Filters.refuse_seconds</code> at 31536000 seconds (365 days).</p>
 <p>The master will send task status updates in response to <code>LAUNCH</code> and <code>LAUNCH_GROUP</code> operations. For other types of operations, if an operation ID is specified, the master will send operation status updates in response.</p>
@@ -306,53 +314,53 @@ Content-Type: application/json
 Mesos-Stream-Id: 130ae4e3-6b13-4ef4-baa9-9f2e85c3e9af
 
 {
-  &quot;framework_id&quot;: {&quot;value&quot;: &quot;12220-3440-12532-2345&quot;},
-  &quot;type&quot;: &quot;ACCEPT&quot;,
-  &quot;accept&quot;: {
-    &quot;offer_ids&quot;: [
-      {&quot;value&quot;: &quot;12220-3440-12532-O12&quot;}
+  "framework_id": {"value": "12220-3440-12532-2345"},
+  "type": "ACCEPT",
+  "accept": {
+    "offer_ids": [
+      {"value": "12220-3440-12532-O12"}
     ],
-    &quot;operations&quot;: [
+    "operations": [
       {
-        &quot;type&quot;: &quot;LAUNCH&quot;,
-        &quot;launch&quot;: {
-          &quot;task_infos&quot;: [
+        "type": "LAUNCH",
+        "launch": {
+          "task_infos": [
             {
-              &quot;name&quot;: &quot;My Task&quot;,
-              &quot;task_id&quot;: {&quot;value&quot;: &quot;12220-3440-12532-my-task&quot;},
-              &quot;agent_id&quot;: {&quot;value&quot;: &quot;12220-3440-12532-S1233&quot;},
-              &quot;executor&quot;: {
-                &quot;command&quot;: {
-                  &quot;shell&quot;: true,
-                  &quot;value&quot;: &quot;sleep 1000&quot;
+              "name": "My Task",
+              "task_id": {"value": "12220-3440-12532-my-task"},
+              "agent_id": {"value": "12220-3440-12532-S1233"},
+              "executor": {
+                "command": {
+                  "shell": true,
+                  "value": "sleep 1000"
                 },
-                &quot;executor_id&quot;: {&quot;value&quot;: &quot;12214-23523-my-executor&quot;}
+                "executor_id": {"value": "12214-23523-my-executor"}
               },
-              &quot;resources&quot;: [
+              "resources": [
                 {
-                  &quot;allocation_info&quot;: {&quot;role&quot;: &quot;engineering&quot;},
-                  &quot;name&quot;: &quot;cpus&quot;,
-                  &quot;role&quot;: &quot;*&quot;,
-                  &quot;type&quot;: &quot;SCALAR&quot;,
-                  &quot;scalar&quot;: {&quot;value&quot;: 1.0}
+                  "allocation_info": {"role": "engineering"},
+                  "name": "cpus",
+                  "role": "*",
+                  "type": "SCALAR",
+                  "scalar": {"value": 1.0}
 				        }, {
-                  &quot;allocation_info&quot;: {&quot;role&quot;: &quot;engineering&quot;},
-                  &quot;name&quot;: &quot;mem&quot;,
-                  &quot;role&quot;: &quot;*&quot;,
-                  &quot;type&quot;: &quot;SCALAR&quot;,
-                  &quot;scalar&quot;: {&quot;value&quot;: 128.0}
+                  "allocation_info": {"role": "engineering"},
+                  "name": "mem",
+                  "role": "*",
+                  "type": "SCALAR",
+                  "scalar": {"value": 128.0}
 				        }
               ],
-              &quot;limits&quot;: {
-                &quot;cpus&quot;: &quot;Infinity&quot;,
-                &quot;mem&quot;: 512.0
+              "limits": {
+                "cpus": "Infinity",
+                "mem": 512.0
               }
             }
           ]
         }
       }
     ],
-    &quot;filters&quot;: {&quot;refuse_seconds&quot;: 5.0}
+    "filters": {"refuse_seconds": 5.0}
   }
 }
 
@@ -370,14 +378,14 @@ Content-Type: application/json
 Mesos-Stream-Id: 130ae4e3-6b13-4ef4-baa9-9f2e85c3e9af
 
 {
-  &quot;framework_id&quot;	: {&quot;value&quot; : &quot;12220-3440-12532-2345&quot;},
-  &quot;type&quot;			: &quot;DECLINE&quot;,
-  &quot;decline&quot;			: {
-    &quot;offer_ids&quot;	: [
-                   {&quot;value&quot; : &quot;12220-3440-12532-O12&quot;},
-                   {&quot;value&quot; : &quot;12220-3440-12532-O13&quot;}
+  "framework_id"	: {"value" : "12220-3440-12532-2345"},
+  "type"			: "DECLINE",
+  "decline"			: {
+    "offer_ids"	: [
+                   {"value" : "12220-3440-12532-O12"},
+                   {"value" : "12220-3440-12532-O13"}
                   ],
-    &quot;filters&quot;	: {&quot;refuse_seconds&quot; : 5.0}
+    "filters"	: {"refuse_seconds" : 5.0}
   }
 }
 
@@ -388,10 +396,10 @@ HTTP/1.1 202 Accepted
 <h3 id="revive"><a class="header" href="#revive">REVIVE</a></h3>
 <p>Sent by the scheduler to perform two actions:</p>
 <ol>
-<li>Place the scheduler's role(s) in a non-<code>SUPPRESS</code>ed state in order to once again receive offers. No-op if the role is not suppressed.</li>
+<li>Place the scheduler’s role(s) in a non-<code>SUPPRESS</code>ed state in order to once again receive offers. No-op if the role is not suppressed.</li>
 <li>Clears all filters for its role(s) that were previously set via <code>ACCEPT</code> and <code>DECLINE</code>.</li>
 </ol>
-<p>If no role is specified, the operation will apply to all of the scheduler's subscribed roles.</p>
+<p>If no role is specified, the operation will apply to all of the scheduler’s subscribed roles.</p>
 <pre><code>REVIVE Request (JSON):
 POST /api/v1/scheduler  HTTP/1.1
 
@@ -400,9 +408,9 @@ Content-Type: application/json
 Mesos-Stream-Id: 130ae4e3-6b13-4ef4-baa9-9f2e85c3e9af
 
 {
-  &quot;framework_id&quot; : {&quot;value&quot; : &quot;12220-3440-12532-2345&quot;},
-  &quot;type&quot;         : &quot;REVIVE&quot;,
-  &quot;revive&quot;       : {&quot;role&quot;: &lt;one-of-the-subscribed-roles&gt;}
+  "framework_id" : {"value" : "12220-3440-12532-2345"},
+  "type"         : "REVIVE",
+  "revive"       : {"role": &lt;one-of-the-subscribed-roles&gt;}
 }
 
 REVIVE Response:
@@ -410,7 +418,7 @@ HTTP/1.1 202 Accepted
 
 </code></pre>
 <h3 id="kill"><a class="header" href="#kill">KILL</a></h3>
-<p>Sent by the scheduler to kill a specific task. If the scheduler has a custom executor, the kill is forwarded to the executor; it is up to the executor to kill the task and send a <code>TASK_KILLED</code> (or <code>TASK_FAILED</code>) update. If the task hasn't yet been delivered to the executor when Mesos master or agent receives the kill request, a <code>TASK_KILLED</code> is generated and the task launch is not forwarded to the executor. Note that if the task belongs to a task group, killing of one task results in all tasks in the task group being killed. Mesos releases the resources for a task once it receives a terminal update for the task. If the task is unknown to the master, a <code>TASK_LOST</code> will be generated.</p>
+<p>Sent by the scheduler to kill a specific task. If the scheduler has a custom executor, the kill is forwarded to the executor; it is up to the executor to kill the task and send a <code>TASK_KILLED</code> (or <code>TASK_FAILED</code>) update. If the task hasn’t yet been delivered to the executor when Mesos master or agent receives the kill request, a <code>TASK_KILLED</code> is generated and the task launch is not forwarded to the executor. Note that if the task belongs to a task group, killing of one task results in all tasks in the task group being killed. Mesos releases the resources for a task once it receives a terminal update for the task. If the task is unknown to the master, a <code>TASK_LOST</code> will be generated.</p>
 <pre><code>KILL Request (JSON):
 POST /api/v1/scheduler  HTTP/1.1
 
@@ -419,11 +427,11 @@ Content-Type: application/json
 Mesos-Stream-Id: 130ae4e3-6b13-4ef4-baa9-9f2e85c3e9af
 
 {
-  &quot;framework_id&quot;	: {&quot;value&quot; : &quot;12220-3440-12532-2345&quot;},
-  &quot;type&quot;			: &quot;KILL&quot;,
-  &quot;kill&quot;			: {
-    &quot;task_id&quot;	:  {&quot;value&quot; : &quot;12220-3440-12532-my-task&quot;},
-    &quot;agent_id&quot;	:  {&quot;value&quot; : &quot;12220-3440-12532-S1233&quot;}
+  "framework_id"	: {"value" : "12220-3440-12532-2345"},
+  "type"			: "KILL",
+  "kill"			: {
+    "task_id"	:  {"value" : "12220-3440-12532-my-task"},
+    "agent_id"	:  {"value" : "12220-3440-12532-S1233"}
   }
 }
 
@@ -432,7 +440,7 @@ HTTP/1.1 202 Accepted
 
 </code></pre>
 <h3 id="shutdown"><a class="header" href="#shutdown">SHUTDOWN</a></h3>
-<p>Sent by the scheduler to shutdown a specific custom executor (NOTE: This is a new call that was not present in the old API). When an executor gets a shutdown event, it is expected to kill all its tasks (and send <code>TASK_KILLED</code> updates) and terminate. If an executor doesn't terminate within a certain timeout (configurable via the <code>--executor_shutdown_grace_period</code> agent flag), the agent will forcefully destroy the container (executor and its tasks) and transition its active tasks to <code>TASK_LOST</code>.</p>
+<p>Sent by the scheduler to shutdown a specific custom executor (NOTE: This is a new call that was not present in the old API). When an executor gets a shutdown event, it is expected to kill all its tasks (and send <code>TASK_KILLED</code> updates) and terminate. If an executor doesn’t terminate within a certain timeout (configurable via the <code>--executor_shutdown_grace_period</code> agent flag), the agent will forcefully destroy the container (executor and its tasks) and transition its active tasks to <code>TASK_LOST</code>.</p>
 <pre><code>SHUTDOWN Request (JSON):
 POST /api/v1/scheduler  HTTP/1.1
 
@@ -441,11 +449,11 @@ Content-Type: application/json
 Mesos-Stream-Id: 130ae4e3-6b13-4ef4-baa9-9f2e85c3e9af
 
 {
-  &quot;framework_id&quot;	: {&quot;value&quot; : &quot;12220-3440-12532-2345&quot;},
-  &quot;type&quot;			: &quot;SHUTDOWN&quot;,
-  &quot;shutdown&quot;		: {
-    &quot;executor_id&quot;	:  {&quot;value&quot; : &quot;123450-2340-1232-my-executor&quot;},
-    &quot;agent_id&quot;		:  {&quot;value&quot; : &quot;12220-3440-12532-S1233&quot;}
+  "framework_id"	: {"value" : "12220-3440-12532-2345"},
+  "type"			: "SHUTDOWN",
+  "shutdown"		: {
+    "executor_id"	:  {"value" : "123450-2340-1232-my-executor"},
+    "agent_id"		:  {"value" : "12220-3440-12532-S1233"}
   }
 }
 
@@ -463,12 +471,12 @@ Content-Type: application/json
 Mesos-Stream-Id: 130ae4e3-6b13-4ef4-baa9-9f2e85c3e9af
 
 {
-  &quot;framework_id&quot;	: {&quot;value&quot; : &quot;12220-3440-12532-2345&quot;},
-  &quot;type&quot;			: &quot;ACKNOWLEDGE&quot;,
-  &quot;acknowledge&quot;		: {
-    &quot;agent_id&quot;	:  {&quot;value&quot; : &quot;12220-3440-12532-S1233&quot;},
-    &quot;task_id&quot;	:  {&quot;value&quot; : &quot;12220-3440-12532-my-task&quot;},
-    &quot;uuid&quot;		:  &quot;jhadf73jhakdlfha723adf&quot;
+  "framework_id"	: {"value" : "12220-3440-12532-2345"},
+  "type"			: "ACKNOWLEDGE",
+  "acknowledge"		: {
+    "agent_id"	:  {"value" : "12220-3440-12532-S1233"},
+    "task_id"	:  {"value" : "12220-3440-12532-my-task"},
+    "uuid"		:  "jhadf73jhakdlfha723adf"
   }
 }
 
@@ -486,13 +494,13 @@ Content-Type: application/json
 Mesos-Stream-Id: 130ae4e3-6b13-4ef4-baa9-9f2e85c3e9af
 
 {
-  &quot;framework_id&quot;: { &quot;value&quot;: &quot;12220-3440-12532-2345&quot; },
-  &quot;type&quot;: &quot;ACKNOWLEDGE_OPERATION_STATUS&quot;,
-  &quot;acknowledge_operation_status&quot;: {
-    &quot;agent_id&quot;: { &quot;value&quot;: &quot;12220-3440-12532-S1233&quot; },
-    &quot;resource_provider_id&quot;: { &quot;value&quot;: &quot;12220-3440-12532-rp&quot; },
-    &quot;uuid&quot;: &quot;jhadf73jhakdlfha723adf&quot;,
-    &quot;operation_id&quot;: &quot;73jhakdlfha723adf&quot;
+  "framework_id": { "value": "12220-3440-12532-2345" },
+  "type": "ACKNOWLEDGE_OPERATION_STATUS",
+  "acknowledge_operation_status": {
+    "agent_id": { "value": "12220-3440-12532-S1233" },
+    "resource_provider_id": { "value": "12220-3440-12532-rp" },
+    "uuid": "jhadf73jhakdlfha723adf",
+    "operation_id": "73jhakdlfha723adf"
   }
 }
 
@@ -510,12 +518,12 @@ Content-Type: application/json
 Mesos-Stream-Id: 130ae4e3-6b13-4ef4-baa9-9f2e85c3e9af
 
 {
-  &quot;framework_id&quot;	: {&quot;value&quot; : &quot;12220-3440-12532-2345&quot;},
-  &quot;type&quot;			: &quot;RECONCILE&quot;,
-  &quot;reconcile&quot;		: {
-    &quot;tasks&quot;		: [
-                   { &quot;task_id&quot;  : {&quot;value&quot; : &quot;312325&quot;},
-                     &quot;agent_id&quot; : {&quot;value&quot; : &quot;123535&quot;}
+  "framework_id"	: {"value" : "12220-3440-12532-2345"},
+  "type"			: "RECONCILE",
+  "reconcile"		: {
+    "tasks"		: [
+                   { "task_id"  : {"value" : "312325"},
+                     "agent_id" : {"value" : "123535"}
                    }
                   ]
   }
@@ -536,14 +544,14 @@ Accept: application/json
 Mesos-Stream-Id: 130ae4e3-6b13-4ef4-baa9-9f2e85c3e9af
 
 {
-  &quot;framework_id&quot;: { &quot;value&quot;: &quot;12220-3440-12532-2345&quot; },
-  &quot;type&quot;: &quot;RECONCILE_OPERATIONS&quot;,
-  &quot;reconcile_operations&quot;: {
-    &quot;operations&quot;: [
+  "framework_id": { "value": "12220-3440-12532-2345" },
+  "type": "RECONCILE_OPERATIONS",
+  "reconcile_operations": {
+    "operations": [
       {
-        &quot;operation_id&quot;: { &quot;value&quot;: &quot;312325&quot; },
-        &quot;agent_id&quot;: { &quot;value&quot;: &quot;123535&quot; },
-        &quot;resource_provider_id&quot;: { &quot;value&quot;: &quot;927695&quot; }
+        "operation_id": { "value": "312325" },
+        "agent_id": { "value": "123535" },
+        "resource_provider_id": { "value": "927695" }
       }
     ]
   }
@@ -563,12 +571,12 @@ Content-Type: application/json
 Mesos-Stream-Id: 130ae4e3-6b13-4ef4-baa9-9f2e85c3e9af
 
 {
-  &quot;framework_id&quot;	: {&quot;value&quot; : &quot;12220-3440-12532-2345&quot;},
-  &quot;type&quot;			: &quot;MESSAGE&quot;,
-  &quot;message&quot;			: {
-    &quot;agent_id&quot;       : {&quot;value&quot; : &quot;12220-3440-12532-S1233&quot;},
-    &quot;executor_id&quot;    : {&quot;value&quot; : &quot;my-framework-executor&quot;},
-    &quot;data&quot;           : &quot;adaf838jahd748jnaldf&quot;
+  "framework_id"	: {"value" : "12220-3440-12532-2345"},
+  "type"			: "MESSAGE",
+  "message"			: {
+    "agent_id"       : {"value" : "12220-3440-12532-S1233"},
+    "executor_id"    : {"value" : "my-framework-executor"},
+    "data"           : "adaf838jahd748jnaldf"
   }
 }
 
@@ -586,12 +594,12 @@ Content-Type: application/json
 Mesos-Stream-Id: 130ae4e3-6b13-4ef4-baa9-9f2e85c3e9af
 
 {
-  &quot;framework_id&quot;	: {&quot;value&quot; : &quot;12220-3440-12532-2345&quot;},
-  &quot;type&quot;			: &quot;REQUEST&quot;,
-  &quot;requests&quot;		: [
+  "framework_id"	: {"value" : "12220-3440-12532-2345"},
+  "type"			: "REQUEST",
+  "requests"		: [
       {
-         &quot;agent_id&quot;       : {&quot;value&quot; : &quot;12220-3440-12532-S1233&quot;},
-         &quot;resources&quot;      : {}
+         "agent_id"       : {"value" : "12220-3440-12532-S1233"},
+         "resources"      : {}
       }
   ]
 }
@@ -601,8 +609,8 @@ HTTP/1.1 202 Accepted
 
 </code></pre>
 <h3 id="suppress"><a class="header" href="#suppress">SUPPRESS</a></h3>
-<p>Sent by the scheduler when it doesn't need offers for a given set of its roles. When Mesos master receives this request, it will stop sending offers for the given set of roles to the framework. As a special case, if roles are not specified, all subscribed roles of this framework are suppressed.</p>
-<p>Note that master continues to send offers to other subscribed roles of this framework that are not suppressed. Also, status updates about tasks, executors and agents are not affected by this call. </p>
+<p>Sent by the scheduler when it doesn’t need offers for a given set of its roles. When Mesos master receives this request, it will stop sending offers for the given set of roles to the framework. As a special case, if roles are not specified, all subscribed roles of this framework are suppressed.</p>
+<p>Note that master continues to send offers to other subscribed roles of this framework that are not suppressed. Also, status updates about tasks, executors and agents are not affected by this call.</p>
 <p>If the scheduler wishes to receive offers for the suppressed roles again (e.g., it needs to schedule new workloads), it can send <code>REVIVE</code> call.</p>
 <pre><code>SUPPRESS Request (JSON):
 POST /api/v1/scheduler  HTTP/1.1
@@ -612,9 +620,9 @@ Content-Type: application/json
 Mesos-Stream-Id: 130ae4e3-6b13-4ef4-baa9-9f2e85c3e9af
 
 {
-  &quot;framework_id&quot; : {&quot;value&quot; : &quot;12220-3440-12532-2345&quot;},
-  &quot;type&quot;         : &quot;SUPPRESS&quot;,
-  &quot;suppress&quot;     : {&quot;roles&quot;: &lt;an-array-of-strings&gt;}
+  "framework_id" : {"value" : "12220-3440-12532-2345"},
+  "type"         : "SUPPRESS",
+  "suppress"     : {"roles": &lt;an-array-of-strings&gt;}
 }
 
 SUPPRESS Response:
@@ -628,7 +636,7 @@ are consistent with changing the same fields via re-subscribing.</p>
 <h4 id="disallowed-updates"><a class="header" href="#disallowed-updates">Disallowed updates</a></h4>
 <p>Updating the following <code>FrameworkInfo</code> fields is not allowed:</p>
 <ul>
-<li><code>principal</code> (mainly because &quot;changing a principal&quot; effectively means
+<li><code>principal</code> (mainly because “changing a principal” effectively means
 a transfer of a framework by an original principal to the new one; secure
 mechanism for such transfer is yet to be developed)</li>
 <li><code>user</code></li>
@@ -695,22 +703,22 @@ Accept: application/json
 Connection: close
 
 {
-   &quot;type&quot;		: &quot;UPDATE_FRAMEWORK&quot;,
-   &quot;update_framework&quot;	: {
-      &quot;framework_info&quot;	: {
-        &quot;user&quot; :  &quot;foo&quot;,
-        &quot;name&quot; :  &quot;Example HTTP Framework&quot;,
-        &quot;roles&quot;: [&quot;test1&quot;, &quot;test2&quot;],
-        &quot;capabilities&quot; : [{&quot;type&quot;: &quot;MULTI_ROLE&quot;}]
+   "type"		: "UPDATE_FRAMEWORK",
+   "update_framework"	: {
+      "framework_info"	: {
+        "user" :  "foo",
+        "name" :  "Example HTTP Framework",
+        "roles": ["test1", "test2"],
+        "capabilities" : [{"type": "MULTI_ROLE"}]
       },
-      &quot;suppressed_roles&quot; : [&quot;test2&quot;]
-      &quot;offer_constraints&quot; : {
-        &quot;role_constraints&quot;: {
-          &quot;test1&quot;: {
-            &quot;groups&quot;: [{
-              &quot;attribute_constraints&quot;: [{
-                &quot;selector&quot;: {&quot;attribute_name&quot;: &quot;foo&quot;},
-                &quot;predicate&quot;: {&quot;exists&quot;: {}}
+      "suppressed_roles" : ["test2"]
+      "offer_constraints" : {
+        "role_constraints": {
+          "test1": {
+            "groups": [{
+              "attribute_constraints": [{
+                "selector": {"attribute_name": "foo"},
+                "predicate": {"exists": {}}
               }]
             }]
           }
@@ -724,10 +732,10 @@ HTTP/1.1 200 OK
 </code></pre>
 <p>Response codes:</p>
 <ul>
-<li>&quot;200 OK&quot; after the update has been successfully applied by the master and
+<li>“200 OK” after the update has been successfully applied by the master and
 sent to the agents.</li>
-<li>&quot;400 Bad request&quot; if the call was not valid or authorizing the call failed.</li>
-<li>&quot;403 Forbidden&quot; if the principal was declined authorization to use the
+<li>“400 Bad request” if the call was not valid or authorizing the call failed.</li>
+<li>“403 Forbidden” if the principal was declined authorization to use the
 provided FrameworkInfo. (Typical authorizer implementations will check
 authorization to use specified roles.)</li>
 </ul>
@@ -740,42 +748,42 @@ to avoid such reordering, it was necessary to wait for UPDATE_FRAMEWORK response
 before issuing the next call. This issue has been fixed in Mesos 1.10.0 (see
 <a href="https://issues.apache.org/jira/browse/MESOS-10056">MESOS-10056</a>).</p>
 <h2 id="events"><a class="header" href="#events">Events</a></h2>
-<p>Schedulers are expected to keep a <strong>persistent</strong> connection to the &quot;/scheduler&quot; endpoint (even after getting a <code>SUBSCRIBED</code> HTTP Response event). This is indicated by the &quot;Connection: keep-alive&quot; and &quot;Transfer-Encoding: chunked&quot; headers with <em>no</em> &quot;Content-Length&quot; header set. All subsequent events that are relevant to this framework generated by Mesos are streamed on this connection. The master encodes each Event in RecordIO format, i.e., string representation of the length of the event in bytes followed by JSON or binary Protobuf (possibly compressed) encoded event. The length of an event is a 64-bit unsigned integer (encoded as a textual value) and will never be &quot;0&quot;. Also, note that the RecordIO encoding should be decoded by the scheduler whereas the underlying HTTP chunked encoding is typically invisible at the application (scheduler) layer. The type of content encoding used for the events will be determined by the accept header of the POST request (e.g., Accept: application/json).</p>
+<p>Schedulers are expected to keep a <strong>persistent</strong> connection to the “/scheduler” endpoint (even after getting a <code>SUBSCRIBED</code> HTTP Response event). This is indicated by the “Connection: keep-alive” and “Transfer-Encoding: chunked” headers with <em>no</em> “Content-Length” header set. All subsequent events that are relevant to this framework generated by Mesos are streamed on this connection. The master encodes each Event in RecordIO format, i.e., string representation of the length of the event in bytes followed by JSON or binary Protobuf (possibly compressed) encoded event. The length of an event is a 64-bit unsigned integer (encoded as a textual value) and will never be “0”. Also, note that the RecordIO encoding should be decoded by the scheduler whereas the underlying HTTP chunked encoding is typically invisible at the application (scheduler) layer. The type of content encoding used for the events will be determined by the accept header of the POST request (e.g., Accept: application/json).</p>
 <p>The following events are currently sent by the master. The canonical source of this information is at <a href="https://github.com/apache/mesos/blob/master/include/mesos/v1/scheduler/scheduler.proto">scheduler.proto</a>. Note that when sending JSON encoded events, master encodes raw bytes in Base64 and strings in UTF-8.</p>
 <h3 id="subscribed"><a class="header" href="#subscribed">SUBSCRIBED</a></h3>
 <p>The first event sent by the master when the scheduler sends a <code>SUBSCRIBE</code> request, if authorization / validation succeeds. See <code>SUBSCRIBE</code> in Calls section for the format.</p>
 <h3 id="offers"><a class="header" href="#offers">OFFERS</a></h3>
-<p>Sent by the master whenever there are new resources that can be offered to the framework. Each offer corresponds to a set of resources on an agent and is allocated to one of roles the framework is subscribed to. Until the scheduler 'Accept's or 'Decline's an offer the resources are considered allocated to the scheduler, unless the offer is otherwise rescinded, e.g., due to a lost agent or <code>--offer_timeout</code>.</p>
+<p>Sent by the master whenever there are new resources that can be offered to the framework. Each offer corresponds to a set of resources on an agent and is allocated to one of roles the framework is subscribed to. Until the scheduler ’Accept’s or ’Decline’s an offer the resources are considered allocated to the scheduler, unless the offer is otherwise rescinded, e.g., due to a lost agent or <code>--offer_timeout</code>.</p>
 <pre><code>OFFERS Event (JSON)
 
 &lt;event-length&gt;
 {
-  &quot;type&quot;	: &quot;OFFERS&quot;,
-  &quot;offers&quot;	: [
+  "type"	: "OFFERS",
+  "offers"	: [
     {
-      &quot;allocation_info&quot;: { &quot;role&quot;: &quot;engineering&quot; },
-      &quot;id&quot;             : {&quot;value&quot;: &quot;12214-23523-O235235&quot;},
-      &quot;framework_id&quot;   : {&quot;value&quot;: &quot;12124-235325-32425&quot;},
-      &quot;agent_id&quot;       : {&quot;value&quot;: &quot;12325-23523-S23523&quot;},
-      &quot;hostname&quot;       : &quot;agent.host&quot;,
-      &quot;resources&quot;      : [
+      "allocation_info": { "role": "engineering" },
+      "id"             : {"value": "12214-23523-O235235"},
+      "framework_id"   : {"value": "12124-235325-32425"},
+      "agent_id"       : {"value": "12325-23523-S23523"},
+      "hostname"       : "agent.host",
+      "resources"      : [
                           {
-                           &quot;allocation_info&quot;: { &quot;role&quot;: &quot;engineering&quot; },
-                           &quot;name&quot;   : &quot;cpus&quot;,
-                           &quot;type&quot;   : &quot;SCALAR&quot;,
-                           &quot;scalar&quot; : {&quot;value&quot; : 2},
-                           &quot;role&quot;   : &quot;*&quot;
+                           "allocation_info": { "role": "engineering" },
+                           "name"   : "cpus",
+                           "type"   : "SCALAR",
+                           "scalar" : {"value" : 2},
+                           "role"   : "*"
                           }
                          ],
-      &quot;attributes&quot;     : [
+      "attributes"     : [
                           {
-                           &quot;name&quot;   : &quot;os&quot;,
-                           &quot;type&quot;   : &quot;TEXT&quot;,
-                           &quot;text&quot;   : {&quot;value&quot; : &quot;ubuntu16.04&quot;}
+                           "name"   : "os",
+                           "type"   : "TEXT",
+                           "text"   : {"value" : "ubuntu16.04"}
                           }
                          ],
-      &quot;executor_ids&quot;   : [
-                          {&quot;value&quot; : &quot;12214-23523-my-executor&quot;}
+      "executor_ids"   : [
+                          {"value" : "12214-23523-my-executor"}
                          ]
     }
   ]
@@ -787,9 +795,9 @@ before issuing the next call. This issue has been fixed in Mesos 1.10.0 (see
 
 &lt;event-length&gt;
 {
-  &quot;type&quot;	: &quot;RESCIND&quot;,
-  &quot;rescind&quot;	: {
-    &quot;offer_id&quot;	: { &quot;value&quot; : &quot;12214-23523-O235235&quot;}
+  "type"	: "RESCIND",
+  "rescind"	: {
+    "offer_id"	: { "value" : "12214-23523-O235235"}
   }
 }
 </code></pre>
@@ -799,32 +807,32 @@ before issuing the next call. This issue has been fixed in Mesos 1.10.0 (see
 
 &lt;event-length&gt;
 {
-  &quot;type&quot;	: &quot;UPDATE&quot;,
-  &quot;update&quot;	: {
-    &quot;status&quot;	: {
-        &quot;task_id&quot;	: { &quot;value&quot; : &quot;12344-my-task&quot;},
-        &quot;state&quot;		: &quot;TASK_RUNNING&quot;,
-        &quot;source&quot;	: &quot;SOURCE_EXECUTOR&quot;,
-        &quot;uuid&quot;		: &quot;adfadfadbhgvjayd23r2uahj&quot;,
-        &quot;bytes&quot;		: &quot;uhdjfhuagdj63d7hadkf&quot;
+  "type"	: "UPDATE",
+  "update"	: {
+    "status"	: {
+        "task_id"	: { "value" : "12344-my-task"},
+        "state"		: "TASK_RUNNING",
+        "source"	: "SOURCE_EXECUTOR",
+        "uuid"		: "adfadfadbhgvjayd23r2uahj",
+        "bytes"		: "uhdjfhuagdj63d7hadkf"
       }
   }
 }
 </code></pre>
 <h3 id="update_operation_status"><a class="header" href="#update_operation_status">UPDATE_OPERATION_STATUS</a></h3>
-<p>Sent by the master whenever there is an update to the state of an operation for which the scheduler requested feedback by setting the operation's <code>id</code> field. It is the responsibility of the scheduler to explicitly acknowledge the receipt of any status updates which have their <code>uuid</code> field set, as this indicates that the update will be retried until acknowledgement is received. This ensures that such updates are delivered reliably. See <code>ACKNOWLEDGE_OPERATION_STATUS</code> in the Calls section above for the relevant acknowledgement semantics. Note that the <code>uuid</code> field contains raw bytes encoded in Base64.</p>
+<p>Sent by the master whenever there is an update to the state of an operation for which the scheduler requested feedback by setting the operation’s <code>id</code> field. It is the responsibility of the scheduler to explicitly acknowledge the receipt of any status updates which have their <code>uuid</code> field set, as this indicates that the update will be retried until acknowledgement is received. This ensures that such updates are delivered reliably. See <code>ACKNOWLEDGE_OPERATION_STATUS</code> in the Calls section above for the relevant acknowledgement semantics. Note that the <code>uuid</code> field contains raw bytes encoded in Base64.</p>
 <pre><code>UPDATE_OPERATION_STATUS Event (JSON)
 
 &lt;event-length&gt;
 {
-  &quot;type&quot;	: &quot;UPDATE_OPERATION_STATUS&quot;,
-  &quot;update_operation_status&quot;	: {
-    &quot;status&quot;	: {
-        &quot;operation_id&quot; : { &quot;value&quot; : &quot;operation-1234&quot;},
-        &quot;state&quot;        : &quot;OPERATION_FAILED&quot;,
-        &quot;uuid&quot;         : &quot;adfadfadbhgvjayd23r2uahj&quot;,
-        &quot;agent_id&quot;     : { &quot;value&quot; : &quot;12214-23523-S235235&quot;},
-        &quot;resource_provider_id&quot; : { &quot;value&quot; : &quot;83978-17885-1089645&quot;}
+  "type"	: "UPDATE_OPERATION_STATUS",
+  "update_operation_status"	: {
+    "status"	: {
+        "operation_id" : { "value" : "operation-1234"},
+        "state"        : "OPERATION_FAILED",
+        "uuid"         : "adfadfadbhgvjayd23r2uahj",
+        "agent_id"     : { "value" : "12214-23523-S235235"},
+        "resource_provider_id" : { "value" : "83978-17885-1089645"}
       }
   }
 }
@@ -835,11 +843,11 @@ before issuing the next call. This issue has been fixed in Mesos 1.10.0 (see
 
 &lt;event-length&gt;
 {
-  &quot;type&quot;	: &quot;MESSAGE&quot;,
-  &quot;message&quot;	: {
-    &quot;agent_id&quot;		: { &quot;value&quot; : &quot;12214-23523-S235235&quot;},
-    &quot;executor_id&quot;	: { &quot;value&quot; : &quot;12214-23523-my-executor&quot;},
-    &quot;data&quot;			: &quot;adfadf3t2wa3353dfadf&quot;
+  "type"	: "MESSAGE",
+  "message"	: {
+    "agent_id"		: { "value" : "12214-23523-S235235"},
+    "executor_id"	: { "value" : "12214-23523-my-executor"},
+    "data"			: "adfadf3t2wa3353dfadf"
   }
 }
 </code></pre>
@@ -849,18 +857,18 @@ before issuing the next call. This issue has been fixed in Mesos 1.10.0 (see
 
 &lt;event-length&gt;
 {
-  &quot;type&quot;	: &quot;FAILURE&quot;,
-  &quot;failure&quot;	: {
-    &quot;agent_id&quot;		: { &quot;value&quot; : &quot;12214-23523-S235235&quot;},
-    &quot;executor_id&quot;	: { &quot;value&quot; : &quot;12214-23523-my-executor&quot;},
-    &quot;status&quot;		: 1
+  "type"	: "FAILURE",
+  "failure"	: {
+    "agent_id"		: { "value" : "12214-23523-S235235"},
+    "executor_id"	: { "value" : "12214-23523-my-executor"},
+    "status"		: 1
   }
 }
 </code></pre>
 <h3 id="error"><a class="header" href="#error">ERROR</a></h3>
 <p>Can be sent either:</p>
 <ul>
-<li>As the first event (in lieu of <code>SUBSCRIBED</code>) when the scheduler's <code>SUBSCRIBE</code> request is invalid (e.g. invalid <code>FrameworkInfo</code>) or unauthorized (e.g., a framework is not authorized to subscribe with some of the given <code>FrameworkInfo.roles</code>).</li>
+<li>As the first event (in lieu of <code>SUBSCRIBED</code>) when the scheduler’s <code>SUBSCRIBE</code> request is invalid (e.g. invalid <code>FrameworkInfo</code>) or unauthorized (e.g., a framework is not authorized to subscribe with some of the given <code>FrameworkInfo.roles</code>).</li>
 <li>When an asynchronous error event is generated (e.g. the master detects a newer subscription from a failed over instance of the scheduler).</li>
 </ul>
 <p>It is recommended that the framework abort when it receives an error and retry subscription as necessary.</p>
@@ -868,8 +876,8 @@ before issuing the next call. This issue has been fixed in Mesos 1.10.0 (see
 
 &lt;event-length&gt;
 {
-  &quot;type&quot;	: &quot;ERROR&quot;,
-  &quot;message&quot;	: &quot;Framework is not authorized&quot;
+  "type"	: "ERROR",
+  "message"	: "Framework is not authorized"
 }
 </code></pre>
 <h3 id="heartbeat"><a class="header" href="#heartbeat">HEARTBEAT</a></h3>
@@ -878,23 +886,23 @@ before issuing the next call. This issue has been fixed in Mesos 1.10.0 (see
 
 &lt;event-length&gt;
 {
-  &quot;type&quot;	: &quot;HEARTBEAT&quot;
+  "type"	: "HEARTBEAT"
 }
 </code></pre>
 <h2 id="disconnections"><a class="header" href="#disconnections">Disconnections</a></h2>
-<p>Master considers a scheduler disconnected if the persistent subscription connection (opened via <code>SUBSCRIBE</code> request) to &quot;/scheduler&quot; breaks. The connection could break for several reasons, e.g., scheduler restart, scheduler failover, network error. Note that the master doesn't keep track of non-subscription connection(s) to
-&quot;/scheduler&quot; because it is not expected to be a persistent connection.</p>
-<p>If master realizes that the subscription connection is broken, it marks the scheduler as &quot;disconnected&quot; and starts a failover timeout (failover timeout is part of FrameworkInfo). It also drops any pending events in its queue. Additionally, it rejects subsequent non-subscribe HTTP requests to &quot;/scheduler&quot; with &quot;403 Forbidden&quot;, until the scheduler subscribes again with &quot;/scheduler&quot;. If the scheduler <em>does not</em> re-subscribe within the failover timeout, the master considers the scheduler gone forever and shuts down all its executors, thus killing all its tasks. Therefore, all production schedulers are recommended to use a high value (e.g., 4 weeks) for the failover timeout.</p>
+<p>Master considers a scheduler disconnected if the persistent subscription connection (opened via <code>SUBSCRIBE</code> request) to “/scheduler” breaks. The connection could break for several reasons, e.g., scheduler restart, scheduler failover, network error. Note that the master doesn’t keep track of non-subscription connection(s) to
+“/scheduler” because it is not expected to be a persistent connection.</p>
+<p>If master realizes that the subscription connection is broken, it marks the scheduler as “disconnected” and starts a failover timeout (failover timeout is part of FrameworkInfo). It also drops any pending events in its queue. Additionally, it rejects subsequent non-subscribe HTTP requests to “/scheduler” with “403 Forbidden”, until the scheduler subscribes again with “/scheduler”. If the scheduler <em>does not</em> re-subscribe within the failover timeout, the master considers the scheduler gone forever and shuts down all its executors, thus killing all its tasks. Therefore, all production schedulers are recommended to use a high value (e.g., 4 weeks) for the failover timeout.</p>
 <p>NOTE: To force shutdown of a framework before the failover timeout elapses (e.g., during framework development and testing), either the framework can send the <code>TEARDOWN</code> call (part of the Scheduler API) or an operator can use the <a href="endpoints/master/teardown.html">/teardown</a> master endpoint (part of the Operator API).</p>
-<p>If the scheduler realizes that its subscription connection to &quot;/scheduler&quot; is broken or the master has changed (e.g., via ZooKeeper), it should resubscribe (using a backoff strategy). This is done by sending a <code>SUBSCRIBE</code> request (with framework ID set) on a <strong>new</strong> persistent connection to the &quot;/scheduler&quot; endpoint on the (possibly new) master. It should not send new non-subscribe HTTP requests to &quot;/scheduler&quot; unless it receives a <code>SUBSCRIBED</code> event; such requests will result in &quot;403 Forbidden&quot;.</p>
+<p>If the scheduler realizes that its subscription connection to “/scheduler” is broken or the master has changed (e.g., via ZooKeeper), it should resubscribe (using a backoff strategy). This is done by sending a <code>SUBSCRIBE</code> request (with framework ID set) on a <strong>new</strong> persistent connection to the “/scheduler” endpoint on the (possibly new) master. It should not send new non-subscribe HTTP requests to “/scheduler” unless it receives a <code>SUBSCRIBED</code> event; such requests will result in “403 Forbidden”.</p>
 <p>If the master does not realize that the subscription connection is broken but the scheduler realizes it, the scheduler might open a new persistent connection to
-&quot;/scheduler&quot; via <code>SUBSCRIBE</code>. In this case, the master closes the existing subscription connection and allows subscription on the new connection. The invariant here is that only one persistent subscription connection for a given framework ID is allowed on the master.</p>
+“/scheduler” via <code>SUBSCRIBE</code>. In this case, the master closes the existing subscription connection and allows subscription on the new connection. The invariant here is that only one persistent subscription connection for a given framework ID is allowed on the master.</p>
 <p>The master uses the <code>Mesos-Stream-Id</code> header to distinguish scheduler instances from one another. In the case of highly available schedulers with multiple instances, this can prevent unwanted behavior in certain failure scenarios. Each unique <code>Mesos-Stream-Id</code> is valid only for the life of a single subscription connection. Each response to a <code>SUBSCRIBE</code> request contains a <code>Mesos-Stream-Id</code>, and this ID must be included with all subsequent non-subscribe calls sent over that subscription connection. Whenever a new subscription connection is established, a new stream ID is generated and should be used for the life of that connection.</p>
 <h3 id="network-partitions"><a class="header" href="#network-partitions">Network partitions</a></h3>
-<p>In the case of a network partition, the subscription connection between the scheduler and master might not necessarily break. To be able to detect this scenario, master periodically (e.g., 15s) sends <code>HEARTBEAT</code> events (similar to Twitter's Streaming API). If a scheduler doesn't receive a bunch (e.g., 5) of these heartbeats within a time window, it should immediately disconnect and try to resubscribe. It is highly recommended for schedulers to use an exponential backoff strategy (e.g., up to a maximum of 15s) to avoid overwhelming the master while reconnecting. Schedulers can use a similar timeout (e.g., 75s) for receiving responses to any HTTP requests.</p>
+<p>In the case of a network partition, the subscription connection between the scheduler and master might not necessarily break. To be able to detect this scenario, master periodically (e.g., 15s) sends <code>HEARTBEAT</code> events (similar to Twitter’s Streaming API). If a scheduler doesn’t receive a bunch (e.g., 5) of these heartbeats within a time window, it should immediately disconnect and try to resubscribe. It is highly recommended for schedulers to use an exponential backoff strategy (e.g., up to a maximum of 15s) to avoid overwhelming the master while reconnecting. Schedulers can use a similar timeout (e.g., 75s) for receiving responses to any HTTP requests.</p>
 <h2 id="master-detection"><a class="header" href="#master-detection">Master detection</a></h2>
 <p>Mesos has a high-availability mode that uses multiple Mesos masters; one active master (called the leader or leading master) and several standbys in case it fails. The masters elect the leader, with ZooKeeper coordinating the election. For more details please refer to the <a href="high-availability.html">documentation</a>.</p>
-<p>Schedulers are expected to make HTTP requests to the leading master. If requests are made to a non-leading master a &quot;HTTP 307 Temporary Redirect&quot; will be received with the &quot;Location&quot; header pointing to the leading master.</p>
+<p>Schedulers are expected to make HTTP requests to the leading master. If requests are made to a non-leading master a “HTTP 307 Temporary Redirect” will be received with the “Location” header pointing to the leading master.</p>
 <p>Example subscription workflow with redirection when the scheduler hits a non-leading master.</p>
 <pre><code>Scheduler -&gt; Master
 POST /api/v1/scheduler  HTTP/1.1
@@ -905,11 +913,11 @@ Accept: application/json
 Connection: keep-alive
 
 {
-  &quot;framework_info&quot;	: {
-    &quot;user&quot; :  &quot;foo&quot;,
-    &quot;name&quot; :  &quot;Example HTTP Framework&quot;
+  "framework_info"	: {
+    "user" :  "foo",
+    "name" :  "Example HTTP Framework"
   },
-  &quot;type&quot;			: &quot;SUBSCRIBE&quot;
+  "type"			: "SUBSCRIBE"
 }
 
 Master -&gt; Scheduler
@@ -926,25 +934,25 @@ Accept: application/json
 Connection: keep-alive
 
 {
-  &quot;framework_info&quot;	: {
-    &quot;user&quot; :  &quot;foo&quot;,
-    &quot;name&quot; :  &quot;Example HTTP Framework&quot;
+  "framework_info"	: {
+    "user" :  "foo",
+    "name" :  "Example HTTP Framework"
   },
-  &quot;type&quot;			: &quot;SUBSCRIBE&quot;
+  "type"			: "SUBSCRIBE"
 }
 </code></pre>
-<p>If the scheduler knows the list of master's hostnames for a cluster, it could use this mechanism to find the leading master to subscribe with. Alternatively, the scheduler could use a library that detects the leading master given a ZooKeeper (or etcd) URL. For a C++ library that does ZooKeeper based master detection please look at <code>src/scheduler/scheduler.cpp</code>.</p>
-
+<p>If the scheduler knows the list of master’s hostnames for a cluster, it could use this mechanism to find the leading master to subscribe with. Alternatively, the scheduler could use a library that detects the leading master given a ZooKeeper (or etcd) URL. For a C++ library that does ZooKeeper based master detection please look at <code>src/scheduler/scheduler.cpp</code>.</p>
+<footer id="open-on-gh">Found a bug? <a href="https://github.com/m3scluster/clusterd-docs//edit/main/src/scheduler-http-api.md">Edit this page on GitHub.</a></footer>
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                             <a rel="prev" href="health-checks.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
-                                <i class="fa fa-angle-left"></i>
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                             </a>
 
-                            <a rel="next" href="executor-http-api.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                                <i class="fa fa-angle-right"></i>
+                            <a rel="next prefetch" href="executor-http-api.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
                             </a>
 
                         <div style="clear: both"></div>
@@ -954,16 +962,21 @@ Connection: keep-alive
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                     <a rel="prev" href="health-checks.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
-                        <i class="fa fa-angle-left"></i>
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                     </a>
 
-                    <a rel="next" href="executor-http-api.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                        <i class="fa fa-angle-right"></i>
+                    <a rel="next prefetch" href="executor-http-api.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
                     </a>
             </nav>
 
         </div>
 
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
 
 
 
@@ -972,15 +985,16 @@ Connection: keep-alive
         </script>
 
 
-        <script src="elasticlunr.min.js"></script>
-        <script src="mark.min.js"></script>
-        <script src="searcher.js"></script>
+        <script src="elasticlunr-ef4e11c1.min.js"></script>
+        <script src="mark-09e88c2c.min.js"></script>
+        <script src="searcher-09f2665d.js"></script>
 
-        <script src="clipboard.min.js"></script>
-        <script src="highlight.js"></script>
-        <script src="book.js"></script>
+        <script src="clipboard-1626706a.min.js"></script>
+        <script src="highlight-abc7f01d.js"></script>
+        <script src="book-609e4cb8.js"></script>
 
         <!-- Custom JS scripts -->
+
 
 
     </div>

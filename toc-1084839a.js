@@ -1,0 +1,455 @@
+// Populate the sidebar
+//
+// This is a script, and not included directly in the page, to control the total size of the book.
+// The TOC contains an entry for each page, so if each page includes a copy of the TOC,
+// the total size of the page becomes O(n**2).
+class MDBookSidebarScrollbox extends HTMLElement {
+    constructor() {
+        super();
+    }
+    connectedCallback() {
+        this.innerHTML = '<ol class="chapter"><li class="chapter-item expanded "><li class="part-title">Fundamentals</li></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="architecture.html"><strong aria-hidden="true">1.</strong> Mesos Architecture providing an overview of Mesos concepts</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="presentations.html"><strong aria-hidden="true">2.</strong> Video and Slides of Mesos Presentations</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="versioning.html"><strong aria-hidden="true">3.</strong> Mesos Release and Support Policy</a></span></li><li class="chapter-item expanded "><li class="part-title">Build / Installation</li></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="building.html"><strong aria-hidden="true">4.</strong> Building for basic instructions on compiling and installing Mesos.</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="binary-packages.html"><strong aria-hidden="true">5.</strong> Binary Packages for how to use Mesos binary packages.</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="configuration.html"><strong aria-hidden="true">6.</strong> Configuration for build configuration options.</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="cmake.html"><strong aria-hidden="true">7.</strong> CMake for details about using the new CMake build system.</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="windows.html"><strong aria-hidden="true">8.</strong> Windows Support for the state of Windows support in Mesos.</a></span></li><li class="chapter-item expanded "><li class="part-title">Configuration</li></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="configuration/agent.html"><strong aria-hidden="true">9.</strong> Agent Options</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="configuration/autotools.html"><strong aria-hidden="true">10.</strong> Autotools Options</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="configuration/cmake.html"><strong aria-hidden="true">11.</strong> CMake Options</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="configuration/libprocess.html"><strong aria-hidden="true">12.</strong> Libprocess Options</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="configuration/master-and-agent.html"><strong aria-hidden="true">13.</strong> Master and Agent Options</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="configuration/master.html"><strong aria-hidden="true">14.</strong> Master Options</a></span></li><li class="chapter-item expanded "><li class="part-title">Administration</li></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="high-availability.html"><strong aria-hidden="true">15.</strong> High Availability Master Setup</a></span><ol class="section"><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="replicated-log-internals.html"><strong aria-hidden="true">15.1.</strong> Replicated Log for information on the Mesos replicated log.</a></span></li></ol><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="agent-recovery.html"><strong aria-hidden="true">16.</strong> Fault Tolerant Agent Setup</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="framework-rate-limiting.html"><strong aria-hidden="true">17.</strong> Framework Rate Limiting</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="maintenance.html"><strong aria-hidden="true">18.</strong> Maintenance for performing maintenance on a Mesos cluster.</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="upgrades.html"><strong aria-hidden="true">19.</strong> Upgrades for upgrading a Mesos cluster.</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="downgrades.html"><strong aria-hidden="true">20.</strong> Downgrades for downgrading a Mesos cluster.</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="logging.html"><strong aria-hidden="true">21.</strong> Logging</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="monitoring.html"><strong aria-hidden="true">22.</strong> Monitoring / Metrics</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="cli.html"><strong aria-hidden="true">23.</strong> Debugging using the new CLI</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="operational-guide.html"><strong aria-hidden="true">24.</strong> Operational Guide</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="fetcher.html"><strong aria-hidden="true">25.</strong> Fetcher Cache Configuration</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="fault-domains.html"><strong aria-hidden="true">26.</strong> Fault Domains</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="performance-profiling.html"><strong aria-hidden="true">27.</strong> Performance Profiling for debugging performance issues in Mesos.</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="memory-profiling.html"><strong aria-hidden="true">28.</strong> Memory Profiling for debugging potential memory leaks in Mesos.</a></span></li><li class="chapter-item expanded "><li class="part-title">Resource Management</li></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="attributes-resources.html"><strong aria-hidden="true">29.</strong> Attributes and Resources for how to describe the agents that comprise a cluster.</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="container-memory-limit.html"><strong aria-hidden="true">30.</strong> Updating the memory limit of a running container</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="roles.html"><strong aria-hidden="true">31.</strong> Using Resource Roles</a></span><ol class="section"><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="weights.html"><strong aria-hidden="true">31.1.</strong> Resource Role Weights for fair sharing.</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="quota.html"><strong aria-hidden="true">31.2.</strong> Resource Role Quota for how to configure Mesos to provide guaranteed resource allocations for use by a role.</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="reservation.html"><strong aria-hidden="true">31.3.</strong> Reservations for how operators and frameworks can reserve resources on individual agents for use by a role.</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="shared-resources.html"><strong aria-hidden="true">31.4.</strong> Shared Resources for how to share persistent volumes between tasks managed by different executors on the same agent.</a></span></li></ol><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="oversubscription.html"><strong aria-hidden="true">32.</strong> Oversubscription for how to configure Mesos to take advantage of unused resources to launch “best-effort” tasks.</a></span></li><li class="chapter-item expanded "><li class="part-title">Security</li></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="authentication.html"><strong aria-hidden="true">33.</strong> Authentication</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="authorization.html"><strong aria-hidden="true">34.</strong> Authorization</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="ssl.html"><strong aria-hidden="true">35.</strong> SSL</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="secrets.html"><strong aria-hidden="true">36.</strong> Secrets for managing secrets within Mesos.</a></span></li><li class="chapter-item expanded "><li class="part-title">Containerization</li></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="containerizers.html"><strong aria-hidden="true">37.</strong> Containerizer Overview</a></span><ol class="section"><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="containerizer-internals.html"><strong aria-hidden="true">37.1.</strong> Containerizer Internals for implementation details of containerizers.</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="docker-containerizer.html"><strong aria-hidden="true">37.2.</strong> Docker Containerizer for launching a Docker image as a Task, or as an Executor.</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="mesos-containerizer.html"><strong aria-hidden="true">37.3.</strong> Mesos Containerizer default containerizer, supports both Linux and POSIX systems.</a></span><ol class="section"><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="container-image.html"><strong aria-hidden="true">37.3.1.</strong> Container Images for supporting container images in Mesos containerizer.</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="isolators/docker-volume.html"><strong aria-hidden="true">37.3.2.</strong> Docker Volume Support</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="gpu-support.html"><strong aria-hidden="true">37.3.3.</strong> Nvidia GPU Support for how to run Mesos with Nvidia GPU support.</a></span></li></ol></li></ol><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="sandbox.html"><strong aria-hidden="true">38.</strong> Container Sandboxes</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="container-volume.html"><strong aria-hidden="true">39.</strong> Container Volumes</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="nested-container-and-task-group.html"><strong aria-hidden="true">40.</strong> Nested Container and Task Group (Pod)</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="standalone-containers.html"><strong aria-hidden="true">41.</strong> Standalone Containers</a></span></li><li class="chapter-item expanded "><li class="part-title">Networking</li></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="networking.html"><strong aria-hidden="true">42.</strong> Networking Overview</a></span><ol class="section"><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="networking-for-mesos-managed-containers.html"><strong aria-hidden="true">42.1.</strong> Networking in Detail</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="cni.html"><strong aria-hidden="true">42.2.</strong> Container Network Interface (CNI)</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="isolators/network-port-mapping.html"><strong aria-hidden="true">42.3.</strong> Port Mapping Isolator</a></span></li></ol><li class="chapter-item expanded "><li class="part-title">Storage</li></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="multiple-disk.html"><strong aria-hidden="true">43.</strong> Multiple Disks for how to allow tasks to use multiple isolated disk resources.</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="persistent-volume.html"><strong aria-hidden="true">44.</strong> Persistent Volume for how to allow tasks to access persistent storage resources.</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="csi.html"><strong aria-hidden="true">45.</strong> Container Storage Interface (CSI) Support</a></span></li><li class="chapter-item expanded "><li class="part-title">Scheduler and Executor Development</li></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="running-workloads.html"><strong aria-hidden="true">46.</strong> Running Workloads in Mesos explains how a scheduler can specify and run tasks.</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="app-framework-development-guide.html"><strong aria-hidden="true">47.</strong> Framework Development Guide describes how to build applications on top of Mesos.</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="high-availability-framework-guide.html"><strong aria-hidden="true">48.</strong> Guide for Designing Highly Available Mesos Frameworks</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="reconciliation.html"><strong aria-hidden="true">49.</strong> Reconciliation for ensuring a framework’s state remains eventually consistent in the face of failures.</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="task-state-reasons.html"><strong aria-hidden="true">50.</strong> Task State Reasons describes how task state reasons are used in Mesos.</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="health-checks.html"><strong aria-hidden="true">51.</strong> Task Health Checking</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="scheduler-http-api.html"><strong aria-hidden="true">52.</strong> v1 Scheduler HTTP API for communication between schedulers and the Mesos master.</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="executor-http-api.html"><strong aria-hidden="true">53.</strong> v1 Executor HTTP API describes the new HTTP API for communication between executors and the Mesos agent.</a></span></li><li class="chapter-item expanded "><span class="chapter-link-wrapper"><a href="operator-http-api.html"><strong aria-hidden="true">54.</strong> v1 Operator HTTP API for operator calls to masters and agents.</a></span></li></ol>';
+        // Set the current, active page, and reveal it if it's hidden
+        let current_page = document.location.href.toString().split('#')[0].split('?')[0];
+        if (current_page.endsWith('/')) {
+            current_page += 'index.html';
+        }
+        const links = Array.prototype.slice.call(this.querySelectorAll('a'));
+        const l = links.length;
+        for (let i = 0; i < l; ++i) {
+            const link = links[i];
+            const href = link.getAttribute('href');
+            if (href && !href.startsWith('#') && !/^(?:[a-z+]+:)?\/\//.test(href)) {
+                link.href = path_to_root + href;
+            }
+            // The 'index' page is supposed to alias the first chapter in the book.
+            // Check both with and without the '.html' suffix to be robust against pretty URLs
+            if (link.href.replace(/\.html$/, '') === current_page.replace(/\.html$/, '')
+                || i === 0
+                && path_to_root === ''
+                && current_page.endsWith('/index.html')) {
+                link.classList.add('active');
+                let parent = link.parentElement;
+                while (parent) {
+                    if (parent.tagName === 'LI' && parent.classList.contains('chapter-item')) {
+                        parent.classList.add('expanded');
+                    }
+                    parent = parent.parentElement;
+                }
+            }
+        }
+        // Track and set sidebar scroll position
+        this.addEventListener('click', e => {
+            if (e.target.tagName === 'A') {
+                const clientRect = e.target.getBoundingClientRect();
+                const sidebarRect = this.getBoundingClientRect();
+                sessionStorage.setItem('sidebar-scroll-offset', clientRect.top - sidebarRect.top);
+            }
+        }, { passive: true });
+        const sidebarScrollOffset = sessionStorage.getItem('sidebar-scroll-offset');
+        sessionStorage.removeItem('sidebar-scroll-offset');
+        if (sidebarScrollOffset !== null) {
+            // preserve sidebar scroll position when navigating via links within sidebar
+            const activeSection = this.querySelector('.active');
+            if (activeSection) {
+                const clientRect = activeSection.getBoundingClientRect();
+                const sidebarRect = this.getBoundingClientRect();
+                const currentOffset = clientRect.top - sidebarRect.top;
+                this.scrollTop += currentOffset - parseFloat(sidebarScrollOffset);
+            }
+        } else {
+            // scroll sidebar to current active section when navigating via
+            // 'next/previous chapter' buttons
+            const activeSection = document.querySelector('#mdbook-sidebar .active');
+            if (activeSection) {
+                activeSection.scrollIntoView({ block: 'center' });
+            }
+        }
+        // Toggle buttons
+        const sidebarAnchorToggles = document.querySelectorAll('.chapter-fold-toggle');
+        function toggleSection(ev) {
+            ev.currentTarget.parentElement.parentElement.classList.toggle('expanded');
+        }
+        Array.from(sidebarAnchorToggles).forEach(el => {
+            el.addEventListener('click', toggleSection);
+        });
+    }
+}
+window.customElements.define('mdbook-sidebar-scrollbox', MDBookSidebarScrollbox);
+
+
+// ---------------------------------------------------------------------------
+// Support for dynamically adding headers to the sidebar.
+
+(function() {
+    // This is used to detect which direction the page has scrolled since the
+    // last scroll event.
+    let lastKnownScrollPosition = 0;
+    // This is the threshold in px from the top of the screen where it will
+    // consider a header the "current" header when scrolling down.
+    const defaultDownThreshold = 150;
+    // Same as defaultDownThreshold, except when scrolling up.
+    const defaultUpThreshold = 300;
+    // The threshold is a virtual horizontal line on the screen where it
+    // considers the "current" header to be above the line. The threshold is
+    // modified dynamically to handle headers that are near the bottom of the
+    // screen, and to slightly offset the behavior when scrolling up vs down.
+    let threshold = defaultDownThreshold;
+    // This is used to disable updates while scrolling. This is needed when
+    // clicking the header in the sidebar, which triggers a scroll event. It
+    // is somewhat finicky to detect when the scroll has finished, so this
+    // uses a relatively dumb system of disabling scroll updates for a short
+    // time after the click.
+    let disableScroll = false;
+    // Array of header elements on the page.
+    let headers;
+    // Array of li elements that are initially collapsed headers in the sidebar.
+    // I'm not sure why eslint seems to have a false positive here.
+    // eslint-disable-next-line prefer-const
+    let headerToggles = [];
+    // This is a debugging tool for the threshold which you can enable in the console.
+    let thresholdDebug = false;
+
+    // Updates the threshold based on the scroll position.
+    function updateThreshold() {
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        const windowHeight = window.innerHeight;
+        const documentHeight = document.documentElement.scrollHeight;
+
+        // The number of pixels below the viewport, at most documentHeight.
+        // This is used to push the threshold down to the bottom of the page
+        // as the user scrolls towards the bottom.
+        const pixelsBelow = Math.max(0, documentHeight - (scrollTop + windowHeight));
+        // The number of pixels above the viewport, at least defaultDownThreshold.
+        // Similar to pixelsBelow, this is used to push the threshold back towards
+        // the top when reaching the top of the page.
+        const pixelsAbove = Math.max(0, defaultDownThreshold - scrollTop);
+        // How much the threshold should be offset once it gets close to the
+        // bottom of the page.
+        const bottomAdd = Math.max(0, windowHeight - pixelsBelow - defaultDownThreshold);
+        let adjustedBottomAdd = bottomAdd;
+
+        // Adjusts bottomAdd for a small document. The calculation above
+        // assumes the document is at least twice the windowheight in size. If
+        // it is less than that, then bottomAdd needs to be shrunk
+        // proportional to the difference in size.
+        if (documentHeight < windowHeight * 2) {
+            const maxPixelsBelow = documentHeight - windowHeight;
+            const t = 1 - pixelsBelow / Math.max(1, maxPixelsBelow);
+            const clamp = Math.max(0, Math.min(1, t));
+            adjustedBottomAdd *= clamp;
+        }
+
+        let scrollingDown = true;
+        if (scrollTop < lastKnownScrollPosition) {
+            scrollingDown = false;
+        }
+
+        if (scrollingDown) {
+            // When scrolling down, move the threshold up towards the default
+            // downwards threshold position. If near the bottom of the page,
+            // adjustedBottomAdd will offset the threshold towards the bottom
+            // of the page.
+            const amountScrolledDown = scrollTop - lastKnownScrollPosition;
+            const adjustedDefault = defaultDownThreshold + adjustedBottomAdd;
+            threshold = Math.max(adjustedDefault, threshold - amountScrolledDown);
+        } else {
+            // When scrolling up, move the threshold down towards the default
+            // upwards threshold position. If near the bottom of the page,
+            // quickly transition the threshold back up where it normally
+            // belongs.
+            const amountScrolledUp = lastKnownScrollPosition - scrollTop;
+            const adjustedDefault = defaultUpThreshold - pixelsAbove
+                + Math.max(0, adjustedBottomAdd - defaultDownThreshold);
+            threshold = Math.min(adjustedDefault, threshold + amountScrolledUp);
+        }
+
+        if (documentHeight <= windowHeight) {
+            threshold = 0;
+        }
+
+        if (thresholdDebug) {
+            const id = 'mdbook-threshold-debug-data';
+            let data = document.getElementById(id);
+            if (data === null) {
+                data = document.createElement('div');
+                data.id = id;
+                data.style.cssText = `
+                    position: fixed;
+                    top: 50px;
+                    right: 10px;
+                    background-color: 0xeeeeee;
+                    z-index: 9999;
+                    pointer-events: none;
+                `;
+                document.body.appendChild(data);
+            }
+            data.innerHTML = `
+                <table>
+                  <tr><td>documentHeight</td><td>${documentHeight.toFixed(1)}</td></tr>
+                  <tr><td>windowHeight</td><td>${windowHeight.toFixed(1)}</td></tr>
+                  <tr><td>scrollTop</td><td>${scrollTop.toFixed(1)}</td></tr>
+                  <tr><td>pixelsAbove</td><td>${pixelsAbove.toFixed(1)}</td></tr>
+                  <tr><td>pixelsBelow</td><td>${pixelsBelow.toFixed(1)}</td></tr>
+                  <tr><td>bottomAdd</td><td>${bottomAdd.toFixed(1)}</td></tr>
+                  <tr><td>adjustedBottomAdd</td><td>${adjustedBottomAdd.toFixed(1)}</td></tr>
+                  <tr><td>scrollingDown</td><td>${scrollingDown}</td></tr>
+                  <tr><td>threshold</td><td>${threshold.toFixed(1)}</td></tr>
+                </table>
+            `;
+            drawDebugLine();
+        }
+
+        lastKnownScrollPosition = scrollTop;
+    }
+
+    function drawDebugLine() {
+        if (!document.body) {
+            return;
+        }
+        const id = 'mdbook-threshold-debug-line';
+        const existingLine = document.getElementById(id);
+        if (existingLine) {
+            existingLine.remove();
+        }
+        const line = document.createElement('div');
+        line.id = id;
+        line.style.cssText = `
+            position: fixed;
+            top: ${threshold}px;
+            left: 0;
+            width: 100vw;
+            height: 2px;
+            background-color: red;
+            z-index: 9999;
+            pointer-events: none;
+        `;
+        document.body.appendChild(line);
+    }
+
+    function mdbookEnableThresholdDebug() {
+        thresholdDebug = true;
+        updateThreshold();
+        drawDebugLine();
+    }
+
+    window.mdbookEnableThresholdDebug = mdbookEnableThresholdDebug;
+
+    // Updates which headers in the sidebar should be expanded. If the current
+    // header is inside a collapsed group, then it, and all its parents should
+    // be expanded.
+    function updateHeaderExpanded(currentA) {
+        // Add expanded to all header-item li ancestors.
+        let current = currentA.parentElement;
+        while (current) {
+            if (current.tagName === 'LI' && current.classList.contains('header-item')) {
+                current.classList.add('expanded');
+            }
+            current = current.parentElement;
+        }
+    }
+
+    // Updates which header is marked as the "current" header in the sidebar.
+    // This is done with a virtual Y threshold, where headers at or below
+    // that line will be considered the current one.
+    function updateCurrentHeader() {
+        if (!headers || !headers.length) {
+            return;
+        }
+
+        // Reset the classes, which will be rebuilt below.
+        const els = document.getElementsByClassName('current-header');
+        for (const el of els) {
+            el.classList.remove('current-header');
+        }
+        for (const toggle of headerToggles) {
+            toggle.classList.remove('expanded');
+        }
+
+        // Find the last header that is above the threshold.
+        let lastHeader = null;
+        for (const header of headers) {
+            const rect = header.getBoundingClientRect();
+            if (rect.top <= threshold) {
+                lastHeader = header;
+            } else {
+                break;
+            }
+        }
+        if (lastHeader === null) {
+            lastHeader = headers[0];
+            const rect = lastHeader.getBoundingClientRect();
+            const windowHeight = window.innerHeight;
+            if (rect.top >= windowHeight) {
+                return;
+            }
+        }
+
+        // Get the anchor in the summary.
+        const href = '#' + lastHeader.id;
+        const a = [...document.querySelectorAll('.header-in-summary')]
+            .find(element => element.getAttribute('href') === href);
+        if (!a) {
+            return;
+        }
+
+        a.classList.add('current-header');
+
+        updateHeaderExpanded(a);
+    }
+
+    // Updates which header is "current" based on the threshold line.
+    function reloadCurrentHeader() {
+        if (disableScroll) {
+            return;
+        }
+        updateThreshold();
+        updateCurrentHeader();
+    }
+
+
+    // When clicking on a header in the sidebar, this adjusts the threshold so
+    // that it is located next to the header. This is so that header becomes
+    // "current".
+    function headerThresholdClick(event) {
+        // See disableScroll description why this is done.
+        disableScroll = true;
+        setTimeout(() => {
+            disableScroll = false;
+        }, 100);
+        // requestAnimationFrame is used to delay the update of the "current"
+        // header until after the scroll is done, and the header is in the new
+        // position.
+        requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+                // Closest is needed because if it has child elements like <code>.
+                const a = event.target.closest('a');
+                const href = a.getAttribute('href');
+                const targetId = href.substring(1);
+                const targetElement = document.getElementById(targetId);
+                if (targetElement) {
+                    threshold = targetElement.getBoundingClientRect().bottom;
+                    updateCurrentHeader();
+                }
+            });
+        });
+    }
+
+    // Takes the nodes from the given head and copies them over to the
+    // destination, along with some filtering.
+    function filterHeader(source, dest) {
+        const clone = source.cloneNode(true);
+        clone.querySelectorAll('mark').forEach(mark => {
+            mark.replaceWith(...mark.childNodes);
+        });
+        dest.append(...clone.childNodes);
+    }
+
+    // Scans page for headers and adds them to the sidebar.
+    document.addEventListener('DOMContentLoaded', function() {
+        const activeSection = document.querySelector('#mdbook-sidebar .active');
+        if (activeSection === null) {
+            return;
+        }
+
+        const main = document.getElementsByTagName('main')[0];
+        headers = Array.from(main.querySelectorAll('h2, h3, h4, h5, h6'))
+            .filter(h => h.id !== '' && h.children.length && h.children[0].tagName === 'A');
+
+        if (headers.length === 0) {
+            return;
+        }
+
+        // Build a tree of headers in the sidebar.
+
+        const stack = [];
+
+        const firstLevel = parseInt(headers[0].tagName.charAt(1));
+        for (let i = 1; i < firstLevel; i++) {
+            const ol = document.createElement('ol');
+            ol.classList.add('section');
+            if (stack.length > 0) {
+                stack[stack.length - 1].ol.appendChild(ol);
+            }
+            stack.push({level: i + 1, ol: ol});
+        }
+
+        // The level where it will start folding deeply nested headers.
+        const foldLevel = 3;
+
+        for (let i = 0; i < headers.length; i++) {
+            const header = headers[i];
+            const level = parseInt(header.tagName.charAt(1));
+
+            const currentLevel = stack[stack.length - 1].level;
+            if (level > currentLevel) {
+                // Begin nesting to this level.
+                for (let nextLevel = currentLevel + 1; nextLevel <= level; nextLevel++) {
+                    const ol = document.createElement('ol');
+                    ol.classList.add('section');
+                    const last = stack[stack.length - 1];
+                    const lastChild = last.ol.lastChild;
+                    // Handle the case where jumping more than one nesting
+                    // level, which doesn't have a list item to place this new
+                    // list inside of.
+                    if (lastChild) {
+                        lastChild.appendChild(ol);
+                    } else {
+                        last.ol.appendChild(ol);
+                    }
+                    stack.push({level: nextLevel, ol: ol});
+                }
+            } else if (level < currentLevel) {
+                while (stack.length > 1 && stack[stack.length - 1].level > level) {
+                    stack.pop();
+                }
+            }
+
+            const li = document.createElement('li');
+            li.classList.add('header-item');
+            li.classList.add('expanded');
+            if (level < foldLevel) {
+                li.classList.add('expanded');
+            }
+            const span = document.createElement('span');
+            span.classList.add('chapter-link-wrapper');
+            const a = document.createElement('a');
+            span.appendChild(a);
+            a.href = '#' + header.id;
+            a.classList.add('header-in-summary');
+            filterHeader(header.children[0], a);
+            a.addEventListener('click', headerThresholdClick);
+            const nextHeader = headers[i + 1];
+            if (nextHeader !== undefined) {
+                const nextLevel = parseInt(nextHeader.tagName.charAt(1));
+                if (nextLevel > level && level >= foldLevel) {
+                    const toggle = document.createElement('a');
+                    toggle.classList.add('chapter-fold-toggle');
+                    toggle.classList.add('header-toggle');
+                    toggle.addEventListener('click', () => {
+                        li.classList.toggle('expanded');
+                    });
+                    const toggleDiv = document.createElement('div');
+                    toggleDiv.textContent = '❱';
+                    toggle.appendChild(toggleDiv);
+                    span.appendChild(toggle);
+                    headerToggles.push(li);
+                }
+            }
+            li.appendChild(span);
+
+            const currentParent = stack[stack.length - 1];
+            currentParent.ol.appendChild(li);
+        }
+
+        const onThisPage = document.createElement('div');
+        onThisPage.classList.add('on-this-page');
+        onThisPage.append(stack[0].ol);
+        const activeItemSpan = activeSection.parentElement;
+        activeItemSpan.after(onThisPage);
+    });
+
+    document.addEventListener('DOMContentLoaded', reloadCurrentHeader);
+    document.addEventListener('scroll', reloadCurrentHeader, { passive: true });
+})();
+

@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="en" class="sidebar-visible no-js light">
+<html lang="en" class="light sidebar-visible" dir="ltr">
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
@@ -7,43 +7,57 @@
 
 
         <!-- Custom HTML head -->
-        
+
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="theme-color" content="#ffffff" />
+        <meta name="theme-color" content="#ffffff">
 
-        <link rel="icon" href="../favicon.svg">
-        <link rel="shortcut icon" href="../favicon.png">
-        <link rel="stylesheet" href="../css/variables.css">
-        <link rel="stylesheet" href="../css/general.css">
-        <link rel="stylesheet" href="../css/chrome.css">
-        <link rel="stylesheet" href="../css/print.css" media="print">
+        <link rel="icon" href="../favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="../favicon-8114d1fc.png">
+        <link rel="stylesheet" href="../css/variables-8adf115d.css">
+        <link rel="stylesheet" href="../css/general-e96d0476.css">
+        <link rel="stylesheet" href="../css/chrome-d279d366.css">
+        <link rel="stylesheet" href="../css/print-9e4910d8.css" media="print">
 
         <!-- Fonts -->
-        <link rel="stylesheet" href="../FontAwesome/css/font-awesome.css">
-        <link rel="stylesheet" href="../fonts/fonts.css">
+        <link rel="stylesheet" href="../fonts/fonts-9644e21d.css">
 
         <!-- Highlight.js Stylesheets -->
-        <link rel="stylesheet" href="../highlight.css">
-        <link rel="stylesheet" href="../tomorrow-night.css">
-        <link rel="stylesheet" href="../ayu-highlight.css">
+        <link rel="stylesheet" id="mdbook-highlight-css" href="../highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="../tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="../ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
 
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "../";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "../searchindex-c0e7f0eb.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="../toc-1084839a.js"></script>
     </head>
     <body>
-    <div id="body-container">
-        <!-- Provide site root to javascript -->
-        <script>
-            var path_to_root = "../";
-            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
-        </script>
-
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
         <script>
             try {
-                var theme = localStorage.getItem('mdbook-theme');
-                var sidebar = localStorage.getItem('mdbook-sidebar');
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
 
                 if (theme.startsWith('"') && theme.endsWith('"')) {
                     localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
@@ -57,80 +71,69 @@
 
         <!-- Set the theme before any content is loaded, prevents flash -->
         <script>
-            var theme;
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
-            var html = document.querySelector('html');
-            html.classList.remove('no-js')
+            const html = document.documentElement;
             html.classList.remove('light')
             html.classList.add(theme);
-            html.classList.add('js');
+            html.classList.add("js");
         </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
 
         <!-- Hide / unhide sidebar before it is displayed -->
         <script>
-            var html = document.querySelector('html');
-            var sidebar = null;
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
             if (document.body.clientWidth >= 1080) {
                 try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
                 sidebar = sidebar || 'visible';
             } else {
                 sidebar = 'hidden';
+                sidebar_toggle.checked = false;
             }
-            html.classList.remove('sidebar-visible');
-            html.classList.add("sidebar-" + sidebar);
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
         </script>
 
-        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">Fundamentals</li><li class="chapter-item expanded "><a href="../architecture.html"><strong aria-hidden="true">1.</strong> Mesos Architecture providing an overview of Mesos concepts</a></li><li class="chapter-item expanded "><a href="../presentations.html"><strong aria-hidden="true">2.</strong> Video and Slides of Mesos Presentations</a></li><li class="chapter-item expanded "><a href="../versioning.html"><strong aria-hidden="true">3.</strong> Mesos Release and Support Policy</a></li><li class="chapter-item expanded affix "><li class="part-title">Build / Installation</li><li class="chapter-item expanded "><a href="../building.html"><strong aria-hidden="true">4.</strong> Building for basic instructions on compiling and installing Mesos.</a></li><li class="chapter-item expanded "><a href="../binary-packages.html"><strong aria-hidden="true">5.</strong> Binary Packages for how to use Mesos binary packages.</a></li><li class="chapter-item expanded "><a href="../configuration.html"><strong aria-hidden="true">6.</strong> Configuration for build configuration options.</a></li><li class="chapter-item expanded "><a href="../cmake.html"><strong aria-hidden="true">7.</strong> CMake for details about using the new CMake build system.</a></li><li class="chapter-item expanded "><a href="../windows.html"><strong aria-hidden="true">8.</strong> Windows Support for the state of Windows support in Mesos.</a></li><li class="chapter-item expanded affix "><li class="part-title">Configuration</li><li class="chapter-item expanded "><a href="../configuration/agent.html" class="active"><strong aria-hidden="true">9.</strong> Agent Options</a></li><li class="chapter-item expanded "><a href="../configuration/autotools.html"><strong aria-hidden="true">10.</strong> Autotools Options</a></li><li class="chapter-item expanded "><a href="../configuration/cmake.html"><strong aria-hidden="true">11.</strong> CMake Options</a></li><li class="chapter-item expanded "><a href="../configuration/libprocess.html"><strong aria-hidden="true">12.</strong> Libprocess Options</a></li><li class="chapter-item expanded "><a href="../configuration/master-and-agent.html"><strong aria-hidden="true">13.</strong> Master and Agent Options</a></li><li class="chapter-item expanded "><a href="../configuration/master.html"><strong aria-hidden="true">14.</strong> Master Options</a></li><li class="chapter-item expanded affix "><li class="part-title">Administration</li><li class="chapter-item expanded "><a href="../configuration.html"><strong aria-hidden="true">15.</strong> Configuration for command-line arguments.</a></li><li class="chapter-item expanded "><a href="../high-availability.html"><strong aria-hidden="true">16.</strong> High Availability Master Setup</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../replicated-log-internals.html"><strong aria-hidden="true">16.1.</strong> Replicated Log for information on the Mesos replicated log.</a></li></ol></li><li class="chapter-item expanded "><a href="../agent-recovery.html"><strong aria-hidden="true">17.</strong> Fault Tolerant Agent Setup</a></li><li class="chapter-item expanded "><a href="../framework-rate-limiting.html"><strong aria-hidden="true">18.</strong> Framework Rate Limiting</a></li><li class="chapter-item expanded "><a href="../maintenance.html"><strong aria-hidden="true">19.</strong> Maintenance for performing maintenance on a Mesos cluster.</a></li><li class="chapter-item expanded "><a href="../upgrades.html"><strong aria-hidden="true">20.</strong> Upgrades for upgrading a Mesos cluster.</a></li><li class="chapter-item expanded "><a href="../downgrades.html"><strong aria-hidden="true">21.</strong> Downgrades for downgrading a Mesos cluster.</a></li><li class="chapter-item expanded "><a href="../logging.html"><strong aria-hidden="true">22.</strong> Logging</a></li><li class="chapter-item expanded "><a href="../monitoring.html"><strong aria-hidden="true">23.</strong> Monitoring / Metrics</a></li><li class="chapter-item expanded "><a href="../cli.html"><strong aria-hidden="true">24.</strong> Debugging using the new CLI</a></li><li class="chapter-item expanded "><a href="../operational-guide.html"><strong aria-hidden="true">25.</strong> Operational Guide</a></li><li class="chapter-item expanded "><a href="../fetcher.html"><strong aria-hidden="true">26.</strong> Fetcher Cache Configuration</a></li><li class="chapter-item expanded "><a href="../fault-domains.html"><strong aria-hidden="true">27.</strong> Fault Domains</a></li><li class="chapter-item expanded "><a href="../performance-profiling.html"><strong aria-hidden="true">28.</strong> Performance Profiling for debugging performance issues in Mesos.</a></li><li class="chapter-item expanded "><a href="../memory-profiling.html"><strong aria-hidden="true">29.</strong> Memory Profiling for debugging potential memory leaks in Mesos.</a></li><li class="chapter-item expanded affix "><li class="part-title">Resource Management</li><li class="chapter-item expanded "><a href="../attributes-resources.html"><strong aria-hidden="true">30.</strong> Attributes and Resources for how to describe the agents that comprise a cluster.</a></li><li class="chapter-item expanded "><a href="../roles.html"><strong aria-hidden="true">31.</strong> Using Resource Roles</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../weights.html"><strong aria-hidden="true">31.1.</strong> Resource Role Weights for fair sharing.</a></li><li class="chapter-item expanded "><a href="../quota.html"><strong aria-hidden="true">31.2.</strong> Resource Role Quota for how to configure Mesos to provide guaranteed resource allocations for use by a role.</a></li><li class="chapter-item expanded "><a href="../reservation.html"><strong aria-hidden="true">31.3.</strong> Reservations for how operators and frameworks can reserve resources on individual agents for use by a role.</a></li><li class="chapter-item expanded "><a href="../shared-resources.html"><strong aria-hidden="true">31.4.</strong> Shared Resources for how to share persistent volumes between tasks managed by different executors on the same agent.</a></li></ol></li><li class="chapter-item expanded "><a href="../oversubscription.html"><strong aria-hidden="true">32.</strong> Oversubscription for how to configure Mesos to take advantage of unused resources to launch “best-effort” tasks.</a></li><li class="chapter-item expanded affix "><li class="part-title">Security</li><li class="chapter-item expanded "><a href="../authentication.html"><strong aria-hidden="true">33.</strong> Authentication</a></li><li class="chapter-item expanded "><a href="../authorization.html"><strong aria-hidden="true">34.</strong> Authorization</a></li><li class="chapter-item expanded "><a href="../ssl.html"><strong aria-hidden="true">35.</strong> SSL</a></li><li class="chapter-item expanded "><a href="../secrets.html"><strong aria-hidden="true">36.</strong> Secrets for managing secrets within Mesos.</a></li><li class="chapter-item expanded affix "><li class="part-title">Containerization</li><li class="chapter-item expanded "><a href="../containerizers.html"><strong aria-hidden="true">37.</strong> Containerizer Overview</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../containerizer-internals.html"><strong aria-hidden="true">37.1.</strong> Containerizer Internals for implementation details of containerizers.</a></li><li class="chapter-item expanded "><a href="../docker-containerizer.html"><strong aria-hidden="true">37.2.</strong> Docker Containerizer for launching a Docker image as a Task, or as an Executor.</a></li><li class="chapter-item expanded "><a href="../mesos-containerizer.html"><strong aria-hidden="true">37.3.</strong> Mesos Containerizer default containerizer, supports both Linux and POSIX systems.</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../container-image.html"><strong aria-hidden="true">37.3.1.</strong> Container Images for supporting container images in Mesos containerizer.</a></li><li class="chapter-item expanded "><a href="../isolators/docker-volume.html"><strong aria-hidden="true">37.3.2.</strong> Docker Volume Support</a></li><li class="chapter-item expanded "><a href="../gpu-support.html"><strong aria-hidden="true">37.3.3.</strong> Nvidia GPU Support for how to run Mesos with Nvidia GPU support.</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="../sandbox.html"><strong aria-hidden="true">38.</strong> Container Sandboxes</a></li><li class="chapter-item expanded "><a href="../container-volume.html"><strong aria-hidden="true">39.</strong> Container Volumes</a></li><li class="chapter-item expanded "><a href="../nested-container-and-task-group.html"><strong aria-hidden="true">40.</strong> Nested Container and Task Group (Pod)</a></li><li class="chapter-item expanded "><a href="../standalone-containers.html"><strong aria-hidden="true">41.</strong> Standalone Containers</a></li><li class="chapter-item expanded affix "><li class="part-title">Networking</li><li class="chapter-item expanded "><a href="../networking.html"><strong aria-hidden="true">42.</strong> Networking Overview</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="../networking-for-mesos-managed-containers.html"><strong aria-hidden="true">42.1.</strong> Networking in Detail</a></li><li class="chapter-item expanded "><a href="../cni.html"><strong aria-hidden="true">42.2.</strong> Container Network Interface (CNI)</a></li><li class="chapter-item expanded "><a href="../isolators/network-port-mapping.html"><strong aria-hidden="true">42.3.</strong> Port Mapping Isolator</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">Storage</li><li class="chapter-item expanded "><a href="../multiple-disk.html"><strong aria-hidden="true">43.</strong> Multiple Disks for how to allow tasks to use multiple isolated disk resources.</a></li><li class="chapter-item expanded "><a href="../persistent-volume.html"><strong aria-hidden="true">44.</strong> Persistent Volume for how to allow tasks to access persistent storage resources.</a></li><li class="chapter-item expanded "><a href="../csi.html"><strong aria-hidden="true">45.</strong> Container Storage Interface (CSI) Support</a></li><li class="chapter-item expanded affix "><li class="part-title">Scheduler and Executor Development</li><li class="chapter-item expanded "><a href="../running-workloads.html"><strong aria-hidden="true">46.</strong> Running Workloads in Mesos explains how a scheduler can specify and run tasks.</a></li><li class="chapter-item expanded "><a href="../app-framework-development-guide.html"><strong aria-hidden="true">47.</strong> Framework Development Guide describes how to build applications on top of Mesos.</a></li><li class="chapter-item expanded "><a href="../high-availability-framework-guide.html"><strong aria-hidden="true">48.</strong> Guide for Designing Highly Available Mesos Frameworks</a></li><li class="chapter-item expanded "><a href="../reconciliation.html"><strong aria-hidden="true">49.</strong> Reconciliation for ensuring a framework’s state remains eventually consistent in the face of failures.</a></li><li class="chapter-item expanded "><a href="../task-state-reasons.html"><strong aria-hidden="true">50.</strong> Task State Reasons describes how task state reasons are used in Mesos.</a></li><li class="chapter-item expanded "><a href="../health-checks.html"><strong aria-hidden="true">51.</strong> Task Health Checking</a></li><li class="chapter-item expanded "><a href="../scheduler-http-api.html"><strong aria-hidden="true">52.</strong> v1 Scheduler HTTP API for communication between schedulers and the Mesos master.</a></li><li class="chapter-item expanded "><a href="../executor-http-api.html"><strong aria-hidden="true">53.</strong> v1 Executor HTTP API describes the new HTTP API for communication between executors and the Mesos agent.</a></li></ol>
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="../toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
             </div>
-            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
 
-        <!-- Track and set sidebar scroll position -->
-        <script>
-            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
-            sidebarScrollbox.addEventListener('click', function(e) {
-                if (e.target.tagName === 'A') {
-                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
-                }
-            }, { passive: true });
-            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
-            sessionStorage.removeItem('sidebar-scroll');
-            if (sidebarScrollTop) {
-                // preserve sidebar scroll position when navigating via links within sidebar
-                sidebarScrollbox.scrollTop = sidebarScrollTop;
-            } else {
-                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
-                var activeSection = document.querySelector('#sidebar .active');
-                if (activeSection) {
-                    activeSection.scrollIntoView({ block: 'center' });
-                }
-            }
-        </script>
-
-        <div id="page-wrapper" class="page-wrapper">
+        <div id="mdbook-page-wrapper" class="page-wrapper">
 
             <div class="page">
-                                <div id="menu-bar-hover-placeholder"></div>
-                <div id="menu-bar" class="menu-bar sticky">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
                     <div class="left-buttons">
-                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
-                            <i class="fa fa-bars"></i>
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
                         </button>
-                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
-                            <i class="fa fa-paint-brush"></i>
-                        </button>
-                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
-                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
                         </ul>
-                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
-                            <i class="fa fa-search"></i>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
                         </button>
                     </div>
 
@@ -138,42 +141,49 @@
 
                     <div class="right-buttons">
                         <a href="../print.html" title="Print this book" aria-label="Print this book">
-                            <i id="print-button" class="fa fa-print"></i>
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
                         </a>
                         <a href="https://github.com/m3scluster/clusterd-docs/" title="Git repository" aria-label="Git repository">
-                            <i id="git-repository-button" class="fa fa-github"></i>
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
                         </a>
 
                     </div>
                 </div>
 
-                <div id="search-wrapper" class="hidden">
-                    <form id="searchbar-outer" class="searchbar-outer">
-                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
                     </form>
-                    <div id="searchresults-outer" class="searchresults-outer hidden">
-                        <div id="searchresults-header" class="searchresults-header"></div>
-                        <ul id="searchresults">
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
                         </ul>
                     </div>
                 </div>
 
                 <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
                 <script>
-                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
-                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
-                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
                         link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
                     });
                 </script>
 
-                <div id="content" class="content">
+                <div id="mdbook-content" class="content">
                     <main>
                         <h1 id="clusterd-agent-options"><a class="header" href="#clusterd-agent-options">ClusterD Agent Options</a></h1>
 <h2 id="required-flags"><a class="header" href="#required-flags">Required Flags</a></h2>
 <table class=".anchored table table-striped">
-  <thead>
-    <tr>
+  
+<thead>
+    
+<tr>
       <th width="30%">
         Flag
       </th>
@@ -181,7 +191,9 @@
         Explanation
       </th>
     </tr>
+
   </thead>
+
 <tr id="master">
   <td>
     --master=VALUE
@@ -194,6 +206,7 @@ May be one of:
   <code>file:///path/to/file</code> (where file contains one of the above)
   </td>
 </tr>
+
 <tr id="work_dir">
   <td>
     --work_dir=VALUE
@@ -207,11 +220,15 @@ production, since long-running agents could lose data when cleanup
 occurs. (Example: <code>/var/lib/mesos/agent</code>)
   </td>
 </tr>
+
 </table>
+
 <h2 id="optional-flags"><a class="header" href="#optional-flags">Optional Flags</a></h2>
 <table class=".anchored table table-striped">
-  <thead>
-    <tr>
+  
+<thead>
+    
+<tr>
       <th width="30%">
         Flag
       </th>
@@ -219,7 +236,9 @@ occurs. (Example: <code>/var/lib/mesos/agent</code>)
         Explanation
       </th>
     </tr>
+
   </thead>
+
 <tr id="acls">
   <td>
     --acls=VALUE
@@ -229,13 +248,13 @@ The value could be a JSON-formatted string of ACLs
 or a file path containing the JSON-formatted ACLs used
 for authorization. Path could be of the form <code>file:///path/to/file</code>
 or <code>/path/to/file</code>.
-<p/>
+<p />
 Note that if the <code>--authorizer</code> flag is provided with a value
 other than <code>local</code>, the ACLs contents will be
 ignored.
-<p/>
+<p />
 See the ACLs protobuf in acls.proto for the expected format.
-<p/>
+<p />
 Example:
 <pre><code>{
   "get_endpoints": [
@@ -245,8 +264,10 @@ Example:
     }
   ]
 }</code></pre>
+
   </td>
 </tr>
+
 <tr id="agent_features">
   <td>
     --agent_features=VALUE
@@ -256,7 +277,7 @@ JSON representation of agent features to whitelist. We always require
 'MULTI_ROLE', 'HIERARCHICAL_ROLE', 'RESERVATION_REFINEMENT',
 'AGENT_OPERATION_FEEDBACK', 'RESOURCE_PROVIDER', 'AGENT_DRAINING', and
 'TASK_RESOURCE_LIMITS'.
-<p/>
+<p />
 Example:
 <pre><code>
 {
@@ -270,13 +291,14 @@ Example:
         {"type": "TASK_RESOURCE_LIMITS"}
     ]
 }
-</pre></code>
-  </td>
-</tr>
+</code>
+  
+
 <tr id="agent_subsystems">
   <td>
     --agent_subsystems=VALUE,
-    <p/>
+    
+<p />
     --slave_subsystems=VALUE
   </td>
   <td>
@@ -287,6 +309,7 @@ no cgroup limits are set, they are inherited from the root mesos
 cgroup.
   </td>
 </tr>
+
 <tr id="effective_capabilities">
   <td>
     --effective_capabilities=VALUE
@@ -297,13 +320,13 @@ grant to a task that will be run in containers launched by the
 containerizer (currently only supported by the Mesos Containerizer).
 This set overrides the default capabilities for the user but not
 the capabilities requested by the framework.
-<p/>
+<p />
 To set capabilities the agent should have the <code>SETPCAP</code> capability.
-<p/>
+<p />
 This flag is effective iff <code>linux/capabilities</code> isolation is enabled.
 When <code>linux/capabilities</code> isolation is enabled, the absence of this flag
 implies that the operator intends to allow ALL capabilities.
-<p/>
+<p />
 Example:
 <pre><code>
 {
@@ -313,8 +336,10 @@ Example:
   ]
 }
 </code></pre>
+
   </td>
 </tr>
+
 <tr id="bounding_capabilities">
   <td>
     --bounding_capabilities=VALUE
@@ -324,14 +349,15 @@ JSON representation of the Linux capabilities that the operator
 will allow as the maximum level of privilege that a task launched
 by the containerizer may acquire (currently only supported by the
 Mesos Containerizer).
-<p/>
+<p />
 This flag is effective iff <code>linux/capabilities</code> isolation is enabled.
 When <code>linux/capabilities</code> isolation is enabled, the absence of this flag
 implies that the operator intends to allow ALL capabilities.
-<p/>
+<p />
 This flag has the same syntax as <code>--effective_capabilities</code>.
   </td>
 </tr>
+
 <tr id="appc_simple_discovery_uri_prefix">
   <td>
     --appc_simple_discovery_uri_prefix=VALUE
@@ -339,10 +365,10 @@ This flag has the same syntax as <code>--effective_capabilities</code>.
   <td>
 URI prefix to be used for simple discovery of appc images,
 e.g., <code>http://</code>, <code>https://</code>,
-<code>hdfs://<hostname>:9000/user/abc/cde</code>.
+<code>hdfs://<hostname>:9000/user/abc/cde.
 (default: http://)
-  </td>
-</tr>
+  
+
 <tr id="appc_store_dir">
   <td>
     --appc_store_dir=VALUE
@@ -352,6 +378,7 @@ Directory the appc provisioner will store images in.
 (default: /tmp/mesos/store/appc)
   </td>
 </tr>
+
 <tr id="attributes">
   <td>
     --attributes=VALUE
@@ -361,6 +388,7 @@ Attributes of the agent machine, in the form:
 <code>rack:2</code> or <code>rack:2;u:1</code>
   </td>
 </tr>
+
 <tr id="authenticate_http_executors">
   <td>
     --[no-]authenticate_http_executors
@@ -372,6 +400,7 @@ flag is only available when Mesos is built with SSL support.
 (default: false)
   </td>
 </tr>
+
 <tr id="authenticatee">
   <td>
     --authenticatee=VALUE
@@ -382,6 +411,7 @@ master. Use the default <code>crammd5</code>, or
 load an alternate authenticatee module using <code>--modules</code>. (default: crammd5)
   </td>
 </tr>
+
 <tr id="authentication_backoff_factor">
   <td>
     --authentication_backoff_factor=VALUE
@@ -394,6 +424,7 @@ of failed attempts. To tune these parameters, set the
 <code>--authentication_timeout_[min|max|factor]</code> flags. (default: 1secs)
   </td>
 </tr>
+
 <tr id="authentication_timeout_min">
   <td>
     --authentication_timeout_min=VALUE
@@ -402,11 +433,12 @@ of failed attempts. To tune these parameters, set the
 The minimum amount of time the agent waits before retrying authenticating
 with the master. See <code>--authentication_backoff_factor</code> for more
 details. (default: 5secs)
-<p/>NOTE that since authentication retry cancels the previous authentication
+<p />NOTE that since authentication retry cancels the previous authentication
 request, one should consider what is the normal authentication delay when
-setting this flag to prevent premature retry.</p>
+setting this flag to prevent premature retry.
   </td>
 </tr>
+
 <tr id="authentication_timeout_max">
   <td>
     --authentication_timeout_max=VALUE
@@ -417,6 +449,7 @@ with the master. See <code>--authentication_backoff_factor</code> for more
 details. (default: 1mins)
   </td>
 </tr>
+
 <tr id="authorizer">
   <td>
     --authorizer=VALUE
@@ -426,12 +459,13 @@ Authorizer implementation to use when authorizing actions that
 require it.
 Use the default <code>local</code>, or
 load an alternate authorizer module using <code>--modules</code>.
-<p/>
+<p />
 Note that if the <code>--authorizer</code> flag is provided with a value
 other than the default <code>local</code>, the ACLs
 passed through the <code>--acls</code> flag will be ignored.
   </td>
 </tr>
+
 <tr id="cgroups_cpu_enable_pids_and_tids_count">
   <td>
     --[no]-cgroups_cpu_enable_pids_and_tids_count
@@ -441,6 +475,7 @@ Cgroups feature flag to enable counting of processes and threads
 inside a container. (default: false)
   </td>
 </tr>
+
 <tr id="cgroups_destroy_timeout">
   <td>
     --cgroups_destroy_timeout=VALUE
@@ -451,6 +486,7 @@ hierarchy is not destroyed within the timeout, the corresponding
 container destroy is considered failed. (default: 1mins)
   </td>
 </tr>
+
 <tr id="cgroups_enable_cfs">
   <td>
     --[no]-cgroups_enable_cfs
@@ -460,6 +496,7 @@ Cgroups feature flag to enable hard limits on CPU resources
 via the CFS bandwidth limiting subfeature. (default: false)
   </td>
 </tr>
+
 <tr id="enable_cgroupsv2">
   <td>
     --enable_cgroupsv2
@@ -468,6 +505,7 @@ via the CFS bandwidth limiting subfeature. (default: false)
   Enable support for cgroupsv2 (Currently only the Docker executor supports CgroupsV2. Set these flag to true, will break the Mesos contrainerizer).
   </td>
 </tr>
+
 <tr id="cgroups_hierarchy">
   <td>
     --cgroups_hierarchy=VALUE
@@ -476,15 +514,18 @@ via the CFS bandwidth limiting subfeature. (default: false)
 The path to the cgroups hierarchy root. (default: /sys/fs/cgroup)
   </td>
 </tr>
+
 <tr id="cgroups_limit_swap">
   <td>
     --[no]-cgroups_limit_swap
   </td>
   <td>
 Cgroups feature flag to enable memory limits on both memory and
-swap instead of just memory. (default: false)
+swap instead of just memory. Not supported if cgroups v2 is used.
+(default: false)
   </td>
 </tr>
+
 <tr id="cgroups_net_cls_primary_handle">
   <td>
     --cgroups_net_cls_primary_handle
@@ -494,6 +535,7 @@ A non-zero, 16-bit handle of the form `0xAAAA`. This will be used as
 the primary handle for the net_cls cgroup.
   </td>
 </tr>
+
 <tr id="cgroups_net_cls_secondary_handles">
   <td>
     --cgroups_net_cls_secondary_handles
@@ -504,6 +546,7 @@ handles that can be used with the primary handle. This will take
 effect only when the <code>--cgroups_net_cls_primary_handle</code> is set.
   </td>
 </tr>
+
 <tr id="allowed_devices">
   <td>
     --allowed_devices
@@ -525,9 +568,10 @@ devices always be whitelisted by default:
   * /dev/urandom
   * /dev/random
 </code></pre>
+
 This flag will take effect only when <code>cgroups/devices</code> is set in
 <code>--isolation</code> flag.
-<p/>
+<p />
 Example:
 <pre><code>{
   "allowed_devices": [
@@ -544,8 +588,10 @@ Example:
   ]
 }
 </code></pre>
+
   </td>
 </tr>
+
 <tr id="cgroups_root">
   <td>
     --cgroups_root=VALUE
@@ -554,6 +600,7 @@ Example:
 Name of the root cgroup. (default: mesos)
   </td>
 </tr>
+
 <tr id="check_agent_port_range_only">
   <td>
     --[no-]check_agent_port_range_only
@@ -567,6 +614,7 @@ to only listen on ports for which they have been assigned resources.
 <code>--container_ports_isolated_range</code>.
   </td>
 </tr>
+
 <tr id="container_disk_watch_interval">
   <td>
     --container_disk_watch_interval=VALUE
@@ -576,6 +624,7 @@ The interval between disk quota checks for containers. This flag is
 used for the <code>disk/du</code> isolator. (default: 15secs)
   </td>
 </tr>
+
 <tr id="container_logger">
   <td>
     --container_logger=VALUE
@@ -587,6 +636,7 @@ container logger writes to <code>stdout</code> and <code>stderr</code> files
 in the sandbox directory.
   </td>
 </tr>
+
 <tr id="container_ports_isolated_range">
   <td>
     --container_ports_isolated_range=VALUE
@@ -598,6 +648,7 @@ be used in conjunction with <code>--check_agent_port_range_only</code>.
 Example: <code>[0-35000]</code>
   </td>
 </tr>
+
 <tr id="container_ports_watch_interval">
   <td>
     --container_ports_watch_interval=VALUE
@@ -608,6 +659,7 @@ containers listening on ports they don't have resources for.
 (default: 30secs)
   </td>
 </tr>
+
 <tr id="containerizers">
   <td>
     --containerizers=VALUE
@@ -621,6 +673,7 @@ are specified is the order they are tried.
 (default: mesos)
   </td>
 </tr>
+
 <tr id="credential">
   <td>
     --credential=VALUE
@@ -634,8 +687,10 @@ Example:
   "principal": "username",
   "secret": "secret"
 }</code></pre>
+
   </td>
 </tr>
+
 <tr id="default_container_dns">
   <td>
     --default_container_dns=VALUE
@@ -650,9 +705,9 @@ by a CNI plugin, but higher than the DNS information in agent host's
 `nameservers`, `search` and `options`, it will only be used if there
 is no DNS information provided in the ContainerInfo.docker.parameters
 message.
-<p/>
+<p />
 See the ContainerDNS message in `flags.proto` for the expected format.
-<p/>
+<p />
 Example:
 <pre><code>{
   "mesos": [
@@ -680,8 +735,10 @@ Example:
     }
   ]
 }</code></pre>
+
   </td>
 </tr>
+
 <tr id="default_container_info">
   <td>
     --default_container_info=VALUE
@@ -689,10 +746,10 @@ Example:
   <td>
 JSON-formatted ContainerInfo that will be included into
 any ExecutorInfo that does not specify a ContainerInfo.
-<p/>
+<p />
 See the ContainerInfo protobuf in mesos.proto for
 the expected format.
-<p/>
+<p />
 Example:
 <pre><code>{
   "type": "MESOS",
@@ -704,8 +761,10 @@ Example:
     }
   ]
 }</code></pre>
+
   </td>
 </tr>
+
 <tr id="default_role">
   <td>
     --default_role=VALUE
@@ -718,6 +777,7 @@ automatically detected, will be assigned to
 this role. (default: *)
   </td>
 </tr>
+
 <tr id="default_container_shm_size">
   <td>
     --default_container_shm_size
@@ -732,6 +792,7 @@ only relevant for the Mesos Containerizer and it will be ignored if
 the <code>namespaces/ipc</code> isolator is not enabled.
   </td>
 </tr>
+
 <tr id="disallow_sharing_agent_ipc_namespace">
   <td>
     --[no-]disallow_sharing_agent_ipc_namespace
@@ -746,6 +807,7 @@ flag will be ignored if the <code>namespaces/ipc</code> isolator is not enabled.
 (default: false)
   </td>
 </tr>
+
 <tr id="disallow_sharing_agent_pid_namespace">
   <td>
     --[no-]disallow_sharing_agent_pid_namespace
@@ -760,6 +822,7 @@ namespaces/pid</code> isolator is not enabled.
 (default: false)
   </td>
 </tr>
+
 <tr id="disk_profile_adaptor">
   <td>
     --disk_profile_adaptor=VALUE
@@ -773,6 +836,7 @@ resource providers is to only expose resources for pre-existing
 volumes and not publish RAW volumes.
   </td>
 </tr>
+
 <tr id="disk_watch_interval">
   <td>
     --disk_watch_interval=VALUE
@@ -784,6 +848,7 @@ This drives the garbage collection of archived
 information and sandboxes. (default: 1mins)
   </td>
 </tr>
+
 <tr id="docker">
   <td>
     --docker=VALUE
@@ -794,6 +859,7 @@ containerizer.
 (default: docker)
   </td>
 </tr>
+
 <tr id="docker_config">
   <td>
     --docker_config=VALUE
@@ -814,8 +880,10 @@ Example JSON (<code>$HOME/.docker/config.json</code>):
   }
 }
 </code></pre>
+
   </td>
 </tr>
+
 <tr id="docker_ignore_runtime">
   <td>
     --docker_ignore_runtime=VALUE
@@ -828,6 +896,7 @@ to the container.
 (default: false)
   </td>
 </tr>
+
 <tr id="docker_kill_orphans">
   <td>
     --[no-]docker_kill_orphans
@@ -840,6 +909,7 @@ removing docker tasks launched by other agents.
 (default: true)
   </td>
 </tr>
+
 <tr id="docker_mesos_image">
   <td>
     --docker_mesos_image=VALUE
@@ -852,6 +922,7 @@ docker containers in order to recover them when the agent restarts and
 recovers.
   </td>
 </tr>
+
 <tr id="docker_registry">
   <td>
     --docker_registry=VALUE
@@ -867,6 +938,7 @@ change the default registry server for Docker containerizer.
 (default: https://registry-1.docker.io)
   </td>
 </tr>
+
 <tr id="docker_remove_delay">
   <td>
     --docker_remove_delay=VALUE
@@ -878,6 +950,7 @@ after Mesos regards the container as TERMINATED
 This only applies for the Docker Containerizer. (default: 6hrs)
   </td>
 </tr>
+
 <tr id="docker_socket">
   <td>
     --docker_socket=VALUE
@@ -892,6 +965,7 @@ used by the Docker image used to run the agent. (default:
 platforms).
   </td>
 </tr>
+
 <tr id="docker_stop_timeout">
   <td>
     --docker_stop_timeout=VALUE
@@ -902,6 +976,7 @@ that container. This flag is deprecated; use task's kill policy instead.
 (default: 0ns)
   </td>
 </tr>
+
 <tr id="docker_store_dir">
   <td>
     --docker_store_dir=VALUE
@@ -910,6 +985,7 @@ that container. This flag is deprecated; use task's kill policy instead.
 Directory the Docker provisioner will store images in (default: /tmp/mesos/store/docker)
   </td>
 </tr>
+
 <tr id="docker_volume_checkpoint_dir">
   <td>
     --docker_volume_checkpoint_dir=VALUE
@@ -920,6 +996,7 @@ volumes that each container uses.
 (default: /var/run/mesos/isolators/docker/volume)
   </td>
 </tr>
+
 <tr id="docker_volume_chown">
   <td>
     --[no-]docker_volume_chown
@@ -931,6 +1008,7 @@ to turn on if there is any docker volume shared by multiple non-root
 users. By default, this flag is off. (default: false)
   </td>
 </tr>
+
 <tr id="domain_socket_location">
   <td>
     --domain_socket_location=VALUE
@@ -940,12 +1018,13 @@ Location on the host filesystem of the domain socket used for
 communication with executors. Alternatively, this can be set to
 <code>'systemd:&lt;identifier&gt;'</code> to use the domain socket
 with the given identifier, which is expected to be passed by systemd.
-<p>This flag will be ignored unless the <code>--http_executor_domain_sockets</code>
+<p>This flag will be ignored unless the <code>–http_executor_domain_sockets</code>
 flag is also set to true.</p>
 <p>Total path length must be less than 108 characters.</p>
 <p>Will be set to <code>&lt;runtime_dir&gt;/agent.sock</code> by default.</p>
-</td>
+  </td>
 </tr>
+
 <tr id="enforce_container_disk_quota">
   <td>
     --[no-]enforce_container_disk_quota
@@ -955,6 +1034,7 @@ Whether to enable disk quota enforcement for containers. This flag
 is used by the <code>disk/du</code> and <code>disk/xfs</code> isolators. (default: false)
   </td>
 </tr>
+
 <tr id="enforce_container_ports">
   <td>
     --[no-]enforce_container_ports
@@ -964,6 +1044,7 @@ Whether to enable network port enforcement for containers. This flag
 is used by the <code>network/ports</code> isolator. (default: false)
   </td>
 </tr>
+
 <tr id="executor_environment_variables">
   <td>
     --executor_environment_variables=VALUE
@@ -977,8 +1058,10 @@ Example:
   "PATH": "/bin:/usr/bin",
   "LD_LIBRARY_PATH": "/usr/local/lib"
 }</code></pre>
+
   </td>
 </tr>
+
 <tr id="executor_registration_timeout">
   <td>
     --executor_registration_timeout=VALUE
@@ -989,6 +1072,7 @@ to register with the agent before considering it hung and
 shutting it down (e.g., 60secs, 3mins, etc) (default: 1mins)
   </td>
 </tr>
+
 <tr id="executor_reregistration_timeout">
   <td>
     --executor_reregistration_timeout=VALUE
@@ -1000,6 +1084,7 @@ it down. Note that currently, the agent will not reregister with the
 master until this timeout has elapsed (see MESOS-7539). (default: 2secs)
   </td>
 </tr>
+
 <tr id="executor_reregistration_retry_interval">
   <td>
     --executor_reregistration_retry_interval=VALUE
@@ -1025,6 +1110,7 @@ This results in "old" executors correctly establishing a link
 when processing the second reconnect message. (default: no retries)
   </td>
 </tr>
+
 <tr id="max_completed_executors_per_framework">
   <td>
     --max_completed_executors_per_framework=VALUE
@@ -1034,6 +1120,7 @@ Maximum number of completed executors per framework to store
 in memory. (default: 150)
   </td>
 </tr>
+
 <tr id="jwt_secret_key">
   <td>
     --jwt_secret_key=VALUE
@@ -1043,6 +1130,7 @@ Path to a file containing the key used when generating JWT secrets.
 This flag is only available when Mesos is built with SSL support.
   </td>
 </tr>
+
 <tr id="executor_shutdown_grace_period">
   <td>
     --executor_shutdown_grace_period=VALUE
@@ -1057,6 +1145,7 @@ terminations may occur.
 (default: 5secs)
   </td>
 </tr>
+
 <tr id="fetcher_cache_dir">
   <td>
     --fetcher_cache_dir=VALUE
@@ -1070,11 +1159,15 @@ for several reasons:</p>
 <ul>
 <li> The cache directories are transient and not meant to be
      backed up. Upon restarting the agent, the cache is always empty. </li>
+
 <li> The cache and container sandboxes can potentially interfere with
      each other when occupying a shared space (i.e. disk contention). </li>
+
 </ul>
+
   </td>
 </tr>
+
 <tr id="fetcher_cache_size">
   <td>
     --fetcher_cache_size=VALUE
@@ -1083,6 +1176,7 @@ for several reasons:</p>
 Size of the fetcher cache in Bytes. (default: 2GB)
   </td>
 </tr>
+
 <tr id="fetcher_stall_timeout">
   <td>
     --fetcher_stall_timeout=VALUE
@@ -1095,6 +1189,7 @@ keeps below one byte per second).
 does not apply to HDFS. (default: 1mins)
   </td>
 </tr>
+
 <tr id="frameworks_home">
   <td>
     --frameworks_home=VALUE
@@ -1103,6 +1198,7 @@ does not apply to HDFS. (default: 1mins)
 Directory path prepended to relative executor URIs (default: )
   </td>
 </tr>
+
 <tr id="gc_delay">
   <td>
     --gc_delay=VALUE
@@ -1114,6 +1210,7 @@ Note that this delay may be shorter depending on
 the available disk usage. (default: 1weeks)
   </td>
 </tr>
+
 <tr id="gc_disk_headroom">
   <td>
     --gc_disk_headroom=VALUE
@@ -1126,6 +1223,7 @@ every <code>--disk_watch_interval</code> duration. <code>gc_disk_headroom</code>
 be a value between 0.0 and 1.0 (default: 0.1)
   </td>
 </tr>
+
 <tr id="gc_non_executor_container_sandboxes">
   <td>
     --[no-]gc_non_executor_container_sandboxes
@@ -1138,6 +1236,7 @@ The <code>REMOVE_(NESTED_)CONTAINER</code> API is unaffected by this flag
 and can still be used. (default: false).
   </td>
 </tr>
+
 <tr id="hadoop_home">
   <td>
     --hadoop_home=VALUE
@@ -1149,6 +1248,7 @@ fetching framework executors from HDFS)
 environment or find hadoop on <code>PATH</code>)
   </td>
 </tr>
+
 <tr id="host_path_volume_force_creation">
   <td>
     --host_path_volume_force_creation
@@ -1159,6 +1259,7 @@ allowed to be created by the <code>volume/host_path</code> isolator,
 if the directories do not exist.
   </td>
 </tr>
+
 <tr id="http_credentials">
   <td>
     --http_credentials=VALUE
@@ -1167,7 +1268,7 @@ if the directories do not exist.
 Path to a JSON-formatted file containing credentials. These
 credentials are used to authenticate HTTP endpoints on the agent.
 Path can be of the form <code>file:///path/to/file</code> or <code>/path/to/file</code>.
-<p/>
+<p />
 Example:
 <pre><code>{
   "credentials": [
@@ -1178,8 +1279,10 @@ Example:
   ]
 }
 </code></pre>
+
   </td>
 </tr>
+
 <tr id="http_command_executor">
   <td>
     --[no-]http_command_executor
@@ -1193,6 +1296,7 @@ the driver based implementation would be used.
 production yet. (default: false)
   </td>
 </tr>
+
 <tr id="http_executor_domain_sockets">
   <td>
       --http_executor_domain_sockets
@@ -1203,6 +1307,7 @@ executor can use to connect to the agent, instead of relying on
 a TCP connection.
   </td>
 </tr>
+
 <tr id="http_heartbeat_interval">
   <td>
     --http_heartbeat_interval=VALUE
@@ -1215,6 +1320,7 @@ the agent HTTP API. Currently, this only applies to the
 (default: 30secs)
   </td>
 </tr>
+
 <tr id="image_providers">
   <td>
     --image_providers=VALUE
@@ -1224,6 +1330,7 @@ Comma-separated list of supported image providers,
 e.g., <code>APPC,DOCKER</code>.
   </td>
 </tr>
+
 <tr id="image_provisioner_backend">
   <td>
     --image_provisioner_backend=VALUE
@@ -1233,6 +1340,7 @@ Strategy for provisioning container rootfs from images, e.g., <code>aufs</code>,
 <code>bind</code>, <code>copy</code>, <code>overlay</code>.
   </td>
 </tr>
+
 <tr id="image_gc_config">
   <td>
     --image_gc_config=VALUE
@@ -1246,10 +1354,10 @@ auto image gc is enabled. This image gc config can be provided either
 as a path pointing to a local file, or as a JSON-formatted string.
 Please note that the image garbage collection only work with Mesos
 Containerizer for now.
-<p/>
+<p />
 See the ImageGcConfig message in `flags.proto` for the expected
 format.
-<p/>
+<p />
 In the following example, image garbage collection is configured to
 sample disk usage every hour, and will attempt to maintain at least
 10% of free space on the container image filesystem:
@@ -1260,8 +1368,10 @@ sample disk usage every hour, and will attempt to maintain at least
   },
   "excluded_images": []
 }</code></pre>
+
   </td>
 </tr>
+
 <tr id="ip6">
   <td>
     --ip6=VALUE
@@ -1269,12 +1379,13 @@ sample disk usage every hour, and will attempt to maintain at least
   <td>
 IPv6 address to listen on. This cannot be used in conjunction
 with <code>--ip6_discovery_command</code>.
-<p/>
+<p />
 NOTE: Currently Mesos doesn't listen on IPv6 sockets and hence
 this IPv6 address is only used to advertise IPv6 addresses for
 containers running on the host network.
   </td>
 </tr>
+
 <tr id="ip6_discovery_command">
   <td>
     --ip6_discovery_command=VALUE
@@ -1283,12 +1394,13 @@ containers running on the host network.
 Optional IPv6 discovery binary: if set, it is expected to emit
 the IPv6 address on which Mesos will try to bind when IPv6 socket
 support is enabled in Mesos.
-<p/>
+<p />
 NOTE: Currently Mesos doesn't listen on IPv6 sockets and hence
 this IPv6 address is only used to advertise IPv6 addresses for
 containers running on the host network.
   </td>
 </tr>
+
 <tr id="isolation">
   <td>
     --isolation=VALUE
@@ -1307,6 +1419,7 @@ Note that this flag is only relevant for the Mesos Containerizer. (default:
 windows/cpu,windows/mem on Windows; posix/cpu,posix/mem on other platforms)
   </td>
 </tr>
+
 <tr id="launcher">
   <td>
     --launcher=VALUE
@@ -1319,6 +1432,7 @@ network, pid, etc. If unspecified, the agent will choose the Linux
 launcher if it's running as root on Linux.
   </td>
 </tr>
+
 <tr id="launcher_dir">
   <td>
     --launcher_dir=VALUE
@@ -1329,6 +1443,7 @@ fetcher, containerizer, and executor binary files under this
 directory. (default: /usr/local/libexec/mesos)
   </td>
 </tr>
+
 <tr id="master_detector">
   <td>
   --master_detector=VALUE
@@ -1339,6 +1454,7 @@ module specified through the <code>--modules</code> flag. Cannot be used in
 conjunction with <code>--master</code>.
   </td>
 </tr>
+
 <tr id="nvidia_gpu_devices">
   <td>
     --nvidia_gpu_devices=VALUE
@@ -1353,6 +1469,7 @@ listed will only be isolated if the <code>--isolation</code> flag contains the
 string <code>gpu/nvidia</code>.
   </td>
 </tr>
+
 <tr id="network_cni_plugins_dir">
   <td>
     --network_cni_plugins_dir=VALUE
@@ -1364,6 +1481,7 @@ the plugins to add/delete container from the CNI networks. It is the operator's
 responsibility to install the CNI plugin binaries in the specified directory.
   </td>
 </tr>
+
 <tr id="network_cni_config_dir">
   <td>
     --network_cni_config_dir=VALUE
@@ -1374,6 +1492,7 @@ containers launched in Mesos agent can connect to, the operator should install
 a network configuration file in JSON format in the specified directory.
   </td>
 </tr>
+
 <tr id="network_cni_root_dir_persist">
   <td>
     --[no-]network_cni_root_dir_persist
@@ -1383,6 +1502,7 @@ This setting controls whether the CNI root directory persists across
 reboot or not.
   </td>
 </tr>
+
 <tr id="network_cni_metrics">
   <td>
     --[no-]network_cni_metrics
@@ -1392,6 +1512,7 @@ This setting controls whether the networking metrics of the CNI isolator should
 be exposed.
   </td>
 </tr>
+
 <tr id="oversubscribed_resources_interval">
   <td>
     --oversubscribed_resources_interval=VALUE
@@ -1403,6 +1524,7 @@ and available. The interval between updates is controlled by this flag.
 (default: 15secs)
   </td>
 </tr>
+
 <tr id="perf_duration">
   <td>
     --perf_duration=VALUE
@@ -1412,6 +1534,7 @@ Duration of a perf stat sample. The duration must be less
 than the <code>perf_interval</code>. (default: 10secs)
   </td>
 </tr>
+
 <tr id="perf_events">
   <td>
     --perf_events=VALUE
@@ -1425,6 +1548,7 @@ when reported in the PerfStatistics protobuf, e.g., <code>cpu-cycles</code>
 becomes <code>cpu_cycles</code>; see the PerfStatistics protobuf for all names.
   </td>
 </tr>
+
 <tr id="perf_interval">
   <td>
     --perf_interval=VALUE
@@ -1437,6 +1561,7 @@ demand. For this reason, <code>perf_interval</code> is independent of the
 resource monitoring interval. (default: 60secs)
   </td>
 </tr>
+
 <tr id="qos_controller">
   <td>
     --qos_controller=VALUE
@@ -1445,6 +1570,7 @@ resource monitoring interval. (default: 60secs)
 The name of the QoS Controller to use for oversubscription.
   </td>
 </tr>
+
 <tr id="qos_correction_interval_min">
   <td>
     --qos_correction_interval_min=VALUE
@@ -1456,6 +1582,7 @@ The smallest interval between these corrections is controlled by
 this flag. (default: 0secs)
   </td>
 </tr>
+
 <tr id="reconfiguration_policy">
   <td>
     --reconfiguration_policy=VALUE
@@ -1471,8 +1598,9 @@ acceptable when recovering the previous agent state. Possible values:
 the master may still reject the agent if it detects a change that it
 considers unacceptable, which, e.g., currently happens when port or hostname
 are changed. (default: equal)</p>
-</td>
+  </td>
 </tr>
+
 <tr id="recover">
   <td>
     --recover=VALUE
@@ -1486,6 +1614,7 @@ cleanup  : Kill any old live executors and exit.
            or executor upgrade!). (default: reconnect)
   </td>
 </tr>
+
 <tr id="recovery_timeout">
   <td>
     --recovery_timeout=VALUE
@@ -1497,6 +1626,7 @@ waiting to reconnect to the agent will self-terminate.
 (default: 15mins)
   </td>
 </tr>
+
 <tr id="registration_backoff_factor">
   <td>
     --registration_backoff_factor=VALUE
@@ -1510,6 +1640,7 @@ interval (e.g., 1st retry uses a random value between <code>[0, b * 2^1]</code>,
 etc) up to a maximum of 1mins (default: 1secs)
   </td>
 </tr>
+
 <tr id="resource_estimator">
   <td>
     --resource_estimator=VALUE
@@ -1518,6 +1649,7 @@ etc) up to a maximum of 1mins (default: 1secs)
 The name of the resource estimator to use for oversubscription.
   </td>
 </tr>
+
 <tr id="resources">
   <td>
     --resources=VALUE
@@ -1526,15 +1658,15 @@ The name of the resource estimator to use for oversubscription.
 Total consumable resources per agent. Can be provided in JSON format
 or as a semicolon-delimited list of key:value pairs, with the role
 optionally specified.
-<p/>
+<p />
 As a key:value list:
 <code>name(role):value;name:value...</code>
-<p/>
+<p />
 To use JSON, pass a JSON-formatted string or use
 <code>--resources=filepath</code> to specify the resources via a file containing
 a JSON-formatted string. 'filepath' can only be of the form
 <code>file:///path/to/file</code>.
-<p/>
+<p />
 Example JSON:
 <pre><code>[
   {
@@ -1552,8 +1684,10 @@ Example JSON:
     }
   }
 ]</code></pre>
+
   </td>
 </tr>
+
 <tr id="resource_provider_config_dir">
   <td>
     --resource_provider_config_dir=VALUE
@@ -1567,14 +1701,16 @@ responsible for handling operations on the resources it provides.
 Please note that <code>resources</code> field might not need to be
 specified if the resource provider determines the resources
 automatically.
-<p/>
+<p />
 Example config file in this directory:
 <pre><code>{
   "type": "org.mesos.apache.rp.local.storage",
   "name": "lvm"
 }</code></pre>
+
   </td>
 </tr>
+
 <tr id="csi_plugin_config_dir">
   <td>
     --csi_plugin_config_dir=VALUE
@@ -1585,7 +1721,7 @@ Each file in the config dir should contain a JSON object representing
 a <code>CSIPluginInfo</code> object which can be either a managed CSI
 plugin (i.e. the plugin launched by Mesos as a standalone container)
 or an unmanaged CSI plugin (i.e. the plugin launched out of Mesos).
-<p/>
+<p />
 Example config files in this directory:
 <pre><code>{
   "type": "org.apache.mesos.csi.managed-plugin",
@@ -1603,7 +1739,7 @@ Example config files in this directory:
       ]
     }
   ]
-}</code></pre>
+}
 <pre><code>{
   "type": "org.apache.mesos.csi.unmanaged-plugin",
   "endpoints": [
@@ -1614,8 +1750,9 @@ Example config files in this directory:
   ],
   "target_path_root": "/mnt/unmanaged-plugin"
 }</code></pre>
-  </td>
-</tr>
+
+  
+
 <tr id="revocable_cpu_low_priority">
   <td>
     --[no-]revocable_cpu_low_priority
@@ -1626,6 +1763,7 @@ normal containers (non-revocable cpu). Currently only
 supported by the cgroups/cpu isolator. (default: true)
   </td>
 </tr>
+
 <tr id="runtime_dir">
   <td>
     --runtime_dir
@@ -1637,6 +1775,7 @@ not across reboots). This directory will be cleared on reboot.
 (Example: <code>/var/run/mesos</code>)
   </td>
 </tr>
+
 <tr id="sandbox_directory">
   <td>
     --sandbox_directory=VALUE
@@ -1647,6 +1786,7 @@ sandbox is mapped to.
 (default: /mnt/mesos/sandbox)
   </td>
 </tr>
+
 <tr id="strict">
   <td>
     --[no-]strict
@@ -1660,6 +1800,7 @@ state as possible is recovered.
 (default: true)
   </td>
 </tr>
+
 <tr id="secret_resolver">
   <td>
     --secret_resolver=VALUE
@@ -1671,6 +1812,7 @@ the default behavior is to resolve value-based secrets and error on
 reference-based secrets.
   </td>
 </tr>
+
 <tr id="switch_user">
   <td>
     --[no-]switch_user
@@ -1687,6 +1829,7 @@ agent process.
 therefore the flag currently does not exist on that platform. (default: true)
   </td>
 </tr>
+
 <tr>
   <td>
     --[no-]systemd_enable_support
@@ -1699,6 +1842,7 @@ the agent is launched as a systemd unit.
 (default: true)
   </td>
 </tr>
+
 <tr>
   <td>
     --systemd_runtime_directory=VALUE
@@ -1708,6 +1852,7 @@ The path to the systemd system run time directory.
 (default: /run/systemd/system)
   </td>
 </tr>
+
 <tr>
   <td>
     --volume_gid_range=VALUE
@@ -1721,12 +1866,15 @@ as its supplementary group to make sure it can access the volume.
 (Example: <code>[10000-20000]</code>)
   </td>
 </tr>
-</table>
+
+
 <h2 id="network-isolator-flags"><a class="header" href="#network-isolator-flags">Network Isolator Flags</a></h2>
 <p><em>Available when configured with <code>--with-network-isolator</code>.</em></p>
 <table class="table table-striped">
-  <thead>
-    <tr>
+  
+<thead>
+    
+<tr>
       <th width="30%">
         Flag
       </th>
@@ -1734,7 +1882,9 @@ as its supplementary group to make sure it can access the volume.
         Explanation
       </th>
     </tr>
+
   </thead>
+
 <tr id="ephemeral_ports_per_container">
   <td>
     --ephemeral_ports_per_container=VALUE
@@ -1745,6 +1895,7 @@ isolator. This number has to be a power of 2. This flag is used
 for the <code>network/port_mapping</code> isolator. (default: 1024)
   </td>
 </tr>
+
 <tr id="eth0_name">
   <td>
     --eth0_name=VALUE
@@ -1756,6 +1907,7 @@ on the host default gateway. This flag is used for the
 <code>network/port_mapping</code> isolator.
   </td>
 </tr>
+
 <tr id="lo_name">
   <td>
     --lo_name=VALUE
@@ -1766,6 +1918,7 @@ not specified, the network isolator will try to guess it. This
 flag is used for the <code>network/port_mapping</code> isolator.
   </td>
 </tr>
+
 <tr id="egress_rate_limit_per_container">
   <td>
     --egress_rate_limit_per_container=VALUE
@@ -1778,6 +1931,7 @@ This flag uses the Bytes type (defined in stout) and is used for
 the <code>network/port_mapping</code> isolator.
   </td>
 </tr>
+
 <tr id="egress_unique_flow_per_container">
   <td>
     --[no-]egress_unique_flow_per_container
@@ -1788,6 +1942,7 @@ egress traffic. This flag is used for the <code>network/port_mapping</code>
 isolator. (default: false)
   </td>
 </tr>
+
 <tr id="egress_flow_classifier_parent">
   <td>
     --egress_flow_classifier_parent=VALUE
@@ -1798,6 +1953,7 @@ a flow classifier (fq_codel) qdisc on egress side. This flag specifies
 where to install it in the hierarchy. By default, we install it at root.
   </td>
 </tr>
+
 <tr id="network_enable_socket_statistics_summary">
   <td>
     --[no-]network_enable_socket_statistics_summary
@@ -1808,6 +1964,7 @@ This flag is used for the <code>network/port_mapping</code> isolator.
 (default: false)
   </td>
 </tr>
+
 <tr id="network_enable_socket_statistics_details">
   <td>
     --[no-]network_enable_socket_statistics_details
@@ -1818,6 +1975,7 @@ each container. This flag is used for the <code>network/port_mapping</code>
 isolator. (default: false)
   </td>
 </tr>
+
 <tr id="network_enable_snmp_statistics">
   <td>
     --[no-]network_enable_snmp_statistics
@@ -1828,12 +1986,16 @@ each container. This flag is used for the 'network/port_mapping'
 isolator. (default: false)
   </td>
 </tr>
+
 </table>
+
 <h2 id="seccomp-isolator-flags"><a class="header" href="#seccomp-isolator-flags">Seccomp Isolator flags</a></h2>
 <p><em>Available when configured with <code>--enable-seccomp-isolator</code>.</em></p>
 <table class="table table-striped">
-  <thead>
-    <tr>
+  
+<thead>
+    
+<tr>
       <th width="30%">
         Flag
       </th>
@@ -1841,7 +2003,9 @@ isolator. (default: false)
         Explanation
       </th>
     </tr>
+
   </thead>
+
 <tr id="seccomp_config_dir">
   <td>
     --seccomp_config_dir=VALUE
@@ -1853,6 +2017,7 @@ the <code>linux/seccomp</code> isolator will try to locate a Seccomp
 profile in the specified directory.
 </td>
 </tr>
+
 <tr id="seccomp_profile_name">
   <td>
     --seccomp_profile_name=VALUE
@@ -1865,12 +2030,16 @@ profile by default when launching a new Mesos container.
 Docker Seccomp profile format (e.g., https://github.com/moby/moby/blob/master/profiles/seccomp/default.json).
 </td>
 </tr>
+
 </table>
+
 <h2 id="xfs-disk-isolator-flags"><a class="header" href="#xfs-disk-isolator-flags">XFS Disk Isolator flags</a></h2>
 <p><em>Available when configured with <code>--enable-xfs-disk-isolator</code>.</em></p>
 <table class="table table-striped">
-  <thead>
-    <tr>
+  
+<thead>
+    
+<tr>
       <th width="30%">
         Flag
       </th>
@@ -1878,7 +2047,9 @@ Docker Seccomp profile format (e.g., https://github.com/moby/moby/blob/master/pr
         Explanation
       </th>
     </tr>
+
   </thead>
+
 <tr id="xfs_project_range">
   <td>
     --xfs_project_range=VALUE
@@ -1889,6 +2060,14 @@ quotas for container sandbox directories. Valid project IDs range from
 1 to max(uint32). (default `[5000-10000]`)
 </td>
 </tr>
+
+</table>
+
+<footer id="open-on-gh">Found a bug? <a href="https://github.com/m3scluster/clusterd-docs//edit/main/src/configuration/agent.md">Edit this page on GitHub.</a></footer></path-to-managed-plugin></code></pre>
+</td></tr>
+</hostname></code></td></tr>
+</pre>
+</td></tr>
 </table>
 
                     </main>
@@ -1896,11 +2075,11 @@ quotas for container sandbox directories. Valid project IDs range from
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                             <a rel="prev" href="../windows.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
-                                <i class="fa fa-angle-left"></i>
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                             </a>
 
-                            <a rel="next" href="../configuration/autotools.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                                <i class="fa fa-angle-right"></i>
+                            <a rel="next prefetch" href="../configuration/autotools.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
                             </a>
 
                         <div style="clear: both"></div>
@@ -1910,16 +2089,21 @@ quotas for container sandbox directories. Valid project IDs range from
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                     <a rel="prev" href="../windows.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
-                        <i class="fa fa-angle-left"></i>
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                     </a>
 
-                    <a rel="next" href="../configuration/autotools.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                        <i class="fa fa-angle-right"></i>
+                    <a rel="next prefetch" href="../configuration/autotools.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
                     </a>
             </nav>
 
         </div>
 
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
 
 
 
@@ -1928,15 +2112,16 @@ quotas for container sandbox directories. Valid project IDs range from
         </script>
 
 
-        <script src="../elasticlunr.min.js"></script>
-        <script src="../mark.min.js"></script>
-        <script src="../searcher.js"></script>
+        <script src="../elasticlunr-ef4e11c1.min.js"></script>
+        <script src="../mark-09e88c2c.min.js"></script>
+        <script src="../searcher-09f2665d.js"></script>
 
-        <script src="../clipboard.min.js"></script>
-        <script src="../highlight.js"></script>
-        <script src="../book.js"></script>
+        <script src="../clipboard-1626706a.min.js"></script>
+        <script src="../highlight-abc7f01d.js"></script>
+        <script src="../book-609e4cb8.js"></script>
 
         <!-- Custom JS scripts -->
+
 
 
     </div>

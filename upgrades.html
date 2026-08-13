@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="en" class="sidebar-visible no-js light">
+<html lang="en" class="light sidebar-visible" dir="ltr">
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
@@ -7,43 +7,57 @@
 
 
         <!-- Custom HTML head -->
-        
+
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="theme-color" content="#ffffff" />
+        <meta name="theme-color" content="#ffffff">
 
-        <link rel="icon" href="favicon.svg">
-        <link rel="shortcut icon" href="favicon.png">
-        <link rel="stylesheet" href="css/variables.css">
-        <link rel="stylesheet" href="css/general.css">
-        <link rel="stylesheet" href="css/chrome.css">
-        <link rel="stylesheet" href="css/print.css" media="print">
+        <link rel="icon" href="favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="favicon-8114d1fc.png">
+        <link rel="stylesheet" href="css/variables-8adf115d.css">
+        <link rel="stylesheet" href="css/general-e96d0476.css">
+        <link rel="stylesheet" href="css/chrome-d279d366.css">
+        <link rel="stylesheet" href="css/print-9e4910d8.css" media="print">
 
         <!-- Fonts -->
-        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
-        <link rel="stylesheet" href="fonts/fonts.css">
+        <link rel="stylesheet" href="fonts/fonts-9644e21d.css">
 
         <!-- Highlight.js Stylesheets -->
-        <link rel="stylesheet" href="highlight.css">
-        <link rel="stylesheet" href="tomorrow-night.css">
-        <link rel="stylesheet" href="ayu-highlight.css">
+        <link rel="stylesheet" id="mdbook-highlight-css" href="highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
 
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "searchindex-c0e7f0eb.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc-1084839a.js"></script>
     </head>
     <body>
-    <div id="body-container">
-        <!-- Provide site root to javascript -->
-        <script>
-            var path_to_root = "";
-            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
-        </script>
-
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
         <script>
             try {
-                var theme = localStorage.getItem('mdbook-theme');
-                var sidebar = localStorage.getItem('mdbook-sidebar');
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
 
                 if (theme.startsWith('"') && theme.endsWith('"')) {
                     localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
@@ -57,80 +71,69 @@
 
         <!-- Set the theme before any content is loaded, prevents flash -->
         <script>
-            var theme;
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
-            var html = document.querySelector('html');
-            html.classList.remove('no-js')
+            const html = document.documentElement;
             html.classList.remove('light')
             html.classList.add(theme);
-            html.classList.add('js');
+            html.classList.add("js");
         </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
 
         <!-- Hide / unhide sidebar before it is displayed -->
         <script>
-            var html = document.querySelector('html');
-            var sidebar = null;
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
             if (document.body.clientWidth >= 1080) {
                 try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
                 sidebar = sidebar || 'visible';
             } else {
                 sidebar = 'hidden';
+                sidebar_toggle.checked = false;
             }
-            html.classList.remove('sidebar-visible');
-            html.classList.add("sidebar-" + sidebar);
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
         </script>
 
-        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">Fundamentals</li><li class="chapter-item expanded "><a href="architecture.html"><strong aria-hidden="true">1.</strong> Mesos Architecture providing an overview of Mesos concepts</a></li><li class="chapter-item expanded "><a href="presentations.html"><strong aria-hidden="true">2.</strong> Video and Slides of Mesos Presentations</a></li><li class="chapter-item expanded "><a href="versioning.html"><strong aria-hidden="true">3.</strong> Mesos Release and Support Policy</a></li><li class="chapter-item expanded affix "><li class="part-title">Build / Installation</li><li class="chapter-item expanded "><a href="building.html"><strong aria-hidden="true">4.</strong> Building for basic instructions on compiling and installing Mesos.</a></li><li class="chapter-item expanded "><a href="binary-packages.html"><strong aria-hidden="true">5.</strong> Binary Packages for how to use Mesos binary packages.</a></li><li class="chapter-item expanded "><a href="configuration.html"><strong aria-hidden="true">6.</strong> Configuration for build configuration options.</a></li><li class="chapter-item expanded "><a href="cmake.html"><strong aria-hidden="true">7.</strong> CMake for details about using the new CMake build system.</a></li><li class="chapter-item expanded "><a href="windows.html"><strong aria-hidden="true">8.</strong> Windows Support for the state of Windows support in Mesos.</a></li><li class="chapter-item expanded affix "><li class="part-title">Configuration</li><li class="chapter-item expanded "><a href="configuration/agent.html"><strong aria-hidden="true">9.</strong> Agent Options</a></li><li class="chapter-item expanded "><a href="configuration/autotools.html"><strong aria-hidden="true">10.</strong> Autotools Options</a></li><li class="chapter-item expanded "><a href="configuration/cmake.html"><strong aria-hidden="true">11.</strong> CMake Options</a></li><li class="chapter-item expanded "><a href="configuration/libprocess.html"><strong aria-hidden="true">12.</strong> Libprocess Options</a></li><li class="chapter-item expanded "><a href="configuration/master-and-agent.html"><strong aria-hidden="true">13.</strong> Master and Agent Options</a></li><li class="chapter-item expanded "><a href="configuration/master.html"><strong aria-hidden="true">14.</strong> Master Options</a></li><li class="chapter-item expanded affix "><li class="part-title">Administration</li><li class="chapter-item expanded "><a href="configuration.html"><strong aria-hidden="true">15.</strong> Configuration for command-line arguments.</a></li><li class="chapter-item expanded "><a href="high-availability.html"><strong aria-hidden="true">16.</strong> High Availability Master Setup</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="replicated-log-internals.html"><strong aria-hidden="true">16.1.</strong> Replicated Log for information on the Mesos replicated log.</a></li></ol></li><li class="chapter-item expanded "><a href="agent-recovery.html"><strong aria-hidden="true">17.</strong> Fault Tolerant Agent Setup</a></li><li class="chapter-item expanded "><a href="framework-rate-limiting.html"><strong aria-hidden="true">18.</strong> Framework Rate Limiting</a></li><li class="chapter-item expanded "><a href="maintenance.html"><strong aria-hidden="true">19.</strong> Maintenance for performing maintenance on a Mesos cluster.</a></li><li class="chapter-item expanded "><a href="upgrades.html" class="active"><strong aria-hidden="true">20.</strong> Upgrades for upgrading a Mesos cluster.</a></li><li class="chapter-item expanded "><a href="downgrades.html"><strong aria-hidden="true">21.</strong> Downgrades for downgrading a Mesos cluster.</a></li><li class="chapter-item expanded "><a href="logging.html"><strong aria-hidden="true">22.</strong> Logging</a></li><li class="chapter-item expanded "><a href="monitoring.html"><strong aria-hidden="true">23.</strong> Monitoring / Metrics</a></li><li class="chapter-item expanded "><a href="cli.html"><strong aria-hidden="true">24.</strong> Debugging using the new CLI</a></li><li class="chapter-item expanded "><a href="operational-guide.html"><strong aria-hidden="true">25.</strong> Operational Guide</a></li><li class="chapter-item expanded "><a href="fetcher.html"><strong aria-hidden="true">26.</strong> Fetcher Cache Configuration</a></li><li class="chapter-item expanded "><a href="fault-domains.html"><strong aria-hidden="true">27.</strong> Fault Domains</a></li><li class="chapter-item expanded "><a href="performance-profiling.html"><strong aria-hidden="true">28.</strong> Performance Profiling for debugging performance issues in Mesos.</a></li><li class="chapter-item expanded "><a href="memory-profiling.html"><strong aria-hidden="true">29.</strong> Memory Profiling for debugging potential memory leaks in Mesos.</a></li><li class="chapter-item expanded affix "><li class="part-title">Resource Management</li><li class="chapter-item expanded "><a href="attributes-resources.html"><strong aria-hidden="true">30.</strong> Attributes and Resources for how to describe the agents that comprise a cluster.</a></li><li class="chapter-item expanded "><a href="roles.html"><strong aria-hidden="true">31.</strong> Using Resource Roles</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="weights.html"><strong aria-hidden="true">31.1.</strong> Resource Role Weights for fair sharing.</a></li><li class="chapter-item expanded "><a href="quota.html"><strong aria-hidden="true">31.2.</strong> Resource Role Quota for how to configure Mesos to provide guaranteed resource allocations for use by a role.</a></li><li class="chapter-item expanded "><a href="reservation.html"><strong aria-hidden="true">31.3.</strong> Reservations for how operators and frameworks can reserve resources on individual agents for use by a role.</a></li><li class="chapter-item expanded "><a href="shared-resources.html"><strong aria-hidden="true">31.4.</strong> Shared Resources for how to share persistent volumes between tasks managed by different executors on the same agent.</a></li></ol></li><li class="chapter-item expanded "><a href="oversubscription.html"><strong aria-hidden="true">32.</strong> Oversubscription for how to configure Mesos to take advantage of unused resources to launch “best-effort” tasks.</a></li><li class="chapter-item expanded affix "><li class="part-title">Security</li><li class="chapter-item expanded "><a href="authentication.html"><strong aria-hidden="true">33.</strong> Authentication</a></li><li class="chapter-item expanded "><a href="authorization.html"><strong aria-hidden="true">34.</strong> Authorization</a></li><li class="chapter-item expanded "><a href="ssl.html"><strong aria-hidden="true">35.</strong> SSL</a></li><li class="chapter-item expanded "><a href="secrets.html"><strong aria-hidden="true">36.</strong> Secrets for managing secrets within Mesos.</a></li><li class="chapter-item expanded affix "><li class="part-title">Containerization</li><li class="chapter-item expanded "><a href="containerizers.html"><strong aria-hidden="true">37.</strong> Containerizer Overview</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="containerizer-internals.html"><strong aria-hidden="true">37.1.</strong> Containerizer Internals for implementation details of containerizers.</a></li><li class="chapter-item expanded "><a href="docker-containerizer.html"><strong aria-hidden="true">37.2.</strong> Docker Containerizer for launching a Docker image as a Task, or as an Executor.</a></li><li class="chapter-item expanded "><a href="mesos-containerizer.html"><strong aria-hidden="true">37.3.</strong> Mesos Containerizer default containerizer, supports both Linux and POSIX systems.</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="container-image.html"><strong aria-hidden="true">37.3.1.</strong> Container Images for supporting container images in Mesos containerizer.</a></li><li class="chapter-item expanded "><a href="isolators/docker-volume.html"><strong aria-hidden="true">37.3.2.</strong> Docker Volume Support</a></li><li class="chapter-item expanded "><a href="gpu-support.html"><strong aria-hidden="true">37.3.3.</strong> Nvidia GPU Support for how to run Mesos with Nvidia GPU support.</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="sandbox.html"><strong aria-hidden="true">38.</strong> Container Sandboxes</a></li><li class="chapter-item expanded "><a href="container-volume.html"><strong aria-hidden="true">39.</strong> Container Volumes</a></li><li class="chapter-item expanded "><a href="nested-container-and-task-group.html"><strong aria-hidden="true">40.</strong> Nested Container and Task Group (Pod)</a></li><li class="chapter-item expanded "><a href="standalone-containers.html"><strong aria-hidden="true">41.</strong> Standalone Containers</a></li><li class="chapter-item expanded affix "><li class="part-title">Networking</li><li class="chapter-item expanded "><a href="networking.html"><strong aria-hidden="true">42.</strong> Networking Overview</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="networking-for-mesos-managed-containers.html"><strong aria-hidden="true">42.1.</strong> Networking in Detail</a></li><li class="chapter-item expanded "><a href="cni.html"><strong aria-hidden="true">42.2.</strong> Container Network Interface (CNI)</a></li><li class="chapter-item expanded "><a href="isolators/network-port-mapping.html"><strong aria-hidden="true">42.3.</strong> Port Mapping Isolator</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">Storage</li><li class="chapter-item expanded "><a href="multiple-disk.html"><strong aria-hidden="true">43.</strong> Multiple Disks for how to allow tasks to use multiple isolated disk resources.</a></li><li class="chapter-item expanded "><a href="persistent-volume.html"><strong aria-hidden="true">44.</strong> Persistent Volume for how to allow tasks to access persistent storage resources.</a></li><li class="chapter-item expanded "><a href="csi.html"><strong aria-hidden="true">45.</strong> Container Storage Interface (CSI) Support</a></li><li class="chapter-item expanded affix "><li class="part-title">Scheduler and Executor Development</li><li class="chapter-item expanded "><a href="running-workloads.html"><strong aria-hidden="true">46.</strong> Running Workloads in Mesos explains how a scheduler can specify and run tasks.</a></li><li class="chapter-item expanded "><a href="app-framework-development-guide.html"><strong aria-hidden="true">47.</strong> Framework Development Guide describes how to build applications on top of Mesos.</a></li><li class="chapter-item expanded "><a href="high-availability-framework-guide.html"><strong aria-hidden="true">48.</strong> Guide for Designing Highly Available Mesos Frameworks</a></li><li class="chapter-item expanded "><a href="reconciliation.html"><strong aria-hidden="true">49.</strong> Reconciliation for ensuring a framework’s state remains eventually consistent in the face of failures.</a></li><li class="chapter-item expanded "><a href="task-state-reasons.html"><strong aria-hidden="true">50.</strong> Task State Reasons describes how task state reasons are used in Mesos.</a></li><li class="chapter-item expanded "><a href="health-checks.html"><strong aria-hidden="true">51.</strong> Task Health Checking</a></li><li class="chapter-item expanded "><a href="scheduler-http-api.html"><strong aria-hidden="true">52.</strong> v1 Scheduler HTTP API for communication between schedulers and the Mesos master.</a></li><li class="chapter-item expanded "><a href="executor-http-api.html"><strong aria-hidden="true">53.</strong> v1 Executor HTTP API describes the new HTTP API for communication between executors and the Mesos agent.</a></li></ol>
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
             </div>
-            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
 
-        <!-- Track and set sidebar scroll position -->
-        <script>
-            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
-            sidebarScrollbox.addEventListener('click', function(e) {
-                if (e.target.tagName === 'A') {
-                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
-                }
-            }, { passive: true });
-            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
-            sessionStorage.removeItem('sidebar-scroll');
-            if (sidebarScrollTop) {
-                // preserve sidebar scroll position when navigating via links within sidebar
-                sidebarScrollbox.scrollTop = sidebarScrollTop;
-            } else {
-                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
-                var activeSection = document.querySelector('#sidebar .active');
-                if (activeSection) {
-                    activeSection.scrollIntoView({ block: 'center' });
-                }
-            }
-        </script>
-
-        <div id="page-wrapper" class="page-wrapper">
+        <div id="mdbook-page-wrapper" class="page-wrapper">
 
             <div class="page">
-                                <div id="menu-bar-hover-placeholder"></div>
-                <div id="menu-bar" class="menu-bar sticky">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
                     <div class="left-buttons">
-                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
-                            <i class="fa fa-bars"></i>
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
                         </button>
-                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
-                            <i class="fa fa-paint-brush"></i>
-                        </button>
-                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
-                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
                         </ul>
-                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
-                            <i class="fa fa-search"></i>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
                         </button>
                     </div>
 
@@ -138,40 +141,45 @@
 
                     <div class="right-buttons">
                         <a href="print.html" title="Print this book" aria-label="Print this book">
-                            <i id="print-button" class="fa fa-print"></i>
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
                         </a>
                         <a href="https://github.com/m3scluster/clusterd-docs/" title="Git repository" aria-label="Git repository">
-                            <i id="git-repository-button" class="fa fa-github"></i>
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
                         </a>
 
                     </div>
                 </div>
 
-                <div id="search-wrapper" class="hidden">
-                    <form id="searchbar-outer" class="searchbar-outer">
-                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
                     </form>
-                    <div id="searchresults-outer" class="searchresults-outer hidden">
-                        <div id="searchresults-header" class="searchresults-header"></div>
-                        <ul id="searchresults">
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
                         </ul>
                     </div>
                 </div>
 
                 <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
                 <script>
-                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
-                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
-                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
                         link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
                     });
                 </script>
 
-                <div id="content" class="content">
+                <div id="mdbook-content" class="content">
                     <main>
-                        <hr />
-<h2>title: Apache Mesos - Upgrading Mesos
-layout: documentation</h2>
+                        <hr>
+<h2 id="title-apache-mesos---upgrading-mesos-layout-documentation"><a class="header" href="#title-apache-mesos---upgrading-mesos-layout-documentation">title: Apache Mesos - Upgrading Mesos
+layout: documentation</a></h2>
 <h1 id="upgrading-mesos"><a class="header" href="#upgrading-mesos">Upgrading Mesos</a></h1>
 <p>This document serves as a guide for users who wish to upgrade an existing Mesos cluster. Some versions require particular upgrade techniques when upgrading a running cluster. Some upgrades will have incompatible changes.</p>
 <h2 id="overview"><a class="header" href="#overview">Overview</a></h2>
@@ -183,8 +191,10 @@ D Deprecated feature/behavior
 R Removed feature/behavior
 </code></pre>
 <table class="table table-bordered" style="table-layout: fixed;">
-  <thead>
-    <tr>
+  
+<thead>
+    
+<tr>
       <th width="10%">
         Version
       </th>
@@ -204,321 +214,594 @@ R Removed feature/behavior
         Endpoints
       </th>
     </tr>
+
   </thead>
+
 <tr>
   <td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Version-->
   1.10.x
   </td>
-<td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Mesos Core-->
-    <ul style="padding-left:10px;">
-      <li>D <a href="#1-10-x-ssl-env-var-rename">Renamed LIBPROCESS_SSL_VERIFY_CERT and LIBPROCESS_SSL_REQUIRE_CERT environment variables.</a></li>
-      <li>D <a href="#1-10-x-limits-cfs-quota">CPU limits affect the function of the agent's `cgroups_enable_cfs` flag.</a></li>
+  <td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Mesos Core-->
+    
+<ul style="padding-left:10px;">
+      
+<li>D <a href="#1-10-x-ssl-env-var-rename">Renamed LIBPROCESS_SSL_VERIFY_CERT and LIBPROCESS_SSL_REQUIRE_CERT environment variables.</a></li>
+
+      
+<li>D <a href="#1-10-x-limits-cfs-quota">CPU limits affect the function of the agent's `cgroups_enable_cfs` flag.</a></li>
+
     </ul>
+
  </td>
-<td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Flags-->
-    <ul style="padding-left:10px;">
-      <li>C <a href="#1-10-x-agent-features">agent_features</a></li>
+  <td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Flags-->
+    
+<ul style="padding-left:10px;">
+      
+<li>C <a href="#1-10-x-agent-features">agent_features</a></li>
+
     </ul>
+
   </td>
-<td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Framework API-->
-    <ul style="padding-left:10px;">
+  <td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Framework API-->
+    
+<ul style="padding-left:10px;">
     </ul>
+
   </td>
-<td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Module API-->
-    <ul style="padding-left:10px;">
-      <li>C <a href="#1-10-x-synchronous-authorization">Authorizers must support synchronous authorization.</a></li>
-      <li>AC <a href="#1-10-x-allocator-module-changes">Resource consumption is exposed to allocators.</a></li>
+  <td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Module API-->
+    
+<ul style="padding-left:10px;">
+      
+<li>C <a href="#1-10-x-synchronous-authorization">Authorizers must support synchronous authorization.</a></li>
+
+      
+<li>AC <a href="#1-10-x-allocator-module-changes">Resource consumption is exposed to allocators.</a></li>
+
     </ul>
+
   </td>
-<td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Endpoints-->
-    <ul style="padding-left:10px;">
-      <li>D <a href="#1-10-x-tasks-pending-authoirization-deprecated">v1 GetTasks pending_tasks</a></li>
+  <td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Endpoints-->
+    
+<ul style="padding-left:10px;">
+      
+<li>D <a href="#1-10-x-tasks-pending-authoirization-deprecated">v1 GetTasks pending_tasks</a></li>
+
     </ul>
+
   </td>
 </tr>
+
 <tr>
   <td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Version-->
   1.9.x
   </td>
-<td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Mesos Core-->
-    <ul style="padding-left:10px;">
-      <li>A <a href="#1-9-x-quota-guarantees">Quota Limits</a></li>
-      <li>A <a href="#1-9-x-linux-nnp-isolator">Linux NNP isolator</a></li>
-      <li>A <a href="#1-9-x-hostname-validation-scheme">hostname_validation_scheme</a></li>
-      <li>C <a href="#1-9-x-client-certificate-verification">TLS certificate verification behaviour</a></li>
-      <li>C <a href="#1-9-x-configurable-ipc">Configurable IPC namespace and /dev/shm</a></li>
-      <li>A <a href="#1-9-x-automatic-agent-draining">Automatic Agent Draining</a></li>
+  <td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Mesos Core-->
+    
+<ul style="padding-left:10px;">
+      
+<li>A <a href="#1-9-x-quota-guarantees">Quota Limits</a></li>
+
+      
+<li>A <a href="#1-9-x-linux-nnp-isolator">Linux NNP isolator</a></li>
+
+      
+<li>A <a href="#1-9-x-hostname-validation-scheme">hostname_validation_scheme</a></li>
+
+      
+<li>C <a href="#1-9-x-client-certificate-verification">TLS certificate verification behaviour</a></li>
+
+      
+<li>C <a href="#1-9-x-configurable-ipc">Configurable IPC namespace and /dev/shm</a></li>
+
+      
+<li>A <a href="#1-9-x-automatic-agent-draining">Automatic Agent Draining</a></li>
+
     </ul>
+
  </td>
-<td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Flags-->
-    <ul style="padding-left:10px;">
-      <li>A <a href="#1-9-x-docker-ignore-runtime">docker_ignore_runtime</a></li>
-      <li>A <a href="#1-9-x-configurable-ipc">disallow_sharing_agent_ipc_namespace</a></li>
-      <li>A <a href="#1-9-x-configurable-ipc">default_container_shm_size</a></li>
-      <li>C <a href="#1-9-x-agent-features">agent_features</a></li>
+  <td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Flags-->
+    
+<ul style="padding-left:10px;">
+      
+<li>A <a href="#1-9-x-docker-ignore-runtime">docker_ignore_runtime</a></li>
+
+      
+<li>A <a href="#1-9-x-configurable-ipc">disallow_sharing_agent_ipc_namespace</a></li>
+
+      
+<li>A <a href="#1-9-x-configurable-ipc">default_container_shm_size</a></li>
+
+      
+<li>C <a href="#1-9-x-agent-features">agent_features</a></li>
+
     </ul>
+
   </td>
-<td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Framework API-->
-    <ul style="padding-left:10px;">
-      <li>A <a href="#1-9-x-configurable-ipc">LinuxInfo.ipc_mode and LinuxInfo.shm_size</a></li>
+  <td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Framework API-->
+    
+<ul style="padding-left:10px;">
+      
+<li>A <a href="#1-9-x-configurable-ipc">LinuxInfo.ipc_mode and LinuxInfo.shm_size</a></li>
+
     </ul>
+
   </td>
-<td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Module API-->
-    <ul style="padding-left:10px;">
+  <td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Module API-->
+    
+<ul style="padding-left:10px;">
     </ul>
+
   </td>
-<td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Endpoints-->
-    <ul style="padding-left:10px;">
-      <li>D <a href="#1-9-x-update-quota">SET_QUOTA and REMOVE QUOTA deprecated
+  <td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Endpoints-->
+    
+<ul style="padding-left:10px;">
+      
+<li>D <a href="#1-9-x-update-quota">SET_QUOTA and REMOVE QUOTA deprecated
             in favor of UPDATE_QUOTA</a></li>
-      <li>D <a href="#1-9-x-quota-guarantees">Quota guarantees deprecated in favor
+
+      
+<li>D <a href="#1-9-x-quota-guarantees">Quota guarantees deprecated in favor
             of using quota limits</a></li>
+
     </ul>
+
   </td>
 </tr>
+
 <tr>
   <td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Version-->
   1.8.x
   </td>
-<td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Mesos Core-->
-    <ul style="padding-left:10px;">
-      <li>A <a href="#1-8-x-linux-seccomp-isolator">Linux Seccomp isolator</a></li>
+  <td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Mesos Core-->
+    
+<ul style="padding-left:10px;">
+      
+<li>A <a href="#1-8-x-linux-seccomp-isolator">Linux Seccomp isolator</a></li>
+
     </ul>
+
   </td>
-<td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Flags-->
-    <ul style="padding-left:10px;">
-      <li>A <a href="#1-8-x-linux-seccomp-isolator">seccomp_config_dir</a></li>
-      <li>A <a href="#1-8-x-linux-seccomp-isolator">seccomp_profile_name</a></li>
+  <td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Flags-->
+    
+<ul style="padding-left:10px;">
+      
+<li>A <a href="#1-8-x-linux-seccomp-isolator">seccomp_config_dir</a></li>
+
+      
+<li>A <a href="#1-8-x-linux-seccomp-isolator">seccomp_profile_name</a></li>
+
     </ul>
+
   </td>
-<td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Framework API-->
-    <ul style="padding-left:10px;">
+  <td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Framework API-->
+    
+<ul style="padding-left:10px;">
     </ul>
+
   </td>
-<td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Module API-->
-    <ul style="padding-left:10px;">
+  <td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Module API-->
+    
+<ul style="padding-left:10px;">
     </ul>
+
   </td>
-<td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Endpoints-->
-    <ul style="padding-left:10px;">
+  <td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Endpoints-->
+    
+<ul style="padding-left:10px;">
     </ul>
+
   </td>
 </tr>
+
 <tr>
   <td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Version-->
   1.7.x
   </td>
-<td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Mesos Core-->
-    <ul style="padding-left:10px;">
-      <li>A <a href="#1-7-x-linux-devices-isolator">Linux devices isolator</a></li>
-      <li>A <a href="#1-7-x-auto-load-subsystems">Automatically load local enabled cgroups subsystems</a></li>
-      <li>A <a href="#1-7-x-container-specific-cgroups-mounts">Container-specific cgroups mounts</a></li>
-      <li>A <a href="#1-7-x-volume-mode-support">Volume mode support</a></li>
-      <li>A <a href="#1-7-x-resource-provider-acls">Resource Provider ACLs</a></li>
+  <td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Mesos Core-->
+    
+<ul style="padding-left:10px;">
+      
+<li>A <a href="#1-7-x-linux-devices-isolator">Linux devices isolator</a></li>
+
+      
+<li>A <a href="#1-7-x-auto-load-subsystems">Automatically load local enabled cgroups subsystems</a></li>
+
+      
+<li>A <a href="#1-7-x-container-specific-cgroups-mounts">Container-specific cgroups mounts</a></li>
+
+      
+<li>A <a href="#1-7-x-volume-mode-support">Volume mode support</a></li>
+
+      
+<li>A <a href="#1-7-x-resource-provider-acls">Resource Provider ACLs</a></li>
+
     </ul>
+
   </td>
-<td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Flags-->
-    <ul style="padding-left:10px;">
-      <li>A <a href="#1-7-x-enforce-container-ports">enforce_container_ports</a></li>
-      <li>A <a href="#1-7-x-gc-non-executor-container-sandboxes">gc_non_executor_container_sandboxes</a></li>
-      <li>A <a href="#1-7-x-network-cni-root-dir-persist">network_cni_root_dir_persist</a></li>
+  <td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Flags-->
+    
+<ul style="padding-left:10px;">
+      
+<li>A <a href="#1-7-x-enforce-container-ports">enforce_container_ports</a></li>
+
+      
+<li>A <a href="#1-7-x-gc-non-executor-container-sandboxes">gc_non_executor_container_sandboxes</a></li>
+
+      
+<li>A <a href="#1-7-x-network-cni-root-dir-persist">network_cni_root_dir_persist</a></li>
+
     </ul>
+
   </td>
-<td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Framework API-->
-    <ul style="padding-left:10px;">
-      <li>C <a href="#1-7-x-create-disk">`CREATE_DISK` and `DESTROY_DISK` operations and ACLs</a></li>
+  <td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Framework API-->
+    
+<ul style="padding-left:10px;">
+      
+<li>C <a href="#1-7-x-create-disk">`CREATE_DISK` and `DESTROY_DISK` operations and ACLs</a></li>
+
     </ul>
+
   </td>
-<td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Module API-->
-    <ul style="padding-left:10px;">
-      <li>C <a href="#1-7-x-container-logger">ContainerLogger module interface changes</a></li>
-      <li>C <a href="#1-7-x-isolator-recover">Isolator::recover module interface changes</a></li>
+  <td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Module API-->
+    
+<ul style="padding-left:10px;">
+      
+<li>C <a href="#1-7-x-container-logger">ContainerLogger module interface changes</a></li>
+
+      
+<li>C <a href="#1-7-x-isolator-recover">Isolator::recover module interface changes</a></li>
+
     </ul>
+
   </td>
-<td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Endpoints-->
-    <ul style="padding-left:10px;">
-      <li>C <a href="#1-7-x-json-serialization">JSON serialization changes</a></li>
+  <td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Endpoints-->
+    
+<ul style="padding-left:10px;">
+      
+<li>C <a href="#1-7-x-json-serialization">JSON serialization changes</a></li>
+
     </ul>
+
   </td>
 </tr>
+
 <tr>
   <td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Version-->
   1.6.x
   </td>
-<td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Mesos Core-->
-    <ul style="padding-left:10px;">
-      <li>C <a href="#1-6-x-grpc-requirement">Requirement for gRPC library</a></li>
-      <li>C <a href="#1-6-x-csi-support">CSI v0.2 Support</a></li>
+  <td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Mesos Core-->
+    
+<ul style="padding-left:10px;">
+      
+<li>C <a href="#1-6-x-grpc-requirement">Requirement for gRPC library</a></li>
+
+      
+<li>C <a href="#1-6-x-csi-support">CSI v0.2 Support</a></li>
+
     </ul>
+
   </td>
-<td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Flags-->
-    <ul style="padding-left:10px;">
-      <li>A <a href="#1-6-x-fetcher-stall-timeout">fetcher_stall_timeout</a></li>
+  <td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Flags-->
+    
+<ul style="padding-left:10px;">
+      
+<li>A <a href="#1-6-x-fetcher-stall-timeout">fetcher_stall_timeout</a></li>
+
     </ul>
-    <ul style="padding-left:10px;">
-      <li>A <a href="#1-6-x-xfs-kill-containers">xfs_kill_containers</a></li>
+
+    
+<ul style="padding-left:10px;">
+      
+<li>A <a href="#1-6-x-xfs-kill-containers">xfs_kill_containers</a></li>
+
     </ul>
+
   </td>
-<td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Framework API-->
-    <ul style="padding-left:10px;">
+  <td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Framework API-->
+    
+<ul style="padding-left:10px;">
     </ul>
+
   </td>
-<td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Module API-->
-    <ul style="padding-left:10px;">
-      <li>C <a href="#1-6-x-disk-profile-adaptor">Disk profile adaptor module changes</a></li>
+  <td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Module API-->
+    
+<ul style="padding-left:10px;">
+      
+<li>C <a href="#1-6-x-disk-profile-adaptor">Disk profile adaptor module changes</a></li>
+
     </ul>
+
   </td>
-<td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Endpoints-->
-    <ul style="padding-left:10px;">
+  <td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Endpoints-->
+    
+<ul style="padding-left:10px;">
     </ul>
+
   </td>
 </tr>
+
 <tr>
   <td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Version-->
   1.5.x
   </td>
-<td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Mesos Core-->
-    <ul style="padding-left:10px;">
-      <li>C <a href="#1-5-x-task-starting">Built-in executors send a TASK_STARTING update</a></li>
-      <li>A <a href="#1-5-x-network-ports-isolator">Network ports isolator</a></li>
-      <li>C <a href="#1-5-x-relative-disk-source-root-path">Relative source root paths for disk resources</a></li>
-      <li>A <a href="#1-5-x-reconfiguration-policy">Agent state recovery after resource changes</a></li>
-      <li>C <a href="#1-5-x-protobuf-requirement">Requirement for Protobuf library</a></li>
+  <td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Mesos Core-->
+    
+<ul style="padding-left:10px;">
+      
+<li>C <a href="#1-5-x-task-starting">Built-in executors send a TASK_STARTING update</a></li>
+
+      
+<li>A <a href="#1-5-x-network-ports-isolator">Network ports isolator</a></li>
+
+      
+<li>C <a href="#1-5-x-relative-disk-source-root-path">Relative source root paths for disk resources</a></li>
+
+      
+<li>A <a href="#1-5-x-reconfiguration-policy">Agent state recovery after resource changes</a></li>
+
+      
+<li>C <a href="#1-5-x-protobuf-requirement">Requirement for Protobuf library</a></li>
+
     </ul>
+
   </td>
-<td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Flags-->
-    <ul style="padding-left:10px;">
-      <li>A <a href="#1-5-x-network-ports-isolator">container_ports_watch_interval</a></li>
-      <li>A <a href="#1-5-x-network-ports-isolator">check_agent_port_range_only</a></li>
-      <li>D <a href="#1-5-x-executor-secret-key">executor_secret_key</a></li>
-      <li>A <a href="#1-5-x-reconfiguration-policy">reconfiguration_policy</a></li>
+  <td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Flags-->
+    
+<ul style="padding-left:10px;">
+      
+<li>A <a href="#1-5-x-network-ports-isolator">container_ports_watch_interval</a></li>
+
+      
+<li>A <a href="#1-5-x-network-ports-isolator">check_agent_port_range_only</a></li>
+
+      
+<li>D <a href="#1-5-x-executor-secret-key">executor_secret_key</a></li>
+
+      
+<li>A <a href="#1-5-x-reconfiguration-policy">reconfiguration_policy</a></li>
+
     </ul>
+
   </td>
-<td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Framework API-->
-    <ul style="padding-left:10px;">
-      <li>A <a href="#1-5-x-task-resource-limitation">Added the TaskStatus.limitation message</a></li>
+  <td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Framework API-->
+    
+<ul style="padding-left:10px;">
+      
+<li>A <a href="#1-5-x-task-resource-limitation">Added the TaskStatus.limitation message</a></li>
+
     </ul>
+
   </td>
-<td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Module API-->
-    <ul style="padding-left:10px;">
+  <td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Module API-->
+    
+<ul style="padding-left:10px;">
     </ul>
+
   </td>
-<td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Endpoints-->
-    <ul style="padding-left:10px;">
-      <li>A <a href="#1-5-x-get-containers">Allowed to view nested/standalone containers</a></li>
+  <td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Endpoints-->
+    
+<ul style="padding-left:10px;">
+      
+<li>A <a href="#1-5-x-get-containers">Allowed to view nested/standalone containers</a></li>
+
     </ul>
+
   </td>
 </tr>
+
 <tr>
   <td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Version-->
   1.4.x
   </td>
-<td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Mesos Core-->
-    <ul style="padding-left:10px;">
-      <li>A <a href="#1-4-x-ambient-capabilities">Container capabilities are made ambient if supported</a></li>
-      <li>A <a href="#1-4-x-bounding-capabilities">Support for explicit bounding capabilities</a></li>
-      <li>C <a href="#1-4-x-agent-recovery">Agent recovery post reboot</a></li>
-      <li>C <a href="#1-4-x-xfs-no-enforce">XFS disk isolator support for not enforcing disk limits</a></li>
-      <li>C <a href="#1-4-x-update-minimal-docker-version">Update the minimal supported Docker version</a></li>
+  <td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Mesos Core-->
+    
+<ul style="padding-left:10px;">
+      
+<li>A <a href="#1-4-x-ambient-capabilities">Container capabilities are made ambient if supported</a></li>
+
+      
+<li>A <a href="#1-4-x-bounding-capabilities">Support for explicit bounding capabilities</a></li>
+
+      
+<li>C <a href="#1-4-x-agent-recovery">Agent recovery post reboot</a></li>
+
+      
+<li>C <a href="#1-4-x-xfs-no-enforce">XFS disk isolator support for not enforcing disk limits</a></li>
+
+      
+<li>C <a href="#1-4-x-update-minimal-docker-version">Update the minimal supported Docker version</a></li>
+
     </ul>
+
   </td>
-<td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Flags-->
-    <ul style="padding-left:10px;">
-      <li>A <a href="#1-4-x-agent-capabilities-flags">effective_capabilities</a></li>
-      <li>A <a href="#1-4-x-agent-capabilities-flags">bounding-capabilities</a></li>
-      <li>D <a href="#1-4-x-agent-capabilities-flags">allowed-capabilities</a></li>
+  <td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Flags-->
+    
+<ul style="padding-left:10px;">
+      
+<li>A <a href="#1-4-x-agent-capabilities-flags">effective_capabilities</a></li>
+
+      
+<li>A <a href="#1-4-x-agent-capabilities-flags">bounding-capabilities</a></li>
+
+      
+<li>D <a href="#1-4-x-agent-capabilities-flags">allowed-capabilities</a></li>
+
     </ul>
+
   </td>
-<td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Framework API-->
-    <ul style="padding-left:10px;">
-      <li>A <a href="#1-4-x-bounding-capabilities">Support for explicit setting bounding capabilities</a></li>
-      <li>D <a href="#1-4-x-linuxinfo-capabilities">LinuxInfo.effective_capabilities deprecates LinuxInfo.capabilities</a></li>
-      <li>C <a href="#1-4-x-mesos-library">`Resources` class in the internal Mesos C++ library only supports post-`RESERVATION_REFINEMENT` format</a></li>
+  <td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Framework API-->
+    
+<ul style="padding-left:10px;">
+      
+<li>A <a href="#1-4-x-bounding-capabilities">Support for explicit setting bounding capabilities</a></li>
+
+      
+<li>D <a href="#1-4-x-linuxinfo-capabilities">LinuxInfo.effective_capabilities deprecates LinuxInfo.capabilities</a></li>
+
+      
+<li>C <a href="#1-4-x-mesos-library">`Resources` class in the internal Mesos C++ library only supports post-`RESERVATION_REFINEMENT` format</a></li>
+
     </ul>
+
   </td>
-<td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Module API-->
-    <ul style="padding-left:10px;">
-      <li>C <a href="#1-4-x-allocator-update-slave">Changed semantics of Allocator::updateSlave</a></li>
+  <td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Module API-->
+    
+<ul style="padding-left:10px;">
+      
+<li>C <a href="#1-4-x-allocator-update-slave">Changed semantics of Allocator::updateSlave</a></li>
+
     </ul>
+
   </td>
-<td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Endpoints-->
-    <ul style="padding-left:10px;">
+  <td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Endpoints-->
+    
+<ul style="padding-left:10px;">
     </ul>
+
   </td>
 </tr>
+
 <tr>
   <td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Version-->
   1.3.x
   </td>
   <td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Mesos Core-->
-    <ul style="padding-left:10px;">
-      <li>R <a href="#1-3-x-disallow-old-agents">Prevent registration by old Mesos agents</a></li>
+    
+<ul style="padding-left:10px;">
+      
+<li>R <a href="#1-3-x-disallow-old-agents">Prevent registration by old Mesos agents</a></li>
+
     </ul>
+
   </td>
   <td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Flags-->
-    <ul style="padding-left:10px;">
-      <li>R <a href="#1-3-x-setquota-removequota-acl">--acls (set_quotas and remove_quotas)</a></li>
-      <li>R <a href="#1-3-x-shutdown-framework-acl">--acls (shutdown_frameworks)</a></li>
-      <li>A <a href="#1-3-x-executor-authentication">authenticate_http_executors</a></li>
-      <li>A <a href="#1-3-x-executor-authentication">executor_secret_key</a></li>
+    
+<ul style="padding-left:10px;">
+      
+<li>R <a href="#1-3-x-setquota-removequota-acl">--acls (set_quotas and remove_quotas)</a></li>
+
+      
+<li>R <a href="#1-3-x-shutdown-framework-acl">--acls (shutdown_frameworks)</a></li>
+
+      
+<li>A <a href="#1-3-x-executor-authentication">authenticate_http_executors</a></li>
+
+      
+<li>A <a href="#1-3-x-executor-authentication">executor_secret_key</a></li>
+
     </ul>
+
   </td>
   <td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Framework API-->
-    <ul style="padding-left:10px;">
-      <li>A <a href="#1-3-x-multi-role-support">MULTI_ROLE support</a></li>
-      <li>D <a href="#1-3-x-framework-info-role">FrameworkInfo.roles deprecates FrameworkInfo.role</a></li>
+    
+<ul style="padding-left:10px;">
+      
+<li>A <a href="#1-3-x-multi-role-support">MULTI_ROLE support</a></li>
+
+      
+<li>D <a href="#1-3-x-framework-info-role">FrameworkInfo.roles deprecates FrameworkInfo.role</a></li>
+
     </ul>
+
   </td>
   <td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Module API-->
-    <ul style="padding-left:10px;">
-      <li>C <a href="#1-3-x-allocator-interface-change">Allocator MULTI_ROLE interface changes</a></li>
+    
+<ul style="padding-left:10px;">
+      
+<li>C <a href="#1-3-x-allocator-interface-change">Allocator MULTI_ROLE interface changes</a></li>
+
     </ul>
+
   </td>
   <td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Endpoints-->
-    <ul style="padding-left:10px;">
-      <li>D <a href="#1-3-x-endpoints-roles">MULTI_ROLE deprecates 'role' field in endpoints</a></li>
+    
+<ul style="padding-left:10px;">
+      
+<li>D <a href="#1-3-x-endpoints-roles">MULTI_ROLE deprecates 'role' field in endpoints</a></li>
+
     </ul>
+
   </td>
 </tr>
+
 <tr>
   <td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Version-->
   1.2.x
   </td>
   <td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Mesos Core-->
-    <ul style="padding-left:10px;">
-      <li>R <a href="#1-2-1-disallow-old-agents">Prevent registration by old Mesos agents</a></li>
+    
+<ul style="padding-left:10px;">
+      
+<li>R <a href="#1-2-1-disallow-old-agents">Prevent registration by old Mesos agents</a></li>
+
     </ul>
+
   </td>
   <td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Flags-->
-    <ul style="padding-left:10px;">
-      <li>A <a href="#1-2-x-heartbeat-flag">http_heartbeat_interval</a></li>
-      <li>A <a href="#1-2-x-backend-flag">image_provisioner_backend</a></li>
-      <li>A <a href="#1-2-x-unreachable-flag">max_unreachable_tasks_per_framework</a></li>
+    
+<ul style="padding-left:10px;">
+      
+<li>A <a href="#1-2-x-heartbeat-flag">http_heartbeat_interval</a></li>
+
+      
+<li>A <a href="#1-2-x-backend-flag">image_provisioner_backend</a></li>
+
+      
+<li>A <a href="#1-2-x-unreachable-flag">max_unreachable_tasks_per_framework</a></li>
+
     </ul>
+
   </td>
   <td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Framework API-->
-    <ul style="padding-left:10px;">
-      <li>A <a href="#1-2-x-revive-suppress">Revive and Suppress v1 scheduler Calls</a></li>
+    
+<ul style="padding-left:10px;">
+      
+<li>A <a href="#1-2-x-revive-suppress">Revive and Suppress v1 scheduler Calls</a></li>
+
     </ul>
+
   </td>
   <td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Module API-->
-    <ul style="padding-left:10px;">
-      <li>C <a href="#1-2-x-container-logger-interface">Container Logger prepare method</a></li>
-      <li>C <a href="#1-2-x-allocator-module-changes">Allocator module changes</a></li>
-      <li>A <a href="#1-2-x-new-authz-actions">New Authorizer module actions</a></li>
-      <li>D <a href="#1-2-x-renamed-authz-actions">Renamed Authorizer module actions (deprecated old aliases)</a></li>
-      <li>R <a href="#1-2-x-removed-hooks">Removed slavePreLaunchDockerEnvironmentDecorator and slavePreLaunchDockerHook</a></li>
+    
+<ul style="padding-left:10px;">
+      
+<li>C <a href="#1-2-x-container-logger-interface">Container Logger prepare method</a></li>
+
+      
+<li>C <a href="#1-2-x-allocator-module-changes">Allocator module changes</a></li>
+
+      
+<li>A <a href="#1-2-x-new-authz-actions">New Authorizer module actions</a></li>
+
+      
+<li>D <a href="#1-2-x-renamed-authz-actions">Renamed Authorizer module actions (deprecated old aliases)</a></li>
+
+      
+<li>R <a href="#1-2-x-removed-hooks">Removed slavePreLaunchDockerEnvironmentDecorator and slavePreLaunchDockerHook</a></li>
+
     </ul>
+
   </td>
   <td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Endpoints-->
-    <ul style="padding-left:10px;">
-      <li>A <a href="#1-2-x-debug-endpoints">LAUNCH_NESTED_CONTAINER_SESSION, ATTACH_CONTAINER_INPUT, ATTACH_CONTAINER_OUTPUT</a></li>
-      <li>D <a href="#1-2-x-recovered-frameworks">v1 GetFrameworks recovered_frameworks</a></li>
-      <li>D <a href="#1-2-x-orphan-executors">v1 GetExecutors orphan_executors</a></li>
-      <li>D <a href="#1-2-x-orphan-tasks">v1 GetTasks orphan_tasks</a></li>
+    
+<ul style="padding-left:10px;">
+      
+<li>A <a href="#1-2-x-debug-endpoints">LAUNCH_NESTED_CONTAINER_SESSION, ATTACH_CONTAINER_INPUT, ATTACH_CONTAINER_OUTPUT</a></li>
+
+      
+<li>D <a href="#1-2-x-recovered-frameworks">v1 GetFrameworks recovered_frameworks</a></li>
+
+      
+<li>D <a href="#1-2-x-orphan-executors">v1 GetExecutors orphan_executors</a></li>
+
+      
+<li>D <a href="#1-2-x-orphan-tasks">v1 GetTasks orphan_tasks</a></li>
+
     </ul>
+
   </td>
 </tr>
+
 <tr>
   <td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Version-->
   1.1.x
@@ -530,76 +813,150 @@ R Removed feature/behavior
   <td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Framework API-->
   </td>
   <td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Module API-->
-    <ul style="padding-left:10px;">
-      <li>R <a href="#1-1-x-container-logger-interface">Container Logger recovery method</a></li>
-      <li>C <a href="#1-1-x-allocator-updateallocation">Allocator updateAllocation method</a></li>
+    
+<ul style="padding-left:10px;">
+      
+<li>R <a href="#1-1-x-container-logger-interface">Container Logger recovery method</a></li>
+
+      
+<li>C <a href="#1-1-x-allocator-updateallocation">Allocator updateAllocation method</a></li>
+
     </ul>
+
   </td>
   <td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Endpoints-->
   </td>
 </tr>
+
 <tr>
   <td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Version-->
   1.0.x
   </td>
   <td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Mesos Core-->
-    <ul style="padding-left:10px;">
-      <li>CD <a href="#1-0-x-allocator-metrics">Allocator Metrics</a></li>
-      <li>C <a href="#1-0-x-persistent-volume">Destruction of persistent volumes</a></li>
-      <li>C <a href="#1-0-x-slave">Slave to Agent rename</a></li>
-      <li>C <a href="#1-0-x-quota-acls">Quota ACLs</a></li>
-      <li>R <a href="#1-0-x-executor-environment-variables">Executor environment variables inheritance</a></li>
-      <li>R <a href="#1-0-x-deprecated-fields-in-container-config">Deprecated fields in ContainerConfig</a></li>
-      <li>C <a href="#1-0-x-persistent-volume-ownership">Persistent volume ownership</a></li>
-      <li>C <a href="#1-0-x-fetcher-user">Fetcher assumes same user as task</a></li>
+    
+<ul style="padding-left:10px;">
+      
+<li>CD <a href="#1-0-x-allocator-metrics">Allocator Metrics</a></li>
+
+      
+<li>C <a href="#1-0-x-persistent-volume">Destruction of persistent volumes</a></li>
+
+      
+<li>C <a href="#1-0-x-slave">Slave to Agent rename</a></li>
+
+      
+<li>C <a href="#1-0-x-quota-acls">Quota ACLs</a></li>
+
+      
+<li>R <a href="#1-0-x-executor-environment-variables">Executor environment variables inheritance</a></li>
+
+      
+<li>R <a href="#1-0-x-deprecated-fields-in-container-config">Deprecated fields in ContainerConfig</a></li>
+
+      
+<li>C <a href="#1-0-x-persistent-volume-ownership">Persistent volume ownership</a></li>
+
+      
+<li>C <a href="#1-0-x-fetcher-user">Fetcher assumes same user as task</a></li>
+
     </ul>
+
   </td>
   <td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Flags-->
-    <ul style="padding-left:10px;">
-      <li>D <a href="#1-0-x-docker-timeout-flag">docker_stop_timeout</a></li>
-      <li>D <a href="#1-0-x-credentials-file">credential(s) (plain text format)</a></li>
-      <li>C <a href="#1-0-x-slave">Slave to Agent rename</a></li>
-      <li>R <a href="#1-0-x-workdir">work_dir default value</a></li>
-      <li>D <a href="#1-0-x-deprecated-ssl-env-variables">SSL environment variables</a></li>
-      <li>ACD <a href="#1-0-x-http-authentication-flags">HTTP authentication</a></li>
-      <li>R <a href="#1-0-x-registry-strict">registry_strict</a></li>
+    
+<ul style="padding-left:10px;">
+      
+<li>D <a href="#1-0-x-docker-timeout-flag">docker_stop_timeout</a></li>
+
+      
+<li>D <a href="#1-0-x-credentials-file">credential(s) (plain text format)</a></li>
+
+      
+<li>C <a href="#1-0-x-slave">Slave to Agent rename</a></li>
+
+      
+<li>R <a href="#1-0-x-workdir">work_dir default value</a></li>
+
+      
+<li>D <a href="#1-0-x-deprecated-ssl-env-variables">SSL environment variables</a></li>
+
+      
+<li>ACD <a href="#1-0-x-http-authentication-flags">HTTP authentication</a></li>
+
+      
+<li>R <a href="#1-0-x-registry-strict">registry_strict</a></li>
+
     </ul>
+
   </td>
   <td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Framework API-->
-    <ul style="padding-left:10px;">
-      <li>DC <a href="#1-0-x-executorinfo">ExecutorInfo.source</a></li>
-      <li>A <a href="#1-0-x-v1-commandinfo">CommandInfo.URI output_file</a></li>
-      <li>C <a href="#1-0-x-scheduler-proto">scheduler.proto optional fields</a></li>
-      <li>C <a href="#1-0-x-executor-proto">executor.proto optional fields</a></li>
+    
+<ul style="padding-left:10px;">
+      
+<li>DC <a href="#1-0-x-executorinfo">ExecutorInfo.source</a></li>
+
+      
+<li>A <a href="#1-0-x-v1-commandinfo">CommandInfo.URI output_file</a></li>
+
+      
+<li>C <a href="#1-0-x-scheduler-proto">scheduler.proto optional fields</a></li>
+
+      
+<li>C <a href="#1-0-x-executor-proto">executor.proto optional fields</a></li>
+
     </ul>
+
   </td>
   <td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Module API-->
-    <ul style="padding-left:10px;">
-      <li>C <a href="#1-0-x-authorizer">Authorizer</a></li>
-      <li>C <a href="#1-0-x-allocator">Allocator</a></li>
+    
+<ul style="padding-left:10px;">
+      
+<li>C <a href="#1-0-x-authorizer">Authorizer</a></li>
+
+      
+<li>C <a href="#1-0-x-allocator">Allocator</a></li>
+
     </ul>
+
   </td>
   <td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Endpoints-->
-    <ul style="padding-left:10px;">
-      <li>C <a href="#1-0-x-status-code">HTTP return codes</a></li>
-      <li>R <a href="#1-0-x-status-code">/observe</a></li>
-      <li>C <a href="#1-0-x-endpoint-authorization">Added authorization</a></li>
+    
+<ul style="padding-left:10px;">
+      
+<li>C <a href="#1-0-x-status-code">HTTP return codes</a></li>
+
+      
+<li>R <a href="#1-0-x-status-code">/observe</a></li>
+
+      
+<li>C <a href="#1-0-x-endpoint-authorization">Added authorization</a></li>
+
     </ul>
+
   </td>
 </tr>
+
 <tr>
   <td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Version-->
   0.28.x
   </td>
   <td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Mesos Core-->
-    <ul style="padding-left:10px;">
-      <li>C <a href="#0-28-x-resource-precision">Resource Precision</a></li>
+    
+<ul style="padding-left:10px;">
+      
+<li>C <a href="#0-28-x-resource-precision">Resource Precision</a></li>
+
     </ul>
+
   </td>
   <td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Flags-->
-    <ul style="padding-left:10px;">
-      <li>C <a href="#0-28-x-autherization-acls">Authentication ACLs</a></li>
+    
+<ul style="padding-left:10px;">
+      
+<li>C <a href="#0-28-x-autherization-acls">Authentication ACLs</a></li>
+
     </ul>
+
   </td>
   <td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Framework API-->
   </td>
@@ -608,6 +965,7 @@ R Removed feature/behavior
   <td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Endpoints-->
   </td>
 </tr>
+
 <tr>
   <td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Version-->
   0.27.x
@@ -615,25 +973,42 @@ R Removed feature/behavior
   <td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Mesos Core-->
   </td>
   <td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Flags-->
-    <ul style="padding-left:10px;">
-      <li>D <a href="#0-27-x-implicit-roles">--roles</a></li>
-      <li>D <a href="#0-27-x-acl-shutdown-flag">--acls (shutdown_frameworks)</a></li>
+    
+<ul style="padding-left:10px;">
+      
+<li>D <a href="#0-27-x-implicit-roles">--roles</a></li>
+
+      
+<li>D <a href="#0-27-x-acl-shutdown-flag">--acls (shutdown_frameworks)</a></li>
+
     </ul>
+
   </td>
   <td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Framework API-->
-    <ul style="padding-left:10px;">
-      <li>C <a href="#0-27-x-executor-lost-callback">executorLost callback</a></li>
+    
+<ul style="padding-left:10px;">
+      
+<li>C <a href="#0-27-x-executor-lost-callback">executorLost callback</a></li>
+
     </ul>
+
   </td>
   <td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Module API-->
-    <ul style="padding-left:10px;">
-      <li>C <a href="#0-27-x-allocator-api">Allocator API</a></li>
-      <li>C <a href="#0-27-x-isolator-api">Isolator API</a></li>
+    
+<ul style="padding-left:10px;">
+      
+<li>C <a href="#0-27-x-allocator-api">Allocator API</a></li>
+
+      
+<li>C <a href="#0-27-x-isolator-api">Isolator API</a></li>
+
     </ul>
+
   </td>
   <td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Endpoints-->
   </td>
 </tr>
+
 <tr>
   <td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Version-->
   0.26.x
@@ -643,20 +1018,33 @@ R Removed feature/behavior
   <td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Flags-->
   </td>
   <td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Framework API-->
-    <ul style="padding-left:10px;">
-      <li>C <a href="#0-26-x-taskstatus-reason">TaskStatus::Reason Enum</a></li>
-      <li>C <a href="#0-26-x-credential-protobuf">Credential Protobuf</a></li>
-      <li>C <a href="#0-26-x-network-info-protobuf">NetworkInfo Protobuf</a></li>
+    
+<ul style="padding-left:10px;">
+      
+<li>C <a href="#0-26-x-taskstatus-reason">TaskStatus::Reason Enum</a></li>
+
+      
+<li>C <a href="#0-26-x-credential-protobuf">Credential Protobuf</a></li>
+
+      
+<li>C <a href="#0-26-x-network-info-protobuf">NetworkInfo Protobuf</a></li>
+
     </ul>
+
   </td>
   <td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Module API-->
   </td>
   <td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Endpoints-->
-    <ul style="padding-left:10px;">
-      <li>C <a href="#0-26-x-state-endpoint">State Endpoint</a></li>
+    
+<ul style="padding-left:10px;">
+      
+<li>C <a href="#0-26-x-state-endpoint">State Endpoint</a></li>
+
     </ul>
+
   </td>
 </tr>
+
 <tr>
   <td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Version-->
   0.25.x
@@ -666,19 +1054,29 @@ R Removed feature/behavior
   <td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Flags-->
   </td>
   <td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Framework API-->
-    <ul style="padding-left:10px;">
-      <li>C <a href="#0-25-x-scheduler-bindings">C++/Java/Python Scheduler Bindings</a></li>
+    
+<ul style="padding-left:10px;">
+      
+<li>C <a href="#0-25-x-scheduler-bindings">C++/Java/Python Scheduler Bindings</a></li>
+
     </ul>
+
   </td>
   <td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Module API-->
   </td>
   <td style="word-wrap: break-word; overflow-wrap: break-word;"><!--Endpoints-->
-    <ul style="padding-left:10px;">
-      <li>D <a href="#0-25-x-json-endpoints">*.json Endpoints</a></li>
+    
+<ul style="padding-left:10px;">
+      
+<li>D <a href="#0-25-x-json-endpoints">*.json Endpoints</a></li>
+
     </ul>
+
   </td>
 </tr>
+
 </table>
+
 <h2 id="upgrading-from-19x-to-110x"><a class="header" href="#upgrading-from-19x-to-110x">Upgrading from 1.9.x to 1.10.x</a></h2>
 <p><a name="1-10-x-ssl-env-var-rename"></a></p>
 <ul>
@@ -688,7 +1086,7 @@ The old names will continue to work as before, but operators are encouraged to u
 </ul>
 <p><a name="1-10-x-limits-cfs-quota"></a></p>
 <ul>
-<li>The Mesos agent's <code>cgroups_enable_cfs</code> flag previously controlled whether or not CFS quota would be used for all tasks on the agent. Resource limits have been added to tasks, and when a CPU limit is specified on a task, the agent will now apply a CFS quota regardless of the value of <code>cgroups_enable_cfs</code>.</li>
+<li>The Mesos agent’s <code>cgroups_enable_cfs</code> flag previously controlled whether or not CFS quota would be used for all tasks on the agent. Resource limits have been added to tasks, and when a CPU limit is specified on a task, the agent will now apply a CFS quota regardless of the value of <code>cgroups_enable_cfs</code>.</li>
 </ul>
 <p><a name="1-10-x-agent-features"></a></p>
 <ul>
@@ -763,7 +1161,7 @@ the <code>LIBPROCESS_SSL_REQUIRE_CERT</code> option is set to true.</li>
 </ul>
 <p><a name="1-9-x-configurable-ipc"></a></p>
 <ul>
-<li>The Mesos containerizer now supports configurable IPC namespace and /dev/shm. Container can be configured to have a private IPC namespace and /dev/shm or share them from its parent via the field <code>LinuxInfo.ipc_mode</code>, and the size of its private /dev/shm is also configurable via the field <code>LinuxInfo.shm_size</code>. Operators can control whether it is allowed to share host's IPC namespace and /dev/shm with top level containers via the agent flag <code>--disallow_sharing_agent_ipc_namespace</code>, and specify the default size of the /dev/shm for the container which has a private /dev/shm via the agent flag <code>--default_container_shm_size</code>.</li>
+<li>The Mesos containerizer now supports configurable IPC namespace and /dev/shm. Container can be configured to have a private IPC namespace and /dev/shm or share them from its parent via the field <code>LinuxInfo.ipc_mode</code>, and the size of its private /dev/shm is also configurable via the field <code>LinuxInfo.shm_size</code>. Operators can control whether it is allowed to share host’s IPC namespace and /dev/shm with top level containers via the agent flag <code>--disallow_sharing_agent_ipc_namespace</code>, and specify the default size of the /dev/shm for the container which has a private /dev/shm via the agent flag <code>--default_container_shm_size</code>.</li>
 </ul>
 <p><a name="1-9-x-update-quota"></a></p>
 <ul>
@@ -771,9 +1169,9 @@ the <code>LIBPROCESS_SSL_REQUIRE_CERT</code> option is set to true.</li>
 </ul>
 <p><a name="1-9-x-quota-guarantees"></a></p>
 <ul>
-<li>Prior to Mesos 1.9, the quota related APIs only exposed quota &quot;guarantees&quot; which ensured a minimum amount of resources would be available to a role. Setting guarantees also set implicit quota limits. In Mesos 1.9+, quota limits are now exposed directly.
+<li>Prior to Mesos 1.9, the quota related APIs only exposed quota “guarantees” which ensured a minimum amount of resources would be available to a role. Setting guarantees also set implicit quota limits. In Mesos 1.9+, quota limits are now exposed directly.
 <ul>
-<li>Quota guarantees are now deprecated in favor of using only quota limits. Enforcement of quota guarantees required that Mesos holds back enough resources to meet all of the unsatisfied quota guarantees. Since Mesos is moving towards an optimistic offer model (to improve multi-role / multi- scheduler scalability, see MESOS-1607), it will become no longer possible to enforce quota guarantees by holding back resources. In such a model, quota limits are simple to enforce, but quota guarantees would require a complex &quot;effective limit&quot; propagation model to leave space for unsatisfied guarantees.</li>
+<li>Quota guarantees are now deprecated in favor of using only quota limits. Enforcement of quota guarantees required that Mesos holds back enough resources to meet all of the unsatisfied quota guarantees. Since Mesos is moving towards an optimistic offer model (to improve multi-role / multi- scheduler scalability, see MESOS-1607), it will become no longer possible to enforce quota guarantees by holding back resources. In such a model, quota limits are simple to enforce, but quota guarantees would require a complex “effective limit” propagation model to leave space for unsatisfied guarantees.</li>
 <li>For these reasons, quota guarantees, while still functional in Mesos 1.9, are now deprecated. A combination of limits and priority based preemption will be simpler in an optimistic offer model.</li>
 </ul>
 </li>
@@ -846,7 +1244,7 @@ task groups on the same default executor instance.</li>
 </ul>
 <p><a name="1-7-x-json-serialization"></a></p>
 <ul>
-<li>As a result of adapting rapidjson for performance improvement, all JSON endpoints serialize differently while still conforming to the ECMA-404 spec for JSON. This means that if a client has a JSON de-serializer that conforms to ECMA-404 they will see no change. Otherwise, they may break. As an example, Mesos would previously serialize '/' as '/', but the spec does not require the escaping and rapidjson does not escape '/'.</li>
+<li>As a result of adapting rapidjson for performance improvement, all JSON endpoints serialize differently while still conforming to the ECMA-404 spec for JSON. This means that if a client has a JSON de-serializer that conforms to ECMA-404 they will see no change. Otherwise, they may break. As an example, Mesos would previously serialize ‘/’ as ‘/’, but the spec does not require the escaping and rapidjson does not escape ‘/’.</li>
 </ul>
 <h2 id="upgrading-from-15x-to-16x"><a class="header" href="#upgrading-from-15x-to-16x">Upgrading from 1.5.x to 1.6.x</a></h2>
 <p><a name="1-6-x-grpc-requirement"></a></p>
@@ -874,7 +1272,7 @@ will now kill containers that exceed the disk limit.</li>
 <p><a name="1-5-x-task-starting"></a></p>
 <ul>
 <li>The built-in executors will now send a <code>TASK_STARTING</code> status update for
-every task they've successfully received and are about to start.
+every task they’ve successfully received and are about to start.
 The possibility of any executor sending this update has been documented since
 the beginning of Mesos, but prior to this version the built-in executors did
 not actually send it. This means that all schedulers using one of the built-in
@@ -892,7 +1290,7 @@ that caused a task to fail with a resource limitation reason.</li>
 <li>A new <a href="isolators/network-ports.html"><code>network/ports</code></a> isolator has been added. The isolator supports the following new agent flags:
 <ul>
 <li><code>--container_ports_watch_interval</code> specifies the interval at which the isolator reconciles port assignments.</li>
-<li><code>--check_agent_port_range_only</code> excludes ports outside the agent's range from port reconciliation.</li>
+<li><code>--check_agent_port_range_only</code> excludes ports outside the agent’s range from port reconciliation.</li>
 </ul>
 </li>
 </ul>
@@ -902,7 +1300,7 @@ that caused a task to fail with a resource limitation reason.</li>
 </ul>
 <p><a name="1-5-x-relative-disk-source-root-path"></a></p>
 <ul>
-<li>The fields <code>Resource.disk.source.path.root</code> and <code>Resource.disk.source.mount.root</code> can now be set to relative paths to an agent's work directory. The containerizers will interpret the paths based on the <code>--work_dir</code> flag on an agent.</li>
+<li>The fields <code>Resource.disk.source.path.root</code> and <code>Resource.disk.source.mount.root</code> can now be set to relative paths to an agent’s work directory. The containerizers will interpret the paths based on the <code>--work_dir</code> flag on an agent.</li>
 </ul>
 <p><a name="1-5-x-get-containers"></a></p>
 <ul>
@@ -940,8 +1338,8 @@ changed. Note that if this feature is used, the master version is required to be
 <ul>
 <li>Agent is now allowed to recover its agent ID post a host reboot. This prevents the unnecessary discarding of agent ID by prior Mesos versions. Notes about backwards compatibility:
 <ul>
-<li>In case the agent's recovery runs into agent info mismatch which may happen due to resource change associated with reboot, it'll fall back to recovering as a new agent (existing behavior).</li>
-<li>In other cases such as checkpointed resources (e.g. persistent volumes) being incompatible with the agent's resources the recovery will still fail (existing behavior).</li>
+<li>In case the agent’s recovery runs into agent info mismatch which may happen due to resource change associated with reboot, it’ll fall back to recovering as a new agent (existing behavior).</li>
+<li>In other cases such as checkpointed resources (e.g. persistent volumes) being incompatible with the agent’s resources the recovery will still fail (existing behavior).</li>
 </ul>
 </li>
 </ul>
@@ -1037,7 +1435,7 @@ changed. Note that if this feature is used, the master version is required to be
 </ul>
 <p><a name="1-2-x-container-logger-interface"></a></p>
 <ul>
-<li>Mesos 1.2 modifies the <code>ContainerLogger</code>'s <code>prepare()</code> method.  The method now takes an additional argument for the <code>user</code> the logger should run a subprocess as.  Please see <a href="https://issues.apache.org/jira/browse/MESOS-5856">MESOS-5856</a> for more information.</li>
+<li>Mesos 1.2 modifies the <code>ContainerLogger</code>’s <code>prepare()</code> method.  The method now takes an additional argument for the <code>user</code> the logger should run a subprocess as.  Please see <a href="https://issues.apache.org/jira/browse/MESOS-5856">MESOS-5856</a> for more information.</li>
 </ul>
 <p><a name="1-2-x-allocator-module-changes"></a></p>
 <ul>
@@ -1083,7 +1481,7 @@ changed. Note that if this feature is used, the master version is required to be
 <h2 id="upgrading-from-10x-to-11x"><a class="header" href="#upgrading-from-10x-to-11x">Upgrading from 1.0.x to 1.1.x</a></h2>
 <p><a name="1-1-x-container-logger-interface"></a></p>
 <ul>
-<li>Mesos 1.1 removes the <code>ContainerLogger</code>'s <code>recover()</code> method.  The <code>ContainerLogger</code> had an incomplete interface for a stateful implementation.  This removes the incomplete parts to avoid adding tech debt in the containerizer.  Please see <a href="https://issues.apache.org/jira/browse/MESOS-6371">MESOS-6371</a> for more information.</li>
+<li>Mesos 1.1 removes the <code>ContainerLogger</code>’s <code>recover()</code> method.  The <code>ContainerLogger</code> had an incomplete interface for a stateful implementation.  This removes the incomplete parts to avoid adding tech debt in the containerizer.  Please see <a href="https://issues.apache.org/jira/browse/MESOS-6371">MESOS-6371</a> for more information.</li>
 </ul>
 <p><a name="1-1-x-allocator-updateallocation"></a></p>
 <ul>
@@ -1125,21 +1523,21 @@ changed. Note that if this feature is used, the master version is required to be
 </ul>
 <p><a name="1-0-x-slave"></a></p>
 <ul>
-<li>Mesos 1.0 deprecates the 'slave' keyword in favor of 'agent' in a number of places
+<li>Mesos 1.0 deprecates the ‘slave’ keyword in favor of ‘agent’ in a number of places
 <ul>
-<li>Deprecated flags with keyword 'slave' in favor of 'agent'.</li>
-<li>Deprecated sandbox links with 'slave' keyword in the WebUI.</li>
+<li>Deprecated flags with keyword ‘slave’ in favor of ‘agent’.</li>
+<li>Deprecated sandbox links with ‘slave’ keyword in the WebUI.</li>
 <li>Deprecated <code>slave</code> subcommand for mesos-cli.</li>
 </ul>
 </li>
 </ul>
 <p><a name="1-0-x-workdir"></a></p>
 <ul>
-<li>Mesos 1.0 removes the default value for the agent's <code>work_dir</code> command-line flag. This flag is now required; the agent will exit immediately if it is not provided.</li>
+<li>Mesos 1.0 removes the default value for the agent’s <code>work_dir</code> command-line flag. This flag is now required; the agent will exit immediately if it is not provided.</li>
 </ul>
 <p><a name="1-0-x-registry-strict"></a></p>
 <ul>
-<li>Mesos 1.0 disables support for the master's <code>registry_strict</code> command-line flag. If this flag is specified, the master will exit immediately. Note that this flag was previously marked as experimental and not recommended for production use.</li>
+<li>Mesos 1.0 disables support for the master’s <code>registry_strict</code> command-line flag. If this flag is specified, the master will exit immediately. Note that this flag was previously marked as experimental and not recommended for production use.</li>
 </ul>
 <p><a name="1-0-x-credentials-file"></a></p>
 <ul>
@@ -1210,7 +1608,7 @@ changed. Note that if this feature is used, the master version is required to be
 </ul>
 <p><a name="1-0-x-http-authentication-flags"></a></p>
 <ul>
-<li>The <code>--authenticate_http</code> flag has been deprecated in favor of <code>--authenticate_http_readwrite</code>. Setting <code>--authenticate_http_readwrite</code> will now enable authentication for all endpoints which previously had authentication support. These happen to be the endpoints which allow modification of the cluster state, or &quot;read-write&quot; endpoints. Note that <code>/logging/toggle</code>, <code>/profiler/start</code>, <code>/profiler/stop</code>, <code>/maintenance/schedule</code>, <code>/machine/up</code>, and <code>/machine/down</code> previously did not have authentication support, but in 1.0 if either <code>--authenticate_http</code> or <code>--authenticate_http_readwrite</code> is set, those endpoints will now require authentication. A new flag has also been introduced, <code>--authenticate_http_readonly</code>, which enables authentication for endpoints which support authentication and do not allow modification of the state of the cluster, like <code>/state</code> or <code>/flags</code>.</li>
+<li>The <code>--authenticate_http</code> flag has been deprecated in favor of <code>--authenticate_http_readwrite</code>. Setting <code>--authenticate_http_readwrite</code> will now enable authentication for all endpoints which previously had authentication support. These happen to be the endpoints which allow modification of the cluster state, or “read-write” endpoints. Note that <code>/logging/toggle</code>, <code>/profiler/start</code>, <code>/profiler/stop</code>, <code>/maintenance/schedule</code>, <code>/machine/up</code>, and <code>/machine/down</code> previously did not have authentication support, but in 1.0 if either <code>--authenticate_http</code> or <code>--authenticate_http_readwrite</code> is set, those endpoints will now require authentication. A new flag has also been introduced, <code>--authenticate_http_readonly</code>, which enables authentication for endpoints which support authentication and do not allow modification of the state of the cluster, like <code>/state</code> or <code>/flags</code>.</li>
 </ul>
 <p><a name="1-0-x-endpoint-authorization"></a></p>
 <ul>
@@ -1243,11 +1641,11 @@ changed. Note that if this feature is used, the master version is required to be
 <h2 id="upgrading-from-027x-to-028x"><a class="header" href="#upgrading-from-027x-to-028x">Upgrading from 0.27.x to 0.28.x</a></h2>
 <p><a name="0-28-x-resource-precision"></a></p>
 <ul>
-<li>Mesos 0.28 only supports three decimal digits of precision for scalar resource values. For example, frameworks can reserve &quot;0.001&quot; CPUs but more fine-grained reservations (e.g., &quot;0.0001&quot; CPUs) are no longer supported (although they did not work reliably in prior versions of Mesos anyway). Internally, resource math is now done using a fixed-point format that supports three decimal digits of precision, and then converted to/from floating point for input and output, respectively. Frameworks that do their own resource math and manipulate fractional resources may observe differences in roundoff error and numerical precision.</li>
+<li>Mesos 0.28 only supports three decimal digits of precision for scalar resource values. For example, frameworks can reserve “0.001” CPUs but more fine-grained reservations (e.g., “0.0001” CPUs) are no longer supported (although they did not work reliably in prior versions of Mesos anyway). Internally, resource math is now done using a fixed-point format that supports three decimal digits of precision, and then converted to/from floating point for input and output, respectively. Frameworks that do their own resource math and manipulate fractional resources may observe differences in roundoff error and numerical precision.</li>
 </ul>
 <p><a name="0-28-x-autherization-acls"></a></p>
 <ul>
-<li>Mesos 0.28 changes the definitions of two ACLs used for authorization. The objects of the <code>ReserveResources</code> and <code>CreateVolume</code> ACLs have been changed to <code>roles</code>. In both cases, principals can now be authorized to perform these operations for particular roles. This means that by default, a framework or operator can reserve resources/create volumes for any role. To restrict this behavior, <a href="authorization.html">ACLs can be added</a> to the master which authorize principals to reserve resources/create volumes for specified roles only. Previously, frameworks could only reserve resources for their own role; this behavior can be preserved by configuring the <code>ReserveResources</code> ACLs such that the framework's principal is only authorized to reserve for the framework's role. <strong>NOTE</strong> This renders existing <code>ReserveResources</code> and <code>CreateVolume</code> ACL definitions obsolete; if you are authorizing these operations, your ACL definitions should be updated.</li>
+<li>Mesos 0.28 changes the definitions of two ACLs used for authorization. The objects of the <code>ReserveResources</code> and <code>CreateVolume</code> ACLs have been changed to <code>roles</code>. In both cases, principals can now be authorized to perform these operations for particular roles. This means that by default, a framework or operator can reserve resources/create volumes for any role. To restrict this behavior, <a href="authorization.html">ACLs can be added</a> to the master which authorize principals to reserve resources/create volumes for specified roles only. Previously, frameworks could only reserve resources for their own role; this behavior can be preserved by configuring the <code>ReserveResources</code> ACLs such that the framework’s principal is only authorized to reserve for the framework’s role. <strong>NOTE</strong> This renders existing <code>ReserveResources</code> and <code>CreateVolume</code> ACL definitions obsolete; if you are authorizing these operations, your ACL definitions should be updated.</li>
 </ul>
 <p>In order to upgrade a running cluster:</p>
 <ol>
@@ -1388,10 +1786,10 @@ changed. Note that if this feature is used, the master version is required to be
 <h2 id="upgrading-from-022x-to-023x"><a class="header" href="#upgrading-from-022x-to-023x">Upgrading from 0.22.x to 0.23.x</a></h2>
 <ul>
 <li>
-<p>The 'stats.json' endpoints for masters and agents have been removed. Please use the 'metrics/snapshot' endpoints instead.</p>
+<p>The ‘stats.json’ endpoints for masters and agents have been removed. Please use the ‘metrics/snapshot’ endpoints instead.</p>
 </li>
 <li>
-<p>The '/master/shutdown' endpoint is deprecated in favor of the new '/master/teardown' endpoint.</p>
+<p>The ‘/master/shutdown’ endpoint is deprecated in favor of the new ‘/master/teardown’ endpoint.</p>
 </li>
 <li>
 <p>In order to enable decorator modules to remove metadata (environment variables or labels), we changed the meaning of the return value for decorator hooks in Mesos 0.23.0. Please refer to the modules documentation for more details.</p>
@@ -1430,14 +1828,14 @@ Please refer to the metrics/snapshot endpoint.</p>
 <p>The C++/Java/Python scheduler bindings have been updated. In particular, the driver can be constructed with an additional argument that specifies whether to use implicit driver acknowledgements. In <code>statusUpdate</code>, the <code>TaskStatus</code> now includes a UUID to make explicit acknowledgements possible.</p>
 </li>
 <li>
-<p>The Authentication API has changed slightly in this release to support additional authentication mechanisms. The change from 'string' to 'bytes' for AuthenticationStartMessage.data has no impact on C++ or the over-the-wire representation, so it only impacts pure language bindings for languages like Java and Python that use different types for UTF-8 strings vs. byte arrays.</p>
+<p>The Authentication API has changed slightly in this release to support additional authentication mechanisms. The change from ‘string’ to ‘bytes’ for AuthenticationStartMessage.data has no impact on C++ or the over-the-wire representation, so it only impacts pure language bindings for languages like Java and Python that use different types for UTF-8 strings vs. byte arrays.</p>
 <p>message AuthenticationStartMessage {
 required string mechanism = 1;
 optional bytes data = 2;
 }</p>
 </li>
 <li>
-<p>All Mesos arguments can now be passed using file:// to read them out of a file (either an absolute or relative path). The --credentials, --whitelist, and any flags that expect JSON backed arguments (such as --modules) behave as before, although support for just passing an absolute path for any JSON flags rather than file:// has been deprecated and will produce a warning (and the absolute path behavior will be removed in a future release).</p>
+<p>All Mesos arguments can now be passed using file:// to read them out of a file (either an absolute or relative path). The –credentials, –whitelist, and any flags that expect JSON backed arguments (such as –modules) behave as before, although support for just passing an absolute path for any JSON flags rather than file:// has been deprecated and will produce a warning (and the absolute path behavior will be removed in a future release).</p>
 </li>
 </ul>
 <p>In order to upgrade a running cluster:</p>
@@ -1456,7 +1854,7 @@ optional bytes data = 2;
 </ol>
 <h2 id="upgrading-from-020x-to-021x"><a class="header" href="#upgrading-from-020x-to-021x">Upgrading from 0.20.x to 0.21.x</a></h2>
 <ul>
-<li>Disabling agent checkpointing has been deprecated; the agent --checkpoint flag has been deprecated and will be removed in a future release.</li>
+<li>Disabling agent checkpointing has been deprecated; the agent –checkpoint flag has been deprecated and will be removed in a future release.</li>
 </ul>
 <p>In order to upgrade a running cluster:</p>
 <ol>
@@ -1469,7 +1867,7 @@ optional bytes data = 2;
 <h2 id="upgrading-from-019x-to-020x"><a class="header" href="#upgrading-from-019x-to-020x">Upgrading from 0.19.x to 0.20.x.</a></h2>
 <ul>
 <li>
-<p>The Mesos API has been changed slightly in this release. The CommandInfo has been changed (see below), which makes launching a command more flexible. The 'value' field has been changed from <em>required</em> to <em>optional</em>. However, it will not cause any issue during the upgrade (since the existing schedulers always set this field).</p>
+<p>The Mesos API has been changed slightly in this release. The CommandInfo has been changed (see below), which makes launching a command more flexible. The ‘value’ field has been changed from <em>required</em> to <em>optional</em>. However, it will not cause any issue during the upgrade (since the existing schedulers always set this field).</p>
 <pre><code>  message CommandInfo {
     ...
     // There are two ways to specify the command:
@@ -1505,7 +1903,7 @@ from mesos import Executor, MesosExecutorDriver, MesosSchedulerDriver, Scheduler
 import mesos_pb2</p>
 </li>
 <li>
-<p>If you're using a pure language binding, please ensure that it sends status update acknowledgements through the master before upgrading.</p>
+<p>If you’re using a pure language binding, please ensure that it sends status update acknowledgements through the master before upgrading.</p>
 </li>
 </ul>
 <p>In order to upgrade a running cluster:</p>
@@ -1547,17 +1945,17 @@ import mesos_pb2</p>
 <ul>
 <li>[no cgroups]
 <ul>
-<li>Restart the agents. The &quot;--isolation&quot; flag has changed and &quot;process&quot; has been deprecated in favor of &quot;posix/cpu,posix/mem&quot;.</li>
+<li>Restart the agents. The “–isolation” flag has changed and “process” has been deprecated in favor of “posix/cpu,posix/mem”.</li>
 </ul>
 </li>
 <li>[cgroups]
 <ul>
 <li>Change from a single mountpoint for all controllers to separate mountpoints for each controller, e.g., /sys/fs/cgroup/memory/ and /sys/fs/cgroup/cpu/.</li>
-<li>The suggested configuration is to mount a tmpfs filesystem to /sys/fs/cgroup and to let the agent mount the required controllers. However, the agent will also use previously mounted controllers if they are appropriately mounted under &quot;--cgroups_hierarchy&quot;.</li>
+<li>The suggested configuration is to mount a tmpfs filesystem to /sys/fs/cgroup and to let the agent mount the required controllers. However, the agent will also use previously mounted controllers if they are appropriately mounted under “–cgroups_hierarchy”.</li>
 <li>It has been observed that unmounting and remounting of cgroups from the single to separate configuration is unreliable and a reboot into the new configuration is strongly advised. Restart the agents after reboot.</li>
-<li>The &quot;--cgroups_hierarchy&quot; now defaults to &quot;/sys/fs/cgroup&quot;. The &quot;--cgroups_root&quot; flag default remains &quot;mesos&quot;.</li>
-<li>The &quot;--isolation&quot; flag has changed and &quot;cgroups&quot; has been deprecated in favor of &quot;cgroups/cpu,cgroups/mem&quot;.</li>
-<li>The &quot;--cgroup_subsystems&quot; flag is no longer required and will be ignored.</li>
+<li>The “–cgroups_hierarchy” now defaults to “/sys/fs/cgroup”. The “–cgroups_root” flag default remains “mesos”.</li>
+<li>The “–isolation” flag has changed and “cgroups” has been deprecated in favor of “cgroups/cpu,cgroups/mem”.</li>
+<li>The “–cgroup_subsystems” flag is no longer required and will be ignored.</li>
 </ul>
 </li>
 </ul>
@@ -1586,17 +1984,17 @@ import mesos_pb2</p>
 <ul>
 <li>Schedulers should implement the new <code>reconcileTasks</code> driver method.</li>
 <li>Schedulers should call the new <code>MesosSchedulerDriver</code> constructor that takes <code>Credential</code> to authenticate.</li>
-<li>--authentication=false (default) allows both authenticated and unauthenticated frameworks to register.</li>
+<li>–authentication=false (default) allows both authenticated and unauthenticated frameworks to register.</li>
 </ul>
 <p>In order to upgrade a running cluster:</p>
 <ol>
 <li>Install the new master binaries.</li>
-<li>Restart the masters with --credentials pointing to credentials of the framework(s).</li>
+<li>Restart the masters with –credentials pointing to credentials of the framework(s).</li>
 <li>Install the new agent binaries and restart the agents.</li>
 <li>Upgrade the executors by linking the latest native library and mesos jar (if necessary).</li>
 <li>Upgrade the schedulers by linking the latest native library and mesos jar (if necessary).</li>
 <li>Restart the schedulers.
-Restart the masters with --authentication=true.</li>
+Restart the masters with –authentication=true.</li>
 </ol>
 <p>NOTE: After the restart unauthenticated frameworks <em>will not</em> be allowed to register.</p>
 <h2 id="upgrading-from-0130-to-0140"><a class="header" href="#upgrading-from-0130-to-0140">Upgrading from 0.13.0 to 0.14.0.</a></h2>
@@ -1608,7 +2006,7 @@ Restart the masters with --authentication=true.</li>
 <li>Install the new master binaries and restart the masters.</li>
 <li>Upgrade the executors by linking the latest native library and mesos jar (if necessary).</li>
 <li>Install the new agent binaries.</li>
-<li>Restart the agents after adding --checkpoint flag to enable checkpointing.</li>
+<li>Restart the agents after adding –checkpoint flag to enable checkpointing.</li>
 <li>Upgrade the schedulers by linking the latest native library and mesos jar (if necessary).</li>
 <li>Set FrameworkInfo.checkpoint in the scheduler if checkpointing is desired (recommended).</li>
 <li>Restart the schedulers.</li>
@@ -1630,24 +2028,24 @@ Restart the masters with --authentication=true.</li>
 </ol>
 <h2 id="upgrading-from-0110-to-0120"><a class="header" href="#upgrading-from-0110-to-0120">Upgrading from 0.11.0 to 0.12.0.</a></h2>
 <ul>
-<li>If you are a framework developer, you will want to examine the new 'source' field in the ExecutorInfo protobuf. This will allow you to take further advantage of the resource monitoring.</li>
+<li>If you are a framework developer, you will want to examine the new ‘source’ field in the ExecutorInfo protobuf. This will allow you to take further advantage of the resource monitoring.</li>
 </ul>
 <p>In order to upgrade a running cluster:</p>
 <ol>
 <li>Install the new agent binaries and restart the agents.</li>
 <li>Install the new master binaries and restart the masters.</li>
 </ol>
-
+<footer id="open-on-gh">Found a bug? <a href="https://github.com/m3scluster/clusterd-docs//edit/main/src/upgrades.md">Edit this page on GitHub.</a></footer>
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                             <a rel="prev" href="maintenance.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
-                                <i class="fa fa-angle-left"></i>
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                             </a>
 
-                            <a rel="next" href="downgrades.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                                <i class="fa fa-angle-right"></i>
+                            <a rel="next prefetch" href="downgrades.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
                             </a>
 
                         <div style="clear: both"></div>
@@ -1657,16 +2055,21 @@ Restart the masters with --authentication=true.</li>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                     <a rel="prev" href="maintenance.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
-                        <i class="fa fa-angle-left"></i>
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                     </a>
 
-                    <a rel="next" href="downgrades.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                        <i class="fa fa-angle-right"></i>
+                    <a rel="next prefetch" href="downgrades.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
                     </a>
             </nav>
 
         </div>
 
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
 
 
 
@@ -1675,15 +2078,16 @@ Restart the masters with --authentication=true.</li>
         </script>
 
 
-        <script src="elasticlunr.min.js"></script>
-        <script src="mark.min.js"></script>
-        <script src="searcher.js"></script>
+        <script src="elasticlunr-ef4e11c1.min.js"></script>
+        <script src="mark-09e88c2c.min.js"></script>
+        <script src="searcher-09f2665d.js"></script>
 
-        <script src="clipboard.min.js"></script>
-        <script src="highlight.js"></script>
-        <script src="book.js"></script>
+        <script src="clipboard-1626706a.min.js"></script>
+        <script src="highlight-abc7f01d.js"></script>
+        <script src="book-609e4cb8.js"></script>
 
         <!-- Custom JS scripts -->
+
 
 
     </div>

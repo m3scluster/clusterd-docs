@@ -1,0 +1,4626 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>v1 Operator HTTP API for operator calls to masters and agents. - ClusterD - Continued development of Apache Mesos</title>
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="favicon-8114d1fc.png">
+        <link rel="stylesheet" href="css/variables-8adf115d.css">
+        <link rel="stylesheet" href="css/general-e96d0476.css">
+        <link rel="stylesheet" href="css/chrome-d279d366.css">
+        <link rel="stylesheet" href="css/print-9e4910d8.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="fonts/fonts-9644e21d.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" id="mdbook-highlight-css" href="highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="ayu-highlight-3fdfc3ac.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "searchindex-c0e7f0eb.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc-1084839a.js"></script>
+    </head>
+    <body>
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+                sidebar_toggle.checked = false;
+            }
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
+        </script>
+
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="mdbook-page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
+                        </button>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
+                        </ul>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">ClusterD - Continued development of Apache Mesos</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
+                        </a>
+                        <a href="https://github.com/m3scluster/clusterd-docs/" title="Git repository" aria-label="Git repository">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
+                    </form>
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="mdbook-content" class="content">
+                    <main>
+                        <hr>
+<h2 id="title-apache-mesos---operator-http-api-layout-documentation"><a class="header" href="#title-apache-mesos---operator-http-api-layout-documentation">title: Apache Mesos - Operator HTTP API
+layout: documentation</a></h2>
+<h1 id="operator-http-api"><a class="header" href="#operator-http-api">Operator HTTP API</a></h1>
+<h2 id="overview"><a class="header" href="#overview">Overview</a></h2>
+<p>Both masters and agents provide the <code>/api/v1</code> endpoint as the base URL for performing operator-related operations.</p>
+<p>Similar to the <a href="scheduler-http-api.html">Scheduler</a> and <a href="executor-http-api.html">Executor</a> HTTP APIs, the operator endpoints only accept HTTP POST requests. The request body should be encoded in JSON (<strong>Content-Type: application/json</strong>) or Protobuf (<strong>Content-Type: application/x-protobuf</strong>).</p>
+<p>For requests that Mesos can answer synchronously and immediately, an HTTP response will be sent with status <strong>200 OK</strong>, possibly including a response body encoded in JSON or Protobuf. The encoding depends on the <strong>Accept</strong> header present in the request (the default encoding is JSON). Responses will be gzip compressed if the <strong>Accept-Encoding</strong> header is set to “gzip”.</p>
+<p>For requests that require asynchronous processing (e.g., <code>RESERVE_RESOURCES</code>), an HTTP response will be sent with status <strong>202 Accepted</strong>. For requests that result in a stream of events (<code>SUBSCRIBE</code>), a streaming HTTP response with <a href="recordio.html">RecordIO</a> encoding is sent. Currently, gzip compression is not supported for streaming responses.</p>
+<h2 id="master-api"><a class="header" href="#master-api">Master API</a></h2>
+<p>This API contains all the calls accepted by the master. The canonical source of this information is <a href="https://github.com/apache/mesos/blob/master/include/mesos/v1/master/master.proto">master.proto</a> (NOTE: The protobuf definitions are subject to change before the beta API is finalized). These calls are typically made by human operators, tooling or services (e.g., Mesos WebUI). While schedulers can make these calls as well, schedulers are expected to use the <a href="scheduler-http-api.html">Scheduler HTTP API</a>.</p>
+<h3 id="calls-to-master-and-responses"><a class="header" href="#calls-to-master-and-responses">Calls To Master And Responses</a></h3>
+<p>Below are the example calls to master that result in synchronous responses from the API.</p>
+<h3 id="get_health"><a class="header" href="#get_health">GET_HEALTH</a></h3>
+<p>This call retrieves the health status of master.</p>
+<pre><code>GET_HEALTH HTTP Request (JSON):
+
+POST /api/v1  HTTP/1.1
+
+Host: masterhost:5050
+Content-Type: application/json
+Accept: application/json
+
+{
+  "type": "GET_HEALTH"
+}
+
+
+GET_HEALTH HTTP Response (JSON):
+
+HTTP/1.1 200 OK
+
+Content-Type: application/json
+
+{
+  "type": "GET_HEALTH",
+  "get_health": {
+    "healthy": true
+  }
+}
+
+</code></pre>
+<h3 id="get_flags"><a class="header" href="#get_flags">GET_FLAGS</a></h3>
+<p>This call retrieves the master’s overall flag configuration.</p>
+<pre><code>GET_FLAGS HTTP Request (JSON):
+
+POST /api/v1  HTTP/1.1
+
+Host: masterhost:5050
+Content-Type: application/json
+Accept: application/json
+
+{
+  "type": "GET_FLAGS"
+}
+
+
+GET_FLAGS HTTP Response (JSON):
+
+HTTP/1.1 200 OK
+
+Content-Type: application/json
+
+{
+  "type": "GET_FLAGS",
+  "get_flags": {
+    "flags": [
+      {
+        "name": "acls",
+        "value": ""
+      },
+      {
+        "name": "agent_ping_timeout",
+        "value": "15secs"
+      },
+      {
+        "name": "agent_reregister_timeout",
+        "value": "10mins"
+      },
+      {
+        "name": "allocation_interval",
+        "value": "1secs"
+      },
+      {
+        "name": "allocator",
+        "value": "HierarchicalDRF"
+      },
+      {
+        "name": "authenticate_agents",
+        "value": "true"
+      },
+      {
+        "name": "authenticate_frameworks",
+        "value": "true"
+      },
+      {
+        "name": "authenticate_http_frameworks",
+        "value": "true"
+      },
+      {
+        "name": "authenticate_http_readonly",
+        "value": "true"
+      },
+      {
+        "name": "authenticate_http_readwrite",
+        "value": "true"
+      },
+      {
+        "name": "authenticators",
+        "value": "crammd5"
+      },
+      {
+        "name": "authorizers",
+        "value": "local"
+      },
+      {
+        "name": "credentials",
+        "value": "/tmp/directory/credentials"
+      },
+      {
+        "name": "framework_sorter",
+        "value": "drf"
+      },
+      {
+        "name": "help",
+        "value": "false"
+      },
+      {
+        "name": "hostname_lookup",
+        "value": "true"
+      },
+      {
+        "name": "http_authenticators",
+        "value": "basic"
+      },
+      {
+        "name": "http_framework_authenticators",
+        "value": "basic"
+      },
+      {
+        "name": "initialize_driver_logging",
+        "value": "true"
+      },
+      {
+        "name": "log_auto_initialize",
+        "value": "true"
+      },
+      {
+        "name": "logbufsecs",
+        "value": "0"
+      },
+      {
+        "name": "logging_level",
+        "value": "INFO"
+      },
+      {
+        "name": "max_agent_ping_timeouts",
+        "value": "5"
+      },
+      {
+        "name": "max_completed_frameworks",
+        "value": "50"
+      },
+      {
+        "name": "max_completed_tasks_per_framework",
+        "value": "1000"
+      },
+      {
+        "name": "quiet",
+        "value": "false"
+      },
+      {
+        "name": "recovery_agent_removal_limit",
+        "value": "100%"
+      },
+      {
+        "name": "registry",
+        "value": "replicated_log"
+      },
+      {
+        "name": "registry_fetch_timeout",
+        "value": "1mins"
+      },
+      {
+        "name": "registry_store_timeout",
+        "value": "100secs"
+      },
+      {
+        "name": "registry_strict",
+        "value": "true"
+      },
+      {
+        "name": "root_submissions",
+        "value": "true"
+      },
+      {
+        "name": "user_sorter",
+        "value": "drf"
+      },
+      {
+        "name": "version",
+        "value": "false"
+      },
+      {
+        "name": "webui_dir",
+        "value": "/usr/local/share/mesos/webui"
+      },
+      {
+        "name": "work_dir",
+        "value": "/tmp/directory/master"
+      },
+      {
+        "name": "zk_session_timeout",
+        "value": "10secs"
+      }
+    ]
+  }
+}
+
+</code></pre>
+<h3 id="get_version"><a class="header" href="#get_version">GET_VERSION</a></h3>
+<p>This call retrieves the master’s version information.</p>
+<pre><code>GET_VERSION HTTP Request (JSON):
+
+POST /api/v1  HTTP/1.1
+
+Host: masterhost:5050
+Content-Type: application/json
+Accept: application/json
+
+{
+  "type": "GET_VERSION"
+}
+
+
+GET_VERSION HTTP Response (JSON):
+
+HTTP/1.1 200 OK
+
+Content-Type: application/json
+
+{
+  "type": "GET_VERSION",
+  "get_version": {
+    "version_info": {
+      "version": "1.0.0",
+      "build_date": "2016-06-24 23:18:37",
+      "build_time": 1466810317,
+      "build_user": "root"
+    }
+  }
+}
+
+</code></pre>
+<h3 id="get_metrics"><a class="header" href="#get_metrics">GET_METRICS</a></h3>
+<p>This call gives the snapshot of current metrics to the end user. If <code>timeout</code> is
+set in the call, it will be used to determine the maximum amount of time the
+API will take to respond. If the timeout is exceeded, some metrics may not be
+included in the response.</p>
+<pre><code>GET_METRICS HTTP Request (JSON):
+
+POST /api/v1  HTTP/1.1
+
+Host: masterhost:5050
+Content-Type: application/json
+Accept: application/json
+
+{
+  "type": "GET_METRICS",
+  "get_metrics": {
+    "timeout": {
+      "nanoseconds": 5000000000
+    }
+  }
+}
+
+
+GET_METRICS HTTP Response (JSON):
+
+HTTP/1.1 200 OK
+
+Content-Type: application/json
+
+{
+  "type": "GET_METRICS",
+  "get_metrics": {
+    "metrics": [
+      {
+        "name": "allocator/event_queue_dispatches",
+        "value": 1.0
+      },
+      {
+        "name": "master/slaves_active",
+        "value": 0.0
+      },
+      {
+        "name": "allocator/mesos/resources/cpus/total",
+        "value": 0.0
+      },
+      {
+        "name": "master/messages_revive_offers",
+        "value": 0.0
+      },
+      {
+        "name": "allocator/mesos/allocation_runs",
+        "value": 0.0
+      },
+      {
+        "name": "master/mem_used",
+        "value": 0.0
+      },
+      {
+        "name": "master/valid_executor_to_framework_messages",
+        "value": 0.0
+      },
+      {
+        "name": "allocator/mesos/resources/mem/total",
+        "value": 0.0
+      },
+      {
+        "name": "log/recovered",
+        "value": 1.0
+      },
+      {
+        "name": "registrar/registry_size_bytes",
+        "value": 123.0
+      },
+      {
+        "name": "master/slaves_inactive",
+        "value": 0.0
+      },
+      {
+        "name": "master/messages_unregister_slave",
+        "value": 0.0
+      },
+      {
+        "name": "master/gpus_total",
+        "value": 0.0
+      },
+      {
+        "name": "master/disk_revocable_total",
+        "value": 0.0
+      },
+      {
+        "name": "master/gpus_percent",
+        "value": 0.0
+      },
+      {
+        "name": "master/mem_revocable_used",
+        "value": 0.0
+      },
+      {
+        "name": "master/slave_shutdowns_completed",
+        "value": 0.0
+      },
+      {
+        "name": "master/invalid_status_updates",
+        "value": 0.0
+      },
+      {
+        "name": "master/slave_removals",
+        "value": 0.0
+      },
+      {
+        "name": "master/messages_status_update",
+        "value": 0.0
+      },
+      {
+        "name": "master/messages_framework_to_executor",
+        "value": 0.0
+      },
+      {
+        "name": "master/cpus_revocable_percent",
+        "value": 0.0
+      },
+      {
+        "name": "master/recovery_slave_removals",
+        "value": 0.0
+      },
+      {
+        "name": "master/event_queue_dispatches",
+        "value": 0.0
+      },
+      {
+        "name": "master/messages_update_slave",
+        "value": 0.0
+      },
+      {
+        "name": "allocator/mesos/resources/mem/offered_or_allocated",
+        "value": 0.0
+      },
+      {
+        "name": "master/messages_register_framework",
+        "value": 0.0
+      },
+      {
+        "name": "master/cpus_percent",
+        "value": 0.0
+      },
+      {
+        "name": "master/slave_reregistrations",
+        "value": 0.0
+      },
+      {
+        "name": "master/cpus_revocable_total",
+        "value": 0.0
+      },
+      {
+        "name": "master/gpus_revocable_total",
+        "value": 0.0
+      },
+      {
+        "name": "master/valid_status_updates",
+        "value": 0.0
+      },
+      {
+        "name": "system/load_15min",
+        "value": 1.25
+      },
+      {
+        "name": "master/event_queue_http_requests",
+        "value": 0.0
+      },
+      {
+        "name": "master/messages_decline_offers",
+        "value": 0.0
+      },
+      {
+        "name": "master/tasks_staging",
+        "value": 0.0
+      },
+      {
+        "name": "master/messages_register_slave",
+        "value": 0.0
+      },
+      {
+        "name": "allocator/mesos/resources/disk/offered_or_allocated",
+        "value": 0.0
+      },
+      {
+        "name": "system/mem_free_bytes",
+        "value": 2320146432.0
+      },
+      {
+        "name": "system/cpus_total",
+        "value": 4.0
+      },
+      {
+        "name": "master/mem_percent",
+        "value": 0.0
+      },
+      {
+        "name": "master/event_queue_messages",
+        "value": 0.0
+      },
+      {
+        "name": "master/messages_reregister_slave",
+        "value": 0.0
+      },
+      {
+        "name": "master/gpus_used",
+        "value": 0.0
+      },
+      {
+        "name": "registrar/state_fetch_ms",
+        "value": 16.787968
+      },
+      {
+        "name": "master/messages_launch_tasks",
+        "value": 0.0
+      },
+      {
+        "name": "master/gpus_revocable_percent",
+        "value": 0.0
+      },
+      {
+        "name": "master/disk_percent",
+        "value": 0.0
+      },
+      {
+        "name": "system/load_1min",
+        "value": 1.74
+      },
+      {
+        "name": "registrar/queued_operations",
+        "value": 0.0
+      },
+      {
+        "name": "master/slaves_disconnected",
+        "value": 0.0
+      },
+      {
+        "name": "master/invalid_status_update_acknowledgements",
+        "value": 0.0
+      },
+      {
+        "name": "system/load_5min",
+        "value": 1.65
+      },
+      {
+        "name": "master/tasks_failed",
+        "value": 0.0
+      },
+      {
+        "name": "master/slave_registrations",
+        "value": 0.0
+      },
+      {
+        "name": "master/frameworks_connected",
+        "value": 0.0
+      },
+      {
+        "name": "allocator/mesos/event_queue_dispatches",
+        "value": 0.0
+      },
+      {
+        "name": "master/messages_executor_to_framework",
+        "value": 0.0
+      },
+      {
+        "name": "system/mem_total_bytes",
+        "value": 8057147392.0
+      },
+      {
+        "name": "master/cpus_revocable_used",
+        "value": 0.0
+      },
+      {
+        "name": "master/tasks_killing",
+        "value": 0.0
+      },
+      {
+        "name": "allocator/mesos/resources/cpus/offered_or_allocated",
+        "value": 0.0
+      },
+      {
+        "name": "master/messages_exited_executor",
+        "value": 0.0
+      },
+      {
+        "name": "master/valid_status_update_acknowledgements",
+        "value": 0.0
+      },
+      {
+        "name": "master/disk_used",
+        "value": 0.0
+      },
+      {
+        "name": "master/gpus_revocable_used",
+        "value": 0.0
+      },
+      {
+        "name": "master/disk_revocable_percent",
+        "value": 0.0
+      },
+      {
+        "name": "master/mem_revocable_percent",
+        "value": 0.0
+      },
+      {
+        "name": "master/invalid_executor_to_framework_messages",
+        "value": 0.0
+      },
+      {
+        "name": "master/slave_shutdowns_scheduled",
+        "value": 0.0
+      },
+      {
+        "name": "master/slave_removals/reason_registered",
+        "value": 0.0
+      },
+      {
+        "name": "master/messages_suppress_offers",
+        "value": 0.0
+      },
+      {
+        "name": "master/uptime_secs",
+        "value": 0.038900992
+      },
+      {
+        "name": "allocator/mesos/resources/disk/total",
+        "value": 0.0
+      },
+      {
+        "name": "master/slave_removals/reason_unregistered",
+        "value": 0.0
+      },
+      {
+        "name": "master/disk_total",
+        "value": 0.0
+      },
+      {
+        "name": "master/messages_resource_request",
+        "value": 0.0
+      },
+      {
+        "name": "master/cpus_total",
+        "value": 0.0
+      },
+      {
+        "name": "master/valid_framework_to_executor_messages",
+        "value": 0.0
+      },
+      {
+        "name": "master/cpus_used",
+        "value": 0.0
+      },
+      {
+        "name": "master/slave_removals/reason_unhealthy",
+        "value": 0.0
+      },
+      {
+        "name": "master/messages_kill_task",
+        "value": 0.0
+      },
+      {
+        "name": "master/slave_shutdowns_canceled",
+        "value": 0.0
+      },
+      {
+        "name": "master/messages_deactivate_framework",
+        "value": 0.0
+      },
+      {
+        "name": "master/messages_unregister_framework",
+        "value": 0.0
+      },
+      {
+        "name": "master/mem_revocable_total",
+        "value": 0.0
+      },
+      {
+        "name": "master/messages_reregister_framework",
+        "value": 0.0
+      },
+      {
+        "name": "master/dropped_messages",
+        "value": 0.0
+      },
+      {
+        "name": "master/invalid_framework_to_executor_messages",
+        "value": 0.0
+      },
+      {
+        "name": "master/tasks_error",
+        "value": 0.0
+      },
+      {
+        "name": "master/tasks_lost",
+        "value": 0.0
+      },
+      {
+        "name": "master/messages_reconcile_operations",
+        "value": 0.0
+      },
+      {
+        "name": "master/messages_reconcile_tasks",
+        "value": 0.0
+      },
+      {
+        "name": "master/tasks_killed",
+        "value": 0.0
+      },
+      {
+        "name": "master/tasks_finished",
+        "value": 0.0
+      },
+      {
+        "name": "master/frameworks_inactive",
+        "value": 0.0
+      },
+      {
+        "name": "master/tasks_running",
+        "value": 0.0
+      },
+      {
+        "name": "master/tasks_starting",
+        "value": 0.0
+      },
+      {
+        "name": "registrar/state_store_ms",
+        "value": 5.55392
+      },
+      {
+        "name": "master/mem_total",
+        "value": 0.0
+      },
+      {
+        "name": "master/outstanding_offers",
+        "value": 0.0
+      },
+      {
+        "name": "master/operator_event_stream_subscribers",
+        "value": 0.0
+      },
+      {
+        "name": "master/frameworks_active",
+        "value": 0.0
+      },
+      {
+        "name": "master/messages_authenticate",
+        "value": 0.0
+      },
+      {
+        "name": "master/disk_revocable_used",
+        "value": 0.0
+      },
+      {
+        "name": "master/frameworks_disconnected",
+        "value": 0.0
+      },
+      {
+        "name": "master/slaves_connected",
+        "value": 0.0
+      },
+      {
+        "name": "master/messages_status_update_acknowledgement",
+        "value": 0.0
+      },
+      {
+        "name": "master/elected",
+        "value": 1.0
+      }
+    ]
+  }
+}
+
+</code></pre>
+<h3 id="get_logging_level"><a class="header" href="#get_logging_level">GET_LOGGING_LEVEL</a></h3>
+<p>This call retrieves the master’s logging level.</p>
+<pre><code>GET_LOGGING_LEVEL HTTP Request (JSON):
+
+POST /api/v1  HTTP/1.1
+
+Host: masterhost:5050
+Content-Type: application/json
+Accept: application/json
+
+{
+  "type": "GET_LOGGING_LEVEL"
+}
+
+
+GET_LOGGING_LEVEL HTTP Response (JSON):
+
+HTTP/1.1 200 OK
+
+Content-Type: application/json
+
+{
+  "type": "GET_LOGGING_LEVEL",
+  "get_logging_level": {
+    "level": 0
+  }
+}
+
+</code></pre>
+<h3 id="set_logging_level"><a class="header" href="#set_logging_level">SET_LOGGING_LEVEL</a></h3>
+<p>Sets the logging verbosity level for a specified duration for master. Mesos uses
+<a href="https://github.com/google/glog">glog</a> for logging. The library only uses
+verbose logging which means nothing will be output unless the verbosity
+level is set (by default it’s 0, libprocess uses levels 1, 2, and 3).</p>
+<pre><code>SET_LOGGING_LEVEL HTTP Request (JSON):
+
+POST /api/v1  HTTP/1.1
+
+Host: masterhost:5050
+Content-Type: application/json
+Accept: application/json
+
+{
+  "type": "SET_LOGGING_LEVEL",
+  "set_logging_level": {
+    "duration": {
+      "nanoseconds": 60000000000
+    },
+    "level": 1
+  }
+}
+
+
+SET_LOGGING_LEVEL HTTP Response:
+
+HTTP/1.1 202 Accepted
+
+</code></pre>
+<h3 id="list_files"><a class="header" href="#list_files">LIST_FILES</a></h3>
+<p>This call retrieves the file listing for a directory in master.</p>
+<pre><code>LIST_FILES HTTP Request (JSON):
+
+POST /api/v1  HTTP/1.1
+
+Host: masterhost:5050
+Content-Type: application/json
+Accept: application/json
+
+{
+  "type": "LIST_FILES",
+  "list_files": {
+    "path": "one/"
+  }
+}
+
+
+LIST_FILES HTTP Response (JSON):
+
+HTTP/1.1 200 OK
+
+Content-Type: application/json
+
+{
+  "type": "LIST_FILES",
+  "list_files": {
+    "file_infos": [
+      {
+        "gid": "root",
+        "mode": 16877,
+        "mtime": {
+          "nanoseconds": 1470820172000000000
+        },
+        "nlink": 2,
+        "path": "one/2",
+        "size": 4096,
+        "uid": "root"
+      },
+      {
+        "gid": "root",
+        "mode": 16877,
+        "mtime": {
+          "nanoseconds": 1470820172000000000
+        },
+        "nlink": 2,
+        "path": "one/3",
+        "size": 4096,
+        "uid": "root"
+      },
+      {
+        "gid": "root",
+        "mode": 33188,
+        "mtime": {
+          "nanoseconds": 1470820172000000000
+        },
+        "nlink": 1,
+        "path": "one/two",
+        "size": 3,
+        "uid": "root"
+      }
+    ]
+  }
+}
+
+</code></pre>
+<h3 id="read_file"><a class="header" href="#read_file">READ_FILE</a></h3>
+<p>Reads data from a file on the master. This call takes the path of the
+file to be read, the offset to start reading, and the maximum number of
+bytes to read.</p>
+<pre><code>READ_FILE HTTP Request (JSON):
+
+POST /api/v1  HTTP/1.1
+
+Host: masterhost:5050
+Content-Type: application/json
+Accept: application/json
+
+{
+  "type": "READ_FILE",
+  "read_file": {
+    "length": 6,
+    "offset": 1,
+    "path": "myname"
+  }
+}
+
+
+READ_FILE HTTP Response (JSON):
+
+HTTP/1.1 200 OK
+
+Content-Type: application/json
+
+{
+  "type": "READ_FILE",
+  "read_file": {
+    "data": "b2R5",
+    "size": 4
+  }
+}
+
+</code></pre>
+<h3 id="get_state"><a class="header" href="#get_state">GET_STATE</a></h3>
+<p>This call retrieves the overall cluster state.</p>
+<pre><code>GET_STATE HTTP Request (JSON):
+
+POST /api/v1  HTTP/1.1
+
+Host: masterhost:5050
+Content-Type: application/json
+Accept: application/json
+
+{
+  "type": "GET_STATE"
+}
+
+
+GET_STATE HTTP Response (JSON):
+
+HTTP/1.1 200 OK
+
+Content-Type: application/json
+
+{
+  "type": "GET_STATE",
+  "get_state": {
+    "get_agents": {
+      "agents": [
+        {
+          "active": true,
+          "agent_info": {
+            "hostname": "myhost",
+            "id": {
+              "value": "628984d0-4213-4140-bcb0-99d7ef46b1df-S0"
+            },
+            "port": 34626,
+            "resources": [
+              {
+                "name": "cpus",
+                "role": "*",
+                "scalar": {
+                  "value": 2.0
+                },
+                "type": "SCALAR"
+              },
+              {
+                "name": "mem",
+                "role": "*",
+                "scalar": {
+                  "value": 1024.0
+                },
+                "type": "SCALAR"
+              },
+              {
+                "name": "disk",
+                "role": "*",
+                "scalar": {
+                  "value": 1024.0
+                },
+                "type": "SCALAR"
+              },
+              {
+                "name": "ports",
+                "ranges": {
+                  "range": [
+                    {
+                      "begin": 31000,
+                      "end": 32000
+                    }
+                  ]
+                },
+                "role": "*",
+                "type": "RANGES"
+              }
+            ]
+          },
+          "pid": "slave(3)@127.0.1.1:34626",
+          "registered_time": {
+            "nanoseconds": 1470820172046531840
+          },
+          "total_resources": [
+            {
+              "name": "cpus",
+              "role": "*",
+              "scalar": {
+                "value": 2.0
+              },
+              "type": "SCALAR"
+            },
+            {
+              "name": "mem",
+              "role": "*",
+              "scalar": {
+                "value": 1024.0
+              },
+              "type": "SCALAR"
+            },
+            {
+              "name": "disk",
+              "role": "*",
+              "scalar": {
+                "value": 1024.0
+              },
+              "type": "SCALAR"
+            },
+            {
+              "name": "ports",
+              "ranges": {
+                "range": [
+                  {
+                    "begin": 31000,
+                    "end": 32000
+                  }
+                ]
+              },
+              "role": "*",
+              "type": "RANGES"
+            }
+          ],
+          "version": "1.1.0"
+        }
+      ]
+    },
+    "get_executors": {
+      "executors": [
+        {
+          "agent_id": {
+            "value": "628984d0-4213-4140-bcb0-99d7ef46b1df-S0"
+          },
+          "executor_info": {
+            "command": {
+              "shell": true,
+              "value": ""
+            },
+            "executor_id": {
+              "value": "default"
+            },
+            "framework_id": {
+              "value": "628984d0-4213-4140-bcb0-99d7ef46b1df-0000"
+            }
+          }
+        }
+      ]
+    },
+    "get_frameworks": {
+      "frameworks": [
+        {
+          "active": true,
+          "connected": true,
+          "framework_info": {
+            "checkpoint": false,
+            "failover_timeout": 0.0,
+            "hostname": "abcdev",
+            "id": {
+              "value": "628984d0-4213-4140-bcb0-99d7ef46b1df-0000"
+            },
+            "name": "default",
+            "principal": "my-principal",
+            "role": "*",
+            "user": "root"
+          },
+          "registered_time": {
+            "nanoseconds": 1470820172039300864
+          },
+          "reregistered_time": {
+            "nanoseconds": 1470820172039300864
+          }
+        }
+      ]
+    },
+    "get_tasks": {
+      "completed_tasks": [
+        {
+          "agent_id": {
+            "value": "628984d0-4213-4140-bcb0-99d7ef46b1df-S0"
+          },
+          "executor_id": {
+            "value": "default"
+          },
+          "framework_id": {
+            "value": "628984d0-4213-4140-bcb0-99d7ef46b1df-0000"
+          },
+          "name": "test-task",
+          "resources": [
+            {
+              "name": "cpus",
+              "role": "*",
+              "scalar": {
+                "value": 2.0
+              },
+              "type": "SCALAR"
+            },
+            {
+              "name": "mem",
+              "role": "*",
+              "scalar": {
+                "value": 1024.0
+              },
+              "type": "SCALAR"
+            },
+            {
+              "name": "disk",
+              "role": "*",
+              "scalar": {
+                "value": 1024.0
+              },
+              "type": "SCALAR"
+            },
+            {
+              "name": "ports",
+              "ranges": {
+                "range": [
+                  {
+                    "begin": 31000,
+                    "end": 32000
+                  }
+                ]
+              },
+              "role": "*",
+              "type": "RANGES"
+            }
+          ],
+          "state": "TASK_FINISHED",
+          "status_update_state": "TASK_FINISHED",
+          "status_update_uuid": "IWjmPnfgQCWxGVlNNwctcg==",
+          "statuses": [
+            {
+              "agent_id": {
+                "value": "628984d0-4213-4140-bcb0-99d7ef46b1df-S0"
+              },
+              "container_status": {
+                "network_infos": [
+                  {
+                    "ip_addresses": [
+                      {
+                        "ip_address": "127.0.1.1"
+                      }
+                    ]
+                  }
+                ]
+              },
+              "executor_id": {
+                "value": "default"
+              },
+              "source": "SOURCE_EXECUTOR",
+              "state": "TASK_RUNNING",
+              "task_id": {
+                "value": "eb5cb680-a998-4605-8811-e79db8734c02"
+              },
+              "timestamp": 1470820172.07315,
+              "uuid": "hTaLQ0b5Q1OZuab7QclTKQ=="
+            },
+            {
+              "agent_id": {
+                "value": "628984d0-4213-4140-bcb0-99d7ef46b1df-S0"
+              },
+              "container_status": {
+                "network_infos": [
+                  {
+                    "ip_addresses": [
+                      {
+                        "ip_address": "127.0.1.1"
+                      }
+                    ]
+                  }
+                ]
+              },
+              "executor_id": {
+                "value": "default"
+              },
+              "source": "SOURCE_EXECUTOR",
+              "state": "TASK_FINISHED",
+              "task_id": {
+                "value": "eb5cb680-a998-4605-8811-e79db8734c02"
+              },
+              "timestamp": 1470820172.09382,
+              "uuid": "IWjmPnfgQCWxGVlNNwctcg=="
+            }
+          ],
+          "task_id": {
+            "value": "eb5cb680-a998-4605-8811-e79db8734c02"
+          }
+        }
+      ]
+    }
+  }
+}
+
+</code></pre>
+<h3 id="get_agents"><a class="header" href="#get_agents">GET_AGENTS</a></h3>
+<p>This call retrieves information about all the agents known to the master.</p>
+<pre><code>GET_AGENTS HTTP Request (JSON):
+
+POST /api/v1  HTTP/1.1
+
+Host: masterhost:5050
+Content-Type: application/json
+Accept: application/json
+
+{
+  "type": "GET_AGENTS"
+}
+
+
+GET_AGENTS HTTP Response (JSON):
+
+HTTP/1.1 200 OK
+
+Content-Type: application/json
+
+{{
+  "type": "GET_AGENTS",
+  "get_agents": {
+    "agents": [
+      {
+        "active": true,
+        "agent_info": {
+          "hostname": "host",
+          "id": {
+            "value": "3669ea49-c3c4-4b13-adee-05b8f9cb2562-S0"
+          },
+          "port": 34626,
+          "resources": [
+            {
+              "name": "cpus",
+              "role": "*",
+              "scalar": {
+                "value": 2.0
+              },
+              "type": "SCALAR"
+            },
+            {
+              "name": "mem",
+              "role": "*",
+              "scalar": {
+                "value": 1024.0
+              },
+              "type": "SCALAR"
+            },
+            {
+              "name": "disk",
+              "role": "*",
+              "scalar": {
+                "value": 1024.0
+              },
+              "type": "SCALAR"
+            },
+            {
+              "name": "ports",
+              "ranges": {
+                "range": [
+                  {
+                    "begin": 31000,
+                    "end": 32000
+                  }
+                ]
+              },
+              "role": "*",
+              "type": "RANGES"
+            }
+          ]
+        },
+        "pid": "slave(1)@127.0.1.1:34626",
+        "registered_time": {
+          "nanoseconds": 1470820171393027072
+        },
+        "total_resources": [
+          {
+            "name": "cpus",
+            "role": "*",
+            "scalar": {
+              "value": 2.0
+            },
+            "type": "SCALAR"
+          },
+          {
+            "name": "mem",
+            "role": "*",
+            "scalar": {
+              "value": 1024.0
+            },
+            "type": "SCALAR"
+          },
+          {
+            "name": "disk",
+            "role": "*",
+            "scalar": {
+              "value": 1024.0
+            },
+            "type": "SCALAR"
+          },
+          {
+            "name": "ports",
+            "ranges": {
+              "range": [
+                {
+                  "begin": 31000,
+                  "end": 32000
+                }
+              ]
+            },
+            "role": "*",
+            "type": "RANGES"
+          }
+        ],
+        "version": "1.1.0"
+      }
+    ]
+  }
+}
+
+</code></pre>
+<h3 id="get_frameworks"><a class="header" href="#get_frameworks">GET_FRAMEWORKS</a></h3>
+<p>This call retrieves information about all the frameworks known to the master.</p>
+<pre><code>GET_FRAMEWORKS HTTP Request (JSON):
+
+POST /api/v1  HTTP/1.1
+
+Host: masterhost:5050
+Content-Type: application/json
+Accept: application/json
+
+{
+  "type": "GET_FRAMEWORKS"
+}
+
+
+GET_FRAMEWORKS HTTP Response (JSON):
+
+HTTP/1.1 200 OK
+
+Content-Type: application/json
+
+{
+  "type": "GET_FRAMEWORKS",
+  "get_frameworks": {
+    "frameworks": [
+      {
+        "active": true,
+        "connected": true,
+        "framework_info": {
+          "checkpoint": false,
+          "failover_timeout": 0.0,
+          "hostname": "myhost",
+          "id": {
+            "value": "361be53a-4d1b-42c1-bec3-e3979eff90bd-0000"
+          },
+          "name": "default",
+          "principal": "my-principal",
+          "role": "*",
+          "user": "root"
+        },
+        "registered_time": {
+          "nanoseconds": 1470820171578306816
+        },
+        "reregistered_time": {
+          "nanoseconds": 1470820171578306816
+        }
+      }
+    ]
+  }
+}
+
+</code></pre>
+<h3 id="get_executors"><a class="header" href="#get_executors">GET_EXECUTORS</a></h3>
+<p>Queries about all the executors known to the master.</p>
+<pre><code>GET_EXECUTORS HTTP Request (JSON):
+
+POST /api/v1  HTTP/1.1
+
+Host: masterhost:5050
+Content-Type: application/json
+Accept: application/json
+
+{
+  "type": "GET_EXECUTORS"
+}
+
+
+GET_EXECUTORS HTTP Response (JSON):
+
+HTTP/1.1 200 OK
+
+Content-Type: application/json
+
+{
+  "type": "GET_EXECUTORS",
+  "get_executors": {
+    "executors": [
+      {
+        "agent_id": {
+          "value": "f2ddc41d-6284-405e-8642-34953093140f-S0"
+        },
+        "executor_info": {
+          "command": {
+            "shell": true,
+            "value": "exit 1"
+          },
+          "executor_id": {
+            "value": "default"
+          },
+          "framework_id": {
+            "value": "f2ddc41d-6284-405e-8642-34953093140f-0000"
+          }
+        }
+      }
+    ]
+  }
+}
+
+</code></pre>
+<h3 id="get_tasks"><a class="header" href="#get_tasks">GET_TASKS</a></h3>
+<p>Query about all the tasks known to the master.</p>
+<pre><code>GET_TASKS HTTP Request (JSON):
+
+POST /api/v1  HTTP/1.1
+
+Host: masterhost:5050
+Content-Type: application/json
+Accept: application/json
+
+{
+  "type": "GET_TASKS"
+}
+
+
+GET_TASKS HTTP Response (JSON):
+
+HTTP/1.1 200 OK
+
+Content-Type: application/json
+
+{
+  "type": "GET_TASKS",
+  "get_tasks": {
+    "tasks": [
+      {
+        "agent_id": {
+          "value": "d4bd102f-e25f-46dc-bb5d-8b10bca133d8-S0"
+        },
+        "executor_id": {
+          "value": "default"
+        },
+        "framework_id": {
+          "value": "d4bd102f-e25f-46dc-bb5d-8b10bca133d8-0000"
+        },
+        "name": "test",
+        "resources": [
+          {
+            "name": "cpus",
+            "role": "*",
+            "scalar": {
+              "value": 2.0
+            },
+            "type": "SCALAR"
+          },
+          {
+            "name": "mem",
+            "role": "*",
+            "scalar": {
+              "value": 1024.0
+            },
+            "type": "SCALAR"
+          },
+          {
+            "name": "disk",
+            "role": "*",
+            "scalar": {
+              "value": 1024.0
+            },
+            "type": "SCALAR"
+          },
+          {
+            "name": "ports",
+            "ranges": {
+              "range": [
+                {
+                  "begin": 31000,
+                  "end": 32000
+                }
+              ]
+            },
+            "role": "*",
+            "type": "RANGES"
+          }
+        ],
+        "state": "TASK_RUNNING",
+        "status_update_state": "TASK_RUNNING",
+        "status_update_uuid": "ycLTRBo8TjKFTrh4vsBERg==",
+        "statuses": [
+          {
+            "agent_id": {
+              "value": "d4bd102f-e25f-46dc-bb5d-8b10bca133d8-S0"
+            },
+            "container_status": {
+              "network_infos": [
+                {
+                  "ip_addresses": [
+                    {
+                      "ip_address": "127.0.1.1"
+                    }
+                  ]
+                }
+              ]
+            },
+            "executor_id": {
+              "value": "default"
+            },
+            "source": "SOURCE_EXECUTOR",
+            "state": "TASK_RUNNING",
+            "task_id": {
+              "value": "1"
+            },
+            "timestamp": 1470820172.32565,
+            "uuid": "ycLTRBo8TjKFTrh4vsBERg=="
+          }
+        ],
+        "task_id": {
+          "value": "1"
+        }
+      }
+    ]
+  }
+}
+
+</code></pre>
+<h3 id="get_roles"><a class="header" href="#get_roles">GET_ROLES</a></h3>
+<p>Query the information about roles.</p>
+<pre><code>GET_ROLES HTTP Request (JSON):
+
+POST /api/v1  HTTP/1.1
+
+Host: masterhost:5050
+Content-Type: application/json
+Accept: application/json
+
+{
+  "type": "GET_ROLES"
+}
+
+
+GET_ROLES HTTP Response (JSON):
+
+HTTP/1.1 200 OK
+
+Content-Type: application/json
+
+{
+  "type": "GET_ROLES",
+  "get_roles": {
+    "roles": [
+      {
+        "name": "*",
+        "weight": 1.0
+      },
+      {
+        "frameworks": [
+          {
+            "value": "74bddcbc-4a02-4d64-b291-aed52032055f-0000"
+          }
+        ],
+        "name": "role1",
+        "resources": [
+          {
+            "name": "cpus",
+            "role": "role1",
+            "scalar": {
+              "value": 0.5
+            },
+            "type": "SCALAR"
+          },
+          {
+            "name": "mem",
+            "role": "role1",
+            "scalar": {
+              "value": 512.0
+            },
+            "type": "SCALAR"
+          },
+          {
+            "name": "ports",
+            "ranges": {
+              "range": [
+                {
+                  "begin": 31000,
+                  "end": 31001
+                }
+              ]
+            },
+            "role": "role1",
+            "type": "RANGES"
+          },
+          {
+            "name": "disk",
+            "role": "role1",
+            "scalar": {
+              "value": 1024.0
+            },
+            "type": "SCALAR"
+          }
+        ],
+        "weight": 2.5
+      }
+    ]
+  }
+}
+
+</code></pre>
+<h3 id="get_operations"><a class="header" href="#get_operations">GET_OPERATIONS</a></h3>
+<p>Returns a list of all offer operations throughout the cluster, not including
+<code>LAUNCH</code> or <code>LAUNCH_GROUP</code> operations which can be retrieved with <code>GET_TASKS</code>.</p>
+<pre><code>GET_OPERATIONS HTTP Request (JSON):
+
+POST /api/v1  HTTP/1.1
+
+Host: masterhost:5050
+Content-Type: application/json
+Accept: application/json
+
+{
+  "type": "GET_OPERATIONS"
+}
+
+
+GET_OPERATIONS HTTP Response (JSON):
+
+HTTP/1.1 200 OK
+
+Content-Type: application/json
+
+{
+  "type": "GET_OPERATIONS",
+  "get_operations": {
+    "operations": [
+      {
+        "framework_id": {"value": "74bddcbc-4a02-4d64-b291-aed52032055f-0000"},
+        "agent_id": {"value": "18083noa-j287-dan4-9qx6-l02b84nksb7z-0021"},
+        "info": {
+          "type": "CREATE_DISK",
+          "id": {"value": "n2j8nksj-9827-82bk-nd7u-83hbchu7whdk-9978"},
+          "create_disk": {
+            "source": {
+              "provider_id": {"value": "837hfmi2-u2u7-19pp-1884-812i8f02828j-0030"},
+              "name": "disk",
+              "type": "SCALAR",
+              "scalar": {"value": 1024.0},
+              "role": "storage-role-1",
+              "allocation_info": {"role": "storage-role-1"},
+              "reservation": {
+                "type": "DYNAMIC",
+                "role": "storage-role-1",
+                "principal": "storage-service"
+              },
+              "reservations": [{
+                "type": "DYNAMIC",
+                "role": "storage-role-1",
+                "principal": "storage-service"
+              }],
+              "disk": {
+                "source": {
+                  "type": "RAW",
+                  "vendor": "nas-service",
+                  "id": "vol-19827509",
+                  "profile": "fast-volume"
+                }
+              }
+            },
+            "target_type": "MOUNT"
+          }
+        },
+        "latest_status": {
+          "operation_id": {"value": "n2j8nksj-9827-82bk-nd7u-83hbchu7whdk-9978"},
+          "state": "OPERATION_PENDING",
+          "uuid": {"value": "28987843-j288-1k0s-l29n-837ybzmo18tj-nv73"},
+          "agent_id": {"value": "18083noa-j287-dan4-9qx6-l02b84nksb7z-0021"},
+          "resource_provider_id": {"value": "837hfmi2-u2u7-19pp-1884-812i8f02828j-0030"}
+        },
+        "statuses": [{
+          "operation_id": {"value": "n2j8nksj-9827-82bk-nd7u-83hbchu7whdk-9978"},
+          "state": "OPERATION_PENDING",
+          "uuid": {"value": "28987843-j288-1k0s-l29n-837ybzmo18tj-nv73"},
+          "agent_id": {"value": "18083noa-j287-dan4-9qx6-l02b84nksb7z-0021"},
+          "resource_provider_id": {"value": "837hfmi2-u2u7-19pp-1884-812i8f02828j-0030"}
+        }],
+        "uuid": {"value": "nsj27802-jd82-jd19-jd38-837jdfnoqfij-u284"}
+      }
+    ]
+  }
+}
+
+</code></pre>
+<h3 id="get_weights"><a class="header" href="#get_weights">GET_WEIGHTS</a></h3>
+<p>This call retrieves the information about role weights.</p>
+<pre><code>GET_WEIGHTS HTTP Request (JSON):
+
+POST /api/v1  HTTP/1.1
+
+Host: masterhost:5050
+Content-Type: application/json
+Accept: application/json
+
+{
+  "type": "GET_WEIGHTS"
+}
+
+
+GET_WEIGHTS HTTP Response (JSON):
+
+HTTP/1.1 200 OK
+
+Content-Type: application/json
+
+{
+  "type": "GET_WEIGHTS",
+  "get_weights": {
+    "weight_infos": [
+      {
+        "role": "role",
+        "weight": 2.0
+      }
+    ]
+  }
+}
+
+</code></pre>
+<h3 id="update_weights"><a class="header" href="#update_weights">UPDATE_WEIGHTS</a></h3>
+<p>This call updates weights for specific role. This call takes <code>weight_infos</code>
+which needs <code>role</code> value and <code>weight</code> value.</p>
+<pre><code>UPDATE_WEIGHTS HTTP Request (JSON):
+
+POST /api/v1  HTTP/1.1
+
+Host: masterhost:5050
+Content-Type: application/json
+Accept: application/json
+
+{
+  "type": "UPDATE_WEIGHTS",
+  "update_weights": {
+    "weight_infos": [
+      {
+        "role": "role",
+        "weight": 4.0
+      }
+    ]
+  }
+}
+
+
+UPDATE_WEIGHTS HTTP Response:
+
+HTTP/1.1 202 Accepted
+
+</code></pre>
+<h3 id="get_master"><a class="header" href="#get_master">GET_MASTER</a></h3>
+<p>This call retrieves information about the master.</p>
+<pre><code>GET_MASTER HTTP Request (JSON):
+
+POST /api/v1  HTTP/1.1
+
+Host: masterhost:5050
+Content-Type: application/json
+Accept: application/json
+
+{
+  "type": "GET_MASTER"
+}
+
+
+GET_MASTER HTTP Response (JSON):
+
+HTTP/1.1 200 OK
+
+Content-Type: application/json
+
+{
+  "type": "GET_MASTER",
+  "get_master": {
+    "master_info": {
+      "address": {
+        "hostname": "myhost",
+        "ip": "127.0.1.1",
+        "port": 34626
+      },
+      "hostname": "myhost",
+      "id": "310ffdac-0b73-408d-acf0-2adcd21cb4b7",
+      "ip": 16842879,
+      "pid": "master@127.0.1.1:34626",
+      "port": 34626,
+      "version": "1.1.0"
+    }
+  }
+}
+
+</code></pre>
+<h3 id="reserve_resources"><a class="header" href="#reserve_resources">RESERVE_RESOURCES</a></h3>
+<p>This call is used to update resource reservations.</p>
+<p>This call reserves resources dynamically on a specific agent. This call takes
+<code>agent_id</code>, the <code>source</code> resources of the operation and the target
+<code>resources</code>, and updates the reservations of <code>source</code> to be equal to
+the reservations of <code>target</code>.</p>
+<p>For backwards compatibility we accept calls without the <code>sources</code> field present,
+but only allow adding a single reservation refinement in that case;
+otherwise we expect that <code>sources</code> can be transformed into <code>resources</code> by
+repeatedly removing or adding identical reservations from all given
+resources. This means that <code>source</code> and <code>resources</code> must be identical
+in all values apart from reservation.</p>
+<p>If authorization is enabled we expect the caller to be authorized to perform any
+<code>UNRESERVE</code> or <code>RESERVE</code> operations needed to transform <code>sources</code> to
+<code>resources</code>.</p>
+<p>Example of a call creating reserved resources for role <code>role</code>:</p>
+<pre><code>RESERVE_RESOURCES HTTP Request (JSON):
+
+POST /api/v1  HTTP/1.1
+
+Host: masterhost:5050
+Content-Type: application/json
+Accept: application/json
+
+{
+  "type": "RESERVE_RESOURCES",
+  "reserve_resources": {
+    "agent_id": {
+      "value": "1557de7d-547c-48db-b5d3-6bef9c9640ef-S0"
+    },
+    "source": [
+      {
+        "type": "SCALAR",
+        "name": "cpus",
+        "scalar": {
+          "value": 1.0
+        }
+      },
+      {
+        "type": "SCALAR",
+        "name": "mem",
+        "scalar": {
+          "value": 512.0
+        }
+      }
+    ],
+    "resources": [
+      {
+        "type": "SCALAR",
+        "name": "cpus",
+        "scalar": {
+          "value": 1.0
+        },
+        "reservations": [
+          {
+            "type": "DYNAMIC",
+            "role": "role",
+            "principal": "my-principal"
+          }
+        ]
+      },
+      {
+        "type": "SCALAR",
+        "name": "mem",
+        "scalar": {
+          "value": 512.0
+        },
+        "reservations": [
+          {
+            "type": "DYNAMIC",
+            "role": "role",
+            "principal": "my-principal"
+          }
+        ]
+      }
+    ]
+  }
+}
+
+
+RESERVE_RESOURCES HTTP Response:
+
+HTTP/1.1 202 Accepted
+
+</code></pre>
+<p>Example of a call changing the reservation of resources from <code>role_a</code> to
+<code>role_b</code>.</p>
+<pre><code>RESERVE_RESOURCES HTTP Request (JSON):
+
+POST /api/v1  HTTP/1.1
+
+Host: masterhost:5050
+Content-Type: application/json
+Accept: application/json
+
+{
+  "type": "RESERVE_RESOURCES",
+  "reserve_resources": {
+    "agent_id": {
+      "value": "1557de7d-547c-48db-b5d3-6bef9c9640ef-S0"
+    },
+    "source": [
+      {
+        "type": "SCALAR",
+        "name": "cpus",
+        "scalar": {
+          "value": 1.0
+        },
+        "reservations": [
+          {
+            "type": "DYNAMIC",
+            "role": "role_a",
+            "principal": "my-principal"
+          }
+        ]
+      },
+      {
+        "type": "SCALAR",
+        "name": "mem",
+        "scalar": {
+          "value": 512.0
+        },
+        "reservations": [
+          {
+            "type": "DYNAMIC",
+            "role": "role_a",
+            "principal": "my-principal"
+          }
+        ]
+      }
+    ],
+    "resources": [
+      {
+        "type": "SCALAR",
+        "name": "cpus",
+        "scalar": {
+          "value": 1.0
+        },
+        "reservations": [
+          {
+            "type": "DYNAMIC",
+            "role": "role_b",
+            "principal": "my-principal"
+          }
+        ]
+      },
+      {
+        "type": "SCALAR",
+        "name": "mem",
+        "scalar": {
+          "value": 512.0
+        },
+        "reservations": [
+          {
+            "type": "DYNAMIC",
+            "role": "role_b",
+            "principal": "my-principal"
+          }
+        ]
+      }
+    ]
+  }
+}
+
+
+RESERVE_RESOURCES HTTP Response:
+
+HTTP/1.1 202 Accepted
+
+</code></pre>
+<h3 id="unreserve_resources"><a class="header" href="#unreserve_resources">UNRESERVE_RESOURCES</a></h3>
+<p>This call unreserve resources dynamically on a specific agent. This call takes
+<code>agent_id</code> and <code>resources</code> details like the following.</p>
+<pre><code>UNRESERVE_RESOURCES HTTP Request (JSON):
+
+POST /api/v1  HTTP/1.1
+
+Host: masterhost:5050
+Content-Type: application/json
+Accept: application/json
+
+{
+  "type": "UNRESERVE_RESOURCES",
+  "unreserve_resources": {
+    "agent_id": {
+      "value": "1557de7d-547c-48db-b5d3-6bef9c9640ef-S0"
+    },
+    "resources": [
+      {
+        "type": "SCALAR",
+        "name": "cpus",
+        "scalar": {
+          "value": 1.0
+        },
+        "reservations": [
+          {
+            "type": "DYNAMIC",
+            "role": "role",
+            "principal": "my-principal"
+          }
+        ]
+      },
+      {
+        "type": "SCALAR",
+        "name": "mem",
+        "scalar": {
+          "value": 512.0
+        },
+        "reservations": [
+          {
+            "type": "DYNAMIC",
+            "role": "role",
+            "principal": "my-principal"
+          }
+        ]
+      }
+    ]
+  }
+}
+
+
+UNRESERVE_RESOURCES HTTP Response:
+
+HTTP/1.1 202 Accepted
+
+</code></pre>
+<h3 id="create_volumes"><a class="header" href="#create_volumes">CREATE_VOLUMES</a></h3>
+<p>This call create <a href="persistent-volume.html">persistent volumes</a> on reserved
+resources. The request is forwarded asynchronously to the Mesos agent where the
+reserved resources are located. That asynchronous message may not be delivered
+or creating the volumes at the agent might fail. This call takes <code>agent_id</code>
+and <code>volumes</code> details like the following.</p>
+<pre><code>CREATE_VOLUMES HTTP Request (JSON):
+
+POST /api/v1  HTTP/1.1
+
+Host: masterhost:5050
+Content-Type: application/json
+Accept: application/json
+
+{
+  "type": "CREATE_VOLUMES",
+  "create_volumes": {
+    "agent_id": {
+      "value": "919141a8-b434-4946-86b9-e1b65c8171f6-S0"
+    },
+    "volumes": [
+      {
+        "type": "SCALAR",
+        "disk": {
+          "persistence": {
+            "id": "id1",
+            "principal": "my-principal"
+          },
+          "volume": {
+            "container_path": "path1",
+            "mode": "RW"
+          }
+        },
+        "name": "disk",
+        "role": "role1",
+        "scalar": {
+          "value": 64.0
+        }
+      }
+    ]
+  }
+}
+
+
+CREATE_VOLUMES HTTP Response:
+
+HTTP/1.1 202 Accepted
+
+</code></pre>
+<h3 id="destroy_volumes"><a class="header" href="#destroy_volumes">DESTROY_VOLUMES</a></h3>
+<p>This call destroys <a href="persistent-volume.html">persistent volumes</a>. The request is
+forwarded asynchronously to the Mesos agent where the volumes are located.</p>
+<pre><code>DESTROY_VOLUMES HTTP Request (JSON):
+
+POST /api/v1  HTTP/1.1
+
+Host: masterhost:5050
+Content-Type: application/json
+Accept: application/json
+
+{
+  "type": "DESTROY_VOLUMES",
+  "destroy_volumes": {
+    "agent_id": {
+      "value": "919141a8-b434-4946-86b9-e1b65c8171f6-S0"
+    },
+    "volumes": [
+      {
+        "disk": {
+          "persistence": {
+            "id": "id1",
+            "principal": "my-principal"
+          },
+          "volume": {
+            "container_path": "path1",
+            "mode": "RW"
+          }
+        },
+        "name": "disk",
+        "role": "role1",
+        "scalar": {
+          "value": 64.0
+        },
+        "type": "SCALAR"
+      }
+    ]
+  }
+}
+
+
+DESTROY_VOLUMES HTTP Response:
+
+HTTP/1.1 202 Accepted
+
+</code></pre>
+<h3 id="grow_volume"><a class="header" href="#grow_volume">GROW_VOLUME</a></h3>
+<p>This call grows the size of a <a href="persistent-volume.html">persistent volume</a>. The
+request is forwarded asynchronously to the Mesos agent where the volume is
+located.</p>
+<pre><code>GROW_VOLUME HTTP Request (JSON):
+
+POST /api/v1  HTTP/1.1
+
+Host: masterhost:5050
+Content-Type: application/json
+Accept: application/json
+
+{
+  "type": "GROW_VOLUME",
+  "grow_volume": {
+    "agent_id": {
+      "value": "919141a8-b434-4946-86b9-e1b65c8171f6-S0"
+    },
+    "volume": {
+      "disk": {
+        "persistence": {
+          "id": "id1",
+          "principal": "my-principal"
+        },
+        "volume": {
+          "container_path": "path1",
+          "mode": "RW"
+        }
+      },
+      "name": "disk",
+      "role": "role1",
+      "scalar": {
+        "value": 64.0
+      },
+      "type": "SCALAR"
+    },
+    "addition": {
+      "name": "disk",
+      "role": "role1",
+      "scalar": {
+        "value": 64.0
+      },
+      "type": "SCALAR"
+    }
+  }
+}
+
+
+GROW_VOLUME HTTP Response:
+
+HTTP/1.1 202 Accepted
+
+</code></pre>
+<h3 id="shrink_volume"><a class="header" href="#shrink_volume">SHRINK_VOLUME</a></h3>
+<p>This call shrinks the size of a <a href="persistent-volume.html">persistent volume</a>.
+The request is forwarded asynchronously to the Mesos agent where the volume
+is located.</p>
+<pre><code>SHRINK_VOLUME HTTP Request (JSON):
+
+POST /api/v1  HTTP/1.1
+
+Host: masterhost:5050
+Content-Type: application/json
+Accept: application/json
+
+{
+  "type": "SHRINK_VOLUME",
+  "shrink_volume": {
+    "agent_id": {
+      "value": "919141a8-b434-4946-86b9-e1b65c8171f6-S0"
+    },
+    "volume": {
+      "disk": {
+        "persistence": {
+          "id": "id1",
+          "principal": "my-principal"
+        },
+        "volume": {
+          "container_path": "path1",
+          "mode": "RW"
+        }
+      },
+      "name": "disk",
+      "role": "role1",
+      "scalar": {
+        "value": 128.0
+      },
+      "type": "SCALAR"
+    },
+    "subtract": {
+      "value": 64.0
+    }
+  }
+}
+
+
+SHRINK_VOLUME HTTP Response:
+
+HTTP/1.1 202 Accepted
+
+</code></pre>
+<h3 id="get_maintenance_status"><a class="header" href="#get_maintenance_status">GET_MAINTENANCE_STATUS</a></h3>
+<p>This call retrieves the cluster’s maintenance status.</p>
+<pre><code>GET_MAINTENANCE_STATUS HTTP Request (JSON):
+
+POST /api/v1  HTTP/1.1
+
+Host: masterhost:5050
+Content-Type: application/json
+Accept: application/json
+
+{
+  "type": "GET_MAINTENANCE_STATUS"
+}
+
+
+GET_MAINTENANCE_STATUS HTTP Response (JSON):
+
+HTTP/1.1 200 OK
+
+Content-Type: application/json
+
+{
+  "type": "GET_MAINTENANCE_STATUS",
+  "get_maintenance_status": {
+    "status": {
+      "draining_machines": [
+        {
+          "id": {
+            "ip": "0.0.0.2"
+          }
+        },
+        {
+          "id": {
+            "hostname": "myhost"
+          }
+        }
+      ]
+    }
+  }
+}
+
+</code></pre>
+<h3 id="get_maintenance_schedule"><a class="header" href="#get_maintenance_schedule">GET_MAINTENANCE_SCHEDULE</a></h3>
+<p>This call retrieves the cluster’s maintenance schedule.</p>
+<pre><code>GET_MAINTENANCE_SCHEDULE HTTP Request (JSON):
+
+POST /api/v1  HTTP/1.1
+
+Host: masterhost:5050
+Content-Type: application/json
+Accept: application/json
+
+{
+  "type": "GET_MAINTENANCE_SCHEDULE"
+}
+
+
+GET_MAINTENANCE_SCHEDULE HTTP Response (JSON):
+
+HTTP/1.1 200 OK
+
+Content-Type: application/json
+
+{
+  "type": "GET_MAINTENANCE_SCHEDULE",
+  "get_maintenance_schedule": {
+    "schedule": {
+      "windows": [
+        {
+          "machine_ids": [
+            {
+              "hostname": "myhost"
+            },
+            {
+              "ip": "0.0.0.2"
+            }
+          ],
+          "unavailability": {
+            "start": {
+              "nanoseconds": 1470849373150643200
+            }
+          }
+        }
+      ]
+    }
+  }
+}
+
+</code></pre>
+<h3 id="update_maintenance_schedule"><a class="header" href="#update_maintenance_schedule">UPDATE_MAINTENANCE_SCHEDULE</a></h3>
+<p>This call updates the cluster’s maintenance schedule.</p>
+<pre><code>UPDATE_MAINTENANCE_SCHEDULE HTTP Request (JSON):
+
+POST /api/v1  HTTP/1.1
+
+Host: masterhost:5050
+Content-Type: application/json
+Accept: application/json
+
+{
+  "type": "UPDATE_MAINTENANCE_SCHEDULE",
+  "update_maintenance_schedule": {
+    "schedule": {
+      "windows": [
+        {
+          "machine_ids": [
+            {
+              "hostname": "myhost"
+            },
+            {
+              "ip": "0.0.0.2"
+            }
+          ],
+          "unavailability": {
+            "start": {
+              "nanoseconds": 1470820233192017920
+            }
+          }
+        }
+      ]
+    }
+  }
+}
+
+
+UPDATE_MAINTENANCE_SCHEDULE HTTP Response:
+
+HTTP/1.1 202 Accepted
+
+</code></pre>
+<h3 id="start_maintenance"><a class="header" href="#start_maintenance">START_MAINTENANCE</a></h3>
+<p>This call starts the maintenance of the cluster, this would bring a set of machines
+down.</p>
+<pre><code>START_MAINTENANCE HTTP Request (JSON):
+
+POST /api/v1  HTTP/1.1
+
+Host: masterhost:5050
+Content-Type: application/json
+Accept: application/json
+
+{
+  "type": "START_MAINTENANCE",
+  "start_maintenance": {
+    "machines": [
+      {
+        "hostname": "myhost",
+        "ip": "0.0.0.3"
+      }
+    ]
+  }
+}
+
+
+START_MAINTENANCE HTTP Response:
+
+HTTP/1.1 202 Accepted
+
+</code></pre>
+<h3 id="stop_maintenance"><a class="header" href="#stop_maintenance">STOP_MAINTENANCE</a></h3>
+<p>Stops the maintenance of the cluster, this would bring a set of machines
+back up.</p>
+<pre><code>STOP_MAINTENANCE HTTP Request (JSON):
+
+POST /api/v1  HTTP/1.1
+
+Host: masterhost:5050
+Content-Type: application/json
+Accept: application/json
+
+{
+  "type": "STOP_MAINTENANCE",
+  "stop_maintenance": {
+    "machines": [
+      {
+        "hostname": "myhost",
+        "ip": "0.0.0.3"
+      }
+    ]
+  }
+}
+
+
+STOP_MAINTENANCE HTTP Response:
+
+HTTP/1.1 202 Accepted
+
+</code></pre>
+<h3 id="get_quota"><a class="header" href="#get_quota">GET_QUOTA</a></h3>
+<p>This call retrieves the cluster’s configured quotas.</p>
+<pre><code>GET_QUOTA HTTP Request (JSON):
+
+POST /api/v1  HTTP/1.1
+
+Host: masterhost:5050
+Content-Type: application/json
+Accept: application/json
+
+{
+  "type": "GET_QUOTA"
+}
+
+
+GET_QUOTA HTTP Response (JSON):
+
+HTTP/1.1 200 OK
+
+Content-Type: application/json
+
+{
+  "type": "GET_QUOTA",
+  "get_quota": {
+    "status": {
+      "infos": [
+        {
+          "configs" : [
+            {
+              "role": "dev",
+              "limits": {
+                "cpus": { "value": 2.0 },
+                "mem":  { "value": 2048.0 },
+                "disk": { "value": 4096.0 }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
+
+</code></pre>
+<h3 id="update_quota"><a class="header" href="#update_quota">UPDATE_QUOTA</a></h3>
+<p>This call updates the quota for the specified role(s).
+These configurations are applied in an all-or-nothing manner.
+To reset a role’s quota back to the default (no guarantees and no limits),
+simply update its quota with empty guarantees and limits fields.</p>
+<pre><code>UPDATE_QUOTA HTTP Request (JSON):
+
+POST /api/v1  HTTP/1.1
+
+Host: masterhost:5050
+Content-Type: application/json
+Accept: application/json
+
+{
+  "type": "UPDATE_QUOTA",
+  "update_quota": {
+    "force": false,
+    "quota_configs": [
+      {
+        "role": "dev",
+        "limits": {
+          "cpus": { "value": 10 },
+          "mem":  { "value": 2048 },
+          "disk": { "value": 4096 }
+        }
+      },
+      {
+        "role": "test",
+        "limits": {
+          "cpus": { "value": 1 },
+          "mem":  { "value": 256 },
+          "disk": { "value": 512 }
+        }
+      }
+    ]
+  }
+}
+
+UPDATE_QUOTA HTTP Response:
+
+HTTP/1.1 200 OK
+
+</code></pre>
+<h3 id="mark_agent_gone"><a class="header" href="#mark_agent_gone">MARK_AGENT_GONE</a></h3>
+<p>This call can be used by operators to assert that an agent instance has
+failed and is never coming back (e.g., ephemeral instance from cloud provider).
+The master would shutdown the agent and send <code>TASK_GONE_BY_OPERATOR</code> updates
+for all the running tasks. This signal can be used by stateful frameworks to
+re-schedule their workloads (volumes, reservations etc.) to other agent
+instances. It is possible that the tasks might still be running if the
+operator’s assertion was wrong and the agent was partitioned away from
+the master. The agent would be shutdown when it tries to reregister with the
+master when the partition heals. This call is idempotent.</p>
+<pre><code>MARK_AGENT_GONE HTTP Request (JSON):
+
+POST /api/v1  HTTP/1.1
+
+Host: masterhost:5050
+Content-Type: application/json
+Accept: application/json
+
+{
+  "type": "MARK_AGENT_GONE",
+  "mark_agent_gone": {
+    "agent_id": {
+      "value": "3192b9d1-db71-4699-ae25-e28dfbf42de1"
+    }
+  }
+}
+
+MARK_AGENT_GONE HTTP Response (JSON):
+
+HTTP/1.1 200 OK
+</code></pre>
+<h3 id="drain_agent"><a class="header" href="#drain_agent">DRAIN_AGENT</a></h3>
+<p>Initiates <a href="maintenance.html">draining</a> on the specified agent.</p>
+<pre><code>DRAIN_AGENT HTTP Request (JSON):
+
+POST /api/v1  HTTP/1.1
+
+Host: masterhost:5050
+Content-Type: application/json
+Accept: application/json
+
+{
+  "type": "DRAIN_AGENT",
+  "drain_agent": {
+    "agent_id": {
+      "value": "3192b9d1-db71-4699-ae25-e28dfbf42de1"
+    },
+    "max_grace_period": {"seconds": 600},
+    "mark_gone": false
+  }
+}
+
+DRAIN_AGENT HTTP Response (JSON):
+
+HTTP/1.1 200 OK
+</code></pre>
+<h3 id="deactivate_agent"><a class="header" href="#deactivate_agent">DEACTIVATE_AGENT</a></h3>
+<p>Deactivates the specified agent, preventing offers for that agent’s resources
+from being sent to schedulers until the agent is reactivated.</p>
+<pre><code>DEACTIVATE_AGENT HTTP Request (JSON):
+
+POST /api/v1  HTTP/1.1
+
+Host: masterhost:5050
+Content-Type: application/json
+Accept: application/json
+
+{
+  "type": "DEACTIVATE_AGENT",
+  "deactivate_agent": {
+    "agent_id": {
+      "value": "3192b9d1-db71-4699-ae25-e28dfbf42de1"
+    }
+  }
+}
+
+DEACTIVATE_AGENT HTTP Response (JSON):
+
+HTTP/1.1 200 OK
+</code></pre>
+<h3 id="reactivate_agent"><a class="header" href="#reactivate_agent">REACTIVATE_AGENT</a></h3>
+<p>Reactivates the specified agent, resuming offers for that agent’s resources if
+the agent was previously deactivated.</p>
+<pre><code>REACTIVATE_AGENT HTTP Request (JSON):
+
+POST /api/v1  HTTP/1.1
+
+Host: masterhost:5050
+Content-Type: application/json
+Accept: application/json
+
+{
+  "type": "REACTIVATE_AGENT",
+  "reactivate_agent": {
+    "agent_id": {
+      "value": "3192b9d1-db71-4699-ae25-e28dfbf42de1"
+    }
+  }
+}
+
+REACTIVATE_AGENT HTTP Response (JSON):
+
+HTTP/1.1 200 OK
+</code></pre>
+<h2 id="events"><a class="header" href="#events">Events</a></h2>
+<p>Currently, the only call that results in a streaming response is the <code>SUBSCRIBE</code> call sent to the master API.</p>
+<pre><code>SUBSCRIBE Request (JSON):
+
+POST /api/v1  HTTP/1.1
+
+Host: masterhost:5050
+Content-Type: application/json
+Accept: application/json
+
+{
+  "type": "SUBSCRIBE"
+}
+
+SUBSCRIBE Response Event (JSON):
+HTTP/1.1 200 OK
+
+Content-Type: application/json
+Transfer-Encoding: chunked
+
+&lt;event-length&gt;
+{
+  "type": "SUBSCRIBED",
+
+  "subscribed" : {
+    "get_state" : {...}
+  }
+}
+&lt;more events&gt;
+</code></pre>
+<p>The client is expected to keep a <strong>persistent</strong> connection open to the endpoint even after getting a <code>SUBSCRIBED</code> HTTP Response event. This is indicated by “Connection: keep-alive” and “Transfer-Encoding: chunked” headers with <em>no</em> “Content-Length” header set. All subsequent events generated by Mesos are streamed on this connection. The master encodes each Event in <a href="recordio.html">RecordIO</a> format, i.e., string representation of length of the event in bytes followed by JSON or binary Protobuf encoded event.</p>
+<p>The following events are currently sent by the master. The canonical source of this information is at <a href="https://github.com/apache/mesos/blob/master/include/mesos/v1/master/master.proto">master.proto</a>. Note that when sending JSON encoded events, master encodes raw bytes in Base64 and strings in UTF-8.</p>
+<h3 id="subscribed"><a class="header" href="#subscribed">SUBSCRIBED</a></h3>
+<p>The first event sent by the master when a client sends a <code>SUBSCRIBE</code> request on the persistent connection. This includes a snapshot of the cluster state. See <code>SUBSCRIBE</code> above for details. Subsequent changes to the cluster state can result in more events (currently only <code>TASK_ADDED</code> and <code>TASK_UPDATED</code> are supported).</p>
+<h3 id="heartbeat"><a class="header" href="#heartbeat">HEARTBEAT</a></h3>
+<p>Periodically sent by the master to the subscriber according to ‘Subscribed.heartbeat_interval_seconds’. If the subscriber does not receive any events (including heartbeats) for an extended period of time (e.g., 5 x heartbeat_interval_seconds), it is likely that the connection is lost or there is a network partition. In that case, the subscriber should close the existing subscription connection and resubscribe using a backoff strategy.</p>
+<pre><code>HEARTBEAT Event (JSON)
+
+&lt;event-length&gt;
+{
+  "type": "HEARTBEAT",
+}
+</code></pre>
+<h3 id="task_added"><a class="header" href="#task_added">TASK_ADDED</a></h3>
+<p>Sent whenever a task has been added to the master. This can happen either when a new task launch is processed by the master or when an agent reregisters with a failed over master.</p>
+<pre><code>TASK_ADDED Event (JSON)
+
+&lt;event-length&gt;
+{
+  "type": "TASK_ADDED",
+
+  "task_added": {
+    "task": {
+      "name": "dummy-task",
+      "task_id": {
+        "value": "d40f3f3e-bbe3-44af-a230-4cb1eae72f67"
+      },
+      "agent_id": {
+        "value": "f1c9cdc5-195e-41a7-a0d7-adaa9af07f81"
+      },
+      "command": {
+        "value": "sleep",
+        "arguments": [
+          "100"
+        ]
+      }
+    }
+  }
+}
+</code></pre>
+<h3 id="task_updated"><a class="header" href="#task_updated">TASK_UPDATED</a></h3>
+<p>Sent whenever the state of the task changes in the master. This can happen when a status update is received or generated by the master. Since status updates are retried by the agent, not all status updates received by the master result in the event being sent.</p>
+<pre><code>TASK_UPDATED Event (JSON)
+
+&lt;event-length&gt;
+{
+  "type": "TASK_UPDATED",
+
+  "task_updated": {
+    "task_id": {
+        "value": "42154f1b-adcd-4421-bf13-8bd11adfafaf"
+    },
+
+    "framework_id": {
+        "value": "49154f1b-8cf6-4421-bf13-8bd11dccd1f1"
+    },
+
+    "agent_id": {
+        "value": "2915adf-8aff-4421-bf13-afdafaf1f1"
+    },
+
+    "executor_id": {
+        "value": "adfaf-adff-2421-bf13-adf23tafa21"
+    },
+
+    "state" : "TASK_RUNNING"
+  }
+}
+</code></pre>
+<h3 id="framework_added"><a class="header" href="#framework_added">FRAMEWORK_ADDED</a></h3>
+<p>Sent whenever a framework becomes known to the master. This can happen when a new framework registers with the master.</p>
+<pre><code>FRAMEWORK_ADDED Event (JSON)
+
+&lt;event-length&gt;
+{
+  "type": "FRAMEWORK_ADDED",
+
+  "framework_added": {
+    "framework": {
+      "active": true,
+      "allocated_resources": [],
+      "connected": true,
+      "framework_info": {
+        "capabilities": [
+          {
+            "type": "RESERVATION_REFINEMENT"
+          }
+        ],
+        "checkpoint": true,
+        "failover_timeout": 0,
+        "id": {
+          "value": "a9ba2984-99c4-4183-8cd1-f7313426e21c-0147"
+        },
+        "name": "inverse-offer-example-framework",
+        "role": "*",
+        "user": "root"
+      },
+      "inverse_offers": [],
+      "recovered": false,
+      "registered_time": {
+        "nanoseconds": 1501191957829317120
+      },
+      "reregistered_time": {
+        "nanoseconds": 1501191957829317120
+      }
+    }
+  }
+}
+</code></pre>
+<h3 id="framework_updated"><a class="header" href="#framework_updated">FRAMEWORK_UPDATED</a></h3>
+<p>Sent whenever a framework reregisters with the master upon a disconnection (network error) or upon a master failover.</p>
+<pre><code>FRAMEWORK_UPDATED Event (JSON)
+
+&lt;event-length&gt;
+{
+  "type": "FRAMEWORK_UPDATED",
+
+  "framework_updated": {
+    "framework": {
+      "active": true,
+      "allocated_resources": [],
+      "connected": true,
+      "framework_info": {
+        "capabilities": [
+          {
+            "type": "RESERVATION_REFINEMENT"
+          }
+        ],
+        "checkpoint": true,
+        "failover_timeout": 0,
+        "id": {
+          "value": "a9ba2984-99c4-4183-8cd1-f7313426e21c-0147"
+        },
+        "name": "inverse-offer-example-framework",
+        "role": "*",
+        "user": "root"
+      },
+      "inverse_offers": [],
+      "recovered": false,
+      "registered_time": {
+        "nanoseconds": 1501191957829317120
+      },
+      "reregistered_time": {
+        "nanoseconds": 1501191957829317120
+      }
+    }
+  }
+}
+</code></pre>
+<h3 id="framework_removed"><a class="header" href="#framework_removed">FRAMEWORK_REMOVED</a></h3>
+<p>Sent whenever a framework is removed. This can happen when a framework is explicitly teardown by the operator or if it fails to reregister with the master within the failover timeout.</p>
+<pre><code>FRAMEWORK_REMOVED Event (JSON)
+
+&lt;event-length&gt;
+{
+  "type": "FRAMEWORK_REMOVED",
+
+  "framework_removed": {
+    "framework_info": {
+      "capabilities": [
+        {
+          "type": "RESERVATION_REFINEMENT"
+        }
+      ],
+      "checkpoint": true,
+      "failover_timeout": 0,
+      "id": {
+        "value": "a9ba2984-99c4-4183-8cd1-f7313426e21c-0147"
+      },
+      "name": "inverse-offer-example-framework",
+      "role": "*",
+      "user": "root"
+    }
+  }
+}
+</code></pre>
+<h3 id="agent_added"><a class="header" href="#agent_added">AGENT_ADDED</a></h3>
+<p>Sent whenever an agent becomes known to it. This can happen when an agent registered for the first time, or reregistered after a master failover.</p>
+<pre><code>AGENT_ADDED Event (JSON)
+
+&lt;event-length&gt;
+{
+  "type": "AGENT_ADDED",
+
+  "agent_added": {
+    "agent": {
+      "active": true,
+      "agent_info": {
+        "hostname": "172.31.2.24",
+        "id": {
+          "value": "c3946a13-75b4-4d3c-9d0e-fc10038dca85-S3"
+        },
+        "port": 5051,
+        "resources": [],
+      },
+      "allocated_resources": [],
+      "capabilities": [
+        {
+          "type": "MULTI_ROLE"
+        },
+        {
+          "type": "HIERARCHICAL_ROLE"
+        },
+        {
+          "type": "RESERVATION_REFINEMENT"
+        }
+      ],
+      "offered_resources": [],
+      "pid": "slave(1)@172.31.2.24:5051",
+      "registered_time": {
+        "nanoseconds": 1500993262264135000
+      },
+      "reregistered_time": {
+        "nanoseconds": 1500993263019321000
+      },
+      "total_resources": [],
+      "version": "1.4.0"
+    }
+  }
+}
+</code></pre>
+<h3 id="agent_removed"><a class="header" href="#agent_removed">AGENT_REMOVED</a></h3>
+<p>Sent whenever a agent is removed. This can happen when the agent is scheduled for maintenance. (NOTE: It’s possible that an agent might become active once it has been removed, i.e. if the master has gc’ed its list of known “dead” agents. See MESOS-5965 for context).</p>
+<pre><code>AGENT_REMOVED Event (JSON)
+
+&lt;event-length&gt;
+{
+  "type": "AGENT_REMOVED",
+
+  "agent_removed": {
+    "agent_id": {
+      "value": "c3946a13-75b4-4d3c-9d0e-fc10038dca85-S3"
+    }
+  }
+}
+</code></pre>
+<h2 id="agent-api"><a class="header" href="#agent-api">Agent API</a></h2>
+<p>This API contains all the calls accepted by the agent. The canonical source of this information is <a href="https://github.com/apache/mesos/blob/master/include/mesos/v1/agent/agent.proto">agent.proto</a> (NOTE: The protobuf definitions are subject to change before the beta API is finalized). These calls are typically made by human operators, tooling or services (e.g., Mesos WebUI). While executors can make these calls as well, it is expected for those to use the <a href="executor-http-api.html">Executor HTTP API</a>.</p>
+<h3 id="calls-to-agent-and-responses"><a class="header" href="#calls-to-agent-and-responses">Calls To Agent And Responses</a></h3>
+<p>Below are the example calls to agent that result in synchronous responses from the API.</p>
+<h3 id="get_health-1"><a class="header" href="#get_health-1">GET_HEALTH</a></h3>
+<p>Request and Response are similar to GET_HEALTH call to master.</p>
+<h3 id="get_flags-1"><a class="header" href="#get_flags-1">GET_FLAGS</a></h3>
+<p>This call retrieves the agent’s flag configuration.</p>
+<pre><code>GET_FLAGS HTTP Request (JSON):
+
+POST /api/v1  HTTP/1.1
+
+Host: agenthost:5051
+Content-Type: application/json
+Accept: application/json
+
+{
+  "type": "GET_FLAGS"
+}
+
+
+GET_FLAGS HTTP Response (JSON):
+
+HTTP/1.1 200 OK
+
+Content-Type: application/json
+
+{
+  "type": "GET_FLAGS",
+  "get_flags": {
+    "flags": [
+      {
+        "name": "acls",
+        "value": ""
+      },
+      {
+        "name": "appc_simple_discovery_uri_prefix",
+        "value": "http://"
+      },
+      {
+        "name": "appc_store_dir",
+        "value": "/tmp/mesos/store/appc"
+      },
+      {
+        "name": "authenticate_http_readonly",
+        "value": "true"
+      },
+      {
+        "name": "authenticate_http_readwrite",
+        "value": "true"
+      },
+      {
+        "name": "authenticatee",
+        "value": "crammd5"
+      },
+      {
+        "name": "authentication_backoff_factor",
+        "value": "1secs"
+      },
+      {
+        "name": "authorizer",
+        "value": "local"
+      },
+      {
+        "name": "cgroups_cpu_enable_pids_and_tids_count",
+        "value": "false"
+      },
+      {
+        "name": "cgroups_enable_cfs",
+        "value": "false"
+      },
+      {
+        "name": "cgroups_hierarchy",
+        "value": "/sys/fs/cgroup"
+      },
+      {
+        "name": "cgroups_limit_swap",
+        "value": "false"
+      },
+      {
+        "name": "cgroups_root",
+        "value": "mesos"
+      },
+      {
+        "name": "container_disk_watch_interval",
+        "value": "15secs"
+      },
+      {
+        "name": "containerizers",
+        "value": "mesos"
+      },
+      {
+        "name": "credential",
+        "value": "/tmp/directory/credential"
+      },
+      {
+        "name": "default_role",
+        "value": "*"
+      },
+      {
+        "name": "disk_watch_interval",
+        "value": "1mins"
+      },
+      {
+        "name": "docker",
+        "value": "docker"
+      },
+      {
+        "name": "docker_kill_orphans",
+        "value": "true"
+      },
+      {
+        "name": "docker_registry",
+        "value": "https://registry-1.docker.io"
+      },
+      {
+        "name": "docker_remove_delay",
+        "value": "6hrs"
+      },
+      {
+        "name": "docker_socket",
+        "value": "/var/run/docker.sock"
+      },
+      {
+        "name": "docker_stop_timeout",
+        "value": "0ns"
+      },
+      {
+        "name": "docker_store_dir",
+        "value": "/tmp/mesos/store/docker"
+      },
+      {
+        "name": "docker_volume_checkpoint_dir",
+        "value": "/var/run/mesos/isolators/docker/volume"
+      },
+      {
+        "name": "enforce_container_disk_quota",
+        "value": "false"
+      },
+      {
+        "name": "executor_registration_timeout",
+        "value": "1mins"
+      },
+      {
+        "name": "executor_shutdown_grace_period",
+        "value": "5secs"
+      },
+      {
+        "name": "fetcher_cache_dir",
+        "value": "/tmp/directory/fetch"
+      },
+      {
+        "name": "fetcher_cache_size",
+        "value": "2GB"
+      },
+      {
+        "name": "frameworks_home",
+        "value": ""
+      },
+      {
+        "name": "gc_delay",
+        "value": "1weeks"
+      },
+      {
+        "name": "gc_disk_headroom",
+        "value": "0.1"
+      },
+      {
+        "name": "gc_non_executor_container_sandboxes",
+        "value": "false"
+      },
+      {
+        "name": "help",
+        "value": "false"
+      },
+      {
+        "name": "hostname_lookup",
+        "value": "true"
+      },
+      {
+        "name": "http_authenticators",
+        "value": "basic"
+      },
+      {
+        "name": "http_command_executor",
+        "value": "false"
+      },
+      {
+        "name": "http_credentials",
+        "value": "/tmp/directory/http_credentials"
+      },
+      {
+        "name": "image_provisioner_backend",
+        "value": "copy"
+      },
+      {
+        "name": "initialize_driver_logging",
+        "value": "true"
+      },
+      {
+        "name": "isolation",
+        "value": "posix/cpu,posix/mem"
+      },
+      {
+        "name": "launcher_dir",
+        "value": "/my-directory"
+      },
+      {
+        "name": "logbufsecs",
+        "value": "0"
+      },
+      {
+        "name": "logging_level",
+        "value": "INFO"
+      },
+      {
+        "name": "oversubscribed_resources_interval",
+        "value": "15secs"
+      },
+      {
+        "name": "perf_duration",
+        "value": "10secs"
+      },
+      {
+        "name": "perf_interval",
+        "value": "1mins"
+      },
+      {
+        "name": "qos_correction_interval_min",
+        "value": "0ns"
+      },
+      {
+        "name": "quiet",
+        "value": "false"
+      },
+      {
+        "name": "recover",
+        "value": "reconnect"
+      },
+      {
+        "name": "recovery_timeout",
+        "value": "15mins"
+      },
+      {
+        "name": "registration_backoff_factor",
+        "value": "10ms"
+      },
+      {
+        "name": "resources",
+        "value": "cpus:2;gpus:0;mem:1024;disk:1024;ports:[31000-32000]"
+      },
+      {
+        "name": "revocable_cpu_low_priority",
+        "value": "true"
+      },
+      {
+        "name": "sandbox_directory",
+        "value": "/mnt/mesos/sandbox"
+      },
+      {
+        "name": "strict",
+        "value": "true"
+      },
+      {
+        "name": "switch_user",
+        "value": "true"
+      },
+      {
+        "name": "systemd_enable_support",
+        "value": "true"
+      },
+      {
+        "name": "systemd_runtime_directory",
+        "value": "/run/systemd/system"
+      },
+      {
+        "name": "version",
+        "value": "false"
+      },
+      {
+        "name": "work_dir",
+        "value": "/tmp/directory"
+      }
+    ]
+  }
+}
+
+</code></pre>
+<h3 id="get_version-1"><a class="header" href="#get_version-1">GET_VERSION</a></h3>
+<p>Request and Response are similar to GET_VERSION call to master.</p>
+<h3 id="get_metrics-1"><a class="header" href="#get_metrics-1">GET_METRICS</a></h3>
+<p>Request and Response are similar to GET_METRICS call to master.</p>
+<h3 id="get_logging_level-1"><a class="header" href="#get_logging_level-1">GET_LOGGING_LEVEL</a></h3>
+<p>Request and Response are similar to GET_LOGGING_LEVEL call to master.</p>
+<h3 id="set_logging_level-1"><a class="header" href="#set_logging_level-1">SET_LOGGING_LEVEL</a></h3>
+<p>Request and Response are similar to SET_LOGGING_LEVEL call to master.</p>
+<h3 id="list_files-1"><a class="header" href="#list_files-1">LIST_FILES</a></h3>
+<p>Request and Response are similar to LIST_FILES call to master.</p>
+<h3 id="read_file-1"><a class="header" href="#read_file-1">READ_FILE</a></h3>
+<p>Request and Response are similar to READ_FILE call to master.</p>
+<h3 id="get_state-1"><a class="header" href="#get_state-1">GET_STATE</a></h3>
+<p>This call retrieves full state of the agent i.e. information about the tasks,
+frameworks and executors running in the cluster.</p>
+<pre><code>GET_STATE HTTP Request (JSON):
+
+POST /api/v1  HTTP/1.1
+
+Host: agenthost:5051
+Content-Type: application/json
+Accept: application/json
+
+{
+  "type": "GET_STATE"
+}
+
+
+GET_STATE HTTP Response (JSON):
+
+HTTP/1.1 200 OK
+
+Content-Type: application/json
+
+{
+  "type": "GET_STATE",
+  "get_state": {
+    "get_executors": {
+      "executors": [
+        {
+          "executor_info": {
+            "command": {
+              "arguments": [
+                "mesos-executor",
+                "--launcher_dir=/my-directory"
+              ],
+              "shell": false,
+              "value": "my-directory"
+            },
+            "executor_id": {
+              "value": "1"
+            },
+            "framework_id": {
+              "value": "8903b84e-112f-4b5f-aad3-7366f6ae7ecc-0000"
+            },
+            "name": "Command Executor (Task: 1) (Command: sh -c 'sleep 1000')",
+            "resources": [
+              {
+                "name": "cpus",
+                "role": "*",
+                "scalar": {
+                  "value": 0.1
+                },
+                "type": "SCALAR"
+              },
+              {
+                "name": "mem",
+                "role": "*",
+                "scalar": {
+                  "value": 32.0
+                },
+                "type": "SCALAR"
+              }
+            ],
+            "source": "1"
+          }
+        }
+      ]
+    },
+    "get_frameworks": {
+      "frameworks": [
+        {
+          "framework_info": {
+            "checkpoint": false,
+            "failover_timeout": 0.0,
+            "hostname": "myhost",
+            "id": {
+              "value": "8903b84e-112f-4b5f-aad3-7366f6ae7ecc-0000"
+            },
+            "name": "default",
+            "principal": "my-principal",
+            "role": "*",
+            "user": "root"
+          }
+        }
+      ]
+    },
+    "get_tasks": {
+      "launched_tasks": [
+        {
+          "agent_id": {
+            "value": "8903b84e-112f-4b5f-aad3-7366f6ae7ecc-S0"
+          },
+          "framework_id": {
+            "value": "8903b84e-112f-4b5f-aad3-7366f6ae7ecc-0000"
+          },
+          "name": "",
+          "resources": [
+            {
+              "name": "cpus",
+              "role": "*",
+              "scalar": {
+                "value": 2.0
+              },
+              "type": "SCALAR"
+            },
+            {
+              "name": "mem",
+              "role": "*",
+              "scalar": {
+                "value": 1024.0
+              },
+              "type": "SCALAR"
+            },
+            {
+              "name": "disk",
+              "role": "*",
+              "scalar": {
+                "value": 1024.0
+              },
+              "type": "SCALAR"
+            },
+            {
+              "name": "ports",
+              "ranges": {
+                "range": [
+                  {
+                    "begin": 31000,
+                    "end": 32000
+                  }
+                ]
+              },
+              "role": "*",
+              "type": "RANGES"
+            }
+          ],
+          "state": "TASK_RUNNING",
+          "status_update_state": "TASK_RUNNING",
+          "status_update_uuid": "2qlPayEJRJGPeaWlahI+WA==",
+          "statuses": [
+            {
+              "agent_id": {
+                "value": "8903b84e-112f-4b5f-aad3-7366f6ae7ecc-S0"
+              },
+              "container_status": {
+                "executor_pid": 19846,
+                "network_infos": [
+                  {
+                    "ip_addresses": [
+                      {
+                        "ip_address": "127.0.1.1"
+                      }
+                    ]
+                  }
+                ]
+              },
+              "executor_id": {
+                "value": "1"
+              },
+              "source": "SOURCE_EXECUTOR",
+              "state": "TASK_RUNNING",
+              "task_id": {
+                "value": "1"
+              },
+              "timestamp": 1470898839.48066,
+              "uuid": "2qlPayEJRJGPeaWlahI+WA=="
+            }
+          ],
+          "task_id": {
+            "value": "1"
+          }
+        }
+      ]
+    }
+  }
+}
+
+</code></pre>
+<h3 id="get_containers"><a class="header" href="#get_containers">GET_CONTAINERS</a></h3>
+<p>This call retrieves information about containers running on this agent. It contains
+ContainerStatus and ResourceStatistics along with some metadata of the containers.</p>
+<p>There are two knobs in the request to control the types of the containers this
+API will return:</p>
+<ul>
+<li><code>show_nested</code>: Whether to show nested containers [default: false].</li>
+<li><code>show_standalone</code>: Whether to show standalone containers [default: false].</li>
+</ul>
+<pre><code>GET_CONTAINERS HTTP Request (JSON):
+
+POST /api/v1  HTTP/1.1
+
+Host: agenthost:5051
+Content-Type: application/json
+Accept: application/json
+
+{
+  "type": "GET_CONTAINERS",
+  "get_containers": {
+    "show_nested": true,
+    "show_standalone": false
+  }
+}
+
+
+GET_CONTAINERS HTTP Response (JSON):
+
+HTTP/1.1 200 OK
+
+Content-Type: application/json
+
+{
+  "type": "GET_CONTAINERS",
+  "get_containers": {
+    "containers": [
+      {
+        "container_id": {
+          "value": "f0f97041-1860-4b4a-b279-91fec4e0ebd8"
+        },
+        "container_status": {
+          "network_infos": [
+            {
+              "ip_addresses": [
+                {
+                  "ip_address": "192.168.1.20"
+                }
+              ]
+            }
+          ]
+        },
+        "executor_id": {
+          "value": "default"
+        },
+        "executor_name": "",
+        "framework_id": {
+          "value": "cbe3c0f1-5655-4110-bc01-ae658a9dbab9-0000"
+        },
+        "resource_statistics": {
+          "mem_limit_bytes": 2048,
+          "timestamp": 0.0
+        }
+      }
+    ]
+  }
+}
+
+</code></pre>
+<h3 id="get_frameworks-1"><a class="header" href="#get_frameworks-1">GET_FRAMEWORKS</a></h3>
+<p>This call retrieves information about all the frameworks known to the agent.</p>
+<pre><code>GET_FRAMEWORKS HTTP Request (JSON):
+
+POST /api/v1  HTTP/1.1
+
+Host: agenthost:5051
+Content-Type: application/json
+Accept: application/json
+
+{
+  "type": "GET_FRAMEWORKS"
+}
+
+
+GET_FRAMEWORKS HTTP Response (JSON):
+
+HTTP/1.1 200 OK
+
+Content-Type: application/json
+
+{
+  "type": "GET_FRAMEWORKS",
+  "get_frameworks": {
+    "frameworks": [
+      {
+        "framework_info": {
+          "checkpoint": false,
+          "failover_timeout": 0.0,
+          "hostname": "myhost",
+          "id": {
+            "value": "17e8c0d4-5ee2-4937-bc1c-06c39eddb004-0000"
+          },
+          "name": "default",
+          "principal": "my-principal",
+          "role": "*",
+          "user": "root"
+        }
+      }
+    ]
+  }
+}
+
+</code></pre>
+<h3 id="get_executors-1"><a class="header" href="#get_executors-1">GET_EXECUTORS</a></h3>
+<p>This call retrieves information about all the executors known to the agent.</p>
+<pre><code>GET_EXECUTORS HTTP Request (JSON):
+
+POST /api/v1  HTTP/1.1
+
+Host: agenthost:5051
+Content-Type: application/json
+Accept: application/json
+
+{
+  "type": "GET_EXECUTORS"
+}
+
+
+GET_EXECUTORS HTTP Response (JSON):
+
+HTTP/1.1 200 OK
+
+Content-Type: application/json
+
+{
+  "type": "GET_EXECUTORS",
+  "get_executors": {
+    "executors": [
+      {
+        "executor_info": {
+          "command": {
+            "arguments": [
+              "mesos-executor",
+              "--launcher_dir=/my-directory"
+            ],
+            "shell": false,
+            "value": "/my-directory"
+          },
+          "executor_id": {
+            "value": "1"
+          },
+          "framework_id": {
+            "value": "5ffcfa79-00c4-4d93-94a3-2f3844126fd9-0000"
+          },
+          "name": "Command Executor (Task: 1) (Command: sh -c 'sleep 1000')",
+          "resources": [
+            {
+              "name": "cpus",
+              "role": "*",
+              "scalar": {
+                "value": 0.1
+              },
+              "type": "SCALAR"
+            },
+            {
+              "name": "mem",
+              "role": "*",
+              "scalar": {
+                "value": 32.0
+              },
+              "type": "SCALAR"
+            }
+          ],
+          "source": "1"
+        }
+      }
+    ]
+  }
+}
+
+</code></pre>
+<h3 id="get_tasks-1"><a class="header" href="#get_tasks-1">GET_TASKS</a></h3>
+<p>This call retrieves information about all the tasks known to the agent.</p>
+<pre><code>GET_TASKS HTTP Request (JSON):
+
+POST /api/v1  HTTP/1.1
+
+Host: agenthost:5051
+Content-Type: application/json
+Accept: application/json
+
+{
+  "type": "GET_TASKS"
+}
+
+
+GET_TASKS HTTP Response (JSON):
+
+HTTP/1.1 200 OK
+
+Content-Type: application/json
+
+{
+  "type": "GET_TASKS",
+  "get_tasks": {
+    "launched_tasks": [
+      {
+        "agent_id": {
+          "value": "70770d61-d666-4547-a808-787f63b00cf2-S0"
+        },
+        "framework_id": {
+          "value": "70770d61-d666-4547-a808-787f63b00cf2-0000"
+        },
+        "name": "",
+        "resources": [
+          {
+            "name": "cpus",
+            "role": "*",
+            "scalar": {
+              "value": 2.0
+            },
+            "type": "SCALAR"
+          },
+          {
+            "name": "mem",
+            "role": "*",
+            "scalar": {
+              "value": 1024.0
+            },
+            "type": "SCALAR"
+          },
+          {
+            "name": "disk",
+            "role": "*",
+            "scalar": {
+              "value": 1024.0
+            },
+            "type": "SCALAR"
+          },
+          {
+            "name": "ports",
+            "ranges": {
+              "range": [
+                {
+                  "begin": 31000,
+                  "end": 32000
+                }
+              ]
+            },
+            "role": "*",
+            "type": "RANGES"
+          }
+        ],
+        "state": "TASK_RUNNING",
+        "status_update_state": "TASK_RUNNING",
+        "status_update_uuid": "0RC72iyRTQefoUL0ClcL0g==",
+        "statuses": [
+          {
+            "agent_id": {
+              "value": "70770d61-d666-4547-a808-787f63b00cf2-S0"
+            },
+            "container_status": {
+              "executor_pid": 27140,
+              "network_infos": [
+                {
+                  "ip_addresses": [
+                    {
+                      "ip_address": "127.0.1.1"
+                    }
+                  ]
+                }
+              ]
+            },
+            "executor_id": {
+              "value": "1"
+            },
+            "source": "SOURCE_EXECUTOR",
+            "state": "TASK_RUNNING",
+            "task_id": {
+              "value": "1"
+            },
+            "timestamp": 1470900791.21577,
+            "uuid": "0RC72iyRTQefoUL0ClcL0g=="
+          }
+        ],
+        "task_id": {
+          "value": "1"
+        }
+      }
+    ]
+  }
+}
+
+</code></pre>
+<h3 id="get_operations-1"><a class="header" href="#get_operations-1">GET_OPERATIONS</a></h3>
+<p>Returns a list of all offer operations known to the agent, not including
+<code>LAUNCH</code> or <code>LAUNCH_GROUP</code> operations which can be retrieved with <code>GET_TASKS</code>.</p>
+<pre><code>GET_OPERATIONS HTTP Request (JSON):
+
+POST /api/v1  HTTP/1.1
+
+Host: agenthost:5051
+Content-Type: application/json
+Accept: application/json
+
+{
+  "type": "GET_OPERATIONS"
+}
+
+
+GET_OPERATIONS HTTP Response (JSON):
+
+HTTP/1.1 200 OK
+
+Content-Type: application/json
+
+{
+  "type": "GET_OPERATIONS",
+  "get_operations": {
+    "operations": [
+      {
+        "framework_id": {"value": "74bddcbc-4a02-4d64-b291-aed52032055f-0000"},
+        "agent_id": {"value": "18083noa-j287-dan4-9qx6-l02b84nksb7z-0021"},
+        "info": {
+          "type": "CREATE_DISK",
+          "id": {"value": "n2j8nksj-9827-82bk-nd7u-83hbchu7whdk-9978"},
+          "create_disk": {
+            "source": {
+              "provider_id": {"value": "837hfmi2-u2u7-19pp-1884-812i8f02828j-0030"},
+              "name": "disk",
+              "type": "SCALAR",
+              "scalar": {"value": 1024.0},
+              "role": "storage-role-1",
+              "allocation_info": {"role": "storage-role-1"},
+              "reservation": {
+                "type": "DYNAMIC",
+                "role": "storage-role-1",
+                "principal": "storage-service"
+              },
+              "reservations": [{
+                "type": "DYNAMIC",
+                "role": "storage-role-1",
+                "principal": "storage-service"
+              }],
+              "disk": {
+                "source": {
+                  "type": "RAW",
+                  "vendor": "nas-service",
+                  "id": "vol-19827509",
+                  "profile": "fast-volume"
+                }
+              }
+            },
+            "target_type": "MOUNT"
+          }
+        },
+        "latest_status": {
+          "operation_id": {"value": "n2j8nksj-9827-82bk-nd7u-83hbchu7whdk-9978"},
+          "state": "OPERATION_PENDING",
+          "uuid": {"value": "28987843-j288-1k0s-l29n-837ybzmo18tj-nv73"},
+          "agent_id": {"value": "18083noa-j287-dan4-9qx6-l02b84nksb7z-0021"},
+          "resource_provider_id": {"value": "837hfmi2-u2u7-19pp-1884-812i8f02828j-0030"}
+        },
+        "statuses": [{
+          "operation_id": {"value": "n2j8nksj-9827-82bk-nd7u-83hbchu7whdk-9978"},
+          "state": "OPERATION_PENDING",
+          "uuid": {"value": "28987843-j288-1k0s-l29n-837ybzmo18tj-nv73"},
+          "agent_id": {"value": "18083noa-j287-dan4-9qx6-l02b84nksb7z-0021"},
+          "resource_provider_id": {"value": "837hfmi2-u2u7-19pp-1884-812i8f02828j-0030"}
+        }],
+        "uuid": {"value": "nsj27802-jd82-jd19-jd38-837jdfnoqfij-u284"}
+      }
+    ]
+  }
+}
+
+</code></pre>
+<h3 id="launch_nested_container"><a class="header" href="#launch_nested_container">LAUNCH_NESTED_CONTAINER</a></h3>
+<p>This call launches a nested container. Any authorized entity,
+including the executor itself, its tasks, or the operator can use this
+API to launch a nested container.</p>
+<p><strong>NOTE</strong>: Successful invocation of this API will result in some metadata
+tracked by the agent and the creation of a container sandbox under the
+parent container. The REMOVE_NESTED_CONTAINER should be used to remove
+the metadata and sandbox. If the <code>--gc_non_executor_container_sandboxes</code>
+agent flag is enabled, the agent will garbage collect the sandboxes of
+any containers launched via this API.</p>
+<pre><code>LAUNCH_NESTED_CONTAINER HTTP Request (JSON):
+
+POST /api/v1  HTTP/1.1
+
+Host: agenthost:5051
+Content-Type: application/json
+Accept: application/json
+
+{
+  "type": "LAUNCH_NESTED_CONTAINER",
+  "launch_nested_container": {
+    "container_id": {
+      "parent": {
+        "parent": {
+          "value": "27d44d12-ce9e-455f-9282-f580d8b56cad"
+        },
+        "value": "f5015d94-8093-477d-9551-9452acfad495"
+      },
+      "value": "3192b9d1-db71-4699-ae25-e28dfbf42de1"
+    },
+    "command": {
+      "environment": {
+        "variables": [
+          {
+            "name": "ENV_VAR_KEY",
+            "type": "VALUE",
+            "value": "env_var_value"
+          }
+        ]
+      },
+      "shell": true,
+      "value": "exit 0"
+    }
+  }
+}
+
+LAUNCH_NESTED_CONTAINER HTTP Response (JSON):
+
+HTTP/1.1 200 OK
+
+</code></pre>
+<h3 id="wait_nested_container"><a class="header" href="#wait_nested_container">WAIT_NESTED_CONTAINER</a></h3>
+<p>This call waits for a nested container to terminate or exit. Any
+authorized entity, including the executor itself, its tasks, or the
+operator can use this API to wait on a nested container.</p>
+<pre><code>WAIT_NESTED_CONTAINER HTTP Request (JSON):
+
+POST /api/v1  HTTP/1.1
+
+Host: agenthost:5051
+Content-Type: application/json
+Accept: application/json
+
+{
+  "type": "WAIT_NESTED_CONTAINER",
+  "wait_nested_container": {
+    "container_id": {
+      "parent": {
+        "value": "6643b4be-583a-4dc3-bf23-a1ffb26dd452"
+      },
+      "value": "3192b9d1-db71-4699-ae25-e28dfbf42de1"
+    }
+  }
+}
+
+WAIT_NESTED_CONTAINER HTTP Response (JSON):
+
+HTTP/1.1 200 OK
+
+Content-Type: application/json
+
+{
+  "type": "WAIT_NESTED_CONTAINER",
+  "wait_nested_container": {
+    "exit_status": 0
+  }
+}
+
+</code></pre>
+<h3 id="kill_nested_container"><a class="header" href="#kill_nested_container">KILL_NESTED_CONTAINER</a></h3>
+<p>This call initiates the destruction of a nested container. Any
+authorized entity, including the executor itself, its tasks, or the
+operator can use this API to kill a nested container.</p>
+<pre><code>KILL_NESTED_CONTAINER HTTP Request (JSON):
+
+POST /api/v1  HTTP/1.1
+
+Host: agenthost:5051
+Content-Type: application/json
+Accept: application/json
+
+{
+  "type": "KILL_NESTED_CONTAINER",
+  "kill_nested_container": {
+    "container_id": {
+      "parent": {
+        "value": "62d15977-acd4-4167-ae08-2e3738dc3ad6"
+      },
+      "value": "3192b9d1-db71-4699-ae25-e28dfbf42de1"
+    }
+  }
+}
+
+KILL_NESTED_CONTAINER HTTP Response (JSON):
+
+HTTP/1.1 200 OK
+
+</code></pre>
+<h3 id="launch_nested_container_session"><a class="header" href="#launch_nested_container_session">LAUNCH_NESTED_CONTAINER_SESSION</a></h3>
+<p>This call launches a nested container whose lifetime is tied to the
+lifetime of the HTTP call establishing this connection. The STDOUT and
+STDERR of the nested container is streamed back to the client so long
+as the connection is active.</p>
+<pre><code>LAUNCH_NESTED_CONTAINER_SESSION HTTP Request (JSON):
+
+POST /api/v1  HTTP/1.1
+
+Host: agenthost:5051
+Content-Type: application/json
+Accept: application/recordio
+Message-Accept: application/json
+
+{
+  "type": "LAUNCH_NESTED_CONTAINER_SESSION",
+  "launch_nested_container_session": {
+    "container_id": {
+      "parent": {
+        "parent": {
+          "value": "bde04877-cb26-4277-976e-3ecf0c02e76b"
+        },
+        "value": "134bae93-cf5c-4938-87bf-f779bfcd0092"
+      },
+      "value": "e193a755-8528-4673-a05b-2cc2a01a8b94"
+    },
+    "command": {
+      "environment": {
+        "variables": [
+          {
+            "name": "ENV_VAR_KEY",
+            "type": "VALUE",
+            "value": "env_var_value"
+          }
+        ]
+      },
+      "shell": true,
+      "value": "while [ true ]; do echo $(date); sleep 1; done"
+    }
+  }
+}
+
+LAUNCH_NESTED_CONTAINER_SESSION HTTP Response (JSON):
+
+HTTP/1.1 200 OK
+
+Content-Type: application/recordio
+Message-Content-Type: application/json
+
+90
+{
+  "type":"DATA",
+  "data": {
+    "type":"STDOUT",
+    "data": "TW9uIEZlYiAyNyAwNzozOTozOCBVVEMgMjAxNwo="
+  }
+}90
+{
+  "type":"DATA",
+  "data": {
+    "type":"STDOUT",
+    "data": "TW9uIEZlYiAyNyAwNzozOTozOSBVVEMgMjAxNwo="
+  }
+}90
+{
+  "type":"DATA",
+  "data": {
+    "type":"STDERR",
+    "data": "TW9uIEZlYiAyNyAwNzozOTo0MCBVVEMgMjAxNwo="
+  }
+}
+...
+
+</code></pre>
+<h3 id="attach_container_input"><a class="header" href="#attach_container_input">ATTACH_CONTAINER_INPUT</a></h3>
+<p>This call attaches to the STDIN of the primary process of a container
+and streams input to it. This call can only be made against containers
+that have been launched with an associated IOSwitchboard (i.e. nested
+containers launched via a LAUNCH_NESTED_CONTAINER_SESSION call or
+normal containers launched with a TTYInfo in their ContainerInfo).
+Only one ATTACH_CONTAINER_INPUT call can be active for a given
+container at a time. Subsequent attempts to attach will fail.</p>
+<p>The first message sent over an ATTACH_CONTAINER_INPUT stream must be
+of type CONTAINER_ID and contain the ContainerID of the container
+being attached to. Subsequent messages must be of type PROCESS_IO, but
+they may contain subtypes of either DATA or CONTROL. DATA messages
+must be of type STDIN and contain the actual data to stream to the
+STDIN of the container being attached to. Currently, the only valid
+CONTROL message sends a heartbeat to keep the connection alive. We may
+add more CONTROL messages in the future. An empty DATA message of type
+STDIN indicates EOF. If the container was launched with TTYInfo in their
+ContainerInfo, an EOT DATA message is expected instead.</p>
+<pre><code>ATTACH_CONTAINER_INPUT HTTP Request (JSON):
+
+POST /api/v1  HTTP/1.1
+
+Host: agenthost:5051
+Content-Type: application/recordio
+Message-Content-Type: application/json
+Accept: application/json
+
+214
+{
+  "type": "ATTACH_CONTAINER_INPUT",
+  "attach_container_input": {
+    "type": "CONTAINER_ID",
+    "container_id": {
+      "value": "da737efb-a9d4-4622-84ef-f55eb07b861a"
+    }
+  }
+}163
+{
+  "type": "ATTACH_CONTAINER_INPUT",
+  "attach_container_input": {
+    "type": "PROCESS_IO",
+    "process_io": {
+      "type": "DATA",
+      "data": {
+        "type": "STDIN",
+        "data": "dGVzdAo="
+      }
+    }
+  }
+}210
+{
+  "type":
+  "ATTACH_CONTAINER_INPUT",
+  "attach_container_input": {
+    "type": "PROCESS_IO",
+    "process_io": {
+      "type": "CONTROL",
+      "control": {
+        "type": "HEARTBEAT",
+        "heartbeat": {
+          "interval": {
+            "nanoseconds": 30000000000
+          }
+        }
+      }
+    }
+  }
+}215
+{
+  "type": "ATTACH_CONTAINER_INPUT",
+  "attach_container_input": {
+    "type": "PROCESS_IO",
+    "process_io": {
+      "type": "DATA",
+      "data": {
+        "type": "STDIN",
+        "data": ""
+      }
+    }
+  }
+}
+...
+
+ATTACH_CONTAINER_INPUT HTTP Response (JSON):
+
+HTTP/1.1 200 OK
+
+</code></pre>
+<h3 id="attach_container_output"><a class="header" href="#attach_container_output">ATTACH_CONTAINER_OUTPUT</a></h3>
+<p>This call attaches to the STDOUT and STDERR of the primary process of
+a container and streams its output back to the client. This call can
+only be made against containers that have been launched with an
+associated IOSwitchboard (i.e. nested containers launched via a
+LAUNCH_NESTED_CONTAINER_SESSION call or normal containers launched
+with a TTYInfo in their ContainerInfo field).  Multiple
+ATTACH_CONTAINER_OUTPUT calls can be active for a given container at
+once.</p>
+<pre><code>ATTACH_CONTAINER_OUTPUT HTTP Request (JSON):
+
+POST /api/v1  HTTP/1.1
+
+Host: agenthost:5051
+Content-Type: application/json
+Accept: application/recordio
+Message-Accept: application/json
+
+{
+  "type": "ATTACH_CONTAINER_OUTPUT",
+  "attach_container_output": {
+    "container_id": {
+      "value": "e193a755-8528-4673-a05b-2cc2a01a8b94"
+    }
+  }
+}
+
+ATTACH_CONTAINER_OUTPUT HTTP Response (JSON):
+
+HTTP/1.1 200 OK
+
+Content-Type: application/recordio
+Message-Content-Type: application/json
+
+90
+{
+  "type":"DATA",
+  "data": {
+    "type":"STDOUT",
+    "data": "TW9uIEZlYiAyNyAwNzozOTozOCBVVEMgMjAxNwo="
+  }
+}90
+{
+  "type":"DATA",
+  "data": {
+    "type":"STDOUT",
+    "data": "TW9uIEZlYiAyNyAwNzozOTozOSBVVEMgMjAxNwo="
+  }
+}90
+{
+  "type":"DATA",
+  "data": {
+    "type":"STDERR",
+    "data": "TW9uIEZlYiAyNyAwNzozOTo0MCBVVEMgMjAxNwo="
+  }
+}
+...
+
+</code></pre>
+<h3 id="remove_nested_container"><a class="header" href="#remove_nested_container">REMOVE_NESTED_CONTAINER</a></h3>
+<p>This call triggers the removal of a nested container and its artifacts
+(e.g., the sandbox and runtime directories). This call can only be made
+against containers that have already terminated, and whose parent
+container has not been destroyed. Any authorized entity, including the
+executor itself, its tasks, or the operator can use this API call.</p>
+<pre><code>REMOVE_NESTED_CONTAINER HTTP Request (JSON):
+
+POST /api/v1  HTTP/1.1
+
+Host: agenthost:5051
+Content-Type: application/json
+Accept: application/json
+
+{
+  "type": "REMOVE_NESTED_CONTAINER",
+  "remove_nested_container": {
+    "container_id": {
+      "parent": {
+        "value": "6643b4be-583a-4dc3-bf23-a1ffb26dd452"
+      },
+      "value": "3192b9d1-db71-4699-ae25-e28dfbf42de1"
+    }
+  }
+}
+
+REMOVE_NESTED_CONTAINER HTTP Response (JSON):
+
+HTTP/1.1 200 OK
+</code></pre>
+<h3 id="update_container_memory_limit"><a class="header" href="#update_container_memory_limit">UPDATE_CONTAINER_MEMORY_LIMIT</a></h3>
+<p>This call changes the memory allocation and hard memory limit of a running
+top-level task container on this agent. The limit is expressed in MiB and may
+be increased or decreased. The call is agent-local: clients must send it to
+the agent that owns the container ID.</p>
+<p>Only positive, finite limits and top-level container IDs are accepted. The
+change affects the running container but does not resize the resources
+accounted for the task by the master. See
+<a href="container-memory-limit.html">Updating the memory limit of a running container</a>
+for prerequisites, operational semantics, cgroups details, and verification
+instructions.</p>
+<pre><code>UPDATE_CONTAINER_MEMORY_LIMIT HTTP Request (JSON):
+
+POST /api/v1 HTTP/1.1
+
+Host: agenthost:5051
+Content-Type: application/json
+Accept: application/json
+
+{
+  "type": "UPDATE_CONTAINER_MEMORY_LIMIT",
+  "update_container_memory_limit": {
+    "container_id": {
+      "value": "848b24db-a7f7-4d38-997a-c33c2c5ae669"
+    },
+    "memory_limit": {
+      "value": 256
+    }
+  }
+}
+
+UPDATE_CONTAINER_MEMORY_LIMIT HTTP Response (JSON):
+
+HTTP/1.1 200 OK
+</code></pre>
+<p>Possible response status codes are:</p>
+<ul>
+<li><code>200 OK</code>: The containerizer applied the update.</li>
+<li><code>400 Bad Request</code>: The payload is missing or malformed, the container ID is
+nested or invalid, or the limit is not positive and finite.</li>
+<li><code>401 Unauthorized</code>: Read/write HTTP authentication is enabled and valid
+credentials were not supplied.</li>
+<li><code>404 Not Found</code>: The container is not running on this agent. This commonly
+means that the request was sent to a different agent than the one that owns
+the container.</li>
+<li><code>500 Internal Server Error</code>: The containerizer or cgroups backend could not
+apply the update.</li>
+</ul>
+<h3 id="get_resource_providers"><a class="header" href="#get_resource_providers">GET_RESOURCE_PROVIDERS</a></h3>
+<p>This call retrieves information about all the resource providers known
+to the agent.</p>
+<pre><code>GET_RESOURCE_PROVIDERS HTTP Request (JSON):
+
+POST /api/v1  HTTP/1.1
+
+Host: agenthost:5051
+Content-Type: application/json
+Accept: application/json
+
+{
+  "type": "GET_RESOURCE_PROVIDERS"
+}
+
+
+GET_RESOURCE_PROVIDERS HTTP Response (JSON):
+
+HTTP/1.1 200 OK
+
+Content-Type: application/json
+
+{
+  "type": "GET_RESOURCE_PROVIDERS",
+  "get_resource_providers": {
+    "resource_providers": [
+      {
+        "resource_provider_info": {
+          "id": {
+            "value": "22d25a71-9134-4fe6-88f4-146c31ceaf4a"
+          },
+          "type": "org.apache.mesos.rp.local.storage",
+          "name": "test",
+          "default_reservations": [
+            {
+              "type": "DYNAMIC",
+              "role": "storage"
+            }
+          ],
+          "storage": {
+            "plugin": {
+              "type": "org.apache.mesos.csi.test",
+              "name": "test_csi_plugin",
+              "containers": [
+                {
+                  "services": [
+                    "CONTROLLER_SERVICE",
+                    "NODE_SERVICE"
+                  ],
+                  "command": {
+                    "shell": false,
+                    "value": "/opt/mesos/bin/test-csi-plugin",
+                    "arguments": [
+                      "/opt/mesos/bin/test-csi-plugin",
+                      "--available_capacity=4GB",
+                      "--volumes=",
+                      "--work_dir=/var/run/mesos/test_csi_plugin"
+                    ]
+                  }
+                }
+              ]
+            }
+          }
+        }
+      }
+    ]
+  }
+}
+
+</code></pre>
+<h3 id="add_resource_provider_config"><a class="header" href="#add_resource_provider_config">ADD_RESOURCE_PROVIDER_CONFIG</a></h3>
+<p>This call launches a Local Resource Provider on the agent with the specified
+<code>ResourceProviderInfo</code>.</p>
+<pre><code>ADD_RESOURCE_PROVIDER_CONFIG HTTP Request (JSON):
+
+POST /api/v1  HTTP/1.1
+
+Host: agenthost:5051
+Content-Type: application/json
+Accept: application/json
+
+{
+  "type": "ADD_RESOURCE_PROVIDER_CONFIG",
+  "add_resource_provider_config": {
+    "info": {
+      "type": "org.apache.mesos.rp.local.storage",
+      "name": "test_slrp",
+      "default_reservations": [
+        {
+          "type": "DYNAMIC",
+          "role": "test-role"
+        }
+      ],
+      "storage": {
+        "plugin": {
+          "type": "org.apache.mesos.csi.test",
+          "name": "test_plugin",
+          "containers": [
+            {
+              "services": [
+                "CONTROLLER_SERVICE",
+                "NODE_SERVICE"
+              ],
+              "command": {
+                "shell": true,
+                "value": "./test-csi-plugin --available_capacity=2GB --work_dir=workdir",
+                "uris": [
+                  {
+                    "value": "/PATH/TO/test-csi-plugin",
+                    "executable": true
+                  }
+                ]
+              },
+              "resources": [
+                { "name": "cpus", "type": "SCALAR", "scalar": { "value": 0.1 } },
+                { "name": "mem", "type": "SCALAR", "scalar": { "value": 200.0 } }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  }
+}
+
+ADD_RESOURCE_PROVIDER_CONFIG HTTP Response (JSON):
+
+HTTP/1.1 200 OK
+</code></pre>
+<p>Possible responses:</p>
+<ul>
+<li><code>200 OK</code>: If a new config file is created.</li>
+<li><code>400 Bad Request</code>: If the request is not well-formed.</li>
+<li><code>401 Unauthorized</code>: If HTTP authentication fails.</li>
+<li><code>403 Forbidden</code>: If the call is not authorized.</li>
+<li><code>409 Conflict</code>: If another config file that describes a resource provider of the same type and name exists.</li>
+<li><code>500 Internal Server Error</code>: If an unexpected error occurs.</li>
+</ul>
+<h3 id="update_resource_provider_config"><a class="header" href="#update_resource_provider_config">UPDATE_RESOURCE_PROVIDER_CONFIG</a></h3>
+<p>This call updates a Local Resource Provider on the agent with the specified
+<code>ResourceProviderInfo</code>.</p>
+<pre><code>UPDATE_RESOURCE_PROVIDER_CONFIG HTTP Request (JSON):
+
+POST /api/v1  HTTP/1.1
+
+Host: agenthost:5051
+Content-Type: application/json
+Accept: application/json
+
+{
+  "type": "UPDATE_RESOURCE_PROVIDER_CONFIG",
+  "update_resource_provider_config": {
+    "info": {
+      "type": "org.apache.mesos.rp.local.storage",
+      "name": "test_slrp",
+      "default_reservations": [
+        {
+          "type": "DYNAMIC",
+          "role": "test-role"
+        }
+      ],
+      "storage": {
+        "plugin": {
+          "type": "org.apache.mesos.csi.test",
+          "name": "test_plugin",
+          "containers": [
+            {
+              "services": [
+                "CONTROLLER_SERVICE",
+                "NODE_SERVICE"
+              ],
+              "command": {
+                "shell": true,
+                "value": "./test-csi-plugin --available_capacity=2GB --work_dir=workdir",
+                "uris": [
+                  {
+                    "value": "/PATH/TO/test-csi-plugin",
+                    "executable": true
+                  }
+                ]
+              },
+              "resources": [
+                { "name": "cpus", "type": "SCALAR", "scalar": { "value": 0.1 } },
+                { "name": "mem", "type": "SCALAR", "scalar": { "value": 200.0 } }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  }
+}
+
+UPDATE_RESOURCE_PROVIDER_CONFIG HTTP Response (JSON):
+
+HTTP/1.1 200 OK
+</code></pre>
+<p>Possible responses:</p>
+<ul>
+<li><code>200 OK</code>: If an existing config file is updated.</li>
+<li><code>400 Bad Request</code>: If the request is not well-formed.</li>
+<li><code>401 Unauthorized</code>: If HTTP authentication fails.</li>
+<li><code>403 Forbidden</code>: If the call is not authorized.</li>
+<li><code>404 Not Found</code>: If no config file describes a resource provider of the same type and name exists.</li>
+<li><code>500 Internal Server Error</code>: If an unexpected error occurs.</li>
+</ul>
+<h3 id="remove_resource_provider_config"><a class="header" href="#remove_resource_provider_config">REMOVE_RESOURCE_PROVIDER_CONFIG</a></h3>
+<p>This call terminates a given Local Resource Provider on the agent and prevents
+it from being launched again until the config is added back. The master and the
+agent will think the resource provider has disconnected, similar to agent
+disconnection.</p>
+<p>If there exists a task that is using the resources provided by the resource
+provider, its execution will not be affected. However, offer operations for the
+local resource provider will not be successful. In fact, if a local resource
+provider is disconnected, the master will rescind the offers related to that
+local resource provider, effectively disallowing frameworks to perform
+operations on the disconnected local resource provider.</p>
+<p>The local resource provider can be re-added after its removal using
+<a href="#add_resource_provider_config"><code>ADD_RESOURCE_PROVIDER_CONFIG</code></a>. Note that
+removing a local resource provider is different than marking a local resource
+provider as gone, in which case the local resource provider will not be allowed
+to be re-added.  Marking a local resource provider as gone is not yet supported.</p>
+<pre><code>REMOVE_RESOURCE_PROVIDER_CONFIG HTTP Request (JSON):
+
+POST /api/v1  HTTP/1.1
+
+Host: agenthost:5051
+Content-Type: application/json
+Accept: application/json
+
+{
+  "type": "REMOVE_RESOURCE_PROVIDER_CONFIG",
+  "remove_resource_provider_config": {
+    "type": "org.apache.mesos.rp.local.storage",
+    "name": "test_slrp"
+  }
+}
+
+REMOVE_RESOURCE_PROVIDER_CONFIG HTTP Response (JSON):
+
+HTTP/1.1 200 OK
+</code></pre>
+<p>Possible responses:</p>
+<ul>
+<li><code>200 OK</code>: If the config file is removed.</li>
+<li><code>400 Bad Request</code>: If the request is not well-formed.</li>
+<li><code>401 Unauthorized</code>: If HTTP authentication fails.</li>
+<li><code>403 Forbidden</code>: If the call is not authorized.</li>
+<li><code>404 Not Found</code>: If the config file does not exist.</li>
+<li><code>500 Internal Server Error</code>: If an unexpected error occurs.</li>
+</ul>
+<h3 id="prune_images"><a class="header" href="#prune_images">PRUNE_IMAGES</a></h3>
+<p>This call triggers garbage collection for container images. This call can
+only be made when all running containers are launched with Mesos version 1.5
+or newer. An optional list of excluded images from GC can be speficied via
+<code>prune_images.excluded_images</code> field.</p>
+<pre><code>PRUNE_IMAGES HTTP Request (JSON):
+
+POST /api/v1  HTTP/1.1
+
+Host: agenthost:5051
+Content-Type: application/json
+Accept: application/json
+
+{
+  "type": "PRUNE_IMAGES",
+  "prune_images": {
+    "excluded_images": [
+      {"type":"DOCKER","docker":{"name":"mysql:latest"}}
+    ]
+  }
+}
+
+PRUNE_IMAGES HTTP Response (JSON):
+
+HTTP/1.1 200 OK
+</code></pre>
+<footer id="open-on-gh">Found a bug? <a href="https://github.com/m3scluster/clusterd-docs//edit/main/src/operator-http-api.md">Edit this page on GitHub.</a></footer>
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+                            <a rel="prev" href="executor-http-api.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                            </a>
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+                    <a rel="prev" href="executor-http-api.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
+                    </a>
+
+            </nav>
+
+        </div>
+
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr-ef4e11c1.min.js"></script>
+        <script src="mark-09e88c2c.min.js"></script>
+        <script src="searcher-09f2665d.js"></script>
+
+        <script src="clipboard-1626706a.min.js"></script>
+        <script src="highlight-abc7f01d.js"></script>
+        <script src="book-609e4cb8.js"></script>
+
+        <!-- Custom JS scripts -->
+
+
+
+    </div>
+    </body>
+</html>

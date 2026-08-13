@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html lang="en" class="sidebar-visible no-js light">
+<html lang="en" class="light sidebar-visible" dir="ltr">
     <head>
         <!-- Book generated using mdBook -->
         <meta charset="UTF-8">
@@ -7,43 +7,57 @@
 
 
         <!-- Custom HTML head -->
-        
+
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <meta name="theme-color" content="#ffffff" />
+        <meta name="theme-color" content="#ffffff">
 
-        <link rel="icon" href="favicon.svg">
-        <link rel="shortcut icon" href="favicon.png">
-        <link rel="stylesheet" href="css/variables.css">
-        <link rel="stylesheet" href="css/general.css">
-        <link rel="stylesheet" href="css/chrome.css">
-        <link rel="stylesheet" href="css/print.css" media="print">
+        <link rel="icon" href="favicon-de23e50b.svg">
+        <link rel="shortcut icon" href="favicon-8114d1fc.png">
+        <link rel="stylesheet" href="css/variables-8adf115d.css">
+        <link rel="stylesheet" href="css/general-e96d0476.css">
+        <link rel="stylesheet" href="css/chrome-d279d366.css">
+        <link rel="stylesheet" href="css/print-9e4910d8.css" media="print">
 
         <!-- Fonts -->
-        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
-        <link rel="stylesheet" href="fonts/fonts.css">
+        <link rel="stylesheet" href="fonts/fonts-9644e21d.css">
 
         <!-- Highlight.js Stylesheets -->
-        <link rel="stylesheet" href="highlight.css">
-        <link rel="stylesheet" href="tomorrow-night.css">
-        <link rel="stylesheet" href="ayu-highlight.css">
+        <link rel="stylesheet" id="mdbook-highlight-css" href="highlight-493f70e1.css">
+        <link rel="stylesheet" id="mdbook-tomorrow-night-css" href="tomorrow-night-4c0ae647.css">
+        <link rel="stylesheet" id="mdbook-ayu-highlight-css" href="ayu-highlight-3fdfc3ac.css">
 
         <!-- Custom theme stylesheets -->
 
+
+        <!-- Provide site root and default themes to javascript -->
+        <script>
+            const path_to_root = "";
+            const default_light_theme = "light";
+            const default_dark_theme = "navy";
+            window.path_to_searchindex_js = "searchindex-c0e7f0eb.js";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc-1084839a.js"></script>
     </head>
     <body>
-    <div id="body-container">
-        <!-- Provide site root to javascript -->
-        <script>
-            var path_to_root = "";
-            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
-        </script>
-
+    <div id="mdbook-help-container">
+        <div id="mdbook-help-popup">
+            <h2 class="mdbook-help-title">Keyboard shortcuts</h2>
+            <div>
+                <p>Press <kbd>←</kbd> or <kbd>→</kbd> to navigate between chapters</p>
+                <p>Press <kbd>S</kbd> or <kbd>/</kbd> to search in the book</p>
+                <p>Press <kbd>?</kbd> to show this help</p>
+                <p>Press <kbd>Esc</kbd> to hide this help</p>
+            </div>
+        </div>
+    </div>
+    <div id="mdbook-body-container">
         <!-- Work around some values being stored in localStorage wrapped in quotes -->
         <script>
             try {
-                var theme = localStorage.getItem('mdbook-theme');
-                var sidebar = localStorage.getItem('mdbook-sidebar');
+                let theme = localStorage.getItem('mdbook-theme');
+                let sidebar = localStorage.getItem('mdbook-sidebar');
 
                 if (theme.startsWith('"') && theme.endsWith('"')) {
                     localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
@@ -57,80 +71,69 @@
 
         <!-- Set the theme before any content is loaded, prevents flash -->
         <script>
-            var theme;
+            const default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? default_dark_theme : default_light_theme;
+            let theme;
             try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
             if (theme === null || theme === undefined) { theme = default_theme; }
-            var html = document.querySelector('html');
-            html.classList.remove('no-js')
+            const html = document.documentElement;
             html.classList.remove('light')
             html.classList.add(theme);
-            html.classList.add('js');
+            html.classList.add("js");
         </script>
+
+        <input type="checkbox" id="mdbook-sidebar-toggle-anchor" class="hidden">
 
         <!-- Hide / unhide sidebar before it is displayed -->
         <script>
-            var html = document.querySelector('html');
-            var sidebar = null;
+            let sidebar = null;
+            const sidebar_toggle = document.getElementById("mdbook-sidebar-toggle-anchor");
             if (document.body.clientWidth >= 1080) {
                 try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
                 sidebar = sidebar || 'visible';
             } else {
                 sidebar = 'hidden';
+                sidebar_toggle.checked = false;
             }
-            html.classList.remove('sidebar-visible');
-            html.classList.add("sidebar-" + sidebar);
+            if (sidebar === 'visible') {
+                sidebar_toggle.checked = true;
+            } else {
+                html.classList.remove('sidebar-visible');
+            }
         </script>
 
-        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
-            <div class="sidebar-scrollbox">
-                <ol class="chapter"><li class="chapter-item expanded affix "><li class="part-title">Fundamentals</li><li class="chapter-item expanded "><a href="architecture.html"><strong aria-hidden="true">1.</strong> Mesos Architecture providing an overview of Mesos concepts</a></li><li class="chapter-item expanded "><a href="presentations.html"><strong aria-hidden="true">2.</strong> Video and Slides of Mesos Presentations</a></li><li class="chapter-item expanded "><a href="versioning.html"><strong aria-hidden="true">3.</strong> Mesos Release and Support Policy</a></li><li class="chapter-item expanded affix "><li class="part-title">Build / Installation</li><li class="chapter-item expanded "><a href="building.html"><strong aria-hidden="true">4.</strong> Building for basic instructions on compiling and installing Mesos.</a></li><li class="chapter-item expanded "><a href="binary-packages.html"><strong aria-hidden="true">5.</strong> Binary Packages for how to use Mesos binary packages.</a></li><li class="chapter-item expanded "><a href="configuration.html"><strong aria-hidden="true">6.</strong> Configuration for build configuration options.</a></li><li class="chapter-item expanded "><a href="cmake.html"><strong aria-hidden="true">7.</strong> CMake for details about using the new CMake build system.</a></li><li class="chapter-item expanded "><a href="windows.html"><strong aria-hidden="true">8.</strong> Windows Support for the state of Windows support in Mesos.</a></li><li class="chapter-item expanded affix "><li class="part-title">Configuration</li><li class="chapter-item expanded "><a href="configuration/agent.html"><strong aria-hidden="true">9.</strong> Agent Options</a></li><li class="chapter-item expanded "><a href="configuration/autotools.html"><strong aria-hidden="true">10.</strong> Autotools Options</a></li><li class="chapter-item expanded "><a href="configuration/cmake.html"><strong aria-hidden="true">11.</strong> CMake Options</a></li><li class="chapter-item expanded "><a href="configuration/libprocess.html"><strong aria-hidden="true">12.</strong> Libprocess Options</a></li><li class="chapter-item expanded "><a href="configuration/master-and-agent.html"><strong aria-hidden="true">13.</strong> Master and Agent Options</a></li><li class="chapter-item expanded "><a href="configuration/master.html"><strong aria-hidden="true">14.</strong> Master Options</a></li><li class="chapter-item expanded affix "><li class="part-title">Administration</li><li class="chapter-item expanded "><a href="configuration.html"><strong aria-hidden="true">15.</strong> Configuration for command-line arguments.</a></li><li class="chapter-item expanded "><a href="high-availability.html"><strong aria-hidden="true">16.</strong> High Availability Master Setup</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="replicated-log-internals.html"><strong aria-hidden="true">16.1.</strong> Replicated Log for information on the Mesos replicated log.</a></li></ol></li><li class="chapter-item expanded "><a href="agent-recovery.html"><strong aria-hidden="true">17.</strong> Fault Tolerant Agent Setup</a></li><li class="chapter-item expanded "><a href="framework-rate-limiting.html"><strong aria-hidden="true">18.</strong> Framework Rate Limiting</a></li><li class="chapter-item expanded "><a href="maintenance.html" class="active"><strong aria-hidden="true">19.</strong> Maintenance for performing maintenance on a Mesos cluster.</a></li><li class="chapter-item expanded "><a href="upgrades.html"><strong aria-hidden="true">20.</strong> Upgrades for upgrading a Mesos cluster.</a></li><li class="chapter-item expanded "><a href="downgrades.html"><strong aria-hidden="true">21.</strong> Downgrades for downgrading a Mesos cluster.</a></li><li class="chapter-item expanded "><a href="logging.html"><strong aria-hidden="true">22.</strong> Logging</a></li><li class="chapter-item expanded "><a href="monitoring.html"><strong aria-hidden="true">23.</strong> Monitoring / Metrics</a></li><li class="chapter-item expanded "><a href="cli.html"><strong aria-hidden="true">24.</strong> Debugging using the new CLI</a></li><li class="chapter-item expanded "><a href="operational-guide.html"><strong aria-hidden="true">25.</strong> Operational Guide</a></li><li class="chapter-item expanded "><a href="fetcher.html"><strong aria-hidden="true">26.</strong> Fetcher Cache Configuration</a></li><li class="chapter-item expanded "><a href="fault-domains.html"><strong aria-hidden="true">27.</strong> Fault Domains</a></li><li class="chapter-item expanded "><a href="performance-profiling.html"><strong aria-hidden="true">28.</strong> Performance Profiling for debugging performance issues in Mesos.</a></li><li class="chapter-item expanded "><a href="memory-profiling.html"><strong aria-hidden="true">29.</strong> Memory Profiling for debugging potential memory leaks in Mesos.</a></li><li class="chapter-item expanded affix "><li class="part-title">Resource Management</li><li class="chapter-item expanded "><a href="attributes-resources.html"><strong aria-hidden="true">30.</strong> Attributes and Resources for how to describe the agents that comprise a cluster.</a></li><li class="chapter-item expanded "><a href="roles.html"><strong aria-hidden="true">31.</strong> Using Resource Roles</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="weights.html"><strong aria-hidden="true">31.1.</strong> Resource Role Weights for fair sharing.</a></li><li class="chapter-item expanded "><a href="quota.html"><strong aria-hidden="true">31.2.</strong> Resource Role Quota for how to configure Mesos to provide guaranteed resource allocations for use by a role.</a></li><li class="chapter-item expanded "><a href="reservation.html"><strong aria-hidden="true">31.3.</strong> Reservations for how operators and frameworks can reserve resources on individual agents for use by a role.</a></li><li class="chapter-item expanded "><a href="shared-resources.html"><strong aria-hidden="true">31.4.</strong> Shared Resources for how to share persistent volumes between tasks managed by different executors on the same agent.</a></li></ol></li><li class="chapter-item expanded "><a href="oversubscription.html"><strong aria-hidden="true">32.</strong> Oversubscription for how to configure Mesos to take advantage of unused resources to launch “best-effort” tasks.</a></li><li class="chapter-item expanded affix "><li class="part-title">Security</li><li class="chapter-item expanded "><a href="authentication.html"><strong aria-hidden="true">33.</strong> Authentication</a></li><li class="chapter-item expanded "><a href="authorization.html"><strong aria-hidden="true">34.</strong> Authorization</a></li><li class="chapter-item expanded "><a href="ssl.html"><strong aria-hidden="true">35.</strong> SSL</a></li><li class="chapter-item expanded "><a href="secrets.html"><strong aria-hidden="true">36.</strong> Secrets for managing secrets within Mesos.</a></li><li class="chapter-item expanded affix "><li class="part-title">Containerization</li><li class="chapter-item expanded "><a href="containerizers.html"><strong aria-hidden="true">37.</strong> Containerizer Overview</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="containerizer-internals.html"><strong aria-hidden="true">37.1.</strong> Containerizer Internals for implementation details of containerizers.</a></li><li class="chapter-item expanded "><a href="docker-containerizer.html"><strong aria-hidden="true">37.2.</strong> Docker Containerizer for launching a Docker image as a Task, or as an Executor.</a></li><li class="chapter-item expanded "><a href="mesos-containerizer.html"><strong aria-hidden="true">37.3.</strong> Mesos Containerizer default containerizer, supports both Linux and POSIX systems.</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="container-image.html"><strong aria-hidden="true">37.3.1.</strong> Container Images for supporting container images in Mesos containerizer.</a></li><li class="chapter-item expanded "><a href="isolators/docker-volume.html"><strong aria-hidden="true">37.3.2.</strong> Docker Volume Support</a></li><li class="chapter-item expanded "><a href="gpu-support.html"><strong aria-hidden="true">37.3.3.</strong> Nvidia GPU Support for how to run Mesos with Nvidia GPU support.</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="sandbox.html"><strong aria-hidden="true">38.</strong> Container Sandboxes</a></li><li class="chapter-item expanded "><a href="container-volume.html"><strong aria-hidden="true">39.</strong> Container Volumes</a></li><li class="chapter-item expanded "><a href="nested-container-and-task-group.html"><strong aria-hidden="true">40.</strong> Nested Container and Task Group (Pod)</a></li><li class="chapter-item expanded "><a href="standalone-containers.html"><strong aria-hidden="true">41.</strong> Standalone Containers</a></li><li class="chapter-item expanded affix "><li class="part-title">Networking</li><li class="chapter-item expanded "><a href="networking.html"><strong aria-hidden="true">42.</strong> Networking Overview</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="networking-for-mesos-managed-containers.html"><strong aria-hidden="true">42.1.</strong> Networking in Detail</a></li><li class="chapter-item expanded "><a href="cni.html"><strong aria-hidden="true">42.2.</strong> Container Network Interface (CNI)</a></li><li class="chapter-item expanded "><a href="isolators/network-port-mapping.html"><strong aria-hidden="true">42.3.</strong> Port Mapping Isolator</a></li></ol></li><li class="chapter-item expanded "><li class="part-title">Storage</li><li class="chapter-item expanded "><a href="multiple-disk.html"><strong aria-hidden="true">43.</strong> Multiple Disks for how to allow tasks to use multiple isolated disk resources.</a></li><li class="chapter-item expanded "><a href="persistent-volume.html"><strong aria-hidden="true">44.</strong> Persistent Volume for how to allow tasks to access persistent storage resources.</a></li><li class="chapter-item expanded "><a href="csi.html"><strong aria-hidden="true">45.</strong> Container Storage Interface (CSI) Support</a></li><li class="chapter-item expanded affix "><li class="part-title">Scheduler and Executor Development</li><li class="chapter-item expanded "><a href="running-workloads.html"><strong aria-hidden="true">46.</strong> Running Workloads in Mesos explains how a scheduler can specify and run tasks.</a></li><li class="chapter-item expanded "><a href="app-framework-development-guide.html"><strong aria-hidden="true">47.</strong> Framework Development Guide describes how to build applications on top of Mesos.</a></li><li class="chapter-item expanded "><a href="high-availability-framework-guide.html"><strong aria-hidden="true">48.</strong> Guide for Designing Highly Available Mesos Frameworks</a></li><li class="chapter-item expanded "><a href="reconciliation.html"><strong aria-hidden="true">49.</strong> Reconciliation for ensuring a framework’s state remains eventually consistent in the face of failures.</a></li><li class="chapter-item expanded "><a href="task-state-reasons.html"><strong aria-hidden="true">50.</strong> Task State Reasons describes how task state reasons are used in Mesos.</a></li><li class="chapter-item expanded "><a href="health-checks.html"><strong aria-hidden="true">51.</strong> Task Health Checking</a></li><li class="chapter-item expanded "><a href="scheduler-http-api.html"><strong aria-hidden="true">52.</strong> v1 Scheduler HTTP API for communication between schedulers and the Mesos master.</a></li><li class="chapter-item expanded "><a href="executor-http-api.html"><strong aria-hidden="true">53.</strong> v1 Executor HTTP API describes the new HTTP API for communication between executors and the Mesos agent.</a></li></ol>
+        <nav id="mdbook-sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="mdbook-sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
             </div>
-            <div id="sidebar-resize-handle" class="sidebar-resize-handle"></div>
         </nav>
 
-        <!-- Track and set sidebar scroll position -->
-        <script>
-            var sidebarScrollbox = document.querySelector('#sidebar .sidebar-scrollbox');
-            sidebarScrollbox.addEventListener('click', function(e) {
-                if (e.target.tagName === 'A') {
-                    sessionStorage.setItem('sidebar-scroll', sidebarScrollbox.scrollTop);
-                }
-            }, { passive: true });
-            var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
-            sessionStorage.removeItem('sidebar-scroll');
-            if (sidebarScrollTop) {
-                // preserve sidebar scroll position when navigating via links within sidebar
-                sidebarScrollbox.scrollTop = sidebarScrollTop;
-            } else {
-                // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
-                var activeSection = document.querySelector('#sidebar .active');
-                if (activeSection) {
-                    activeSection.scrollIntoView({ block: 'center' });
-                }
-            }
-        </script>
-
-        <div id="page-wrapper" class="page-wrapper">
+        <div id="mdbook-page-wrapper" class="page-wrapper">
 
             <div class="page">
-                                <div id="menu-bar-hover-placeholder"></div>
-                <div id="menu-bar" class="menu-bar sticky">
+                <div id="mdbook-menu-bar-hover-placeholder"></div>
+                <div id="mdbook-menu-bar" class="menu-bar sticky">
                     <div class="left-buttons">
-                        <button id="sidebar-toggle" class="icon-button" type="button" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
-                            <i class="fa fa-bars"></i>
+                        <label id="mdbook-sidebar-toggle" class="icon-button" for="mdbook-sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="mdbook-sidebar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg></span>
+                        </label>
+                        <button id="mdbook-theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="mdbook-theme-list">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M371.3 367.1c27.3-3.9 51.9-19.4 67.2-42.9L600.2 74.1c12.6-19.5 9.4-45.3-7.6-61.2S549.7-4.4 531.1 9.6L294.4 187.2c-24 18-38.2 46.1-38.4 76.1L371.3 367.1zm-19.6 25.4l-116-104.4C175.9 290.3 128 339.6 128 400c0 3.9 .2 7.8 .6 11.6c1.8 17.5-10.2 36.4-27.8 36.4H96c-17.7 0-32 14.3-32 32s14.3 32 32 32H240c61.9 0 112-50.1 112-112c0-2.5-.1-5-.2-7.5z"/></svg></span>
                         </button>
-                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
-                            <i class="fa fa-paint-brush"></i>
-                        </button>
-                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
-                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
-                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        <ul id="mdbook-theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-default_theme">Auto</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="mdbook-theme-ayu">Ayu</button></li>
                         </ul>
-                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
-                            <i class="fa fa-search"></i>
+                        <button id="mdbook-search-toggle" class="icon-button" type="button" title="Search (`/`)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="/ s" aria-controls="mdbook-searchbar">
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352c79.5 0 144-64.5 144-144s-64.5-144-144-144S64 128.5 64 208s64.5 144 144 144z"/></svg></span>
                         </button>
                     </div>
 
@@ -138,36 +141,41 @@
 
                     <div class="right-buttons">
                         <a href="print.html" title="Print this book" aria-label="Print this book">
-                            <i id="print-button" class="fa fa-print"></i>
+                            <span class=fa-svg id="print-button"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M128 0C92.7 0 64 28.7 64 64v96h64V64H354.7L384 93.3V160h64V93.3c0-17-6.7-33.3-18.7-45.3L400 18.7C388 6.7 371.7 0 354.7 0H128zM384 352v32 64H128V384 368 352H384zm64 32h32c17.7 0 32-14.3 32-32V256c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64v96c0 17.7 14.3 32 32 32H64v64c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V384zm-16-88c-13.3 0-24-10.7-24-24s10.7-24 24-24s24 10.7 24 24s-10.7 24-24 24z"/></svg></span>
                         </a>
                         <a href="https://github.com/m3scluster/clusterd-docs/" title="Git repository" aria-label="Git repository">
-                            <i id="git-repository-button" class="fa fa-github"></i>
+                            <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg></span>
                         </a>
 
                     </div>
                 </div>
 
-                <div id="search-wrapper" class="hidden">
-                    <form id="searchbar-outer" class="searchbar-outer">
-                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                <div id="mdbook-search-wrapper" class="hidden">
+                    <form id="mdbook-searchbar-outer" class="searchbar-outer">
+                        <div class="search-wrapper">
+                            <input type="search" id="mdbook-searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="mdbook-searchresults-outer" aria-describedby="searchresults-header">
+                            <div class="spinner-wrapper">
+                                <span class=fa-svg id="fa-spin"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M304 48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zm0 416c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM48 304c26.5 0 48-21.5 48-48s-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48zm464-48c0-26.5-21.5-48-48-48s-48 21.5-48 48s21.5 48 48 48s48-21.5 48-48zM142.9 437c18.7-18.7 18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zm0-294.2c18.7-18.7 18.7-49.1 0-67.9S93.7 56.2 75 75s-18.7 49.1 0 67.9s49.1 18.7 67.9 0zM369.1 437c18.7 18.7 49.1 18.7 67.9 0s18.7-49.1 0-67.9s-49.1-18.7-67.9 0s-18.7 49.1 0 67.9z"/></svg></span>
+                            </div>
+                        </div>
                     </form>
-                    <div id="searchresults-outer" class="searchresults-outer hidden">
-                        <div id="searchresults-header" class="searchresults-header"></div>
-                        <ul id="searchresults">
+                    <div id="mdbook-searchresults-outer" class="searchresults-outer hidden">
+                        <div id="mdbook-searchresults-header" class="searchresults-header"></div>
+                        <ul id="mdbook-searchresults">
                         </ul>
                     </div>
                 </div>
 
                 <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
                 <script>
-                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
-                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
-                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                    document.getElementById('mdbook-sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('mdbook-sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#mdbook-sidebar a')).forEach(function(link) {
                         link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
                     });
                 </script>
 
-                <div id="content" class="content">
+                <div id="mdbook-content" class="content">
                     <main>
                         <h1 id="performing-node-maintenance-in-a-mesos-cluster"><a class="header" href="#performing-node-maintenance-in-a-mesos-cluster">Performing Node Maintenance in a Mesos Cluster</a></h1>
 <p>Operators regularly need to perform maintenance tasks on machines that comprise
@@ -200,40 +208,40 @@ kill event immediately, assuming the agent is currently reachable. If the agent
 is unreachable, initiation of the kill event will be delayed until the agent is
 reachable by the master again. When the tasks receive a kill event, a SIGTERM
 signal will be sent to the task to begin the killing process. Depending on the
-particular task's behavior, this signal may be sufficient to terminate it. Some
+particular task’s behavior, this signal may be sufficient to terminate it. Some
 tasks may use this signal to begin the process of graceful termination, which
 may take some time. After some delay, a SIGKILL signal will be sent to the task,
 which forcefully terminates the task if it is still running. The delay between
-the SIGTERM and SIGKILL signals is determined by the length of the task's kill
+the SIGTERM and SIGKILL signals is determined by the length of the task’s kill
 grace period. If no grace period is set for the task, a default value of several
 seconds will be used.</p>
 <h2 id="initiating-draining-on-a-node"><a class="header" href="#initiating-draining-on-a-node">Initiating Draining on a Node</a></h2>
 <p>To begin draining an agent, issue the operator API <a href="operator-http-api.html#drain_agent"><code>DRAIN_AGENT</code>
 call</a> to the master:</p>
-<pre><code>$ curl -X POST -d '{&quot;type&quot;: &quot;DRAIN_AGENT&quot;, &quot;drain_agent&quot;: {&quot;agent_id&quot;: {&quot;value&quot;: &quot;&lt;mesos-agent-id&gt;&quot;}}}' masterhost:5050/api/v1
+<pre><code>$ curl -X POST -d '{"type": "DRAIN_AGENT", "drain_agent": {"agent_id": {"value": "&lt;mesos-agent-id&gt;"}}}' masterhost:5050/api/v1
 </code></pre>
 <p>This will immediately begin the process of killing all tasks on the agent. Once
 draining has begun, it cannot be cancelled. To monitor the progress of the
 draining process, you can inspect the state of the agent via the master operator
 API <a href="operator-http-api.html#get_state"><code>GET_STATE</code></a> or
 <a href="operator-http-api.html#get_agents"><code>GET_AGENTS</code></a> calls:</p>
-<pre><code>$ curl -X POST -d '{&quot;type&quot;: &quot;GET_AGENTS&quot;}' masterhost:5050/api/v1
+<pre><code>$ curl -X POST -d '{"type": "GET_AGENTS"}' masterhost:5050/api/v1
 </code></pre>
 <p>Locate the relevant agent and inspect its <code>drain_info.state</code> field. While
 draining, the state will be <code>DRAINING</code>. When all tasks on the agent have
 terminated, all their terminal status updates have been acknowledged by the
 schedulers, and all offer operations on the agent have finished, draining is
-complete and the agent's drain state will transition to <code>DRAINED</code>. At this
+complete and the agent’s drain state will transition to <code>DRAINED</code>. At this
 point, the node may be taken down for maintenance.</p>
 <h2 id="options-for-automatic-node-draining"><a class="header" href="#options-for-automatic-node-draining">Options for Automatic Node Draining</a></h2>
 <p>You may set an upper bound on the kill grace period of draining tasks by
 specifying the <code>max_grace_period</code> option when draining:</p>
-<pre><code>$ curl -X POST -d '{&quot;type&quot;: &quot;DRAIN_AGENT&quot;, &quot;drain_agent&quot;: {&quot;agent_id&quot;: {&quot;value&quot;: &quot;&lt;mesos-agent-id&gt;&quot;}, &quot;max_grace_period&quot;: &quot;10mins&quot;}}' masterhost:5050/api/v1
+<pre><code>$ curl -X POST -d '{"type": "DRAIN_AGENT", "drain_agent": {"agent_id": {"value": "&lt;mesos-agent-id&gt;"}, "max_grace_period": "10mins"}}' masterhost:5050/api/v1
 </code></pre>
 <p>In cases where you know that the node being drained will not return after
 draining is complete, and you would like it to be automatically permanently
 removed from the cluster, you may specify the <code>mark_gone</code> option:</p>
-<pre><code>$ curl -X POST -d '{&quot;type&quot;: &quot;DRAIN_AGENT&quot;, &quot;drain_agent&quot;: {&quot;agent_id&quot;: {&quot;value&quot;: &quot;&lt;mesos-agent-id&gt;&quot;}, &quot;mark_gone&quot;: true}}' masterhost:5050/api/v1
+<pre><code>$ curl -X POST -d '{"type": "DRAIN_AGENT", "drain_agent": {"agent_id": {"value": "&lt;mesos-agent-id&gt;"}, "mark_gone": true}}' masterhost:5050/api/v1
 </code></pre>
 <p>This can be useful, for example, in the case of autoscaled cloud instances,
 where an instance is being scaled down and will never return. This is equivalent
@@ -246,7 +254,7 @@ persistent data on the agent node. Use this option with caution!</p>
 reregister with the master and rejoin the cluster. You may use the master
 operator API <a href="operator-http-api.html#reactivate_agent"><code>REACTIVATE_AGENT</code></a> call to
 accomplish this:</p>
-<pre><code>$ curl -X POST -d '{&quot;type&quot;: &quot;REACTIVATE_AGENT&quot;, &quot;reactivate_agent&quot;: {&quot;agent_id&quot;: {&quot;value&quot;: &quot;&lt;mesos-agent-id&gt;&quot;}}}' masterhost:5050/api/v1
+<pre><code>$ curl -X POST -d '{"type": "REACTIVATE_AGENT", "reactivate_agent": {"agent_id": {"value": "&lt;mesos-agent-id&gt;"}}}' masterhost:5050/api/v1
 </code></pre>
 <h1 id="manual-node-draining"><a class="header" href="#manual-node-draining">Manual Node Draining</a></h1>
 <p>If you require greater control over the draining process, you may be able to
@@ -255,7 +263,7 @@ exposed by the schedulers running tasks on the agent.</p>
 <h2 id="deactivating-an-agent"><a class="header" href="#deactivating-an-agent">Deactivating an Agent</a></h2>
 <p>The first step in the manual draining process is agent deactivation, which
 prevents new tasks from launching on the target agent:</p>
-<pre><code>$ curl -X POST -d '{&quot;type&quot;: &quot;DEACTIVATE_AGENT&quot;, &quot;deactivate_agent&quot;: {&quot;agent_id&quot;: {&quot;value&quot;: &quot;&lt;mesos-agent-id&gt;&quot;}}}' masterhost:5050/api/v1
+<pre><code>$ curl -X POST -d '{"type": "DEACTIVATE_AGENT", "deactivate_agent": {"agent_id": {"value": "&lt;mesos-agent-id&gt;"}}}' masterhost:5050/api/v1
 </code></pre>
 <p>If you receive a <code>200 OK</code> response, then the agent has been deactivated. You can
 confirm the deactivation state of any agent by inspecting its <code>deactivated</code>
@@ -269,14 +277,14 @@ acknowledged by the schedulers, ensure that the <code>pending_tasks</code>, <cod
 and <code>launched_tasks</code> fields in the response to the
 <a href="operator-http-api.html#get_tasks-1"><code>GET_TASKS</code></a> agent operator API call are
 empty:</p>
-<pre><code>$ curl -X POST -d '{&quot;type&quot;: &quot;GET_TASKS&quot;}' agenthost:5051/api/v1
+<pre><code>$ curl -X POST -d '{"type": "GET_TASKS"}' agenthost:5051/api/v1
 </code></pre>
 <p>If you are making use of volumes backed by network storage on the target agent,
-it's possible that there may be a long-running offer operation on the agent
+it’s possible that there may be a long-running offer operation on the agent
 which has not yet finished. To check if this is the case, issue the agent
 operator API <a href="operator-http-api.html#get_operations-1"><code>GET_OPERATIONS</code></a> call to
 the agent:</p>
-<pre><code>$ curl -X POST -d '{&quot;type&quot;: &quot;GET_OPERATIONS&quot;}' agenthost:5051/api/v1
+<pre><code>$ curl -X POST -d '{"type": "GET_OPERATIONS"}' agenthost:5051/api/v1
 </code></pre>
 <p>If any operations have a <code>latest_status</code> with a state of <code>OPERATION_PENDING</code>,
 you should wait for them to finish before taking down the node. Unfortunately,
@@ -292,11 +300,11 @@ in the section on automatic node draining.</p>
 in order to meet Service Level Agreements or to ensure uninterrupted services
 for their end users.  Therefore, to reconcile the requirements of frameworks
 and operators, frameworks must be aware of planned maintenance events and
-operators must be aware of frameworks' ability to adapt to maintenance.
+operators must be aware of frameworks’ ability to adapt to maintenance.
 Maintenance primitives add a layer to facilitate communication between the
 frameworks and operator.</p>
 <h2 id="terminology"><a class="header" href="#terminology">Terminology</a></h2>
-<p>For the purpose of this section, an &quot;Operator&quot; is a person, tool, or script
+<p>For the purpose of this section, an “Operator” is a person, tool, or script
 that manages a Mesos cluster.</p>
 <p>Maintenance primitives add several new concepts to Mesos. Those concepts are:</p>
 <ul>
@@ -316,7 +324,7 @@ machines will contain unavailability information.  Frameworks running on
 draining machines will receive inverse offers (see next).  Frameworks
 utilizing resources on affected machines are expected either to take
 preemptive steps to prepare for the unavailability; or to communicate the
-framework's inability to conform to the maintenance schedule.</li>
+framework’s inability to conform to the maintenance schedule.</li>
 <li><strong>Inverse offer</strong>: A communication mechanism for the master to ask for
 resources back from a framework.  This notifies frameworks about any
 unavailability and gives frameworks a mechanism to respond about their
@@ -329,7 +337,7 @@ resources or resource preemption.</p>
 <h2 id="how-does-it-work"><a class="header" href="#how-does-it-work">How does it work?</a></h2>
 <p>Maintenance primitives were introduced in Mesos 0.25.0.  Several machine
 maintenance modes were also introduced.  Those modes are illustrated below.</p>
-<p><img src="images/maintenance-primitives-modes.png" alt="Maintenance mode transitions" /></p>
+<p><label class="checkbox-label"><input class="checkbox-img" type="checkbox"><img src="images/maintenance-primitives-modes.png" alt="Maintenance mode transitions"><span class="img-wrapper"><img src="images/maintenance-primitives-modes.png" alt="Maintenance mode transitions"></span></label></p>
 <p>All mode transitions must be initiated by the operator.  Mesos will not
 change the mode of any machine, regardless of the estimate provided in
 the maintenance schedule.</p>
@@ -352,32 +360,32 @@ the Unix epoch (note that making reliable use of maintenance primitives requires
 that the system clocks of all machines in the cluster are roughly synchronized).</p>
 <p>The schedule might look like:</p>
 <pre><code>{
-  &quot;windows&quot; : [
+  "windows" : [
     {
-      &quot;machine_ids&quot; : [
-        { &quot;hostname&quot; : &quot;machine1&quot;, &quot;ip&quot; : &quot;10.0.0.1&quot; },
-        { &quot;hostname&quot; : &quot;machine2&quot;, &quot;ip&quot; : &quot;10.0.0.2&quot; }
+      "machine_ids" : [
+        { "hostname" : "machine1", "ip" : "10.0.0.1" },
+        { "hostname" : "machine2", "ip" : "10.0.0.2" }
       ],
-      &quot;unavailability&quot; : {
-        &quot;start&quot; : { &quot;nanoseconds&quot; : 1443830400000000000 },
-        &quot;duration&quot; : { &quot;nanoseconds&quot; : 3600000000000 }
+      "unavailability" : {
+        "start" : { "nanoseconds" : 1443830400000000000 },
+        "duration" : { "nanoseconds" : 3600000000000 }
       }
     }, {
-      &quot;machine_ids&quot; : [
-        { &quot;hostname&quot; : &quot;machine3&quot;, &quot;ip&quot; : &quot;10.0.0.3&quot; }
+      "machine_ids" : [
+        { "hostname" : "machine3", "ip" : "10.0.0.3" }
       ],
-      &quot;unavailability&quot; : {
-        &quot;start&quot; : { &quot;nanoseconds&quot; : 1443834000000000000 },
-        &quot;duration&quot; : { &quot;nanoseconds&quot; : 3600000000000 }
+      "unavailability" : {
+        "start" : { "nanoseconds" : 1443834000000000000 },
+        "duration" : { "nanoseconds" : 3600000000000 }
       }
     }
   ]
 }
 </code></pre>
-<p>The operator can then post the schedule to the master's
+<p>The operator can then post the schedule to the master’s
 <a href="endpoints/master/maintenance/schedule.html">/maintenance/schedule</a> endpoint:</p>
 <pre><code>curl http://localhost:5050/maintenance/schedule \
-  -H &quot;Content-type: application/json&quot; \
+  -H "Content-type: application/json" \
   -X POST \
   -d @schedule.json
 </code></pre>
@@ -389,10 +397,10 @@ agent on boot.</p>
 <p><strong>Note</strong>: Each machine in the maintenance schedule should have as
 complete information as possible.  In order for Mesos to recognize an agent
 as coming from a particular machine, both the <code>hostname</code> and <code>ip</code> fields must
-match.  Any omitted data defaults to the empty string <code>&quot;&quot;</code>.  If there are
-multiple hostnames or IPs for a machine, the machine's fields need to match
+match.  Any omitted data defaults to the empty string <code>""</code>.  If there are
+multiple hostnames or IPs for a machine, the machine’s fields need to match
 what the agent announces to the master.  If there is any ambiguity in a
-machine's configuration, the operator should use the <code>--hostname</code> and <code>--ip</code>
+machine’s configuration, the operator should use the <code>--hostname</code> and <code>--ip</code>
 options when starting agents.</p>
 <p>The master checks that a maintenance schedule has the following properties:</p>
 <ul>
@@ -406,11 +414,11 @@ This is required because this endpoint does not handle the transition
 from Down mode to Up mode.</li>
 </ul>
 <p>If any of these properties are not met, the maintenance schedule is rejected
-with a corresponding error message and the master's state is not changed.</p>
+with a corresponding error message and the master’s state is not changed.</p>
 <p>To update the maintenance schedule, the operator should first read the current
 schedule, make any necessary changes, and then post the modified schedule. The
 current maintenance schedule can be obtained by sending a GET request to the
-master's <code>/maintenance/schedule</code> endpoint.</p>
+master’s <code>/maintenance/schedule</code> endpoint.</p>
 <p>To cancel the maintenance schedule, the operator should post an empty schedule.</p>
 <h3 id="draining-mode"><a class="header" href="#draining-mode">Draining mode</a></h3>
 <p>As soon as a schedule is posted to the Mesos master, the following things occur:</p>
@@ -430,13 +438,13 @@ the additional unavailability data.</li>
 maintenance-aware fashion. Exactly how to do this depends on the design
 requirements of each scheduler, but tasks should typically be scheduled in a way
 that maximizes utilization but that also attempts to vacate machines before that
-machine's advertised unavailability period occurs. A scheduler might choose to
+machine’s advertised unavailability period occurs. A scheduler might choose to
 place long-running tasks on machines with no unavailability, or failing that, on
 machines whose unavailability is the furthest away.</p>
 <p>How a framework responds to an inverse offer indicates its ability to conform to
 the maintenance schedule. Accepting an inverse offer communicates that the
 framework is okay with the current maintenance schedule, given the current state
-of the framework's resources.  The master and operator should interpret
+of the framework’s resources.  The master and operator should interpret
 acceptance as a best-effort promise by the framework to free all the resources
 contained in the inverse offer before the start of the unavailability
 interval. Declining an inverse offer is an advisory notice to the operator that
@@ -469,12 +477,12 @@ machines is specified in JSON format; each element of the list is a
 <a href="https://github.com/apache/mesos/blob/016b02d7ed5a65bcad9261a133c8237c2df66e6e/include/mesos/v1/mesos.proto#L157-L167">MachineID</a>.</p>
 <p>For example, to start maintenance on two machines:</p>
 <pre><code>[
-  { &quot;hostname&quot; : &quot;machine1&quot;, &quot;ip&quot; : &quot;10.0.0.1&quot; },
-  { &quot;hostname&quot; : &quot;machine2&quot;, &quot;ip&quot; : &quot;10.0.0.2&quot; }
+  { "hostname" : "machine1", "ip" : "10.0.0.1" },
+  { "hostname" : "machine2", "ip" : "10.0.0.2" }
 ]
 </code></pre>
 <pre><code>curl http://localhost:5050/machine/down \
-  -H &quot;Content-type: application/json&quot; \
+  -H "Content-type: application/json" \
   -X POST \
   -d @machines.json
 </code></pre>
@@ -484,11 +492,11 @@ machines is specified in JSON format; each element of the list is a
 <li>Each machine must only appear once.</li>
 <li>Each machine must have at least a hostname or IP included.
 The hostname is not case-sensitive.</li>
-<li>If a machine's IP is included, it must be correctly formed.</li>
+<li>If a machine’s IP is included, it must be correctly formed.</li>
 <li>All listed machines must be present in the schedule.</li>
 </ul>
 <p>If any of these properties are not met, the operation is rejected with a
-corresponding error message and the master's state is not changed.</p>
+corresponding error message and the master’s state is not changed.</p>
 <p>The operator can start maintenance on any machine that is scheduled for
 maintenance. Machines that are not scheduled for maintenance cannot be directly
 transitioned from Up mode into Down mode.  However, the operator may schedule a
@@ -507,7 +515,7 @@ are still sent for this machine.</p>
 <p>When maintenance is triggered by the operator, all agents on the machine are
 told to shutdown.  These agents are removed from the master, which means that a
 <code>TASK_LOST</code> status update will be sent for every task running on each of those
-agents. The scheduler driver's <code>slaveLost</code> callback will also be invoked for
+agents. The scheduler driver’s <code>slaveLost</code> callback will also be invoked for
 each of the removed agents. Any agents on machines in maintenance are also
 prevented from reregistering with the master in the future (until maintenance
 is completed and the machine is brought back up).</p>
@@ -515,19 +523,19 @@ is completed and the machine is brought back up).</p>
 <p>When maintenance is complete or if maintenance needs to be cancelled,
 the operator can stop maintenance.  The process is very similar
 to starting maintenance (same validation criteria as the previous section).
-The operator posts a list of machines to the master's <a href="endpoints/master/machine/up.html">/machine/up</a> endpoint:</p>
+The operator posts a list of machines to the master’s <a href="endpoints/master/machine/up.html">/machine/up</a> endpoint:</p>
 <pre><code>[
-  { &quot;hostname&quot; : &quot;machine1&quot;, &quot;ip&quot; : &quot;10.0.0.1&quot; },
-  { &quot;hostname&quot; : &quot;machine2&quot;, &quot;ip&quot; : &quot;10.0.0.2&quot; }
+  { "hostname" : "machine1", "ip" : "10.0.0.1" },
+  { "hostname" : "machine2", "ip" : "10.0.0.2" }
 ]
 </code></pre>
 <pre><code>curl http://localhost:5050/machine/up \
-  -H &quot;Content-type: application/json&quot; \
+  -H "Content-type: application/json" \
   -X POST \
   -d @machines.json
 </code></pre>
 <p><strong>Note</strong>: The duration of the maintenance window, as indicated by the
-&quot;unavailability&quot; field in the maintenance schedule, is a best-effort guess made
+“unavailability” field in the maintenance schedule, is a best-effort guess made
 by the operator.  Stopping maintenance before the end of the unavailability
 interval is allowed, as is stopping maintenance after the end of the
 unavailability interval.  Machines are never automatically transitioned out of
@@ -540,26 +548,26 @@ are no longer sent.  Also, agents running on the machine will be allowed to
 register with the Mesos master.</p>
 <h3 id="viewing-maintenance-status"><a class="header" href="#viewing-maintenance-status">Viewing maintenance status</a></h3>
 <p>The current maintenance status (Up, Draining, or Down) of each machine in the
-cluster can be viewed by accessing the master's
+cluster can be viewed by accessing the master’s
 <a href="endpoints/master/maintenance/status.html">/maintenance/status</a> HTTP endpoint. For
-each machine that is Draining, this endpoint also includes the frameworks' responses to
+each machine that is Draining, this endpoint also includes the frameworks’ responses to
 inverse offers for resources on that machine. For more information, see the
 format of the <a href="https://github.com/apache/mesos/blob/fa36917dd142f66924c5f7ed689b87d5ceabbf79/include/mesos/maintenance/maintenance.proto#L73-L84">ClusterStatus message</a>.</p>
 <blockquote>
 <p>NOTE: The format of the data returned by this endpoint may change in a
 future release of Mesos.</p>
 </blockquote>
-
+<footer id="open-on-gh">Found a bug? <a href="https://github.com/m3scluster/clusterd-docs//edit/main/src/maintenance.md">Edit this page on GitHub.</a></footer>
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">
                         <!-- Mobile navigation buttons -->
                             <a rel="prev" href="framework-rate-limiting.html" class="mobile-nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
-                                <i class="fa fa-angle-left"></i>
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                             </a>
 
-                            <a rel="next" href="upgrades.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                                <i class="fa fa-angle-right"></i>
+                            <a rel="next prefetch" href="upgrades.html" class="mobile-nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                                <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
                             </a>
 
                         <div style="clear: both"></div>
@@ -569,16 +577,21 @@ future release of Mesos.</p>
 
             <nav class="nav-wide-wrapper" aria-label="Page navigation">
                     <a rel="prev" href="framework-rate-limiting.html" class="nav-chapters previous" title="Previous chapter" aria-label="Previous chapter" aria-keyshortcuts="Left">
-                        <i class="fa fa-angle-left"></i>
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M41.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.3 256 246.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg></span>
                     </a>
 
-                    <a rel="next" href="upgrades.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
-                        <i class="fa fa-angle-right"></i>
+                    <a rel="next prefetch" href="upgrades.html" class="nav-chapters next" title="Next chapter" aria-label="Next chapter" aria-keyshortcuts="Right">
+                        <span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"/></svg></span>
                     </a>
             </nav>
 
         </div>
 
+        <template id=fa-eye><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M288 32c-80.8 0-145.5 36.8-192.6 80.6C48.6 156 17.3 208 2.5 243.7c-3.3 7.9-3.3 16.7 0 24.6C17.3 304 48.6 356 95.4 399.4C142.5 443.2 207.2 480 288 480s145.5-36.8 192.6-80.6c46.8-43.5 78.1-95.4 93-131.1c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C433.5 68.8 368.8 32 288 32zM432 256c0 79.5-64.5 144-144 144s-144-64.5-144-144s64.5-144 144-144s144 64.5 144 144zM288 192c0 35.3-28.7 64-64 64c-11.5 0-22.3-3-31.6-8.4c-.2 2.8-.4 5.5-.4 8.4c0 53 43 96 96 96s96-43 96-96s-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6z"/></svg></span></template>
+        <template id=fa-eye-slash><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M38.8 5.1C28.4-3.1 13.3-1.2 5.1 9.2S-1.2 34.7 9.2 42.9l592 464c10.4 8.2 25.5 6.3 33.7-4.1s6.3-25.5-4.1-33.7L525.6 386.7c39.6-40.6 66.4-86.1 79.9-118.4c3.3-7.9 3.3-16.7 0-24.6c-14.9-35.7-46.2-87.7-93-131.1C465.5 68.8 400.8 32 320 32c-68.2 0-125 26.3-169.3 60.8L38.8 5.1zM223.1 149.5C248.6 126.2 282.7 112 320 112c79.5 0 144 64.5 144 144c0 24.9-6.3 48.3-17.4 68.7L408 294.5c5.2-11.8 8-24.8 8-38.5c0-53-43-96-96-96c-2.8 0-5.6 .1-8.4 .4c5.3 9.3 8.4 20.1 8.4 31.6c0 10.2-2.4 19.8-6.6 28.3l-90.3-70.8zm223.1 298L373 389.9c-16.4 6.5-34.3 10.1-53 10.1c-79.5 0-144-64.5-144-144c0-6.9 .5-13.6 1.4-20.2L83.1 161.5C60.3 191.2 44 220.8 34.5 243.7c-3.3 7.9-3.3 16.7 0 24.6c14.9 35.7 46.2 87.7 93 131.1C174.5 443.2 239.2 480 320 480c47.8 0 89.9-12.9 126.2-32.5z"/></svg></span></template>
+        <template id=fa-copy><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M502.6 70.63l-61.25-61.25C435.4 3.371 427.2 0 418.7 0H255.1c-35.35 0-64 28.66-64 64l.0195 256C192 355.4 220.7 384 256 384h192c35.2 0 64-28.8 64-64V93.25C512 84.77 508.6 76.63 502.6 70.63zM464 320c0 8.836-7.164 16-16 16H255.1c-8.838 0-16-7.164-16-16L239.1 64.13c0-8.836 7.164-16 16-16h128L384 96c0 17.67 14.33 32 32 32h47.1V320zM272 448c0 8.836-7.164 16-16 16H63.1c-8.838 0-16-7.164-16-16L47.98 192.1c0-8.836 7.164-16 16-16H160V128H63.99c-35.35 0-64 28.65-64 64l.0098 256C.002 483.3 28.66 512 64 512h192c35.2 0 64-28.8 64-64v-32h-47.1L272 448z"/></svg></span></template>
+        <template id=fa-play><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M73 39c-14.8-9.1-33.4-9.4-48.5-.9S0 62.6 0 80V432c0 17.4 9.4 33.4 24.5 41.9s33.7 8.1 48.5-.9L361 297c14.3-8.7 23-24.2 23-41s-8.7-32.2-23-41L73 39z"/></svg></span></template>
+        <template id=fa-clock-rotate-left><span class=fa-svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Free 6.2.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc. --><path d="M75 75L41 41C25.9 25.9 0 36.6 0 57.9V168c0 13.3 10.7 24 24 24H134.1c21.4 0 32.1-25.9 17-41l-30.8-30.8C155 85.5 203 64 256 64c106 0 192 86 192 192s-86 192-192 192c-40.8 0-78.6-12.7-109.7-34.4c-14.5-10.1-34.4-6.6-44.6 7.9s-6.6 34.4 7.9 44.6C151.2 495 201.7 512 256 512c141.4 0 256-114.6 256-256S397.4 0 256 0C185.3 0 121.3 28.7 75 75zm181 53c-13.3 0-24 10.7-24 24V256c0 6.4 2.5 12.5 7 17l72 72c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-65-65V152c0-13.3-10.7-24-24-24z"/></svg></span></template>
 
 
 
@@ -587,15 +600,16 @@ future release of Mesos.</p>
         </script>
 
 
-        <script src="elasticlunr.min.js"></script>
-        <script src="mark.min.js"></script>
-        <script src="searcher.js"></script>
+        <script src="elasticlunr-ef4e11c1.min.js"></script>
+        <script src="mark-09e88c2c.min.js"></script>
+        <script src="searcher-09f2665d.js"></script>
 
-        <script src="clipboard.min.js"></script>
-        <script src="highlight.js"></script>
-        <script src="book.js"></script>
+        <script src="clipboard-1626706a.min.js"></script>
+        <script src="highlight-abc7f01d.js"></script>
+        <script src="book-609e4cb8.js"></script>
 
         <!-- Custom JS scripts -->
+
 
 
     </div>

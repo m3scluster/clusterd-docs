@@ -4343,6 +4343,59 @@ REMOVE_NESTED_CONTAINER HTTP Response (JSON):
 HTTP/1.1 200 OK
 ```
 
+### UPDATE_CONTAINER_MEMORY_LIMIT
+
+This call changes the memory allocation and hard memory limit of a running
+top-level task container on this agent. The limit is expressed in MiB and may
+be increased or decreased. The call is agent-local: clients must send it to
+the agent that owns the container ID.
+
+Only positive, finite limits and top-level container IDs are accepted. The
+change affects the running container but does not resize the resources
+accounted for the task by the master. See
+[Updating the memory limit of a running container](container-memory-limit.md)
+for prerequisites, operational semantics, cgroups details, and verification
+instructions.
+
+```
+UPDATE_CONTAINER_MEMORY_LIMIT HTTP Request (JSON):
+
+POST /api/v1 HTTP/1.1
+
+Host: agenthost:5051
+Content-Type: application/json
+Accept: application/json
+
+{
+  "type": "UPDATE_CONTAINER_MEMORY_LIMIT",
+  "update_container_memory_limit": {
+    "container_id": {
+      "value": "848b24db-a7f7-4d38-997a-c33c2c5ae669"
+    },
+    "memory_limit": {
+      "value": 256
+    }
+  }
+}
+
+UPDATE_CONTAINER_MEMORY_LIMIT HTTP Response (JSON):
+
+HTTP/1.1 200 OK
+```
+
+Possible response status codes are:
+
+* `200 OK`: The containerizer applied the update.
+* `400 Bad Request`: The payload is missing or malformed, the container ID is
+  nested or invalid, or the limit is not positive and finite.
+* `401 Unauthorized`: Read/write HTTP authentication is enabled and valid
+  credentials were not supplied.
+* `404 Not Found`: The container is not running on this agent. This commonly
+  means that the request was sent to a different agent than the one that owns
+  the container.
+* `500 Internal Server Error`: The containerizer or cgroups backend could not
+  apply the update.
+
 ### GET_RESOURCE_PROVIDERS
 
 This call retrieves information about all the resource providers known

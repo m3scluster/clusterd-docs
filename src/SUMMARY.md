@@ -24,7 +24,6 @@
 
 # Administration
 
-- [Configuration for command-line arguments.](configuration.md)
 - [High Availability Master Setup](high-availability.md)
   - [Replicated Log for information on the Mesos replicated log.](replicated-log-internals.md)
 - [Fault Tolerant Agent Setup](agent-recovery.md)
@@ -44,6 +43,7 @@
 # Resource Management
 
 - [Attributes and Resources for how to describe the agents that comprise a cluster.](attributes-resources.md)
+- [Updating the memory limit of a running container](container-memory-limit.md)
 - [Using Resource Roles](roles.md)
   - [Resource Role Weights for fair sharing.](weights.md)
   - [Resource Role Quota for how to configure Mesos to provide guaranteed resource allocations for use by a role.](quota.md)
@@ -95,6 +95,7 @@
 - [Task Health Checking](health-checks.md)
 - [v1 Scheduler HTTP API for communication between schedulers and the Mesos master.](scheduler-http-api.md)
 - [v1 Executor HTTP API describes the new HTTP API for communication between executors and the Mesos agent.](executor-http-api.md)
+- [v1 Operator HTTP API for operator calls to masters and agents.](operator-http-api.md)
 
 
 

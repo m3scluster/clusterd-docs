@@ -34,6 +34,7 @@
 - [Logging](logging.md)
 - [Monitoring / Metrics](monitoring.md)
 - [Debugging using the new CLI](cli.md)
+  - [Task exec HTTP endpoint reference](task-exec-http-api.md)
 - [Operational Guide](operational-guide.md)
 - [Fetcher Cache Configuration](fetcher.md)
 - [Fault Domains](fault-domains.md)

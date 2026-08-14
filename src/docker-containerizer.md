@@ -116,6 +116,46 @@ or as a JSON object,
       } \
     }"
 
+## Interactive task exec
+
+The Docker containerizer supports starting commands in running tasks through
+`mesos task exec`. The operator supplies a Mesos task ID; the CLI resolves the
+owning agent and root container, then launches a nested debug session. See the
+[CLI documentation](cli.md#executing-commands-in-running-tasks) for command
+syntax, TTY behavior, prerequisites, and troubleshooting. The
+[HTTP endpoint reference](task-exec-http-api.md) lists every master, agent, and
+Docker request in the exec path.
+
+The agent does not invoke `docker exec`. It starts the `mesos-docker-exec`
+helper from `launcher_dir`. The helper connects to the Docker Engine API through
+the agent's `--docker_socket` resource, creates and starts an exec instance, and
+polls Docker for its exit code. The request carries the command argument vector,
+environment, optional user, stream attachments, and TTY selection. On Unix,
+the Docker socket defaults to `/var/run/docker.sock`; compatible proxy sockets
+can be configured when required.
+
+For interactive use, combine stdin and TTY options:
+
+```console
+$ mesos task exec -it synthetic-task-1 /bin/sh
+```
+
+TTY mode makes both the local CLI terminal and the helper's outer Mesos
+terminal raw. This allows control bytes such as `Ctrl-C`, `Ctrl-D`, and `Ctrl-Z`
+to reach the Docker terminal. `Ctrl-p Ctrl-q` remains the CLI's reserved detach
+sequence and is not forwarded. Cursor-position queries from interactive
+programs are handled even when split across stream chunks.
+
+The helper uses regular HTTP streaming instead of requesting a hijacked Docker
+connection, which supports older Docker socket proxies. A proxy must preserve
+the bidirectional stream and must not discard pending terminal output when its
+client write side closes. The input side therefore remains open until the exec
+process exits.
+
+The Docker Engine socket grants extensive control over the daemon and host.
+Restrict socket permissions and Mesos operator authorization; do not expose the
+socket broadly.
+
 ## CommandInfo to run Docker images
 
 A docker image currently supports having an entrypoint and/or a

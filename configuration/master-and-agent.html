@@ -35,10 +35,10 @@
             const path_to_root = "../";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "../searchindex-4e55c3e7.js";
+            window.path_to_searchindex_js = "../searchindex-dc66d6a2.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="../toc-239b7341.js"></script>
+        <script src="../toc-4344deec.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -350,6 +350,22 @@ HTTP authenticator implementation to use when handling requests to
 authenticated endpoints. Use the default <code>basic</code>, or load an
 alternate HTTP authenticator module using <code>--modules</code>.
 (default: basic, or basic and JWT if executor authentication is enabled)
+  </td>
+</tr>
+
+<tr id="http_cors_allowed_origins">
+  <td>
+    --http_cors_allowed_origins=VALUE
+  </td>
+  <td>
+A comma-separated list of exact browser origins allowed to access HTTP
+endpoints on this master or agent. Each origin must include its scheme,
+hostname, and Mesos® master port, for example
+<code>https://master1.example:5050,https://master2.example:5050</code>.
+Requests from other origins receive no CORS access headers. Configure every
+WebUI origin on every master and agent that the WebUI must access. See
+<a href="../cors.html">Browser Access with CORS</a> for configuration and
+security details.
   </td>
 </tr>
 

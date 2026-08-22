@@ -36,10 +36,10 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-4e55c3e7.js";
+            window.path_to_searchindex_js = "searchindex-dc66d6a2.js";
         </script>
         <!-- Start loading toc.js asap -->
-        <script src="toc-239b7341.js"></script>
+        <script src="toc-4344deec.js"></script>
     </head>
     <body>
     <div id="mdbook-help-container">
@@ -4393,6 +4393,22 @@ HTTP authenticator implementation to use when handling requests to
 authenticated endpoints. Use the default <code>basic</code>, or load an
 alternate HTTP authenticator module using <code>--modules</code>.
 (default: basic, or basic and JWT if executor authentication is enabled)
+  </td>
+</tr>
+
+<tr id="http_cors_allowed_origins">
+  <td>
+    --http_cors_allowed_origins=VALUE
+  </td>
+  <td>
+A comma-separated list of exact browser origins allowed to access HTTP
+endpoints on this master or agent. Each origin must include its scheme,
+hostname, and Mesos® master port, for example
+<code>https://master1.example:5050,https://master2.example:5050</code>.
+Requests from other origins receive no CORS access headers. Configure every
+WebUI origin on every master and agent that the WebUI must access. See
+<a href="#browser-access-with-cors">Browser Access with CORS</a> for configuration and
+security details.
   </td>
 </tr>
 
@@ -14698,6 +14714,88 @@ does not leak <code>ObjectApprover</code>s).</p>
 <p>NOTE: As the <code>ObjectApprover</code> is run synchronously in a different actor process
 <code>ObjectApprover.approved()</code> call must not block!</p>
 <footer id="open-on-gh-39">Found a bug? <a href="https://github.com/m3scluster/clusterd-docs//edit/main/src/authorization.md">Edit this page on GitHub.</a></footer><div style="break-before: page; page-break-before: always;"></div>
+<h1 id="browser-access-with-cors"><a class="header" href="#browser-access-with-cors">Browser Access with CORS</a></h1>
+<p>The ClusterD WebUI can make browser requests to HTTP endpoints on Mesos® masters
+and agents. When the WebUI and the target endpoint do not have the same origin,
+the browser requires Cross-Origin Resource Sharing (CORS) response headers.</p>
+<p>CORS access is disabled unless an origin is explicitly configured. Configure the
+<code>--http_cors_allowed_origins</code> flag on every master and every agent that the WebUI
+must access.</p>
+<h2 id="configure-allowed-origins"><a class="header" href="#configure-allowed-origins">Configure Allowed Origins</a></h2>
+<p>The flag accepts a comma-separated list of exact origins. Each origin consists of
+the scheme, hostname, and Mesos® master port. It does not contain a path.</p>
+<p>For example, if the WebUI can be loaded from two TLS-enabled masters, configure:</p>
+<pre><code>--http_cors_allowed_origins=https://master1.example:5050,https://master2.example:5050
+</code></pre>
+<p>Use <code>http</code> instead of <code>https</code> when TLS is not enabled. The configured value must
+exactly match the browser’s <code>Origin</code> header. Scheme, hostname, and port are all
+significant, so <code>https://master1.example:5050</code> does not match
+<code>http://master1.example:5050</code>, <code>https://master1.example</code>, or an IP address.</p>
+<p>In a flag-per-file installation, write the same comma-separated list to both of
+the following files on the applicable hosts:</p>
+<pre><code>/etc/mesos-master/http_cors_allowed_origins
+/etc/mesos-agent/http_cors_allowed_origins
+</code></pre>
+<p>For example, both files can contain:</p>
+<pre><code>https://master1.example:5050,https://master2.example:5050
+</code></pre>
+<p>Apply the configuration according to the deployment’s normal process restart or
+reload procedure.</p>
+<p><strong>NOTE:</strong> ZooKeeper ensemble addresses are not browser origins. Their ports are
+ZooKeeper ports rather than Mesos® master HTTP ports. Specify every complete
+WebUI origin explicitly instead of copying or deriving the value from a
+ZooKeeper URL.</p>
+<h2 id="response-behavior"><a class="header" href="#response-behavior">Response Behavior</a></h2>
+<p>For a request whose <code>Origin</code> exactly matches a configured value, the master or
+agent returns these CORS response headers:</p>
+<pre><code>Access-Control-Allow-Origin: https://master1.example:5050
+Access-Control-Allow-Credentials: true
+Access-Control-Expose-Headers: Mesos-Stream-Id
+Vary: Origin
+</code></pre>
+<p><code>Access-Control-Allow-Origin</code> contains only the matching request origin. It is
+never a list and is not set to <code>*</code>. Responses to requests from an unconfigured
+origin, or requests without an <code>Origin</code> header, do not receive CORS access
+headers. If a response already has a <code>Vary</code> header, <code>Origin</code> is added without
+removing the existing values.</p>
+<p>The CORS handling applies to master and agent HTTP routes, including the
+operator API and other endpoints served by their libprocess processes.</p>
+<h2 id="preflight-requests"><a class="header" href="#preflight-requests">Preflight Requests</a></h2>
+<p>A browser sends an <code>OPTIONS</code> preflight request before requests that use headers
+such as <code>Authorization</code> or a JSON <code>Content-Type</code>. For an allowed origin and a
+requested <code>GET</code> or <code>POST</code> method, the master or agent responds without executing
+the requested API operation and includes:</p>
+<pre><code>Access-Control-Allow-Methods: GET, POST, OPTIONS
+Access-Control-Allow-Headers: Authorization, Content-Type, Accept, Mesos-Stream-Id
+</code></pre>
+<p>The browser then decides whether it may send the actual request.</p>
+<h2 id="authentication-and-security"><a class="header" href="#authentication-and-security">Authentication and Security</a></h2>
+<p>CORS controls which browser origins may read responses. It is not an
+authentication or authorization mechanism. Actual master and agent requests
+remain subject to the configured HTTP authenticators, credentials, ACLs, and
+endpoint authorization rules.</p>
+<p>Only add trusted WebUI origins. Do not treat an origin allowlist as permission to
+expose master or agent endpoints to an untrusted network. Use TLS for the WebUI
+and Mesos® endpoints when credentials or other sensitive data cross the network.
+See <a href="#authentication-1">Authentication</a> and <a href="#ssl">SSL in Mesos</a> for the
+corresponding security configuration.</p>
+<h2 id="troubleshooting-1"><a class="header" href="#troubleshooting-1">Troubleshooting</a></h2>
+<p>If the browser still reports a CORS error, inspect the request’s <code>Origin</code> header
+and verify all of the following:</p>
+<ul>
+<li>The origin is present in <code>--http_cors_allowed_origins</code> on the target process.</li>
+<li>The scheme is correct for the WebUI (<code>http</code> or <code>https</code>).</li>
+<li>The hostname is identical; DNS names, short names, and IP addresses are
+different origins.</li>
+<li>The port is the WebUI’s Mesos® master HTTP port, even when the target request is
+sent to an agent port.</li>
+<li>The value contains no path or trailing slash.</li>
+<li>The changed configuration has been applied to every master and agent that the
+WebUI can contact.</li>
+<li>The actual request still satisfies authentication and authorization. A failed
+credential or ACL check is not fixed by adding an origin.</li>
+</ul>
+<footer id="open-on-gh-40">Found a bug? <a href="https://github.com/m3scluster/clusterd-docs//edit/main/src/cors.md">Edit this page on GitHub.</a></footer><div style="break-before: page; page-break-before: always;"></div>
 <h1 id="ssl"><a href="#ssl" class="header">SSL</a></h1>
 <hr>
 <h2 id="title-apache-mesos---ssl-in-mesos-layout-documentation"><a class="header" href="#title-apache-mesos---ssl-in-mesos-layout-documentation">title: Apache Mesos - SSL in Mesos
@@ -14910,7 +15008,7 @@ LIBPROCESS_SSL_ENABLED=true LIBPROCESS_SSL_SUPPORT_DOWNGRADE=false LIBPROCESS_SS
 <p><strong>NOTE:</strong> Frameworks with their own WebUI will need to add HTTPS support separately.</p>
 <h3 id="certificates"><a class="header" href="#certificates">Certificates</a></h3>
 <p>Most browsers have built in protection that guard transitions between pages served using different certificates. For this reason you may choose to serve both the master and agent endpoints using a common certificate that covers multiple hostnames. If you do not do this, certain links, such as those to agent sandboxes, may seem broken as the browser treats the transition between differing certificates transition as unsafe.</p>
-<footer id="open-on-gh-40">Found a bug? <a href="https://github.com/m3scluster/clusterd-docs//edit/main/src/ssl.md">Edit this page on GitHub.</a></footer><div style="break-before: page; page-break-before: always;"></div>
+<footer id="open-on-gh-41">Found a bug? <a href="https://github.com/m3scluster/clusterd-docs//edit/main/src/ssl.md">Edit this page on GitHub.</a></footer><div style="break-before: page; page-break-before: always;"></div>
 <h1 id="secrets-for-managing-secrets-within-mesos"><a href="#secrets-for-managing-secrets-within-mesos" class="header">Secrets for managing secrets within Mesos.</a></h1>
 <hr>
 <h2 id="title-apache-mesos---secrets-handling-layout-documentation"><a class="header" href="#title-apache-mesos---secrets-handling-layout-documentation">title: Apache Mesos - Secrets Handling
@@ -15033,7 +15131,7 @@ The secret can then be referenced in the <code>Image</code> protobuf as follows:
 };
 </code></pre>
 <p>The default implementation simply resolves value-based Secrets. A custom secret-resolver module can be specified using the <code>--secret_resolver=&lt;module-name&gt;</code> agent flag.</p>
-<footer id="open-on-gh-41">Found a bug? <a href="https://github.com/m3scluster/clusterd-docs//edit/main/src/secrets.md">Edit this page on GitHub.</a></footer><div style="break-before: page; page-break-before: always;"></div>
+<footer id="open-on-gh-42">Found a bug? <a href="https://github.com/m3scluster/clusterd-docs//edit/main/src/secrets.md">Edit this page on GitHub.</a></footer><div style="break-before: page; page-break-before: always;"></div>
 <h1 id="containerizers-2"><a class="header" href="#containerizers-2">Containerizers</a></h1>
 <h2 id="motivation"><a class="header" href="#motivation">Motivation</a></h2>
 <p>Containerizers are used to run tasks in ‘containers’, which in turn are
@@ -15107,7 +15205,7 @@ might not be provided by other container technologies.</li>
 <li><a href="#containerizer">Containerizer Internals</a> for
 implementation details of containerizers.</li>
 </ul>
-<footer id="open-on-gh-42">Found a bug? <a href="https://github.com/m3scluster/clusterd-docs//edit/main/src/containerizers.md">Edit this page on GitHub.</a></footer><div style="break-before: page; page-break-before: always;"></div>
+<footer id="open-on-gh-43">Found a bug? <a href="https://github.com/m3scluster/clusterd-docs//edit/main/src/containerizers.md">Edit this page on GitHub.</a></footer><div style="break-before: page; page-break-before: always;"></div>
 <h1 id="containerizer"><a class="header" href="#containerizer">Containerizer</a></h1>
 <p>Containerizers are Mesos components responsible for launching
 containers. They own the containers launched for the tasks/executors,
@@ -15291,7 +15389,7 @@ storage and memory can be isolated from other containers.</p>
 <li>RUNNING</li>
 <li>DESTROYING</li>
 </ul>
-<footer id="open-on-gh-43">Found a bug? <a href="https://github.com/m3scluster/clusterd-docs//edit/main/src/containerizer-internals.md">Edit this page on GitHub.</a></footer><div style="break-before: page; page-break-before: always;"></div>
+<footer id="open-on-gh-44">Found a bug? <a href="https://github.com/m3scluster/clusterd-docs//edit/main/src/containerizer-internals.md">Edit this page on GitHub.</a></footer><div style="break-before: page; page-break-before: always;"></div>
 <h1 id="docker-containerizer-3"><a class="header" href="#docker-containerizer-3">Docker Containerizer</a></h1>
 <p>Mesos 0.20.0 adds the support for launching tasks that contains Docker
 images, with also a subset of Docker options supported while we plan
@@ -15438,7 +15536,7 @@ Docker container or not.</p>
 assumes the containerizer is running in a container itself and
 modifies the mechanism it recovers and launches docker containers
 accordingly.</p>
-<footer id="open-on-gh-44">Found a bug? <a href="https://github.com/m3scluster/clusterd-docs//edit/main/src/docker-containerizer.md">Edit this page on GitHub.</a></footer><div style="break-before: page; page-break-before: always;"></div>
+<footer id="open-on-gh-45">Found a bug? <a href="https://github.com/m3scluster/clusterd-docs//edit/main/src/docker-containerizer.md">Edit this page on GitHub.</a></footer><div style="break-before: page; page-break-before: always;"></div>
 <h1 id="mesos-containerizer-default-containerizer-supports-both-linux-and-posix-systems"><a href="#mesos-containerizer-default-containerizer-supports-both-linux-and-posix-systems" class="header">Mesos Containerizer default containerizer, supports both Linux and POSIX systems.</a></h1>
 <hr>
 <h2 id="title-apache-mesos---mesos-containerizer-layout-documentation"><a class="header" href="#title-apache-mesos---mesos-containerizer-layout-documentation">title: Apache Mesos - Mesos Containerizer
@@ -15501,7 +15599,7 @@ can write modules that implement custom isolators.</p>
 <li><a href="isolators/windows.html#cpu-limits">windows/cpu</a></li>
 <li><a href="isolators/windows.html#memory-limits">windows/mem</a></li>
 </ul>
-<footer id="open-on-gh-45">Found a bug? <a href="https://github.com/m3scluster/clusterd-docs//edit/main/src/mesos-containerizer.md">Edit this page on GitHub.</a></footer><div style="break-before: page; page-break-before: always;"></div>
+<footer id="open-on-gh-46">Found a bug? <a href="https://github.com/m3scluster/clusterd-docs//edit/main/src/mesos-containerizer.md">Edit this page on GitHub.</a></footer><div style="break-before: page; page-break-before: always;"></div>
 <h1 id="container-images-for-supporting-container-images-in-mesos-containerizer"><a href="#container-images-for-supporting-container-images-in-mesos-containerizer" class="header">Container Images for supporting container images in Mesos containerizer.</a></h1>
 <hr>
 <h2 id="title-apache-mesos---supporting-container-images-in-mesos-containerizer-layout-documentation"><a class="header" href="#title-apache-mesos---supporting-container-images-in-mesos-containerizer-layout-documentation">title: Apache Mesos - Supporting Container Images in Mesos Containerizer
@@ -15882,7 +15980,7 @@ and isolator features, visit <a href="#mesos-containerizer-default-containerizer
 Containerizer</a>.  For more information on
 launching Docker containers through the Docker containerizer, visit
 <a href="#docker-containerizer-3">Docker Containerizer</a>.</p>
-<footer id="open-on-gh-46">Found a bug? <a href="https://github.com/m3scluster/clusterd-docs//edit/main/src/container-image.md">Edit this page on GitHub.</a></footer><div style="break-before: page; page-break-before: always;"></div>
+<footer id="open-on-gh-47">Found a bug? <a href="https://github.com/m3scluster/clusterd-docs//edit/main/src/container-image.md">Edit this page on GitHub.</a></footer><div style="break-before: page; page-break-before: always;"></div>
 <h1 id="docker-volume-support"><a href="#docker-volume-support" class="header">Docker Volume Support</a></h1>
 <hr>
 <h2 id="title-apache-mesos---docker-volume-support-in-mesos-containerizer-layout-documentation"><a class="header" href="#title-apache-mesos---docker-volume-support-in-mesos-containerizer-layout-documentation">title: Apache Mesos - Docker Volume Support in Mesos Containerizer
@@ -16238,7 +16336,7 @@ for the second task to check the file <code>myfile</code> was created successful
     myfile
     Command exited with status 0 (pid: 27288)
 </code></pre>
-<footer id="open-on-gh-47">Found a bug? <a href="https://github.com/m3scluster/clusterd-docs//edit/main/src/isolators/docker-volume.md">Edit this page on GitHub.</a></footer><div style="break-before: page; page-break-before: always;"></div>
+<footer id="open-on-gh-48">Found a bug? <a href="https://github.com/m3scluster/clusterd-docs//edit/main/src/isolators/docker-volume.md">Edit this page on GitHub.</a></footer><div style="break-before: page; page-break-before: always;"></div>
 <h1 id="nvidia-gpu-support-for-how-to-run-mesos-with-nvidia-gpu-support"><a href="#nvidia-gpu-support-for-how-to-run-mesos-with-nvidia-gpu-support" class="header">Nvidia GPU Support for how to run Mesos with Nvidia GPU support.</a></h1>
 <hr>
 <h2 id="title-apache-mesos---nvidia-gpu-support-layout-documentation"><a class="header" href="#title-apache-mesos---nvidia-gpu-support-layout-documentation">title: Apache Mesos - Nvidia GPU Support
@@ -16570,7 +16668,7 @@ execute these unit tests:</p>
 <pre><code>[mesos]$ GTEST_FILTER="" make -j check
 [mesos]$ sudo bin/mesos-tests.sh --gtest_filter="*NVIDIA_GPU*"
 </code></pre>
-<footer id="open-on-gh-48">Found a bug? <a href="https://github.com/m3scluster/clusterd-docs//edit/main/src/gpu-support.md">Edit this page on GitHub.</a></footer><div style="break-before: page; page-break-before: always;"></div>
+<footer id="open-on-gh-49">Found a bug? <a href="https://github.com/m3scluster/clusterd-docs//edit/main/src/gpu-support.md">Edit this page on GitHub.</a></footer><div style="break-before: page; page-break-before: always;"></div>
 <h1 id="container-sandboxes"><a href="#container-sandboxes" class="header">Container Sandboxes</a></h1>
 <hr>
 <h2 id="title-apache-mesos---sandbox-layout-documentation"><a class="header" href="#title-apache-mesos---sandbox-layout-documentation">title: Apache Mesos - Sandbox
@@ -16744,7 +16842,7 @@ After the delay, the files are deleted.</p>
 scheduled for garbage collection are pruned based on the available disk and
 the <code>--gc_disk_headroom</code> agent flag.
 See <a href="#gc_disk_headroom">the formula here</a>.</p>
-<footer id="open-on-gh-49">Found a bug? <a href="https://github.com/m3scluster/clusterd-docs//edit/main/src/sandbox.md">Edit this page on GitHub.</a></footer><div style="break-before: page; page-break-before: always;"></div>
+<footer id="open-on-gh-50">Found a bug? <a href="https://github.com/m3scluster/clusterd-docs//edit/main/src/sandbox.md">Edit this page on GitHub.</a></footer><div style="break-before: page; page-break-before: always;"></div>
 <h1 id="container-volumes"><a class="header" href="#container-volumes">Container Volumes</a></h1>
 <p>For each volume a container specifies (i.e., <code>ContainerInfo.volumes</code>),
 the following fields must be specified:</p>
@@ -16861,7 +16959,7 @@ the parent container.</p>
 <p>See more details in this <a href="#docker-volume-support">doc</a>.</p>
 <h3 id="secret-volume-source"><a class="header" href="#secret-volume-source">SECRET Volume Source</a></h3>
 <p>See more details in this <a href="#file-based-secrets">doc</a>.</p>
-<footer id="open-on-gh-50">Found a bug? <a href="https://github.com/m3scluster/clusterd-docs//edit/main/src/container-volume.md">Edit this page on GitHub.</a></footer><div style="break-before: page; page-break-before: always;"></div>
+<footer id="open-on-gh-51">Found a bug? <a href="https://github.com/m3scluster/clusterd-docs//edit/main/src/container-volume.md">Edit this page on GitHub.</a></footer><div style="break-before: page; page-break-before: always;"></div>
 <h1 id="nested-container-and-task-group-pod"><a href="#nested-container-and-task-group-pod" class="header">Nested Container and Task Group (Pod)</a></h1>
 <hr>
 <h2 id="title-apache-mesos---mesos-nested-container-and-task-group-layout-documentation"><a class="header" href="#title-apache-mesos---mesos-nested-container-and-task-group-layout-documentation">title: Apache Mesos - Mesos Nested Container and Task Group
@@ -17183,7 +17281,7 @@ executor.</p>
 <li><a href="http://kubernetes.io/docs/user-guide/pods/">Kubernetes Pods</a></li>
 <li><a href="https://github.com/docker/docker/issues/8781">Docker Pods</a></li>
 </ul>
-<footer id="open-on-gh-51">Found a bug? <a href="https://github.com/m3scluster/clusterd-docs//edit/main/src/nested-container-and-task-group.md">Edit this page on GitHub.</a></footer><div style="break-before: page; page-break-before: always;"></div>
+<footer id="open-on-gh-52">Found a bug? <a href="https://github.com/m3scluster/clusterd-docs//edit/main/src/nested-container-and-task-group.md">Edit this page on GitHub.</a></footer><div style="break-before: page; page-break-before: always;"></div>
 <h1 id="standalone-containers-1"><a href="#standalone-containers-1" class="header">Standalone Containers</a></h1>
 <hr>
 <h2 id="title-apache-mesos---standalone-containers-layout-documentation"><a class="header" href="#title-apache-mesos---standalone-containers-layout-documentation">title: Apache Mesos - Standalone Containers
@@ -17351,7 +17449,7 @@ no status update mechanism to report the exit status of the container.</p>
 <p>Standalone container sandboxes must be manually cleaned up by the operator and
 are located in the agent’s work directory under
 <code>/containers/&lt;my-standalone-container-id&gt;</code>.</p>
-<footer id="open-on-gh-52">Found a bug? <a href="https://github.com/m3scluster/clusterd-docs//edit/main/src/standalone-containers.md">Edit this page on GitHub.</a></footer><div style="break-before: page; page-break-before: always;"></div>
+<footer id="open-on-gh-53">Found a bug? <a href="https://github.com/m3scluster/clusterd-docs//edit/main/src/standalone-containers.md">Edit this page on GitHub.</a></footer><div style="break-before: page; page-break-before: always;"></div>
 <h1 id="networking-overview"><a href="#networking-overview" class="header">Networking Overview</a></h1>
 <h2 id="networking-support-in-mesos"><a class="header" href="#networking-support-in-mesos">Networking support in Mesos</a></h2>
 <h3 id="table-of-contents-1"><a class="header" href="#table-of-contents-1">Table of contents</a></h3>
@@ -17481,7 +17579,7 @@ container will be reflected in the <code>NetworkInfo</code> protobuf instances.<
 <p>The <code>TaskStatus</code> associated with each task can be accessed at the
 Agent’s <code>state</code> endpoint on which the task is running or it can be
 accessed in the Master’s <code>state</code> endpoint.</p>
-<footer id="open-on-gh-53">Found a bug? <a href="https://github.com/m3scluster/clusterd-docs//edit/main/src/networking.md">Edit this page on GitHub.</a></footer><div style="break-before: page; page-break-before: always;"></div>
+<footer id="open-on-gh-54">Found a bug? <a href="https://github.com/m3scluster/clusterd-docs//edit/main/src/networking.md">Edit this page on GitHub.</a></footer><div style="break-before: page; page-break-before: always;"></div>
 <h1 id="networking-in-detail"><a href="#networking-in-detail" class="header">Networking in Detail</a></h1>
 <hr>
 <h2 id="title-apache-mesos---networking-for-mesos-managed-containers-layout-documentation"><a class="header" href="#title-apache-mesos---networking-for-mesos-managed-containers-layout-documentation">title: Apache Mesos - Networking for Mesos-Managed Containers
@@ -17840,7 +17938,7 @@ module to perform any cleanups such as recovering resources and releasing IP
 addresses as needed.</p>
 </li>
 </ol>
-<footer id="open-on-gh-54">Found a bug? <a href="https://github.com/m3scluster/clusterd-docs//edit/main/src/networking-for-mesos-managed-containers.md">Edit this page on GitHub.</a></footer><div style="break-before: page; page-break-before: always;"></div>
+<footer id="open-on-gh-55">Found a bug? <a href="https://github.com/m3scluster/clusterd-docs//edit/main/src/networking-for-mesos-managed-containers.md">Edit this page on GitHub.</a></footer><div style="break-before: page; page-break-before: always;"></div>
 <h1 id="container-network-interface-cni"><a href="#container-network-interface-cni" class="header">Container Network Interface (CNI)</a></h1>
 <h2 id="container-network-interface-cni-for-mesos-containers"><a class="header" href="#container-network-interface-cni-for-mesos-containers">Container Network Interface (CNI) for Mesos Containers</a></h2>
 <p>This document describes the <code>network/cni</code> isolator, a network isolator
@@ -18284,7 +18382,7 @@ maintain, even when there are multiple hops.</p>
 <p>For more information on setting up and using Weave CNI, see <a href="https://www.weave.works/docs/net/latest/cni-plugin/">Weave’s
 CNI
 documentation</a></p>
-<footer id="open-on-gh-55">Found a bug? <a href="https://github.com/m3scluster/clusterd-docs//edit/main/src/cni.md">Edit this page on GitHub.</a></footer><div style="break-before: page; page-break-before: always;"></div>
+<footer id="open-on-gh-56">Found a bug? <a href="https://github.com/m3scluster/clusterd-docs//edit/main/src/cni.md">Edit this page on GitHub.</a></footer><div style="break-before: page; page-break-before: always;"></div>
 <h1 id="port-mapping-isolator"><a href="#port-mapping-isolator" class="header">Port Mapping Isolator</a></h1>
 <hr>
 <h2 id="title-apache-mesos---port-mapping-network-isolator-layout-documentation"><a class="header" href="#title-apache-mesos---port-mapping-network-isolator-layout-documentation">title: Apache Mesos - Port Mapping Network Isolator
@@ -18632,7 +18730,7 @@ for each of these elements includes:</p>
     }
 ]
 </code></pre>
-<footer id="open-on-gh-56">Found a bug? <a href="https://github.com/m3scluster/clusterd-docs//edit/main/src/isolators/network-port-mapping.md">Edit this page on GitHub.</a></footer></tr>
+<footer id="open-on-gh-57">Found a bug? <a href="https://github.com/m3scluster/clusterd-docs//edit/main/src/isolators/network-port-mapping.md">Edit this page on GitHub.</a></footer></tr>
 </thead>
 </table>
 </tr>
@@ -18769,7 +18867,7 @@ destroyed, Mesos will remove all the files and directories stored in the volume,
 but will <strong>not</strong> remove the root directory (i.e., the mount point).</p>
 <p>Operators should be aware of these distinctions when inspecting or cleaning up
 remnant data.</p>
-<footer id="open-on-gh-57">Found a bug? <a href="https://github.com/m3scluster/clusterd-docs//edit/main/src/multiple-disk.md">Edit this page on GitHub.</a></footer><div style="break-before: page; page-break-before: always;"></div>
+<footer id="open-on-gh-58">Found a bug? <a href="https://github.com/m3scluster/clusterd-docs//edit/main/src/multiple-disk.md">Edit this page on GitHub.</a></footer><div style="break-before: page; page-break-before: always;"></div>
 <h1 id="persistent-volume-for-how-to-allow-tasks-to-access-persistent-storage-resources"><a href="#persistent-volume-for-how-to-allow-tasks-to-access-persistent-storage-resources" class="header">Persistent Volume for how to allow tasks to access persistent storage resources.</a></h1>
 <hr>
 <h2 id="title-apache-mesos---persistent-volumes-layout-documentation"><a class="header" href="#title-apache-mesos---persistent-volumes-layout-documentation">title: Apache Mesos - Persistent Volumes
@@ -19508,7 +19606,7 @@ in previous releases, destroying a volume would remove the Mesos-level metadata
 but would not remove the volume’s data from the agent’s filesystem. Mesos 1.1
 introduced support for <a href="#shared-resources-for-how-to-share-persistent-volumes-between-tasks-managed-by-different-executors-on-the-same-agent">shared persistent volumes</a>. Mesos
 1.6 introduced experimental support for resizing persistent volumes.</p>
-<footer id="open-on-gh-58">Found a bug? <a href="https://github.com/m3scluster/clusterd-docs//edit/main/src/persistent-volume.md">Edit this page on GitHub.</a></footer><div style="break-before: page; page-break-before: always;"></div>
+<footer id="open-on-gh-59">Found a bug? <a href="https://github.com/m3scluster/clusterd-docs//edit/main/src/persistent-volume.md">Edit this page on GitHub.</a></footer><div style="break-before: page; page-break-before: always;"></div>
 <h1 id="container-storage-interface-csi-support"><a class="header" href="#container-storage-interface-csi-support">Container Storage Interface (CSI) Support</a></h1>
 <p>This document describes the <a href="https://github.com/container-storage-interface/spec">Container Storage Interface</a>
 (CSI) support in Mesos.</p>
@@ -20177,7 +20275,7 @@ currently should package the CSI plugins in binary format and use the
 <a href="#mesos-fetcher">fetcher</a> to fetch the binary executable.</li>
 <li><code>BLOCK</code> type disk resources are not supported yet.</li>
 </ul>
-<footer id="open-on-gh-59">Found a bug? <a href="https://github.com/m3scluster/clusterd-docs//edit/main/src/csi.md">Edit this page on GitHub.</a></footer><div style="break-before: page; page-break-before: always;"></div>
+<footer id="open-on-gh-60">Found a bug? <a href="https://github.com/m3scluster/clusterd-docs//edit/main/src/csi.md">Edit this page on GitHub.</a></footer><div style="break-before: page; page-break-before: always;"></div>
 <h1 id="running-workloads-in-mesos-explains-how-a-scheduler-can-specify-and-run-tasks"><a href="#running-workloads-in-mesos-explains-how-a-scheduler-can-specify-and-run-tasks" class="header">Running Workloads in Mesos explains how a scheduler can specify and run tasks.</a></h1>
 <hr>
 <h2 id="title-apache-mesos---running-workloads-in-mesos-layout-documentation"><a class="header" href="#title-apache-mesos---running-workloads-in-mesos-layout-documentation">title: Apache Mesos - Running Workloads in Mesos
@@ -20405,7 +20503,7 @@ scheduler API endpoint:</p>
   }
 }
 </code></pre>
-<footer id="open-on-gh-60">Found a bug? <a href="https://github.com/m3scluster/clusterd-docs//edit/main/src/running-workloads.md">Edit this page on GitHub.</a></footer><div style="break-before: page; page-break-before: always;"></div>
+<footer id="open-on-gh-61">Found a bug? <a href="https://github.com/m3scluster/clusterd-docs//edit/main/src/running-workloads.md">Edit this page on GitHub.</a></footer><div style="break-before: page; page-break-before: always;"></div>
 <h1 id="framework-development-guide-describes-how-to-build-applications-on-top-of-mesos"><a href="#framework-development-guide-describes-how-to-build-applications-on-top-of-mesos" class="header">Framework Development Guide describes how to build applications on top of Mesos.</a></h1>
 <hr>
 <h2 id="title-apache-mesos---framework-development-guide-layout-documentation"><a class="header" href="#title-apache-mesos---framework-development-guide-layout-documentation">title: Apache Mesos - Framework Development Guide
@@ -20697,7 +20795,7 @@ discovery system in the form of key/value pairs. Note that anything passed
 through this field is not guaranteed to be supported moving forward.
 Nevertheless, this field provides extensibility. Common uses of this field will
 allow us to identify use cases that require first class support.</p>
-<footer id="open-on-gh-61">Found a bug? <a href="https://github.com/m3scluster/clusterd-docs//edit/main/src/app-framework-development-guide.md">Edit this page on GitHub.</a></footer><div style="break-before: page; page-break-before: always;"></div>
+<footer id="open-on-gh-62">Found a bug? <a href="https://github.com/m3scluster/clusterd-docs//edit/main/src/app-framework-development-guide.md">Edit this page on GitHub.</a></footer><div style="break-before: page; page-break-before: always;"></div>
 <h1 id="guide-for-designing-highly-available-mesos-frameworks"><a href="#guide-for-designing-highly-available-mesos-frameworks" class="header">Guide for Designing Highly Available Mesos Frameworks</a></h1>
 <hr>
 <h2 id="title-apache-mesos---designing-highly-available-mesos-frameworks-layout-documentation"><a class="header" href="#title-apache-mesos---designing-highly-available-mesos-frameworks-layout-documentation">title: Apache Mesos - Designing Highly Available Mesos Frameworks
@@ -21142,7 +21240,7 @@ failover, even after the <code>agent_reregister_timeout</code> has fired. This m
 frameworks might see a <code>TASK_LOST</code> update for a task but then later discover
 that the task is running (because the agent where it was running was allowed to
 reconnect).</p>
-<footer id="open-on-gh-62">Found a bug? <a href="https://github.com/m3scluster/clusterd-docs//edit/main/src/high-availability-framework-guide.md">Edit this page on GitHub.</a></footer><div style="break-before: page; page-break-before: always;"></div>
+<footer id="open-on-gh-63">Found a bug? <a href="https://github.com/m3scluster/clusterd-docs//edit/main/src/high-availability-framework-guide.md">Edit this page on GitHub.</a></footer><div style="break-before: page; page-break-before: always;"></div>
 <h1 id="reconciliation-for-ensuring-a-frameworks-state-remains-eventually-consistent-in-the-face-of-failures"><a href="#reconciliation-for-ensuring-a-frameworks-state-remains-eventually-consistent-in-the-face-of-failures" class="header">Reconciliation for ensuring a framework’s state remains eventually consistent in the face of failures.</a></h1>
 <hr>
 <h2 id="title-apache-mesos---reconciliation-layout-documentation"><a class="header" href="#title-apache-mesos---reconciliation-layout-documentation">title: Apache Mesos - Reconciliation
@@ -21277,7 +21375,7 @@ resource provider is recovering or gone.</p>
 <p>Similar to task reconciliation, we recommend that schedulers implement a
 periodic reconciliation loop for operations in order to defend against network
 failures and bugs in the scheduler and/or Mesos master.</p>
-<footer id="open-on-gh-63">Found a bug? <a href="https://github.com/m3scluster/clusterd-docs//edit/main/src/reconciliation.md">Edit this page on GitHub.</a></footer><div style="break-before: page; page-break-before: always;"></div>
+<footer id="open-on-gh-64">Found a bug? <a href="https://github.com/m3scluster/clusterd-docs//edit/main/src/reconciliation.md">Edit this page on GitHub.</a></footer><div style="break-before: page; page-break-before: always;"></div>
 <h1 id="task-state-reasons-describes-how-task-state-reasons-are-used-in-mesos"><a href="#task-state-reasons-describes-how-task-state-reasons-are-used-in-mesos" class="header">Task State Reasons describes how task state reasons are used in Mesos.</a></h1>
 <hr>
 <h2 id="title-apache-mesos---task-state-reasons-layout-documentation"><a class="header" href="#title-apache-mesos---task-state-reasons-layout-documentation">title: Apache Mesos - Task State Reasons
@@ -21682,7 +21780,7 @@ update was sent.</p>
 </td></tr>
 </table>
 
-<footer id="open-on-gh-64">Found a bug? <a href="https://github.com/m3scluster/clusterd-docs//edit/main/src/task-state-reasons.md">Edit this page on GitHub.</a></footer></code></code></td></tr>
+<footer id="open-on-gh-65">Found a bug? <a href="https://github.com/m3scluster/clusterd-docs//edit/main/src/task-state-reasons.md">Edit this page on GitHub.</a></footer></code></code></td></tr>
 </table>
 <div style="break-before: page; page-break-before: always;"></div>
 <h1 id="task-health-checking"><a href="#task-health-checking" class="header">Task Health Checking</a></h1>
@@ -22182,7 +22280,7 @@ health check but still in a grace period. An extra state should be introduced
 <li>Task’s health status cannot be assigned from outside, e.g., by an operator via
 an endpoint.</li>
 </ul>
-<footer id="open-on-gh-65">Found a bug? <a href="https://github.com/m3scluster/clusterd-docs//edit/main/src/health-checks.md">Edit this page on GitHub.</a></footer><div style="break-before: page; page-break-before: always;"></div>
+<footer id="open-on-gh-66">Found a bug? <a href="https://github.com/m3scluster/clusterd-docs//edit/main/src/health-checks.md">Edit this page on GitHub.</a></footer><div style="break-before: page; page-break-before: always;"></div>
 <h1 id="v1-scheduler-http-api-for-communication-between-schedulers-and-the-mesos-master"><a href="#v1-scheduler-http-api-for-communication-between-schedulers-and-the-mesos-master" class="header">v1 Scheduler HTTP API for communication between schedulers and the Mesos master.</a></h1>
 <hr>
 <h2 id="title-apache-mesos---scheduler-http-api-layout-documentation"><a class="header" href="#title-apache-mesos---scheduler-http-api-layout-documentation">title: Apache Mesos - Scheduler HTTP API
@@ -22949,7 +23047,7 @@ Connection: keep-alive
 }
 </code></pre>
 <p>If the scheduler knows the list of master’s hostnames for a cluster, it could use this mechanism to find the leading master to subscribe with. Alternatively, the scheduler could use a library that detects the leading master given a ZooKeeper (or etcd) URL. For a C++ library that does ZooKeeper based master detection please look at <code>src/scheduler/scheduler.cpp</code>.</p>
-<footer id="open-on-gh-66">Found a bug? <a href="https://github.com/m3scluster/clusterd-docs//edit/main/src/scheduler-http-api.md">Edit this page on GitHub.</a></footer><div style="break-before: page; page-break-before: always;"></div>
+<footer id="open-on-gh-67">Found a bug? <a href="https://github.com/m3scluster/clusterd-docs//edit/main/src/scheduler-http-api.md">Edit this page on GitHub.</a></footer><div style="break-before: page; page-break-before: always;"></div>
 <h1 id="v1-executor-http-api-describes-the-new-http-api-for-communication-between-executors-and-the-mesos-agent"><a href="#v1-executor-http-api-describes-the-new-http-api-for-communication-between-executors-and-the-mesos-agent" class="header">v1 Executor HTTP API describes the new HTTP API for communication between executors and the Mesos agent.</a></h1>
 <hr>
 <h2 id="title-apache-mesos---executor-http-api-layout-documentation"><a class="header" href="#title-apache-mesos---executor-http-api-layout-documentation">title: Apache Mesos - Executor HTTP API
@@ -23348,7 +23446,7 @@ HTTP/1.1 202 Accepted
 <p><a name="backoff-strategies"></a></p>
 <h2 id="backoff-strategies"><a class="header" href="#backoff-strategies">Backoff Strategies</a></h2>
 <p>Executors are encouraged to retry subscription using a suitable backoff strategy like linear backoff, when they notice a disconnection with the agent. A disconnection typically happens when the agent process terminates (e.g., restarted for an upgrade). Each retry interval should be bounded by the value of <code>MESOS_SUBSCRIPTION_BACKOFF_MAX</code> which is set as an environment variable.</p>
-<footer id="open-on-gh-67">Found a bug? <a href="https://github.com/m3scluster/clusterd-docs//edit/main/src/executor-http-api.md">Edit this page on GitHub.</a></footer><div style="break-before: page; page-break-before: always;"></div>
+<footer id="open-on-gh-68">Found a bug? <a href="https://github.com/m3scluster/clusterd-docs//edit/main/src/executor-http-api.md">Edit this page on GitHub.</a></footer><div style="break-before: page; page-break-before: always;"></div>
 <h1 id="v1-operator-http-api-for-operator-calls-to-masters-and-agents"><a href="#v1-operator-http-api-for-operator-calls-to-masters-and-agents" class="header">v1 Operator HTTP API for operator calls to masters and agents.</a></h1>
 <hr>
 <h2 id="title-apache-mesos---operator-http-api-layout-documentation"><a class="header" href="#title-apache-mesos---operator-http-api-layout-documentation">title: Apache Mesos - Operator HTTP API
@@ -27745,7 +27843,7 @@ PRUNE_IMAGES HTTP Response (JSON):
 
 HTTP/1.1 200 OK
 </code></pre>
-<footer id="open-on-gh-68">Found a bug? <a href="https://github.com/m3scluster/clusterd-docs//edit/main/src/operator-http-api.md">Edit this page on GitHub.</a></footer>
+<footer id="open-on-gh-69">Found a bug? <a href="https://github.com/m3scluster/clusterd-docs//edit/main/src/operator-http-api.md">Edit this page on GitHub.</a></footer>
                     </main>
 
                     <nav class="nav-wrapper" aria-label="Page navigation">

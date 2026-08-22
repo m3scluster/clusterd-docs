@@ -56,6 +56,7 @@
 
 - [Authentication](authentication.md)
 - [Authorization](authorization.md)
+- [Browser Access with CORS](cors.md)
 - [SSL](ssl.md)
 - [Secrets for managing secrets within Mesos.](secrets.md)
 

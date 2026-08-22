@@ -173,6 +173,22 @@ alternate HTTP authenticator module using <code>--modules</code>.
   </td>
 </tr>
 
+<tr id="http_cors_allowed_origins">
+  <td>
+    --http_cors_allowed_origins=VALUE
+  </td>
+  <td>
+A comma-separated list of exact browser origins allowed to access HTTP
+endpoints on this master or agent. Each origin must include its scheme,
+hostname, and Mesos® master port, for example
+<code>https://master1.example:5050,https://master2.example:5050</code>.
+Requests from other origins receive no CORS access headers. Configure every
+WebUI origin on every master and agent that the WebUI must access. See
+<a href="../cors.html">Browser Access with CORS</a> for configuration and
+security details.
+  </td>
+</tr>
+
 <tr id="ip">
   <td>
     --ip=VALUE

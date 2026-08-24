@@ -36,7 +36,7 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-dc66d6a2.js";
+            window.path_to_searchindex_js = "searchindex-a4d1adee.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="toc-4344deec.js"></script>
@@ -16339,9 +16339,9 @@ for the second task to check the file <code>myfile</code> was created successful
 <footer id="open-on-gh-48">Found a bug? <a href="https://github.com/m3scluster/clusterd-docs//edit/main/src/isolators/docker-volume.md">Edit this page on GitHub.</a></footer><div style="break-before: page; page-break-before: always;"></div>
 <h1 id="nvidia-gpu-support-for-how-to-run-mesos-with-nvidia-gpu-support"><a href="#nvidia-gpu-support-for-how-to-run-mesos-with-nvidia-gpu-support" class="header">Nvidia GPU Support for how to run Mesos with Nvidia GPU support.</a></h1>
 <hr>
-<h2 id="title-apache-mesos---nvidia-gpu-support-layout-documentation"><a class="header" href="#title-apache-mesos---nvidia-gpu-support-layout-documentation">title: Apache Mesos - Nvidia GPU Support
+<h2 id="title-apache-mesos---gpu-support-layout-documentation"><a class="header" href="#title-apache-mesos---gpu-support-layout-documentation">title: Apache Mesos - GPU Support
 layout: documentation</a></h2>
-<h1 id="nvidia-gpu-support"><a class="header" href="#nvidia-gpu-support">Nvidia GPU Support</a></h1>
+<h1 id="gpu-support"><a class="header" href="#gpu-support">GPU Support</a></h1>
 <p>Mesos 1.0.0 added first-class support for Nvidia GPUs.
 The minimum required Nvidia driver version is <code>340.29</code>.</p>
 <h2 id="overview-5"><a class="header" href="#overview-5">Overview</a></h2>
@@ -16379,6 +16379,50 @@ Mesos. We then show an example of setting up and running an example
 test cluster that launches tasks both with and without docker
 containers. Finally, we conclude with a step-by-step guide of how to
 install any necessary Nvidia GPU drivers on your machine.</p>
+<h2 id="rocm-gpu-support"><a class="header" href="#rocm-gpu-support">ROCm GPU Support</a></h2>
+<p>ClusterD also supports AMD GPUs through the separate <code>gpu/rocm</code>
+isolator. ROCm support uses the Mesos <code>gpus</code> scalar resource and is
+intended for tasks launched with the Mesos containerizer. The ROCm
+user-space libraries are not injected from the agent host; the task
+image must provide the ROCm runtime and any applications it needs.</p>
+<p>The agent must enable the ROCm isolator together with Linux filesystem
+and device-cgroup isolation:</p>
+<pre><code>--isolation="filesystem/linux,cgroups/devices,gpu/rocm"
+</code></pre>
+<p>The isolator discovers <code>/dev/kfd</code> and <code>/dev/dri/renderD*</code>. It grants
+the container the ROCm control device and only the render devices
+corresponding to the GPUs allocated to the task. Device-cgroup rules
+are applied so that a task cannot access another task’s allocated GPU.</p>
+<p>The agent advertises the discovered GPUs as the <code>gpus</code> resource. A
+framework must enable the <code>GPU_RESOURCES</code> capability before it can
+receive offers containing GPUs. A minimal task request is:</p>
+<pre><code>--framework_capabilities="GPU_RESOURCES"
+--resources="cpus:1;mem:1024;gpus:1"
+</code></pre>
+<p>To restrict discovery to a known list of ROCm devices, use
+<code>--rocm_gpu_devices</code> and keep the GPU resource count consistent with
+the list:</p>
+<pre><code>--rocm_gpu_devices="0"
+--resources="gpus:1"
+</code></pre>
+<p>The <code>gpu/rocm</code> and <code>gpu/nvidia</code> isolators must not be enabled together,
+because both allocate the <code>gpus</code> resource. The <code>cgroups/devices</code> (or
+<code>cgroups/all</code>) and <code>filesystem/linux</code> isolators are required for
+<code>gpu/rocm</code>.</p>
+<p>For example, a Mesos-container task using a ROCm image can run a
+hardware probe as follows:</p>
+<pre><code>mesos-execute \
+  --master=127.0.0.1:5050 \
+  --name=rocm-test \
+  --containerizer=mesos \
+  --docker_image=rocm/dev-ubuntu-22.04:6.1 \
+  --framework_capabilities="GPU_RESOURCES" \
+  --resources="cpus:1;mem:1024;gpus:1" \
+  --command="/opt/rocm/bin/rocminfo"
+</code></pre>
+<p>The image must be compatible with the Mesos image provider in use. In
+particular, older Mesos image-puller versions may not support OCI
+multi-platform index manifests.</p>
 <h2 id="agent-flags-1"><a class="header" href="#agent-flags-1">Agent Flags</a></h2>
 <p>The following isolation flags are required to enable Nvidia GPU
 support on an agent.</p>

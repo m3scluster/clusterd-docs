@@ -35,7 +35,7 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-a4d1adee.js";
+            window.path_to_searchindex_js = "searchindex-2351d73c.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="toc-4344deec.js"></script>
@@ -211,9 +211,10 @@ proper isolation.</p>
 <p>There are a few container image specifications, notably
 <a href="https://github.com/docker/docker/blob/master/image/spec/v1.md">Docker</a>,
 <a href="https://github.com/appc/spec/blob/master/SPEC.md">Appc</a>, and
-<a href="https://github.com/opencontainers/specs">OCI</a> (future). Currently, we
-support Docker and Appc images. More details about what features are
-supported or not can be found in the following sections.</p>
+<a href="https://opencontainers.org/">OCI</a>. Currently, we support Docker, OCI,
+and Appc images. OCI images use the Docker image provider and are supported
+by both the Mesos and Docker containerizers. More details about what
+features are supported or not can be found in the following sections.</p>
 <p><strong>NOTE</strong>: container image is only supported on Linux currently.</p>
 <h3 id="configure-the-agent"><a class="header" href="#configure-the-agent">Configure the agent</a></h3>
 <p>To enable container image support in Mesos containerizer, the operator
@@ -399,6 +400,37 @@ of the container by using the
 Interface) standard. Please refer to the <a href="cni.html">network/cni</a>
 isolator document for more details about how to configure the network
 for the container.</p>
+<h2 id="oci-and-multi-architecture-images"><a class="header" href="#oci-and-multi-architecture-images">OCI and Multi-Architecture Images</a></h2>
+<p>The Docker image provider supports OCI images in addition to Docker image
+manifests. This support is available in both the Mesos containerizer and the
+Docker containerizer.</p>
+<p>The registry media types handled by the provider include:</p>
+<ul>
+<li>OCI image indexes: <code>application/vnd.oci.image.index.v1+json</code>;</li>
+<li>Docker manifest lists: <code>application/vnd.docker.distribution.manifest.list.v2+json</code>;</li>
+<li>OCI image manifests: <code>application/vnd.oci.image.manifest.v1+json</code>;</li>
+<li>Docker v2 schema 2 manifests:
+<code>application/vnd.docker.distribution.manifest.v2+json</code>.</li>
+</ul>
+<p>When an image reference resolves to an OCI image index or Docker manifest
+list, the provider selects the manifest matching the agent host platform
+before fetching the image configuration and layers. Common host architecture
+names are normalized to OCI names, including <code>x86_64</code> to <code>amd64</code>, <code>aarch64</code>
+to <code>arm64</code>, <code>i386</code>/<code>i686</code> to <code>386</code>, <code>ppc64le</code>, and <code>s390x</code>.</p>
+<p>No separate OCI image type is required in the framework API. Specify the
+image as a Docker image (<code>Image.Type = DOCKER</code>) and enable the Docker image
+provider on Mesos-containerizer agents:</p>
+<pre><code>--containerizers=mesos
+--image_providers=docker
+--isolation=filesystem/linux,docker/runtime
+</code></pre>
+<p>For example, a framework can use a multi-architecture image reference such
+as the synthetic example <code>registry.example.invalid/example/worker:latest</code>.
+The same reference can be used with the Docker containerizer.</p>
+<p>OCI image indexes must contain a descriptor for the agent’s operating system
+and architecture. If no matching descriptor exists, provisioning fails with
+an explicit platform-selection error rather than silently selecting a
+different architecture.</p>
 <h3 id="more-agent-flags"><a class="header" href="#more-agent-flags">More agent flags</a></h3>
 <p><code>--docker_registry</code>: The default URL for pulling Docker images. It
 could either be a Docker registry server URL (i.e:

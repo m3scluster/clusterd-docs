@@ -35,7 +35,7 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-a4d1adee.js";
+            window.path_to_searchindex_js = "searchindex-2351d73c.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="toc-4344deec.js"></script>
@@ -248,6 +248,9 @@ docker image, to easier support running a docker image as an Executor.</p>
 It is set disabled as default, so the docker image will only be
 updated again if it’s not available on the host. To enable force
 pulling an image, <code>force_pull_image</code> has to be set as true.</p>
+<p>OCI images and multi-architecture image references are supported as well.
+See <a href="container-image.html#oci-and-multi-architecture-images">OCI and Multi-Architecture Images</a>
+for the supported registry media types and platform-selection behavior.</p>
 <h2 id="private-docker-repository"><a class="header" href="#private-docker-repository">Private Docker repository</a></h2>
 <p>To run an image from a private repository, one can include the uri
 pointing to a <code>.dockercfg</code> that contains login information.  The

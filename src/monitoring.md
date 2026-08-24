@@ -37,6 +37,50 @@ above or below a threshold for a sustained period of time.
 The tables in this document indicate the type of each available metric.
 
 
+## Live Host Utilization
+
+Mesos also exposes additive live host utilization gauges for the machine running
+each master or agent. These gauges describe the current host, not scheduler
+resource allocation. All values are percentages in the range 0 to 100 unless
+otherwise noted.
+
+### Master utilization metrics
+
+The following metrics are available from the master endpoint:
+
+<table class="table table-striped">
+<thead>
+<tr><th>Metric</th><th>Description</th><th>Type</th></tr>
+</thead>
+<tr><td><code>master/cpus_utilization</code></td><td>Current host CPU utilization from the host CPU time delta</td><td>Gauge (%)</td></tr>
+<tr><td><code>master/mem_utilization</code></td><td>Host memory in use, calculated from <code>MemTotal</code> and <code>MemAvailable</code></td><td>Gauge (%)</td></tr>
+<tr><td><code>master/disk_utilization</code></td><td>Used space on the host root filesystem (<code>/</code>)</td><td>Gauge (%)</td></tr>
+<tr><td><code>master/gpus_utilization</code></td><td>Average NVIDIA GPU utilization when <code>nvidia-smi</code> telemetry is available; otherwise zero</td><td>Gauge (%)</td></tr>
+<tr><td><code>master/load_utilization</code></td><td>One-minute host load normalized by the number of CPUs</td><td>Gauge (%)</td></tr>
+</table>
+
+### Agent utilization metrics
+
+Each agent exposes the equivalent gauges for the host running that agent:
+
+<table class="table table-striped">
+<thead>
+<tr><th>Metric</th><th>Description</th><th>Type</th></tr>
+</thead>
+<tr><td><code>slave/cpus_utilization</code></td><td>Current host CPU utilization from the host CPU time delta</td><td>Gauge (%)</td></tr>
+<tr><td><code>slave/mem_utilization</code></td><td>Host memory in use, calculated from <code>MemTotal</code> and <code>MemAvailable</code></td><td>Gauge (%)</td></tr>
+<tr><td><code>slave/disk_utilization</code></td><td>Used space on the host root filesystem (<code>/</code>)</td><td>Gauge (%)</td></tr>
+<tr><td><code>slave/gpus_utilization</code></td><td>Average NVIDIA GPU utilization when <code>nvidia-smi</code> telemetry is available; otherwise zero</td><td>Gauge (%)</td></tr>
+<tr><td><code>slave/load_utilization</code></td><td>One-minute host load normalized by the number of CPUs</td><td>Gauge (%)</td></tr>
+</table>
+
+These gauges are independent of the existing <code>*_total</code>,
+<code>*_used</code>, and <code>*_percent</code> resource capacity and allocation
+metrics. They are sampled on demand and are not persisted across process
+restarts. GPU telemetry currently covers NVIDIA GPUs; a zero value indicates
+that supported GPU telemetry was unavailable at sampling time.
+
+
 ## Master Nodes
 
 Metrics from each master node are available via the

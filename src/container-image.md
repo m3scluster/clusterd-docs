@@ -43,9 +43,10 @@ proper isolation.
 There are a few container image specifications, notably
 [Docker](https://github.com/docker/docker/blob/master/image/spec/v1.md),
 [Appc](https://github.com/appc/spec/blob/master/SPEC.md), and
-[OCI](https://github.com/opencontainers/specs) (future). Currently, we
-support Docker and Appc images. More details about what features are
-supported or not can be found in the following sections.
+[OCI](https://opencontainers.org/). Currently, we support Docker, OCI,
+and Appc images. OCI images use the Docker image provider and are supported
+by both the Mesos and Docker containerizers. More details about what
+features are supported or not can be found in the following sections.
 
 **NOTE**: container image is only supported on Linux currently.
 
@@ -252,6 +253,43 @@ Currently, we support `host`, `bridge` and user defined networks
 Interface) standard. Please refer to the [network/cni](cni.md)
 isolator document for more details about how to configure the network
 for the container.
+
+## OCI and Multi-Architecture Images
+
+The Docker image provider supports OCI images in addition to Docker image
+manifests. This support is available in both the Mesos containerizer and the
+Docker containerizer.
+
+The registry media types handled by the provider include:
+
+* OCI image indexes: `application/vnd.oci.image.index.v1+json`;
+* Docker manifest lists: `application/vnd.docker.distribution.manifest.list.v2+json`;
+* OCI image manifests: `application/vnd.oci.image.manifest.v1+json`;
+* Docker v2 schema 2 manifests:
+  `application/vnd.docker.distribution.manifest.v2+json`.
+
+When an image reference resolves to an OCI image index or Docker manifest
+list, the provider selects the manifest matching the agent host platform
+before fetching the image configuration and layers. Common host architecture
+names are normalized to OCI names, including `x86_64` to `amd64`, `aarch64`
+to `arm64`, `i386`/`i686` to `386`, `ppc64le`, and `s390x`.
+
+No separate OCI image type is required in the framework API. Specify the
+image as a Docker image (`Image.Type = DOCKER`) and enable the Docker image
+provider on Mesos-containerizer agents:
+
+    --containerizers=mesos
+    --image_providers=docker
+    --isolation=filesystem/linux,docker/runtime
+
+For example, a framework can use a multi-architecture image reference such
+as the synthetic example `registry.example.invalid/example/worker:latest`.
+The same reference can be used with the Docker containerizer.
+
+OCI image indexes must contain a descriptor for the agent's operating system
+and architecture. If no matching descriptor exists, provisioning fails with
+an explicit platform-selection error rather than silently selecting a
+different architecture.
 
 ### More agent flags
 

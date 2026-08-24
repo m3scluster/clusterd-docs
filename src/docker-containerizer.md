@@ -84,6 +84,10 @@ It is set disabled as default, so the docker image will only be
 updated again if it's not available on the host. To enable force
 pulling an image, `force_pull_image` has to be set as true.
 
+OCI images and multi-architecture image references are supported as well.
+See [OCI and Multi-Architecture Images](container-image.html#oci-and-multi-architecture-images)
+for the supported registry media types and platform-selection behavior.
+
 ## Private Docker repository
 
 To run an image from a private repository, one can include the uri

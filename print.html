@@ -36,7 +36,7 @@
             const path_to_root = "";
             const default_light_theme = "light";
             const default_dark_theme = "navy";
-            window.path_to_searchindex_js = "searchindex-fe28eac1.js";
+            window.path_to_searchindex_js = "searchindex-a00015e1.js";
         </script>
         <!-- Start loading toc.js asap -->
         <script src="toc-4344deec.js"></script>
@@ -16448,11 +16448,12 @@ offer such as the following is now possible:</p>
 <p>However, unlike CPUs, memory, and disk, <em>only</em> whole numbers of GPUs
 can be selected. If a fractional amount is selected, launching the
 task will result in a <code>TASK_ERROR</code>.</p>
-<p>At the time of this writing, Nvidia GPU support is only available for
-tasks launched through the Mesos containerizer (i.e., no support exists
-for launching GPU capable tasks through the Docker containerizer).
-That said, the Mesos containerizer now supports running docker
-images natively, so this limitation should not affect most users.</p>
+<p>Nvidia GPU support is available for tasks launched through the Mesos
+containerizer. ClusterD also supports AMD ROCm GPUs through both the
+Mesos and Docker containerizers. The Docker containerizer maps only the
+devices allocated to a task that explicitly requests <code>gpus</code>; merely
+running an agent on a GPU-capable host does not expose GPUs to every
+Docker container.</p>
 <p>Moreover, we mimic the support provided by <a href="https://github.com/NVIDIA/nvidia-docker/wiki/NVIDIA-driver">nvidia-docker</a> to
 automatically mount the proper Nvidia drivers and tools directly into
 your docker container. This means you can easily test your GPU-enabled
@@ -16494,6 +16495,56 @@ the list:</p>
 because both allocate the <code>gpus</code> resource. The <code>cgroups/devices</code> (or
 <code>cgroups/all</code>) and <code>filesystem/linux</code> isolators are required for
 <code>gpu/rocm</code>.</p>
+<h3 id="using-an-amd-gpu-from-a-mesos-task"><a class="header" href="#using-an-amd-gpu-from-a-mesos-task">Using an AMD GPU from a Mesos task</a></h3>
+<p>A framework must request the <code>GPU_RESOURCES</code> capability. The task must
+then request one or more whole GPUs through the scalar <code>gpus</code> resource.
+The number must be an integer; fractional GPU requests are rejected.
+The following example requests one GPU and runs a ROCm probe in a task
+using the Mesos containerizer:</p>
+<pre><code>mesos-execute \
+  --master=127.0.0.1:5050 \
+  --name=rocm-task \
+  --containerizer=mesos \
+  --docker_image=rocm/dev-ubuntu-22.04:6.1 \
+  --framework_capabilities="GPU_RESOURCES" \
+  --resources="cpus:1;mem:1024;gpus:1" \
+  --command="/opt/rocm/bin/rocminfo"
+</code></pre>
+<p>The task image supplies the ROCm user-space libraries and tools. The
+agent supplies device access only: <code>/dev/kfd</code> and the render devices
+allocated to the task. Applications should therefore use a ROCm image
+that contains the required runtime and application dependencies.</p>
+<h3 id="using-an-amd-gpu-from-a-docker-containerizer-task"><a class="header" href="#using-an-amd-gpu-from-a-docker-containerizer-task">Using an AMD GPU from a Docker-containerizer task</a></h3>
+<p>Enable the Docker containerizer and the ROCm GPU isolator on the agent:</p>
+<pre><code>mesos-agent \
+  --containerizers=docker,mesos \
+  --isolation="filesystem/linux,docker/runtime,cgroups/devices,gpu/rocm" \
+  --master=127.0.0.1:5050 \
+  --work_dir=/var/lib/mesos
+</code></pre>
+<p>Launch the Docker task with the same explicit <code>GPU_RESOURCES</code> capability
+and <code>gpus</code> request. Set <code>--containerizer=docker</code> so the task is handled
+by the Docker containerizer:</p>
+<pre><code>mesos-execute \
+  --master=127.0.0.1:5050 \
+  --name=rocm-docker-task \
+  --containerizer=docker \
+  --docker_image=rocm/dev-ubuntu-22.04:6.1 \
+  --framework_capabilities="GPU_RESOURCES" \
+  --resources="cpus:1;mem:1024;gpus:1" \
+  --command="/opt/rocm/bin/rocminfo"
+</code></pre>
+<p>For a task requesting <code>gpus:1</code>, the Docker container receives
+<code>/dev/kfd</code> and the one render device allocated by Mesos. For a task
+that does not request GPUs, no GPU device is mapped, even when the
+agent host has AMD GPUs. Never add <code>--device</code> options to the Docker
+image or rely on host-wide device visibility to select a GPU; Mesos
+must perform the allocation so that resources are accounted and
+isolated per task.</p>
+<p>The Docker containerizer does not inject ROCm libraries from the host.
+The image must contain a compatible ROCm user space, while the host
+must provide the AMD kernel driver and the <code>/dev/kfd</code> and render-device
+nodes.</p>
 <p>For example, a Mesos-container task using a ROCm image can run a
 hardware probe as follows:</p>
 <pre><code>mesos-execute \
